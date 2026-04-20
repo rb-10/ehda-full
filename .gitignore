@@ -1,0 +1,7 @@
+*.json
+*.pkl
+*.joblib
+*.pyc
+
+.venv/
+data/
