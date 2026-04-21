@@ -4,8 +4,8 @@ import shutil
 import json
 import re
 
-liquid = "Ethanol" 
-base = r"C:\Users\Bruno Duarte\Documents\datasets"
+liquid = "EW82_HV_nz_21-04" 
+base = r"C:\Users\HV\Desktop\bruno_work\main\data"
 json_folder = os.path.join(base, liquid, "Current")
 images_folder = os.path.join(base, liquid, "PROCESSED CLIPS")
 clips_folder = os.path.join(base, liquid, "SPLIT CLIPS")

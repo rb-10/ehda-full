@@ -68,8 +68,8 @@ def load_ml_models(cfg: dict) -> dict:
     or an empty dict if loading fails.
     """
 
-    model_dir  = cfg.get("model_dir",  "models/")
-    scaler_dir = cfg.get("scaler_dir", "models/scalers/")
+    model_dir  = cfg.get("model_dir",  "current_classification/models/")
+    scaler_dir = cfg.get("scaler_dir", "current_classification/scalers/")
     models     = {}
 
     try:

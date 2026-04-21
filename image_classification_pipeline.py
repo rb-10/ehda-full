@@ -43,7 +43,7 @@ from image_classification.integrated_pipeline.update_jsons import update_jsons
 
 # -------- SETTINGS --------#
 save_electrospray = Path(r"data")
-solution = "ethanol_hv_nozzle"
+solution = "EW82_HV_nz_21-04"
 folder = save_electrospray / solution
 
 MODEL_PATH = "image_classification/final_model/export.pkl"
@@ -103,7 +103,7 @@ if __name__ == "__main__":
         model_path=MODEL_PATH,
         input_folder=INPUT_FOLDER,
         output_base=OUTPUT_BASE,
-        confidence_threshold=0.80
+        confidence_threshold=0.70
     )
 
     stats = update_jsons(

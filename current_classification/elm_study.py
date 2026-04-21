@@ -42,8 +42,8 @@ RANDOM_STATE = 42
 CV_FOLDS = 5
 TEST_SIZE = 0.2
 MIN_SAMPLES_PER_CLASS = 3  # Warn if any class has fewer than this after filtering
-PLOT_DIR = Path("plots/elm_ablation")
-MODEL_DIR = Path("models/elm_ablation")
+PLOT_DIR = Path("current_classification/plots/elm_ablation")
+MODEL_DIR = Path("current_classification/models/elm_ablation")
 
 PLOT_DIR.mkdir(parents=True, exist_ok=True)
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
@@ -662,7 +662,7 @@ if __name__ == "__main__":
     from ehda_normalization import prepare_training_data
     
     # Load data
-    folder = sys.argv[1] if len(sys.argv) > 1 else "new data"
+    folder = sys.argv[1] if len(sys.argv) > 1 else r"C:\Users\HV\Desktop\bruno_work\main\data\current_training"
     print(f"Loading data from: {folder}")
     
     df = process_multiple_files("*.json", folder=folder)

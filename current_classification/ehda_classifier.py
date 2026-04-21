@@ -53,8 +53,8 @@ except ImportError:
 # ─────────────────────────────────────────────────────────────────────────────
 # CONFIGURATION
 # ─────────────────────────────────────────────────────────────────────────────
-MODEL_DIR  = Path("models")
-PLOT_DIR   = Path("plots")
+MODEL_DIR  = Path("current_classification/models")
+PLOT_DIR   = Path("current_classification/plots")
 RANDOM_STATE = 42
 TEST_SIZE    = 0.2    # 20% held out for final evaluation
 CV_FOLDS     = 5      # stratified k-fold cross-validation
@@ -390,7 +390,7 @@ def _plot_model_comparison(all_results: list) -> None:
 def train(X: np.ndarray, labels: np.ndarray,
           feature_names: list,
           normalizer=None,
-          scaler_save_path: str = "scalers") -> dict:
+          scaler_save_path: str = "current_classification/scalers") -> dict:
     """
     Full training pipeline.
 
@@ -409,11 +409,17 @@ def train(X: np.ndarray, labels: np.ndarray,
     dict with keys: "random_forest", "xgboost" (if available),
                     "best_model", "label_encoder", "class_names"
     """
-    # Encode string labels to integers (required by XGBoost, consistent for RF)
     le = LabelEncoder()
     y  = le.fit_transform(labels)
     class_names = list(le.classes_)
     n_classes   = len(class_names)
+
+    # Save label encoder and metadata early — needed for inference
+    MODEL_DIR.mkdir(exist_ok=True)
+    joblib.dump(le,           MODEL_DIR / "label_encoder.pkl")
+    joblib.dump(class_names,  MODEL_DIR / "class_names.pkl")
+    joblib.dump(feature_names,MODEL_DIR / "feature_names.pkl")
+    print(f"  Saved label encoder and metadata to {MODEL_DIR}/")
 
     print(f"\n{'='*60}")
     print(f"  EHDA Classifier Training")
@@ -445,7 +451,7 @@ def train(X: np.ndarray, labels: np.ndarray,
         X_test  = normalizer.transform(X_test_df)[feature_names].values
         save_path = getattr(normalizer, "_scaler_save_path", scaler_save_path)
         normalizer.save(save_path)
-        print(f"  Normalizer fitted on {len(X_train_df)} training samples → saved to {save_path}/")
+        print(f"  Normalizer fitted on {len(X_train_df)} training samples -> saved to {save_path}/")
     else:
         print(f"  WARNING: No normalizer provided — using raw (unscaled) features.")
 
@@ -519,12 +525,7 @@ def train(X: np.ndarray, labels: np.ndarray,
     print(f"\n  Best model by CV F1: {best['model_name']}  "
           f"(F1={best['cv_val_f1']:.4f})")
 
-    # Save label encoder and metadata — needed for inference
-    MODEL_DIR.mkdir(exist_ok=True)
-    joblib.dump(le,           MODEL_DIR / "label_encoder.pkl")
-    joblib.dump(class_names,  MODEL_DIR / "class_names.pkl")
-    joblib.dump(feature_names,MODEL_DIR / "feature_names.pkl")
-    print(f"  Saved label encoder and metadata to {MODEL_DIR}/")
+    # Label encoder was saved earlier
 
     # Print top 10 features from best model
     if not best["importances"].empty:
@@ -566,7 +567,7 @@ class EHDAClassifier:
         self.feature_names = feature_names
 
     @classmethod
-    def load(cls, folder: str = "models",
+    def load(cls, folder: str = "current_classification/models",
              model_name: str = "random_forest") -> "EHDAClassifier":
         folder = Path(folder)
         model         = joblib.load(folder / f"{model_name}.pkl")

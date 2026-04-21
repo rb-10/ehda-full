@@ -1,6 +1,6 @@
 """
-EHDA Normalization Pipeline
-============================
+EHDA Normalization Pipeline (Enhanced with Custom Multi-Strategy Scaler)
+========================================================================
 Two-layer normalization strategy to make features solution-agnostic:
 
   Layer 1 — Signal normalization (applied to raw current before feature extraction)
@@ -8,10 +8,12 @@ Two-layer normalization strategy to make features solution-agnostic:
              across solutions with different conductivities.
 
   Layer 2 — Feature normalization (applied to extracted feature matrix)
-             Different strategies per feature type:
-               • Amplitude-carrying features   → RobustScaler (median/IQR based)
-               • Already-invariant features    → left as-is (documented below)
-               • Metadata / operating params   → StandardScaler (they should vary)
+             Custom multi-strategy approach with 5 different normalization types:
+               • LINEAR:       divide by domain-specific factors
+               • LOG+ROBUST:   signed log transform + RobustScaler
+               • ROBUST:       RobustScaler (median/IQR based) for outliers
+               • PASSTHROUGH:  leave as-is (already normalized)
+               • LOW-VARIANCE: don't scale (already mean≈0, std≈1)
 
 This module also handles saving and loading the fitted scalers so that
 at inference time you apply the exact same transformation as at training time.
@@ -173,7 +175,14 @@ def _classify_columns(df: pd.DataFrame) -> Tuple[list, list, list, list]:
 
 class EHDAFeatureNormalizer:
     """
-    Fits and applies the two-scaler normalization strategy.
+    Fits and applies custom multi-strategy normalization.
+
+    Uses 5 different strategies based on feature characteristics:
+      1. LINEAR: divide by domain-specific factors (e.g., voltage / 10000)
+      2. LOG + ROBUST: signed log transform + RobustScaler (heavy-tailed)
+      3. ROBUST: RobustScaler only (outlier-prone)
+      4. PASSTHROUGH: leave unchanged (already normalized)
+      5. LOW-VARIANCE: don't scale (already mean≈0, std≈1)
 
     Usage
     -----
@@ -188,28 +197,52 @@ class EHDAFeatureNormalizer:
     """
 
     def __init__(self):
-        self.amplitude_scaler = RobustScaler()    # median + IQR — robust to outliers
-        self.metadata_scaler  = StandardScaler()  # mean + std — fine for op. conditions
         self.amplitude_cols: list = []
         self.metadata_cols:  list = []
         self.invariant_cols: list = []
         self.fitted = False
+        
+        # Internal multi-strategy scalers
+        self._linear_factors = {}
+        self._log_robust_scaler = RobustScaler()
+        self._robust_scaler = RobustScaler()
+        self._classification = {}
 
     def fit(self, df: pd.DataFrame) -> "EHDAFeatureNormalizer":
         """Fit scalers on training data. Call once, on training set only."""
+        # Keep backward compatibility with original interface
         self.amplitude_cols, self.metadata_cols, self.invariant_cols, _ = \
             _classify_columns(df)
 
-        if self.amplitude_cols:
-            self.amplitude_scaler.fit(df[self.amplitude_cols])
-        if self.metadata_cols:
-            self.metadata_scaler.fit(df[self.metadata_cols])
+        # Also classify using custom strategies
+        self._classification = self._classify_columns_custom(df)
+        
+        # Fit linear factors (just store them)
+        linear_cols = self._classification["linear"]
+        for col in linear_cols:
+            if col in self._LINEAR_FEATURES:
+                self._linear_factors[col] = self._LINEAR_FEATURES[col]
+            else:
+                self._linear_factors[col] = 1.0
+
+        # Fit log + robust scaler
+        log_robust_cols = self._classification["log_robust"]
+        if log_robust_cols:
+            X_log = self._signed_log1p(df[log_robust_cols].values)
+            self._log_robust_scaler.fit(X_log)
+
+        # Fit robust scaler
+        robust_cols = self._classification["robust"]
+        if robust_cols:
+            self._robust_scaler.fit(df[robust_cols].values)
 
         self.fitted = True
         print(f"SUCCESS Normalizer fitted on {len(df)} samples")
-        print(f"  Amplitude features (RobustScaler):   {len(self.amplitude_cols)}")
-        print(f"  Metadata features  (StandardScaler): {len(self.metadata_cols)}")
-        print(f"  Invariant features (untouched):      {len(self.invariant_cols)}")
+        print(f"  Strategy 1 - LINEAR (÷ factor):        {len(linear_cols)}")
+        print(f"  Strategy 2 - LOG + ROBUST:             {len(log_robust_cols)}")
+        print(f"  Strategy 3 - ROBUST (RobustScaler):    {len(robust_cols)}")
+        print(f"  Strategy 4 - PASSTHROUGH (unchanged):  {len(self._classification['passthrough'])}")
+        print(f"  Strategy 5 - LOW-VARIANCE (unchanged): {len(self._classification['low_variance'])}")
         return self
 
     def transform(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -219,15 +252,27 @@ class EHDAFeatureNormalizer:
 
         df_out = df.copy()
 
-        if self.amplitude_cols:
-            df_out[self.amplitude_cols] = self.amplitude_scaler.transform(
-                df[self.amplitude_cols]
-            )
-        if self.metadata_cols:
-            df_out[self.metadata_cols] = self.metadata_scaler.transform(
-                df[self.metadata_cols]
-            )
-        # Invariant and skip columns are copied unchanged
+        # Strategy 1: LINEAR
+        linear_cols = self._classification["linear"]
+        for col in linear_cols:
+            factor = self._linear_factors.get(col, 1.0)
+            df_out[col] = df[col] / factor
+
+        # Strategy 2: LOG + ROBUST
+        log_robust_cols = self._classification["log_robust"]
+        if log_robust_cols:
+            X_log = self._signed_log1p(df[log_robust_cols].values)
+            X_scaled = self._log_robust_scaler.transform(X_log)
+            df_out[log_robust_cols] = X_scaled
+
+        # Strategy 3: ROBUST
+        robust_cols = self._classification["robust"]
+        if robust_cols:
+            X_scaled = self._robust_scaler.transform(df[robust_cols].values)
+            df_out[robust_cols] = X_scaled
+
+        # Strategy 4 & 5: PASSTHROUGH and LOW-VARIANCE (already handled by copy)
+        
         return df_out
 
     def fit_transform(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -238,34 +283,118 @@ class EHDAFeatureNormalizer:
         """Return the ordered list of columns to feed to the model."""
         return self.amplitude_cols + self.metadata_cols + self.invariant_cols
 
-    def save(self, folder: str = "scalers") -> None:
+    def save(self, folder: str = "current_classification/scalers") -> None:
         """Persist fitted scalers to disk for inference reuse."""
         folder = Path(folder)
         folder.mkdir(parents=True, exist_ok=True)
-        joblib.dump(self.amplitude_scaler, folder / "amplitude_scaler.pkl")
-        joblib.dump(self.metadata_scaler,  folder / "metadata_scaler.pkl")
+        joblib.dump(self._linear_factors, folder / "linear_factors.pkl")
+        joblib.dump(self._log_robust_scaler, folder / "log_robust_scaler.pkl")
+        joblib.dump(self._robust_scaler, folder / "robust_scaler.pkl")
         joblib.dump({
             "amplitude_cols": self.amplitude_cols,
             "metadata_cols":  self.metadata_cols,
             "invariant_cols": self.invariant_cols,
             "fitted":         self.fitted,
+            "classification": self._classification,
         }, folder / "normalizer_meta.pkl")
         print(f"SUCCESS Scalers saved to {folder}/")
 
     @classmethod
-    def load(cls, folder: str = "scalers") -> "EHDAFeatureNormalizer":
+    def load(cls, folder: str = "current_classification/scalers") -> "EHDAFeatureNormalizer":
         """Load previously fitted scalers from disk."""
         folder = Path(folder)
         obj = cls()
-        obj.amplitude_scaler = joblib.load(folder / "amplitude_scaler.pkl")
-        obj.metadata_scaler  = joblib.load(folder / "metadata_scaler.pkl")
+        obj._linear_factors = joblib.load(folder / "linear_factors.pkl")
+        obj._log_robust_scaler = joblib.load(folder / "log_robust_scaler.pkl")
+        obj._robust_scaler = joblib.load(folder / "robust_scaler.pkl")
         meta = joblib.load(folder / "normalizer_meta.pkl")
         obj.amplitude_cols = meta["amplitude_cols"]
         obj.metadata_cols  = meta["metadata_cols"]
         obj.invariant_cols = meta["invariant_cols"]
         obj.fitted         = meta["fitted"]
+        obj._classification = meta["classification"]
         print(f"SUCCESS Scalers loaded from {folder}/")
         return obj
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # PRIVATE HELPER METHODS (custom multi-strategy logic)
+    # ─────────────────────────────────────────────────────────────────────────
+
+    # Strategy 1: Linear features with domain-specific factors
+    _LINEAR_FEATURES = {
+        "target_voltage": 10000.0,
+        "actual_voltage": 10000.0,
+        "flow_rate": 50.0,
+        "dominant_freq": 100.0,
+    }
+
+    # Strategy 2: Heavy-tailed features (log + robust)
+    _LOG_ROBUST_FEATURES = [
+        "total_power", "wavelet_total_energy",
+        "wt_approx_L6_energy",
+        "wt_detail_L6_energy", "wt_detail_L5_energy",
+        "wt_detail_L4_energy", "wt_detail_L3_energy",
+        "wt_detail_L2_energy", "wt_detail_L1_energy",
+        "mean_freq", "median_freq",
+        "spectral_rolloff", "spectral_bandwidth",
+        "derivative_variance",
+    ]
+
+    # Strategy 3: Robust features (outlier-prone)
+    _ROBUST_FEATURES = [
+        "voltage_error",
+        "median", "iqr",
+        "derivative_mean_abs",
+        "zero_crossing_rate",
+        "shape_factor",
+        "skewness", "kurtosis",
+        "peak", "peak_to_peak", "crest_factor",
+    ]
+
+    # Strategy 4: Passthrough (already normalized)
+    _PASSTHROUGH_PATTERN = "_rel"
+
+    # Strategy 5: Low-variance (don't scale)
+    _LOW_VARIANCE_FEATURES = [
+        "std", "rms", "variance",
+        "mean", "current_PS",
+    ]
+
+    @staticmethod
+    def _signed_log1p(x: np.ndarray) -> np.ndarray:
+        """Apply signed logarithm: sign(x) * log(1 + |x|)"""
+        return np.sign(x) * np.log1p(np.abs(x))
+
+    def _classify_columns_custom(self, df: pd.DataFrame) -> dict:
+        """Classify columns into the 5 custom scaling strategies."""
+        all_cols = list(df.columns)
+        classification = {
+            "linear": [],
+            "log_robust": [],
+            "robust": [],
+            "passthrough": [],
+            "low_variance": [],
+            "skip": [],
+        }
+
+        for col in all_cols:
+            if col in NON_FEATURE_COLS:
+                classification["skip"].append(col)
+            elif col in self._LINEAR_FEATURES:
+                classification["linear"].append(col)
+            elif col in self._LOG_ROBUST_FEATURES:
+                classification["log_robust"].append(col)
+            elif col in self._ROBUST_FEATURES:
+                classification["robust"].append(col)
+            elif col.endswith(self._PASSTHROUGH_PATTERN):
+                classification["passthrough"].append(col)
+            elif col in self._LOW_VARIANCE_FEATURES:
+                classification["low_variance"].append(col)
+            else:
+                # Default: treat as robust
+                classification["robust"].append(col)
+
+        return classification
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -276,7 +405,7 @@ class EHDAFeatureNormalizer:
 def prepare_training_data(
     df: pd.DataFrame,
     signal_norm_method: str = "zscore",
-    scaler_save_path: str = "scalers",
+    scaler_save_path: str = "current_classification/scalers",
     drop_metadata: bool = False,
     exclude_label: str = "EXCLUDE",
 ) -> Tuple[pd.DataFrame, np.ndarray, np.ndarray, list, "EHDAFeatureNormalizer"]:
@@ -368,13 +497,10 @@ def prepare_inference_sample(
 # QUICK DEMO
 # ─────────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    import sys
-    sys.path.insert(0, ".")
     from feature_extraction import process_json_file, process_multiple_files
 
-    folder = sys.argv[1] if len(sys.argv) > 1 else "."
-    df = process_multiple_files("*.json", folder=folder)
-
+    df = process_multiple_files("*.json", folder=r"C:\Users\HV\Desktop\bruno_work\main\data\current_training")
+    folder=r"C:\Users\HV\Desktop\bruno_work\main\data\current_training"
     df_norm, X, labels, feature_names, normalizer = prepare_training_data(
         df, scaler_save_path="scalers"
     )
