@@ -9,7 +9,7 @@ from scipy.signal import argrelextrema
 from scipy import signal
 from scipy.signal import hilbert
 from scipy.signal import butter, lfilter
-
+from scipy.integrate import trapezoid
 
 class ElectrosprayConfig:
     def __init__(self, file_setup):
@@ -124,13 +124,11 @@ class ElectrosprayConfig:
 class ElectrosprayMeasurements:
     """ Electrospray setup representation """
 
-    def __init__(self, name, data, voltage, flow_rate, temperature, humidity, day_measurement, current, target_voltage):
+    def __init__(self, name, data, voltage, flow_rate, day_measurement, current, target_voltage):
         self.name = name  # name of liquid
         self.data = data  # array nA
         self.flow_rate = flow_rate  # m3/s
         self.voltage = voltage  # Volt
-        self.temperature = temperature  # degree Celsius
-        self.humidity = humidity  # relative percentage
         self.day_measurement = day_measurement  # date
         # self.gas_coflow_rate  = gas_coflow_rate
         self.current = current
@@ -142,8 +140,6 @@ class ElectrosprayMeasurements:
             "flow_rate": self.flow_rate,
             "voltage": self.voltage,
             "current_PS": self.current,
-            "temperature": self.temperature,  # graus Celsius
-            "humidity": self.humidity,  # percentage
             "date_and_time": self.day_measurement,
             "target_voltage": self.target_voltage
         }
@@ -157,8 +153,6 @@ class ElectrosprayMeasurements:
             "flow_rate": self.flow_rate,
             "voltage": str(self.voltage),
             "current_PS": str(self.current),
-            "temperature": str(self.temperature),  # graus Celsius
-            "humidity": str(self.humidity),  # percentage
             "date_and_time": str(self.day_measurement),
             "target_voltage": self.target_voltage
         }
@@ -169,7 +163,7 @@ class ElectrosprayMeasurements:
         return self.flow_rate
 
     def get_measurements(self):
-        return self.name, self.data, self.voltage,  self.flow_rate, self.impedance, self.temperature, self.humidity, self.current, self.shape_current, self.target_voltage
+        return self.name, self.data, self.voltage,  self.flow_rate, self.impedance, self.current, self.shape_current, self.target_voltage
 
     def set_data(self, data_update):
         self.data = data_update  # array nA
@@ -184,204 +178,140 @@ class ElectrosprayMeasurements:
 # *****************************************
 
 
+import numpy as np
+import json
+from scipy import signal
+from scipy.signal import lfilter, filtfilt, argrelextrema
+
 class ElectrosprayDataProcessing:
     def __init__(self, sample_rate):
         self.sample_rate = sample_rate
+        self.clear_results()
+
+    def clear_results(self):
+        """Resets all stored values to prevent data leakage between measurements."""
         self.mean_value = 0
         self.variance = 0
-        # is a squared mean value of values of the average,
-        # square because it avoids cancellation of values below and above mean
-        self.stddev = 0  # is the sqrt(variance)
+        self.stddev = 0
         self.med = 0
         self.rms = 0
-        self.psd_welch = 0
-        self.datapoints_filtered = []
-        self.fourier_transform = []
-        self.fourier_transform_filtered = []
-        self.freq = []
+        
+        self.datapoints_filtered = np.array([])
+        self.fourier_transform = np.array([])
+        self.freq = np.array([])
+        self.psd_freqs = np.array([])
+        self.psd_welch = np.array([])
+        
         self.fourier_peaks = []
         self.all_fourier_peaks = []
+        
+        # Classification labels
         self.shape_current = ""
         self.generalist_ml_shape_current = ""
         self.ml_shape_current = ""
         self.nn_shape_current = ""
 
-
-    # expected are the polinominal coef for denominator and numerator for filter function
+    # ── Filtering ─────────────────────────────────────────────────────
     def calculate_filter(self, a_coef, b_coef, datapoints):
-        # low pass filter to flatten out noise
-        self.datapoints_filtered = lfilter(b_coef, a_coef, datapoints)
+        """Applies zero-phase filtering to avoid time-shift in features."""
+        # Using filtfilt instead of lfilter prevents the 'right-shift' delay
+        self.datapoints_filtered = filtfilt(b_coef, a_coef, datapoints)
 
-    def calculate_fft_raw(self, datapoints):
-        # low pass filter to flatten out noise
-        # self.datapoints_filtered = lfilter(b, a, self.data)
-        # fourier transform, results in the complex discrete fourier coefficients
-        time_step = 1 / self.sample_rate
-        self.fourier_transform = np.fft.fft(datapoints)
-        # fourier_transform = np.fft.fft(data_filtered)
-        self.freq = np.fft.fftfreq(datapoints.size, d=time_step)
-
-    def calculate_fft_filtered(self):
-        # low pass filter to flatten out noise
-        # fourier transform, results in the complex discrete fourier coefficients
-        time_step = 1 / self.sample_rate
-        self.fourier_transform_filtered = np.fft.fft(self.datapoints_filtered)
-        self.freq = np.fft.fftfreq(self.datapoints_filtered.size, d=time_step)  # better to use data.size
-
-    def calculate_fft_peaks(self):
-        # order – How many points on each side to use for the comparison to consider ``comparator(n, n+x)`` to be True.
-        # mode – How the edges of the vector are treated. 'wrap' (wrap around) or 'clip' (treat overflow as the same as the last (or first) element). Default is 'clip'. See `numpy.take`.
-        self.all_fourier_peaks = \
-            argrelextrema(abs(self.fourier_transform[0:200]), comparator=np.greater, order=3, mode='wrap')[
-                0]  # returns indices
-
-        if len(self.all_fourier_peaks) > 0:
-            # print("rel max fourier: %s" % self.fourier_peaks)
-            sorted_indices = np.argsort(abs(self.fourier_transform[self.all_fourier_peaks]))
-
-            freq_step = self.freq[1] - self.freq[0]
-            self.fourier_peaks.append("1st: ")
-            self.fourier_peaks.append([abs(self.fourier_transform[self.all_fourier_peaks[sorted_indices[-1]]]),
-                                       freq_step * self.all_fourier_peaks[sorted_indices[-1]]])
-        if len(self.all_fourier_peaks) > 1:
-            self.fourier_peaks.append("2nd: ")
-            self.fourier_peaks.append([abs(self.fourier_transform[self.all_fourier_peaks[sorted_indices[-2]]]),
-                                       freq_step * self.all_fourier_peaks[sorted_indices[-2]]])
-
-        if len(self.all_fourier_peaks) > 2:
-            self.fourier_peaks.append("3rd: ")
-            self.fourier_peaks.append([abs(self.fourier_transform[self.all_fourier_peaks[sorted_indices[-3]]]),
-                                       freq_step * self.all_fourier_peaks[sorted_indices[-3]]])
-        """
-        # height = fourier_peaks_find_peaks[1]['peak_heights']  # list containing the height of the peaks
-        # peak_pos = fourier_peaks_find_peaks[0] 
-         # list containing the positions of the peaks
-        """
-
+    # ── Time Domain ───────────────────────────────────────────────────
     def calculate_statistics(self, data):
         self.mean_value = np.mean(data)
         self.variance = np.var(data)
-        # is a squared mean value of values of the average,
-        # square because it avoids cancellation of values below and above mean
-        self.stddev = np.std(data)  # is the sqrt(variance)
+        self.stddev = np.std(data)
         self.med = np.median(data)
         self.rms = np.sqrt(np.mean(data ** 2))
 
+    def calculate_peaks_signal(self, data, threshold=3995.0):
+        """Calculates saturation/clipping metrics (useful for ML to detect 'Out of Range')."""
+        qty_max = np.sum(data >= threshold)
+        pct_max = (qty_max / len(data)) * 100
+        return threshold, qty_max, pct_max
 
-    def calculate_peaks_fft(self, data):
-        sorted_indices = np.argsort(abs(self.fourier_transform[self.all_fourier_peaks]))
-        freq_step = self.freq[1] - self.freq[0]
-        cont = 0
-        fourier_peaks_array = []
-        # if abs(self.fourier_transform[self.all_fourier_peaks[sorted_indices[-1]]])
-
-        for i in range(len(self.all_fourier_peaks)):
-            # above 50 Hz
-            if (freq_step * self.all_fourier_peaks[sorted_indices[-i]]) > 50:
-
-                if (abs(self.fourier_transform[self.all_fourier_peaks[sorted_indices[-i]]])) > 1500:
-                    cont = cont + 1
-                    fourier_peaks_array.append([abs(self.fourier_transform[self.all_fourier_peaks[sorted_indices[-i]]]),
-                                                freq_step * self.all_fourier_peaks[sorted_indices[-i]]])
-
-        return fourier_peaks_array, cont
-
-    def calculate_peaks_signal(self, data):
-        quantity_max_data = 0
-        # max_data = max(data)
-        max_data = 4000.0
-        # for i in range(0, int(len(data))):
-        #     if data[i] >= max_data:
-        #         quantity_max_data = quantity_max_data + 1
-        quantity_max_data = np.count_nonzero(data == max_data)
-        percentage_max = (quantity_max_data / 50000) * 100
-        # print(max_data)
-        # print(quantity_max_data)
-        # print(percentage_max)
-        # print("*************")
-        return max_data, quantity_max_data, percentage_max
+    # ── Frequency Domain ──────────────────────────────────────────────
+    def calculate_fft_raw(self, datapoints):
+        """Standard FFT for high-resolution frequency analysis."""
+        n = datapoints.size
+        self.fourier_transform = np.fft.rfft(datapoints)
+        self.freq = np.fft.rfftfreq(n, d=1/self.sample_rate)
 
     def calculate_power_spectral_density(self, data):
         """
-        # The above definition of energy spectral density is suitable for
-         transients (pulse-like signals) whose energy is concentrated
-          around one time window; then the Fourier transforms of the
-          signals generally exist. For continuous signals over all time,
-          one must rather define the power spectral density (PSD) which
-          exists for stationary processes; this describes how power of
-          a signal or time series is distributed over frequency, as in
-          the simple example given previously. Here, power can be the
-          actual physical power, or more often, for convenience with
-          abstract signals, is simply identified with the squared value
-          of the signal. For example, statisticians study the variance
-          of a function over time {\displaystyle x(t)}x(t) (or over
-          another independent variable), and using an analogy with
-          electrical signals (among other physical processes), it is
-          customary to refer to it as the power spectrum even when there
-          is no physical power involved.
+        Welch's Method: Smoothes the spectrum by averaging windowed segments.
+        Better for ML as it reduces variance in frequency features.
+        """
+        # nperseg=1024 is standard, but you can adjust based on RECORD_LENGTH
+        self.psd_freqs, self.psd_welch = signal.welch(data, fs=self.sample_rate, nperseg=1024)
+        return self.psd_freqs, self.psd_welch
 
-          The spectrum analyzer measures the magnitude of the short-time
-          Fourier transform (STFT) of an input signal. If the signal being
-          analyzed can be considered a stationary process, the STFT is a
-          good smoothed estimate of its power spectral density.
-       """
-        freqs, self.psd_welch = signal.welch(data)
+    def calculate_band_powers(self):
+        if self.psd_welch.size == 0:
+            return {}
 
-        return freqs, self.psd_welch
+        bands = {
+            "v_low":  (0, 50),
+            "low":    (50, 500),
+            "mid":    (500, 2000),
+            "high":   (2000, 10000),
+            "v_high": (10000, self.sample_rate / 2)
+        }
 
-    # string representation of this class
-    def __repr__(self):
-        d = dict(mean=str(self.mean_value),
-                variance=str(self.variance),
-                deviation=str(self.stddev),
-                median=str(self.med),
-                rms=str(self.rms),
-                shape_current=self.shape_current,
-                generalist_ml_shape_current = self.generalist_ml_shape_current,
-                ml_shape_current = self.ml_shape_current,
-                nn_shape_current = self.nn_shape_current,
-                #  psd_welch=str(self.psd_welch.tolist()),
-                # fourier_transform=str(self.fourier_transform),
-                # total_variation_distance=str(self.total_variation_distance),
-                freq=str(self.freq.tolist()),
-                fourier_peaks=str(self.fourier_peaks))
-        return (json.dumps(d, sort_keys=True))
+        band_energies = {}
+        for name, (low, high) in bands.items():
+            idx = np.logical_and(self.psd_freqs >= low, self.psd_freqs < high)
 
+            # Check if we have enough points to integrate
+            if np.any(idx):
+                band_energies[f"band_power_{name}"] = trapezoid(self.psd_welch[idx], self.psd_freqs[idx])
+            else:
+                band_energies[f"band_power_{name}"] = 0.0
+
+        return band_energies
+        
+        
+    def calculate_fft_peaks(self, min_freq=50, min_amp=1500):
+        """Consolidated peak finder to identify dominant oscillation frequencies."""
+        mag = np.abs(self.fourier_transform)
+        # Identify local maxima
+        indices = argrelextrema(mag, np.greater, order=5)[0]
+        
+        # Filter for physical relevance
+        mask = (self.freq[indices] > min_freq) & (mag[indices] > min_amp)
+        valid_idx = indices[mask]
+        
+        # Sort by amplitude descending
+        valid_idx = valid_idx[np.argsort(mag[valid_idx])[::-1]]
+        
+        self.fourier_peaks = []
+        for i, idx in enumerate(valid_idx[:3]):
+            rank = ["1st", "2nd", "3rd"][i]
+            self.fourier_peaks.append(f"{rank}: ")
+            self.fourier_peaks.append([float(mag[idx]), float(self.freq[idx])])
+            
+        return self.fourier_peaks, len(valid_idx)
+
+    # ── Data Export ───────────────────────────────────────────────────
     def get_statistics_dictionary(self):
+        # Extract band powers to include in the flat dictionary
+        bp = self.calculate_band_powers()
+        
         dictionary = {
             "mean": np.float64(self.mean_value),
             "variance": np.float64(self.variance),
             "deviation": np.float64(self.stddev),
             "median": np.float64(self.med),
             "rms": np.float64(self.rms),
-            "spray_mode": (self.shape_current[0] if (isinstance(self.shape_current, (list, tuple)) and len(self.shape_current) > 0) else self.shape_current),
-            "generalist_ml_spray_mode": self.generalist_ml_shape_current,
+            "spray_mode": self.shape_current,
             "ml_spray_mode": self.ml_shape_current,
-            "nn_spray_mode": self.nn_shape_current
-            # "psd welch": self.psd_welch.tolist(),
-            # "fourier peaks": self.fourier_peaks,
-            # "maximum variation distance": np.float64(self.total_variation_distance),
-            # "freq": self.freq.tolist()
+            "nn_spray_mode": self.nn_shape_current,
+            **bp  # Merges the band power dictionary into this one
         }
         return dictionary
 
-    def set_electrical_conductivity(self, K):
-        self.k_electrical_conductivity = K
-
-    def set_flow_rate(self, Q):
-        self.q_flow_rate = Q
-
-    def set_voltage(self, voltage):
-        self.voltage = voltage
-
-    def set_shape(self, shape_current):
-        self.shape_current = shape_current
-
-    def set_generalist_ml_shape(self, generalist_ml_shape_current):
-        self.generalist_ml_shape_current = generalist_ml_shape_current
-
-    def set_ml_shape(self, ml_shape_current):
-        self.ml_shape_current = ml_shape_current
-
-    def set_nn_shape(self, nn_shape_current):
-        self.nn_shape_current = nn_shape_current
+    def __repr__(self):
+        d = self.get_statistics_dictionary()
+        # Convert values to strings for JSON serialization
+        return json.dumps({k: str(v) for k, v in d.items()}, sort_keys=True)

@@ -43,7 +43,7 @@ from image_classification.integrated_pipeline.update_jsons import update_jsons
 
 # -------- SETTINGS --------#
 save_electrospray = Path(r"data")
-solution = "EW82_HV_nz_21-04"
+solution = "DMF"
 folder = save_electrospray / solution
 
 MODEL_PATH = "image_classification/final_model/export.pkl"
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     stats = update_jsons(
         json_folder=JSON_FOLDER,
         results_csv=results_csv,
-        reclassify_existing=False
+        reclassify_existing=True
     )
 
     print(stats)

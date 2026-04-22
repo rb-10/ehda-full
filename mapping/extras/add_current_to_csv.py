@@ -4,7 +4,7 @@ import pandas as pd
 import re
 
 FOLDER = r"data\EW82_HV_nz_21-04\Current"
-CSV = r"classification_results_20260421_132507.csv"
+CSV = r"classification_results_20260421_143641.csv"
 CONFIDENCE = 0.7
 
 def clean_and_threshold_mode(mode_string, threshold=0.70):
@@ -55,12 +55,13 @@ def process_electrospray(folder_path, csv_name, threshold=0.70):
                         # Clean both modes using the new logic
                         rf_cleaned = clean_and_threshold_mode(content.get('rf_spray_mode'), threshold)
                         xgb_cleaned = clean_and_threshold_mode(content.get('xgb_spray_mode'), threshold)
-                        
+                        manual = content.get('manual_classification')
                         json_updates[(exp_idx, s_idx)] = {
                             'voltage': content.get('voltage'),
                             'flow_rate': content.get('flow_rate'),
                             'rf_spray_mode': rf_cleaned,
-                            'xgb_spray_mode': xgb_cleaned
+                            'xgb_spray_mode': xgb_cleaned,
+                            'manual_classification' : manual
                         }
 
     # Apply updates to the existing DataFrame
@@ -71,6 +72,7 @@ def process_electrospray(folder_path, csv_name, threshold=0.70):
             df.at[i, 'flow_rate'] = json_updates[key]['flow_rate']
             df.at[i, 'rf_spray_mode'] = json_updates[key]['rf_spray_mode']
             df.at[i, 'xgb_spray_mode'] = json_updates[key]['xgb_spray_mode']
+            df.at[i, 'manual_classification'] = json_updates[key]['manual_classification']
 
     # Save the cleaned file
     output_path = os.path.join(folder_path, f"cleaned_{csv_name}")

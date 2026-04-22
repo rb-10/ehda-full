@@ -28,6 +28,7 @@ import warnings
 import keyboard
 import numpy as np
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 from mapping.software.electrospray        import ElectrosprayConfig, ElectrosprayDataProcessing
 from mapping.software.hardware            import Hardware
@@ -96,6 +97,23 @@ def load_ml_models(cfg: dict) -> dict:
 
     return models
 
+def get_experiment_metadata():
+    print("\n" + "="*30)
+    print(" NEW ELECTROSPRAY SESSION ")
+    print("="*30)
+    
+    solution = input("Enter solution name (e.g., Ethanol + 0.1M LiCl): ")
+    
+    print("\nHigh Voltage Configuration:")
+    print("1. HV on Nozzle (Counter-Electrode Grounded)")
+    print("2. HV on Counter-Electrode (Nozzle Grounded)")
+    choice = input("Select (1 or 2): ")
+    hv_pos = "nozzle" if choice == "1" else "counter-electrode"
+    
+    return {
+        "solution": solution,
+        "hv_position": hv_pos
+    }
 
 def classify_sample(datapoints, actual_voltage, flow_rate, processing, ml_models):
     if not ml_models:
@@ -184,17 +202,15 @@ if __name__ == "__main__":
     # camera._trigger is a no-op and everything continues normally.
     trigger_fn = camera._trigger
 
-
+    metadata = get_experiment_metadata()
+    SESSION_SOLUTION = metadata["solution"]
+    SESSION_HV = metadata["hv_position"]
+    SESSION_START = datetime.now() # Capture start time for the final filename
     # ── Hardware ──────────────────────────────────────────────────────
     hardware = Hardware(cfg)
 
     # ── Storage ───────────────────────────────────────────────────────
     db = ElectrosprayDatabase(cfg["save_path"])
-
-    # ── Dashboard ─────────────────────────────────────────────────────
-    plt.style.use("seaborn-v0_8-colorblind")
-    plt.ion()
-    dashboard = Dashboard()
 
     steps         = voltage_steps(meas)
     total_points  = len(steps) * len(meas["flow_rate"])
@@ -216,6 +232,8 @@ if __name__ == "__main__":
 
     abort   = False
     counter = 0
+
+
 
     try:
         for flow_rate in meas["flow_rate"]:
@@ -252,10 +270,10 @@ if __name__ == "__main__":
                     hardware.actual_voltage(),
                     hardware.actual_current(),
                     processing,
-                    trigger_fn = trigger_fn,   # ← synchronized trigger
-
+                    trigger_fn = trigger_fn  # ← synchronized trigger
                 )
-
+                result["solution_name"] = SESSION_SOLUTION
+                result["hv_position"] = SESSION_HV
                 # 3. Classify
                 rf_result, xgb_result = classify_sample(
                     result["datapoints"],
@@ -267,9 +285,6 @@ if __name__ == "__main__":
                 result["rf_classification"]  = rf_result
                 result["xgb_classification"] = xgb_result
 
-                # 4. Dashboard
-                dashboard.update(result, processing, voltage, flow_rate)
-                plt.pause(0.01)
 
                 # 5. Save  (rf_classification and xgb_classification
                 #           are now part of the result dict)
@@ -293,6 +308,7 @@ if __name__ == "__main__":
 
     finally:
         hardware.shutdown()
+        db.finalize_session(SESSION_SOLUTION, SESSION_START)
         db.close()
 
     print(f"\n[MAIN] Done.  Results saved to: {cfg['save_path']}")

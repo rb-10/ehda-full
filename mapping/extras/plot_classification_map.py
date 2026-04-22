@@ -9,9 +9,9 @@ from matplotlib.patches import Polygon as MplPolygon
 # ---------------------------------------------------------
 # SETTINGS - CHANGE SOURCE HERE
 # ---------------------------------------------------------
-# Options: 'rf_spray_mode', 'xgb_spray_mode', or 'final_class'
-PLOT_SOURCE = 'rf_spray_mode' 
-FILE_PATH = 'data\EW82_HV_nz_21-04\Current\cleaned_classification_results_20260421_132507.csv'
+# Options: 'rf_spray_mode', 'xgb_spray_mode', or 'final_class', 'manual_classification'
+PLOT_SOURCE = 'raw_class' 
+FILE_PATH = r'C:\Users\HV\Desktop\bruno_work\save_electrospray\DMF\Current\cleaned_classification_results_20260422_094456.csv'
 
 # ---------------------------------------------------------
 # LOAD DATA
@@ -23,13 +23,13 @@ df['classification'] = df[PLOT_SOURCE]
 
 # Set up color palette
 class_palette = {
-    'dripping': "#fffb00",
-    'intermitent': "#0059ff",
-    'cone_jet': "#009b00",
-    'multi_jet': "#ff0000",
-    'undefined': "#525252",
+    'dripping': "#011cfa",
+    'intermitent': "#ffa704",
+    'cone_jet': "#0a7f02",
+    'multi_jet': "#a13195",
+    'undefined': "#000000",
     'unclassified': "#00FFDD",
-    'unconclusive': "#000000",
+    'unconclusive': "#7d7e7b",
     'EXCLUDE': '#7f7f7f',
 }
 

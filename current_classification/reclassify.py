@@ -58,26 +58,31 @@ except ImportError as e:
 # ─────────────────────────────────────────────────────────────────────────────
 # CONFIGURATION
 # ─────────────────────────────────────────────────────────────────────────────
-DEFAULT_INPUT_FOLDER = "new_data/DMF"
-DEFAULT_MODEL_FOLDER = "models"
-DEFAULT_OUTPUT_FOLDER = "results"
+DEFAULT_INPUT_FOLDER = "data/DMF/Current"
+DEFAULT_MODEL_FOLDER = "current_classification/models"
+DEFAULT_OUTPUT_FOLDER = "data/DMF/Current/results"
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 # LOGGING SETUP
 # ─────────────────────────────────────────────────────────────────────────────
 def setup_logging(log_path: Path) -> logging.Logger:
-    """Configure logging to file and console."""
+    """Configure logging to file and console with UTF-8 support."""
     logger = logging.getLogger("ehda_reclassify")
     logger.setLevel(logging.DEBUG)
     
-    # File handler
-    fh = logging.FileHandler(log_path, mode='w')
+    # Clear any existing handlers
+    logger.handlers = []
+    
+    # File handler (UTF-8 encoding to support all characters)
+    fh = logging.FileHandler(log_path, mode='w', encoding='utf-8')
     fh.setLevel(logging.DEBUG)
     
-    # Console handler
-    ch = logging.StreamHandler()
+    # Console handler (UTF-8 encoding for Windows console compatibility)
+    ch = logging.StreamHandler(sys.stdout)
     ch.setLevel(logging.INFO)
+    if hasattr(ch, 'encoding'):
+        ch.encoding = 'utf-8'
     
     # Formatter
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -142,7 +147,7 @@ def load_json_files(folder: Path) -> List[Tuple[Path, dict]]:
     data = []
     for json_file in json_files:
         try:
-            with open(json_file, 'r') as f:
+            with open(json_file, 'r', encoding='utf-8') as f:
                 json_data = json.load(f)
             data.append((json_file, json_data))
         except json.JSONDecodeError as e:
@@ -183,16 +188,24 @@ def reclassify_sample(
         result['metadata'] = metadata
         result['original_label'] = metadata.get('rf_spray_mode', 'N/A')
         
-        # Extract features (same pipeline as training)
-        features_dict = extract_features(current_array, precomputed=metadata)
+        # Extract features - wrap array in dictionary since extract_features expects dict format
+        sample_dict = {"current": current_array}
+        features_dict = extract_features(sample_dict)
+        
+        # Subset to selected features if available
+        if hasattr(reclassify_sample, '_selected_features'):
+            selected_names = reclassify_sample._selected_features
+            features_dict = {n: features_dict[n] for n in selected_names if n in features_dict}
         
         # Convert to DataFrame for normalization
         features_df = pd.DataFrame([features_dict])
-        feature_names = list(features_dict.keys())
         
         # Normalize using the trained normalizer
-        features_normalized = normalizer.transform(features_df)[feature_names].values
-        x_normalized = features_normalized[0]  # Extract first (and only) row
+        # The normalizer.transform() returns a DataFrame, so get the values properly
+        features_normalized_df = normalizer.transform(features_df)
+        
+        # Convert the normalized DataFrame to a numpy array (1D for prediction)
+        x_normalized = features_normalized_df.values.flatten()
         
         # Predict using the classifier
         prediction, probabilities = classifier.predict(x_normalized)
@@ -246,9 +259,9 @@ def save_reclassified_json(
             updated_json[sample_key]['predicted_spray_mode'] = 'ERROR'
             updated_json[sample_key]['predicted_error'] = prediction_result['error']
     
-    # Write to output file
-    with open(output_path, 'w') as f:
-        json.dump(updated_json, f, indent=2)
+    # Write to output file (UTF-8 encoding)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(updated_json, f, indent=2, ensure_ascii=False)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -308,12 +321,12 @@ def main(
     try:
         logger.info("\nLoading trained model...")
         classifier = EHDAClassifier.load(str(model_path), model_name=model_name)
-        logger.info(f"✓ Loaded {model_name} classifier")
+        logger.info(f"[OK] Loaded {model_name} classifier")
         
         logger.info("Loading normalizer...")
-        normalizer_path = model_path / "normalizer"
+        normalizer_path = model_path / ".." / "scalers"
         normalizer = EHDAFeatureNormalizer.load(str(normalizer_path))
-        logger.info("✓ Loaded normalizer")
+        logger.info("[OK] Loaded normalizer")
         
     except FileNotFoundError as e:
         logger.error(f"Failed to load model artifacts: {e}")
@@ -321,6 +334,19 @@ def main(
     except Exception as e:
         logger.error(f"Unexpected error loading model: {e}")
         return False
+    
+    # Load selected features if available
+    selected_features = None
+    try:
+        from feature_selector import load_selected_features
+        selected_features = load_selected_features(str(model_path.parent))
+        logger.info(f"[OK] Loaded {len(selected_features)} selected features")
+        # Store in function for use in reclassify_sample
+        reclassify_sample._selected_features = selected_features
+    except FileNotFoundError:
+        logger.info("[INFO] No selected_features.pkl found — using all extracted features")
+    except Exception as e:
+        logger.warning(f"[WARNING] Could not load selected features: {e}")
     
     # Load JSON files
     try:
@@ -361,12 +387,12 @@ def main(
             result['sample_id'] = sample_obj.get('id', 'N/A')
             results_list.append(result)
             
-            # Log the result
+            # Log the result (use ASCII-safe indicators)
             if result['success']:
-                logger.info(f"  ✓ {sample_key}: {result['original_label']} → {result['predicted_label']} "
+                logger.info(f"  [OK] {sample_key}: {result['original_label']} -> {result['predicted_label']} "
                            f"(confidence: {result['confidence']:.2%})")
             else:
-                logger.warning(f"  ✗ {sample_key}: {result['error']}")
+                logger.warning(f"  [FAILED] {sample_key}: {result['error']}")
         
         # Save reclassified JSON
         output_json_path = json_output_path / file_path.name
@@ -400,9 +426,9 @@ def main(
     
     summary_df = pd.DataFrame(summary_data)
     summary_csv_path = output_path / "reclassification_summary.csv"
-    summary_df.to_csv(summary_csv_path, index=False)
+    summary_df.to_csv(summary_csv_path, index=False, encoding='utf-8')
     
-    logger.info(f"\n✓ Saved summary to {summary_csv_path}")
+    logger.info(f"\n[OK] Saved summary to {summary_csv_path}")
     
     # Print statistics
     success_count = (summary_df['status'] == 'success').sum()

@@ -3,7 +3,7 @@ import json
 import matplotlib.pyplot as plt
 
 # Folder containing your JSON files
-FOLDER_PATH = r'C:\Users\HV\Desktop\bruno_work\save_electrospray\DMF\test'
+FOLDER_PATH = r'C:\Users\HV\Desktop\bruno_work\save_electrospray\DMF\Current'
 
 # Define a color palette for the different classification modes
 COLOR_MAP = {

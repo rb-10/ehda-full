@@ -20,7 +20,7 @@ classes = ["cone_jet", "dripping", "intermitent", "multi_jet", "unconclusive", "
 for cls in classes:
     os.makedirs(os.path.join(output_base, cls), exist_ok=True)
 
-videos = [f for f in os.listdir(images_folder) if f.endswith(".mp4")]
+videos = [f for f in os.listdir(clips_folder) if f.endswith(".mp4")]
 videos.sort()
 
 print("Controls:")
@@ -135,7 +135,7 @@ for video_name in videos:
     voltage = sample_data.get("voltage", "N/A")
     flow_rate = sample_data.get("flow_rate", "N/A")
 
-    video_path = os.path.join(images_folder, video_name)
+    video_path = os.path.join(clips_folder, video_name)
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():

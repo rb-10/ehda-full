@@ -33,27 +33,18 @@ def acquire_and_process(scp,
                         actual_voltage: float,
                         actual_current_ps: float,
                         processing,
-                        trigger_fn: Optional[Callable] = None,
-                        temperature: float = 0.0,
-                        humidity:    float = 0.0) -> dict:
+                        trigger_fn: Optional[Callable] = None) -> dict:
     """
-    Blocking call — returns when oscilloscope has a full 0.5 s record.
+    Acquires 0.5s of data, processes features via ElectrosprayDataProcessing,
+    and returns a results dictionary including statistics and spectral bands.
+    """
 
-    Parameters
-    ----------
-    trigger_fn : callable with no arguments, or None.
-                 Called immediately after scp.start() so the Arduino
-                 shutter trigger fires in sync with oscilloscope acquisition.
-                 Pass camera._trigger  (the bound method, not camera._trigger())
-                 Example in main_electrospray.py:
-                     result = acquire_and_process(..., trigger_fn=camera._trigger)
-    """
+    # 1. Reset state to ensure we aren't using peaks from the previous sample
+    processing.clear_results()
 
     # ── Acquire + trigger ─────────────────────────────────────────────
     scp.start()
 
-    # Fire the trigger immediately after scp.start() — no delay,
-    # no thread handoff, minimum possible latency.
     if trigger_fn is not None:
         try:
             trigger_fn()
@@ -63,40 +54,50 @@ def acquire_and_process(scp,
     while not scp.is_data_ready:
         time.sleep(0.01)
 
-    raw        = scp.get_data()
-    timestamp  = datetime.now()
+    raw = scp.get_data()
+    timestamp = datetime.now()
     datapoints = np.array(raw[1]) * MULTIPLIER_NA   # [nA]
 
-    # ── Filter ────────────────────────────────────────────────────────
+    # ── Filter Design ─────────────────────────────────────────────────
+    # We keep this here if CUTOFF_HZ or SAMPLING_FREQ are global/config vars
     cutoff = CUTOFF_HZ / (0.5 * SAMPLING_FREQ)
-    b, a   = butter(6, Wn=cutoff, btype="low", analog=False)
+    b, a = butter(6, Wn=cutoff, btype="low", analog=False)
 
     # ── Signal processing ─────────────────────────────────────────────
+    # A. Apply Filter
     processing.calculate_filter(a, b, datapoints)
+    
+    # B. Time Domain (Stats on filtered data, Peaks on raw to check clipping)
+    processing.calculate_statistics(processing.datapoints_filtered)
+    max_val, qty_max, pct_max = processing.calculate_peaks_signal(datapoints)
+    
+    # C. Frequency Domain (Always use raw data to see full spectrum)
     processing.calculate_fft_raw(datapoints)
-    processing.calculate_statistics(datapoints)
     processing.calculate_power_spectral_density(datapoints)
+    
+    # D. Peak finding in FFT
+    fft_peaks, n_fft_peaks = processing.calculate_fft_peaks()
 
-    max_data, qty_max, pct_max = processing.calculate_peaks_signal(datapoints)
-    fft_peaks, n_fft_peaks     = processing.calculate_peaks_fft(datapoints)
+    # ── Build Results ─────────────────────────────────────────────────
+    # Get the dictionary containing mean, std, and the new band_power features
+    stats = processing.get_statistics_dictionary()
 
-    processing.calculate_fft_filtered()
-    processing.calculate_fft_peaks()
-
-    return {
-        "datapoints":          datapoints,
-        "timestamp":           timestamp,
-        "target_voltage":      target_voltage,
-        "actual_voltage":      actual_voltage,
-        "actual_current_ps":   actual_current_ps,
-        "flow_rate":           float(flow_rate),
-        "temperature":         temperature,
-        "humidity":            humidity,
-        "mean":                processing.mean_value,
-        "std":                 processing.stddev,
-        "median":              processing.med,
-        "rms":                 processing.rms,
-        "variance":            processing.variance,
-        "rf_classification":   "N/A",   # filled by classify_sample()
-        "xgb_classification":  "N/A",
+    # Create the final return object
+    results = {
+        "datapoints":        datapoints,
+        "timestamp":         timestamp,
+        "target_voltage":    target_voltage,
+        "actual_voltage":    actual_voltage,
+        "actual_current_ps": actual_current_ps,
+        "flow_rate":         float(flow_rate),
+        "qty_max":           qty_max,  # Useful for detecting saturated sensors
+        "pct_max":           pct_max,
+        "n_fft_peaks":       n_fft_peaks,
+        "rf_classification": "N/A",
+        "xgb_classification": "N/A",
     }
+
+    # Merge the statistics and band powers into the main results
+    results.update(stats)
+
+    return results
