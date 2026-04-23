@@ -27,24 +27,29 @@ INSTRUCTIONS:
 
 
 """
-
 from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor
 import multiprocessing
 import os
 import cv2
+import pandas as pd
 
-# your imports
+# Update imports
 from image_classification.integrated_pipeline.split_video import split_video
 from image_classification.pre_processing_ben import *
 from image_classification.integrated_pipeline.classify_images import classify_images
-from image_classification.integrated_pipeline.update_jsons import update_jsons
+# REMOVED update_jsons
+from mapping.software.database import ElectrosprayDatabase # Import your DB class
 
 
 # -------- SETTINGS --------#
-save_electrospray = Path(r"data")
-solution = "DMF"
-folder = save_electrospray / solution
+images_data_folder = Path(r"data/images")
+master_data_folder = Path(r"data")
+RAW_VIDEO_DIR = images_data_folder / "raw"
+SLPIT_VIDEO_DIR = images_data_folder / "SPLIT"
+# Where the script will dump the output
+PROCESSED_CLIPS_DIR = images_data_folder / 'PROCESSED CLIPS'
+CLASSIFIED_DIR = images_data_folder / 'CLASSIFIED'
 
 MODEL_PATH = "image_classification/final_model/export.pkl"
 
@@ -79,26 +84,26 @@ if __name__ == "__main__":
     # -------- Split Videos --------#
     all_chunks = []
 
-    for file_name in Path(folder / 'raw').glob('*.mp4'):
-        output_folder = split_video(folder, file_name)
+    for file_name in RAW_VIDEO_DIR.glob('*.mp4'):
+        output_folder = split_video(SLPIT_VIDEO_DIR, file_name)
         all_chunks.extend(list(Path(output_folder).glob('*.mp4')))
 
     # -------- Process Videos (PARALLEL) --------#
-    processed_clips = folder / 'PROCESSED CLIPS'
-    os.makedirs(processed_clips, exist_ok=True)
 
-    num_workers = multiprocessing.cpu_count() - 2
+    os.makedirs(PROCESSED_CLIPS_DIR, exist_ok=True)
+    cpu_count = multiprocessing.cpu_count()
+    num_workers = cpu_count // 2
 
-    tasks = [(vf, processed_clips) for vf in all_chunks]
+    tasks = [(vf, PROCESSED_CLIPS_DIR) for vf in all_chunks]
 
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
-        list(executor.map(process_video, tasks))
+        list(executor.map(process_video, tasks, chunksize = 4))
 
     # -------- Classify --------#
-    INPUT_FOLDER = processed_clips
-    OUTPUT_BASE = folder / 'CLASSIFIED'
-    JSON_FOLDER = folder / 'Current'
+    INPUT_FOLDER = PROCESSED_CLIPS_DIR
+    OUTPUT_BASE = CLASSIFIED_DIR
 
+    # This creates a CSV mapping clip names to predictions
     results_csv = classify_images(
         model_path=MODEL_PATH,
         input_folder=INPUT_FOLDER,
@@ -106,10 +111,35 @@ if __name__ == "__main__":
         confidence_threshold=0.70
     )
 
-    stats = update_jsons(
-        json_folder=JSON_FOLDER,
-        results_csv=results_csv,
-        reclassify_existing=True
-    )
+    # -------- UPDATE DATABASE -------- #
+    print("Updating Database with image classifications...")
+    db = ElectrosprayDatabase(str(master_data_folder)) # Point to parent folder where data.db lives
+    
+    # Read the results CSV
+    df = pd.read_csv(results_csv)
+    
+    # Assuming your clips are named something like clip_0_5.mp4 (experiment_idx, sample_idx)
+    # We map that sample_idx to the correct row in the database.
+    # We find all unique original videos to group by
+    unique_videos = df['original_video'].unique() if 'original_video' in df.columns else []
 
-    print(stats)
+    updated_count = 0
+    for main_video in unique_videos:
+        # Fetch ordered rows from DB that correspond to this main video
+        db_rows = db.get_measurements_by_video(main_video)
+        
+        # Filter CSV for clips belonging to this main video
+        video_clips = df[df['original_video'] == main_video].sort_values('clip_filename')
+        
+        # Link the clips to the DB rows chronologically
+        for i, (_, row_data) in enumerate(video_clips.iterrows()):
+            if i < len(db_rows):
+                db_id = db_rows[i]['id']
+                pred_class = row_data['predicted_class']
+                db.update_image_classification(db_id, pred_class)
+                updated_count += 1
+            else:
+                print(f"[WARNING] More clips generated than database rows for {main_video}")
+
+    db.close()
+    print(f"Database update complete. {updated_count} rows classified.")

@@ -4,7 +4,7 @@ VERSION: 4.0
 
 Timing per voltage step:
   set_voltage → wait stab_time → acquire (oscilloscope, ~0.5s min)
-              → classify → dashboard + save → wait step_time → next voltage
+              → classify →  save → wait step_time → next voltage
 
 Classification: Random Forest + XGBoost via EHDA flat classifier.
   rf_classification   → RF prediction   e.g. "cone_jet  (87%)"
@@ -33,7 +33,6 @@ from datetime import datetime
 from mapping.software.electrospray        import ElectrosprayConfig, ElectrosprayDataProcessing
 from mapping.software.hardware            import Hardware
 from mapping.software.acquire_and_process import acquire_and_process
-from mapping.software.dashboard           import Dashboard
 from mapping.software.database            import ElectrosprayDatabase
 from mapping.software.camera              import CameraClassifier
 
@@ -291,7 +290,7 @@ if __name__ == "__main__":
                 db.save(result)
 
                 print(f"RF={rf_result}  XGB={xgb_result}  "
-                      f"I={result['mean']:.3f} µA")
+                      f"I={result['mean']:.3f} nA")
 
                 # 6. Wait before next step
                 time.sleep(step_time)
@@ -308,7 +307,7 @@ if __name__ == "__main__":
 
     finally:
         hardware.shutdown()
-        db.finalize_session(SESSION_SOLUTION, SESSION_START)
+        print(f"Save video with thhis name: \n{db.finalize_session(SESSION_SOLUTION, SESSION_START).rsplit('.', 1)[0]}")
         db.close()
 
     print(f"\n[MAIN] Done.  Results saved to: {cfg['save_path']}")

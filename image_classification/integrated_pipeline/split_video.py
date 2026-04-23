@@ -25,6 +25,28 @@ def split_video(folder, file_name):
     print("FPS:", fps)
     print("Total frames:", total_frames)
 
+    
+    # -------- SAFE SKIP CHECK --------
+    video_stem = Path(file_name).stem
+    expected_clips = total_frames // frames_per_clip
+
+    existing_clips = list(Path(output_folder).glob(f"clip_{video_stem}_*.mp4"))
+
+    expected_names = {
+        f"clip_{video_stem}_{i:03d}.mp4"
+        for i in range(expected_clips)
+    }
+
+    existing_names = {p.name for p in existing_clips}
+
+    if expected_clips > 0 and expected_names.issubset(existing_names):
+        print(f"Skipping {video_stem} — all clips already exist")
+        cap.release()
+        return output_folder
+    # --------------------------------
+    
+    
+    
     clip_index = 0
     frame_index = 0
 

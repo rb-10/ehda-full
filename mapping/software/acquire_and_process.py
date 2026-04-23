@@ -72,8 +72,8 @@ def acquire_and_process(scp,
     max_val, qty_max, pct_max = processing.calculate_peaks_signal(datapoints)
     
     # C. Frequency Domain (Always use raw data to see full spectrum)
-    processing.calculate_fft_raw(datapoints)
-    processing.calculate_power_spectral_density(datapoints)
+    processing.calculate_fft_raw(processing.datapoints_filtered)
+    processing.calculate_power_spectral_density(processing.datapoints_filtered)
     
     # D. Peak finding in FFT
     fft_peaks, n_fft_peaks = processing.calculate_fft_peaks()

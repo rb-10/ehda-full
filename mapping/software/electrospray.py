@@ -207,9 +207,9 @@ class ElectrosprayDataProcessing:
         
         # Classification labels
         self.shape_current = ""
-        self.generalist_ml_shape_current = ""
-        self.ml_shape_current = ""
-        self.nn_shape_current = ""
+        #self.generalist_ml_shape_current = ""
+        #self.ml_shape_current = ""
+        #self.nn_shape_current = ""
 
     # ── Filtering ─────────────────────────────────────────────────────
     def calculate_filter(self, a_coef, b_coef, datapoints):
@@ -225,7 +225,7 @@ class ElectrosprayDataProcessing:
         self.med = np.median(data)
         self.rms = np.sqrt(np.mean(data ** 2))
 
-    def calculate_peaks_signal(self, data, threshold=3995.0):
+    def calculate_peaks_signal(self, data, threshold=39950):#Osciloscope caps out at 80 volts
         """Calculates saturation/clipping metrics (useful for ML to detect 'Out of Range')."""
         qty_max = np.sum(data >= threshold)
         pct_max = (qty_max / len(data)) * 100
@@ -304,9 +304,9 @@ class ElectrosprayDataProcessing:
             "deviation": np.float64(self.stddev),
             "median": np.float64(self.med),
             "rms": np.float64(self.rms),
-            "spray_mode": self.shape_current,
-            "ml_spray_mode": self.ml_shape_current,
-            "nn_spray_mode": self.nn_shape_current,
+            #"spray_mode": self.shape_current,
+            #"ml_spray_mode": self.ml_shape_current,
+            #"nn_spray_mode": self.nn_shape_current,
             **bp  # Merges the band power dictionary into this one
         }
         return dictionary

@@ -5,7 +5,7 @@ def config_TiePieScope(scp, sampling_frequency):
     # in oscilloscopechannel.py _get_is_differential or _get_impedance ... investigate further
     """print("SCP is differential: %s" % scp.channels[0].is_differential)
     print("SCP impedance: %s" % scp.channels[0].impedance)
-    print("SCP is safe_ground: %s" % scp.channels[0].safe_ground_enabled)"""
+    print("SCP is safe_ground: %s" % scp.channels[0].safeground_enabled)"""
     # !!!! input impedance by default is 2MOhm ... is in differential mode
     scp.measure_mode = libtiepie.MM_BLOCK
     scp.sample_frequency = sampling_frequency

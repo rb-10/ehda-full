@@ -30,6 +30,7 @@ def classify_images(
 ) -> Path:
     """
     Runs classification and returns path to results CSV.
+    Compatible with timestamped filenames: clip_YYYY-MM-DD_HH-MM-SS_SOL_IDX.jpg
     """
 
     input_folder = Path(input_folder)
@@ -55,25 +56,33 @@ def classify_images(
         return results_path
 
     results = []
-
     print(f"[ML] Found {len(images)} images\n")
 
     for img_path in images:
-
-        match = re.match(r"clip_(\d+)_(\d+)\.(jpg|png)", img_path.name)
-        if not match:
-            print(f"[SKIP] Bad filename: {img_path.name}")
+        # NEW FILENAME LOGIC:
+        # clip_2026-04-23_12-12-47_EW82_000.jpg
+        # 1. Remove 'clip_' prefix
+        # 2. Split at the LAST underscore to separate the Index from the Video Name
+        filename = img_path.name
+        
+        try:
+            # clip_2026-04-23_12-12-47_EW82_000.jpg -> 2026-04-23_12-12-47_EW82_000.jpg
+            clean_name = filename.replace("clip_", "") 
+            
+            # rsplit separates from the right: ['2026-04-23_12-12-47_EW82', '000.jpg']
+            base_video_part, index_part = clean_name.rsplit('_', 1)
+            
+            original_video = base_video_part + ".mp4"
+            sample_idx = int(index_part.split('.')[0]) # Extract 000 from 000.jpg
+        except Exception:
+            print(f"[SKIP] Filename format mismatch: {filename}")
             continue
-
-        experiment_idx = int(match.group(1))
-        sample_idx     = int(match.group(2))
 
         img = PILImage.create(img_path)
         label, _, probs = learn.predict(img)
 
         raw_class  = str(label)
         confidence = probs.max().item()
-
         predicted_class = raw_class.lower().replace(" ", "_")
 
         final_class = predicted_class if confidence >= confidence_threshold else "unconclusive"
@@ -81,28 +90,31 @@ def classify_images(
         if final_class not in CLASSES:
             final_class = "unconclusive"
 
-        # Copy image
+        # Copy image to classified folder
         dest = output_base / final_class / img_path.name
         shutil.copy2(img_path, dest)
 
         results.append({
-            "image_name": img_path.name,
-            "experiment_idx": experiment_idx,
+            "clip_filename": filename,
+            "original_video": original_video,  # Key for DB linking
             "sample_idx": sample_idx,
             "raw_class": raw_class,
+            "predicted_class": f"{raw_class} ({confidence:.0%})",
             "final_class": final_class,
             "confidence": confidence,
             "run_id": run_id
         })
 
-        print(f"{img_path.name:<40} {final_class:<15} {confidence:.2%}")
+        print(f"{filename:<45} {final_class:<15} {confidence:.2%}")
 
-    df = pd.DataFrame(results)
-    df.to_csv(results_path, index=False)
-
-    print(f"\n[ML] Results saved to: {results_path}")
+    if results:
+        df = pd.DataFrame(results)
+        df.to_csv(results_path, index=False)
+        print(f"\n[ML] Results saved to: {results_path}")
+    else:
+        print("\n[ML] No results to save.")
+        
     return results_path
-
 
 # ── Standalone usage ────────────────────────────────────────
 def main():

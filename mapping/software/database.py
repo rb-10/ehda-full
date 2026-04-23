@@ -26,28 +26,33 @@ CREATE TABLE IF NOT EXISTS measurements (
     band_power_v_high   REAL,
     rf_spray_mode       TEXT,
     xgb_spray_mode      TEXT,
+    image_classification  TEXT,
+    manual_classification TEXT,
     video_file          TEXT,
     raw_data_file       TEXT
 );
 """
 
+# Now 25 columns, 25 placeholders
 _INSERT = """
 INSERT INTO measurements (
     timestamp, solution_name, hv_position, target_voltage, actual_voltage, actual_current_ps,
     flow_rate, mean_na, deviation_na, median_na, rms_na, variance_na,
     qty_max, pct_max, 
     band_power_v_low, band_power_low, band_power_mid, band_power_high, band_power_v_high,
-    rf_spray_mode, xgb_spray_mode,
+    rf_spray_mode, xgb_spray_mode, image_classification, manual_classification,
     video_file, raw_data_file
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 """
 
 _MIGRATIONS = [
-    ("ml_spray_mode",   "rf_spray_mode",   "TEXT", "N/A"),
-    ("nn_spray_mode",   "xgb_spray_mode",  "TEXT", "N/A"),
-    ("qty_max",         "qty_max",         "INTEGER", 0),
-    ("pct_max",         "pct_max",         "REAL", 0.0),
-    ("band_power_mid",  "band_power_mid",  "REAL", 0.0), 
+    ("ml_spray_mode",         "rf_spray_mode",         "TEXT", "'N/A'"),
+    ("nn_spray_mode",         "xgb_spray_mode",        "TEXT", "'N/A'"),
+    ("qty_max",               "qty_max",               "INTEGER", "0"),
+    ("pct_max",               "pct_max",               "REAL", "0.0"),
+    ("band_power_mid",        "band_power_mid",        "REAL", "0.0"), 
+    ("image_classification",  "image_classification",  "TEXT", "'N/A'"),
+    ("manual_classification", "manual_classification", "TEXT", "'N/A'"),
 ]
 
 def _migrate(conn):
@@ -70,16 +75,16 @@ class ElectrosprayDatabase:
         self._raw_dir = os.path.join(save_path, "raw_waveforms")
         os.makedirs(self._raw_dir, exist_ok=True)
 
-        db_path = os.path.join(save_path, "data.db")
-        self._conn = sqlite3.connect(db_path, check_same_thread=False)
+        self.db_path = os.path.join(save_path, "data.db")
+        self._conn = sqlite3.connect(self.db_path, check_same_thread=False)
         self._conn.execute(_CREATE)
         self._conn.commit()
         _migrate(self._conn)
-        print(f"[DB] Ready: {db_path}")
+        # Needed to get dict-like rows for easy access
+        self._conn.row_factory = sqlite3.Row 
+        print(f"[DB] Ready: {self.db_path}")
 
     def save(self, result: dict):
-        """Saves individual data points. Video filename is set to PENDING until finalize_session is called."""
-        # Waveforms still need unique names to avoid overwriting
         ts_str = result['timestamp'].strftime('%Y-%m-%d_%H-%M-%S_%f')
         waveform_filename = f"wf_{ts_str}.npy"
 
@@ -109,32 +114,39 @@ class ElectrosprayDatabase:
             float(result.get("band_power_v_high", 0)),
             result.get("rf_classification", "N/A"),
             result.get("xgb_classification", "N/A"),
-            "PENDING",   # Set to PENDING during the run
+            result.get("image_classification", "N/A"),
+            result.get("manual_classification", "N/A"),
+            "PENDING",   
             waveform_filename
         ))
         self._conn.commit()
 
     def finalize_session(self, solution_name: str, session_start_time):
-        """Generates the final descriptive name and updates the DB."""
         clean_sol = "".join(c for c in solution_name if c.isalnum() or c in (' ', '_')).strip().replace(" ", "_")
         base_name = f"{session_start_time.strftime('%Y-%m-%d_%H-%M-%S')}_{clean_sol}"
         video_filename = f"{base_name}.mp4"
 
-        # Update all 'PENDING' rows from this specific run
         self._conn.execute(
             "UPDATE measurements SET video_file = ? WHERE video_file = 'PENDING'",
             (video_filename,)
         )
         self._conn.commit()
-
-        print("\n" + "*"*60)
-        print(f" EXPERIMENT SESSION COMPLETE ")
-        print(f" SOLUTION: {solution_name}")
-        print(f" FINAL FILENAME: {video_filename}")
-        print(f" --> Please rename your external video to this name! <--")
-        print("*"*60 + "\n")
         return video_filename
-    
+
+    # --- NEW HELPER METHODS FOR CLASSIFICATION ---
+    def get_measurements_by_video(self, video_filename: str):
+        """Returns all measurement rows associated with a specific main video file, ordered by time."""
+        cursor = self._conn.execute("SELECT * FROM measurements WHERE video_file = ? ORDER BY timestamp ASC", (video_filename,))
+        return [dict(row) for row in cursor.fetchall()]
+
+    def update_image_classification(self, row_id: int, classification: str):
+        self._conn.execute("UPDATE measurements SET image_classification = ? WHERE id = ?", (classification, row_id))
+        self._conn.commit()
+
+    def update_manual_classification(self, row_id: int, classification: str):
+        self._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (classification, row_id))
+        self._conn.commit()
+
     def close(self):
         self._conn.close()
         print("[DB] Closed")
