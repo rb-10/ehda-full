@@ -150,3 +150,4 @@ class ElectrosprayDatabase:
     def close(self):
         self._conn.close()
         print("[DB] Closed")
+    

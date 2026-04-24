@@ -1,177 +1,177 @@
-import cv2
+import sys
 import os
-import shutil
+from pathlib import Path
 
-# Import your database class
+# Add project root to Python path
+project_root = Path(__file__).parent.parent  # Goes up 3 levels to 'main/'
+sys.path.insert(0, str(project_root))
+
+import shutil
+import cv2
+import numpy as np
+from pathlib import Path
 from mapping.software.database import ElectrosprayDatabase
 
-base_data_path = r"C:\Users\HV\Desktop\bruno_work\main\data"
-liquid = "EW82_HV_nz_21-04" 
+# ── Config ────────────────────────────────────────────────────────────
+BASE         = Path(r"C:\Users\HV\Desktop\bruno_work\main\data")
 
-# Paths
-clips_folder = os.path.join(base_data_path, liquid, "SPLIT CLIPS")
-images_folder = os.path.join(base_data_path, liquid, "PROCESSED CLIPS")
-output_base = os.path.join(base_data_path, liquid, "CLASSIFIED")
+# Folder Structure
+CLIPS_FOLDER = BASE / "images" / "SPLIT" / "SPLIT CLIPS"
+IMAGES_FOLDER = BASE / "images" / "PROCESSED CLIPS"
+OUTPUT_BASE  = BASE / "images" / "CLASSIFIED"
 
-classes = ["cone_jet", "dripping", "intermitent", "multi_jet", "unconclusive", "undefined"]
-for cls in classes:
-    os.makedirs(os.path.join(output_base, cls), exist_ok=True)
+CLASSES = ["cone_jet", "dripping", "intermitent", "multi_jet", "unconclusive", "undefined"]
 
-# Connect to Database (assuming data.db is in the base_data_path)
-db = ElectrosprayDatabase(base_data_path)
+# ── Database Setup ───────────────────────────────────────────────────
+db = ElectrosprayDatabase(str(BASE))
 
-videos = [f for f in os.listdir(clips_folder) if f.endswith(".mp4")]
-videos.sort()
-
-print("Controls:")
-print("1–6 → assign class")
-print("q   → quit")
-print("n   → skip video")
-
-def ensure_classified_copy(video_path, chosen_class, current_class):
-    destination = os.path.join(output_base, chosen_class, os.path.basename(video_path))
-    os.makedirs(os.path.dirname(destination), exist_ok=True)
-    shutil.copy2(video_path, destination)
-    
-    if current_class and current_class != "N/A" and current_class != chosen_class:
-        old_dest = os.path.join(output_base, current_class, os.path.basename(video_path))
-        if os.path.exists(old_dest):
-            os.remove(old_dest)
-    return destination
-
-def find_matching_image(video_name):
-    base_name = os.path.splitext(video_name)[0]
-    image_extensions = [".jpg", ".jpeg", ".png"]
-    for folder in [images_folder, clips_folder]:
-        for ext in image_extensions:
-            candidate = os.path.join(folder, base_name + ext)
-            if os.path.exists(candidate):
-                return candidate
-    return None
-
-def overlay_text(image, lines, start_y=30, line_height=30, color=(0, 255, 0)):
-    for i, line in enumerate(lines):
-        y = start_y + i * line_height
-        cv2.putText(image, line, (10, y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2, cv2.LINE_AA)
-
-# We map the clips by sorting the DB rows chronologically per original video file.
-# Since split_video generates clip_000.mp4, clip_001.mp4, etc., we can link them.
-# We will pull all records from the DB to map them.
-cursor = db._conn.execute("SELECT * FROM measurements ORDER BY timestamp ASC")
-all_records = [dict(row) for row in cursor.fetchall()]
-
-# Create a mapping of video_file -> list of rows
-records_by_video = {}
-for r in all_records:
-    vid = r['video_file']
-    if vid not in records_by_video:
-        records_by_video[vid] = []
-    records_by_video[vid].append(r)
-
-for video_name in videos:
-    # Example parsing: "clip_2026-04-22_16-05-01_Ethanol_005.mp4" 
-    # OR if your split_video just uses "clip_0_5.mp4" 
-    # For now, we will extract the original video and clip index from however your split_video names them.
-    # Let's assume you've structured it so you can find the correct row:
-    
-    # --- TEMPORARY MAPPING LOGIC (Adjust based on how split_video names clips) ---
-    # Assuming video_name contains the row ID (e.g., clip_ID.mp4) or we iterate through sequentially
-    # Let's do a sequential grab if you are doing it folder by folder
-    
-    import re
-    match = re.match(r"clip_(\d+)_(\d+)\.mp4", video_name)
-    if not match:
-        print(f"Skipping (unexpected filename format): {video_name}")
+# ── Collect all classified images ─────────────────────────────────────
+all_images = []
+for cls in CLASSES:
+    folder = OUTPUT_BASE / cls
+    if not folder.exists():
         continue
-    
-    experiment_idx = int(match.group(1))
-    sample_idx = int(match.group(2))
-    
-    # Map to DB: Fetch all distinct main videos from DB to figure out which one is "experiment_idx"
-    unique_main_videos = list(records_by_video.keys())
-    if experiment_idx >= len(unique_main_videos):
-        print(f"Skipping {video_name}: experiment_idx {experiment_idx} exceeds DB sessions.")
+    for img_path in sorted(folder.glob("*.jpg")) + sorted(folder.glob("*.png")):
+        all_images.append((img_path, cls))
+
+all_images.sort(key=lambda x: x[0].name)
+
+if not all_images:
+    print(f"[REVIEW] No classified images found in {OUTPUT_BASE}")
+    exit()
+
+# ── UI Helpers ────────────────────────────────────────────────────────
+PANEL_W  = 320
+TARGET_H = 480 
+
+def make_panel(lines: list, height: int) -> np.ndarray:
+    panel = np.zeros((height, PANEL_W, 3), dtype=np.uint8)
+    for i, (text, color) in enumerate(lines):
+        cv2.putText(panel, text, (10, 30 + i * 28),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.55, color, 1, cv2.LINE_AA)
+    return panel
+
+def resize_to_height(img: np.ndarray, h: int) -> np.ndarray:
+    ratio = h / img.shape[0]
+    return cv2.resize(img, (int(img.shape[1] * ratio), h))
+
+# ── Review loop ───────────────────────────────────────────────────────
+print(f"[REVIEW] Found {len(all_images)} images to review")
+
+for idx, (img_path, current_class) in enumerate(all_images):
+    # Parse filename for DB lookup
+    try:
+        clean_name = img_path.stem.replace("clip_", "")
+        base_video_part, index_part = clean_name.rsplit('_', 1)
+        original_video_name = base_video_part + ".mp4"
+        clip_index = int(index_part)
+    except:
+        print(f"[SKIP] Filename error: {img_path.name}")
         continue
-        
-    main_video_name = unique_main_videos[experiment_idx]
-    session_rows = records_by_video[main_video_name]
-    
-    if sample_idx >= len(session_rows):
-        print(f"Skipping {video_name}: sample_idx {sample_idx} exceeds DB rows for session.")
+
+    # Fetch Metadata and check existing manual classification
+    query = """SELECT id, actual_voltage, flow_rate, image_classification, manual_classification 
+               FROM measurements WHERE video_file = ? 
+               ORDER BY timestamp ASC LIMIT 1 OFFSET ?"""
+    cursor = db._conn.execute(query, (original_video_name, clip_index))
+    row = cursor.fetchone()
+    if not row:
+        print(f"[SKIP] DB Record not found for {img_path.name}")
         continue
-        
-    # GET THE ACTUAL DATABASE ROW
-    db_row = session_rows[sample_idx]
-    db_id = db_row['id']
-    
-    current_manual_class = db_row.get("manual_classification", "N/A")
-    voltage = db_row.get("target_voltage", "N/A")
-    flow_rate = db_row.get("flow_rate", "N/A")
 
-    video_path = os.path.join(clips_folder, video_name)
-    cap = cv2.VideoCapture(video_path)
+    db_id, voltage, flow, ai_label, manual_class = row
+    # --- SKIP LOGIC ---
+    # Skip if manual_classification is already set to one of our valid classes
+    if manual_class in CLASSES:
+        print(f"[{idx+1}] Skipping: Already classified as '{manual_class}'")
+        continue
+    # Video setup
+    video_path = CLIPS_FOLDER / (img_path.stem + ".mp4")
+    cap = cv2.VideoCapture(str(video_path))
+    fps = cap.get(cv2.CAP_PROP_FPS) if cap.isOpened() else 25
+    wait_ms = max(1, int(1000 / fps))
 
-    image_path = find_matching_image(video_name)
-    image = cv2.imread(image_path) if image_path else None
+    # Processed static image
+    static_img = cv2.imread(str(img_path))
+    if static_img is not None:
+        static_img = resize_to_height(static_img, TARGET_H)
+    else:
+        static_img = np.zeros((TARGET_H, TARGET_H, 3), np.uint8)
 
-    print(f"\nLabeling: {video_name}  |  DB Row ID: {db_id}")
-    print(f"  Current Manual Class: {current_manual_class}")
-    print(f"  Voltage: {voltage}  |  Flow Rate: {flow_rate}")
+    info_lines = [
+        (f"[{idx+1}/{len(all_images)}]", (200, 200, 200)),
+        (f"V: {voltage}V | Q: {flow}",   (200, 200, 200)),
+        ("", (0, 0, 0)),
+        (f"Folder: {current_class}",     (0, 255, 0)),
+        (f"Image Model: {ai_label}",              (0, 200, 255)),
+        (f"Manual Class: {manual_class}",              (0, 200, 255)),
+        ("", (0, 0, 0)),
+    ] + [(f"{i+1}: {cls}", (180, 180, 180)) for i, cls in enumerate(CLASSES)] + [
+        ("", (0, 0, 0)),
+        ("n: confirm/next", (150, 150, 150)),
+        ("q: quit",         (150, 150, 150))
+    ]
 
-    if image is not None:
-        image_overlay = image.copy()
-        overlay_text(image_overlay, [
-            f"Class: {current_manual_class}",
-            f"V: {voltage}",
-            f"Q: {flow_rate}",
-        ])
-        cv2.imshow("Image", image_overlay)
-
-    labeled = False
-    while True:
+    decided = False
+    while not decided:
         ret, frame = cap.read()
-        if not ret:
+        if not ret and cap.isOpened():
             cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
-            continue
+            ret, frame = cap.read()
+        
+        video_frame = resize_to_height(frame, TARGET_H) if ret else np.zeros((TARGET_H, 10, 3), np.uint8)
+        panel = make_panel(info_lines, TARGET_H)
 
-        frame_overlay = frame.copy()
-        overlay_text(frame_overlay, [
-            f"Class: {current_manual_class}",
-            f"V: {voltage}",
-            f"Q: {flow_rate}",
-        ])
-        cv2.imshow("Video", frame_overlay)
-
-        key = cv2.waitKey(33) & 0xFF
+        # Combined display: Metadata Panel | Processed Photo | Raw Video
+        display = np.hstack([panel, static_img, video_frame])
+        cv2.imshow("Review & Reclassify", display)
+        
+        key = cv2.waitKey(wait_ms) & 0xFF
 
         if key == ord('q'):
-            cap.release()
-            cv2.destroyAllWindows()
             db.close()
-            print("Quit — Database connection closed.")
+            cv2.destroyAllWindows()
             exit()
 
         elif key == ord('n'):
-            print("  Skipped")
-            break
+            # 1. Clean the AI label (e.g., "dripping (76%)" -> "dripping")
+            clean_ai_class = ai_label.split('(')[0].strip()
+            
+            # 2. Update DB with the cleaned AI class
+            db._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (clean_ai_class, db_id))
+            db._conn.commit()
+            
+            print(f"[{idx+1}] Confirmed AI class: {clean_ai_class}")
+            decided = True
 
-        elif key in [ord('1'), ord('2'), ord('3'), ord('4'), ord('5'), ord('6')]:
-            class_index = int(chr(key)) - 1
-            chosen_class = classes[class_index]
+        elif key in [ord(str(i)) for i in range(1, len(CLASSES) + 1)]:
+            new_class = CLASSES[int(chr(key)) - 1]
+            
+            if new_class != current_class:
+                # 1. Update Database manual classification
+                db._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (new_class, db_id))
+                db._conn.commit()
+                
+                # 2. Move file to new class folder
+                new_folder = OUTPUT_BASE / new_class
+                new_folder.mkdir(exist_ok=True)
+                shutil.move(str(img_path), str(new_folder / img_path.name))
+                
+                print(f"[{idx+1}] Reclassified & Moved: {current_class} -> {new_class}")
+            else: 
+                # If the chosen class is the same as the folder, still save it to the DB
+                # but ensure we strip any percentages if they somehow exist in folder_class
+                clean_current_class = current_class.split('(')[0].strip()
+                db._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (clean_current_class, db_id))
+                db._conn.commit()
+                print(f"[{idx+1}] Folder class confirmed and saved: {clean_current_class}")
 
-            # Write directly to the SQLite Database
-            db.update_manual_classification(db_id, chosen_class)
+            decided = True
+            
 
-            ensure_classified_copy(video_path, chosen_class, current_manual_class)
-            cap.release()
-            cv2.destroyAllWindows()
-            print(f"  Labeled as '{chosen_class}' → DB updated.")
-            labeled = True
-            break
 
-    if not labeled:
-        cap.release()
-        cv2.destroyAllWindows()
+    cap.release()
 
 db.close()
-print("\nDone labeling. Database connection closed.")
+cv2.destroyAllWindows()
+print("\n[REVIEW] Finished reviewing all images.")
