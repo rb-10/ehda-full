@@ -38,7 +38,6 @@ import pandas as pd
 from image_classification.integrated_pipeline.split_video import split_video
 from image_classification.pre_processing_ben import *
 from image_classification.integrated_pipeline.classify_images import classify_images
-# REMOVED update_jsons
 from mapping.software.database import ElectrosprayDatabase # Import your DB class
 
 

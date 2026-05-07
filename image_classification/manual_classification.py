@@ -85,6 +85,9 @@ for idx, (img_path, current_class) in enumerate(all_images):
     if manual_class in CLASSES:
         print(f"[{idx+1}] Skipping: Already classified as '{manual_class}'")
         continue
+    if idx + 1 < 3360:
+        print(f"[{idx+1}] Skipping: Already classified as '{manual_class}'")
+        #continue
     # Video setup
     video_path = CLIPS_FOLDER / (img_path.stem + ".mp4")
     cap = cv2.VideoCapture(str(video_path))

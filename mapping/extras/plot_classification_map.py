@@ -23,7 +23,7 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 BASE = Path(r'C:\Users\HV\Desktop\bruno_work\main\data')
 DB_PATH = str(BASE) # Assuming database file logic is handled inside ElectrosprayDatabase
-
+SOLUTION = "EWG343"
 # The four sources to plot
 PLOT_SOURCES = [
     'manual_classification', 
@@ -49,10 +49,7 @@ class_palette = {
 # ---------------------------------------------------------
 print("Open DB")
 db = ElectrosprayDatabase(DB_PATH)
-query = """SELECT flow_rate, actual_voltage as voltage, 
-                  image_classification, manual_classification, 
-                  xgb_spray_mode, rf_spray_mode 
-           FROM measurements"""
+query = f"SELECT flow_rate, actual_voltage as voltage, image_classification, manual_classification, xgb_spray_mode, rf_spray_mode FROM measurements WHERE solution_name = '{SOLUTION}'"
 
 # Load DB into DataFrame
 df_raw = pd.read_sql(query, db._conn)
@@ -127,12 +124,12 @@ def create_stability_plot(source_col, data):
     
     ax.set_xlabel('Flow Rate ($\\mu L/min$)')
     ax.set_ylabel('Voltage ($V$)')
-    ax.set_title(f'Electrospray Stability Map\n(Classification Method: {source_col})')
+    ax.set_title(f'{SOLUTION}\nElectrospray Stability Map\n(Classification Method: {source_col})')
     ax.legend(title='Classification', bbox_to_anchor=(1.02, 1), loc='upper left')
     ax.grid(True, which="both", ls="-", alpha=0.2)
     
     plt.tight_layout()
-    filename = f'data/plots/stability_map_{source_col}.png'
+    filename = f'data/plots/stability_map_{SOLUTION}_{source_col}.png'
     plt.savefig(filename, dpi=300)
     print(f"Saved: {filename}")
     plt.close()
@@ -141,7 +138,7 @@ def create_stability_plot(source_col, data):
 # EXECUTION
 # ---------------------------------------------------------
 for source in PLOT_SOURCES:
-    print(f"Generating plot for: {source}")
+    print(f"Generating plot for {SOLUTION}: {source}")
     create_stability_plot(source, df_raw)
 
 print("\nDone. All stability maps have been generated.")

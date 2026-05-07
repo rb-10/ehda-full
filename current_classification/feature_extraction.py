@@ -11,7 +11,6 @@ before feature extraction. This removes solution-dependent amplitude
 so that features reflect waveform SHAPE, not absolute magnitude.
 Import normalize_signal from ehda_normalization to change the method.
 """
-
 import json
 import numpy as np
 import pandas as pd
@@ -21,6 +20,9 @@ from pathlib import Path
 from typing import Union
 import warnings
 warnings.filterwarnings("ignore")
+
+
+
 
 # Layer 1 signal normalization — import here to keep extraction self-contained
 def _zscore(x: np.ndarray) -> np.ndarray:
@@ -358,6 +360,8 @@ def process_multiple_files(file_pattern: str = "*.json",
 # ─────────────────────────────────────────────
 # ENTRY POINT
 # ─────────────────────────────────────────────
+
+"""
 if __name__ == "__main__":
     import sys
 
@@ -381,4 +385,4 @@ if __name__ == "__main__":
     print(f"  Time-domain:       {sum(1 for c in feature_cols if not c.startswith(('band_', 'spectral', 'dominant', 'mean_freq', 'median_freq', 'total_power', 'wt_')))}")
     print(f"  Frequency-domain:  {sum(1 for c in feature_cols if c.startswith(('band_', 'spectral', 'dominant', 'mean_freq', 'median_freq', 'total_power')))}")
     print(f"  Wavelet:           {sum(1 for c in feature_cols if c.startswith('wt_'))}")
-    print(f"  TOTAL:             {len(feature_cols)}")
+    print(f"  TOTAL:             {len(feature_cols)}")"""

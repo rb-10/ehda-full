@@ -2,8 +2,8 @@
 EHDA Normalization Pipeline (Enhanced with Custom Multi-Strategy Scaler)
 ========================================================================
 Two-layer normalization strategy to make features solution-agnostic:
-
-  Layer 1 — Signal normalization (applied to raw current before feature extraction)
+    
+  Layer 1 — Signal normalization (applied t o raw current before feature extraction)
              Removes absolute amplitude so shape-based features are comparable
              across solutions with different conductivities.
 
@@ -436,9 +436,6 @@ def prepare_training_data(
     normalizer      : EHDAFeatureNormalizer with column metadata set but NOT
                       fitted — pass this to train() to fit on X_train only
     """
-    # Drop any samples with missing labels or excluded label
-    df = df.dropna(subset=["label"]).copy()
-    df = df[(df["label"] != "N/A") & (df["label"] != exclude_label)].copy()
 
     # Classify columns into groups — but do NOT fit the scalers yet.
     # Fitting on the full dataset would leak test-set statistics into the scaler.

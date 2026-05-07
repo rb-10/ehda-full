@@ -1,6 +1,7 @@
 import os
 import sqlite3
 import numpy as np
+import pandas as pd
 
 _CREATE = """
 CREATE TABLE IF NOT EXISTS measurements (
@@ -150,4 +151,48 @@ class ElectrosprayDatabase:
     def close(self):
         self._conn.close()
         print("[DB] Closed")
+    
+    def load_training_dataframe(self) -> pd.DataFrame:
+        """
+        Interactively selects solutions and returns a DataFrame for ML training.
+        """
+        # 1. Get unique solutions
+        query_solutions = "SELECT DISTINCT solution_name FROM measurements WHERE solution_name IS NOT NULL"
+        solutions = [row['solution_name'] for row in self._conn.execute(query_solutions).fetchall()]
+        
+        if not solutions:
+            print("[DB] No data found in database.")
+            return pd.DataFrame()
+
+        # 2. Display and Ask
+        print("\n--- Available Solutions in Database ---")
+        for i, sol in enumerate(solutions):
+            print(f"[{i}] {sol}")
+        
+        choice = input("\nEnter indexes to use (e.g., '0, 2'), or press Enter for ALL: ").strip()
+        
+        # 3. Build Query based on selection
+        base_query = "SELECT * FROM measurements"
+        
+        if choice:
+            try:
+                # Convert string "0, 5, 6" to list of integers
+                indexes = [int(x.strip()) for x in choice.split(',')]
+                selected_solutions = [solutions[i] for i in indexes]
+                
+                # Format for SQL IN clause: ('Sol1', 'Sol2')
+                placeholders = ', '.join(['?'] * len(selected_solutions))
+                query = f"{base_query} WHERE solution_name IN ({placeholders})"
+                
+                print(f"[DB] Loading samples for: {selected_solutions}")
+                df = pd.read_sql_query(query, self._conn, params=selected_solutions)
+            except (ValueError, IndexError):
+                print("[Error] Invalid input. Loading ALL data instead.")
+                df = pd.read_sql_query(base_query, self._conn)
+        else:
+            print("[DB] Loading all available samples.")
+            df = pd.read_sql_query(base_query, self._conn)
+
+        print(f"[DB] Loaded {len(df)} samples.")
+        return df
     
