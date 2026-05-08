@@ -90,65 +90,6 @@ def _build_xgboost(n_classes: int) -> "XGBClassifier":
         verbosity=0,
     )
 
-class ELMClassifier(BaseEstimator, ClassifierMixin):
-    def __init__(self, n_hidden=1000, activation='tanh', C=1e-3, random_state=42):
-        self.n_hidden = n_hidden
-        self.activation = activation
-        self.C = C            # Tikhonov regularization strength — larger = smoother,
-                              # smaller = closer to exact pseudoinverse fit
-        self.random_state = random_state
-        self.lb_ = None
-        self.w_ = None
-        self.b_ = None
-        self.beta_ = None
-        
-    def _activate(self, X):
-        if self.activation == 'tanh':
-            return np.tanh(X)
-        elif self.activation == 'relu':
-            return np.maximum(X, 0)
-        elif self.activation == 'sigmoid':
-            # Avoid overflow in sigmoid
-            return 1 / (1 + np.exp(-np.clip(X, -500, 500)))
-        else:
-            return X
-
-    def fit(self, X, y):
-        self.lb_ = LabelBinarizer()
-        Y = self.lb_.fit_transform(y)
-        if Y.shape[1] == 1:
-            Y = np.hstack((1 - Y, Y))
-            
-        rng = np.random.RandomState(self.random_state)
-        n_features = X.shape[1]
-        
-        self.w_ = rng.normal(size=(n_features, self.n_hidden))
-        self.b_ = rng.normal(size=self.n_hidden)
-        
-        H = self._activate(np.dot(X, self.w_) + self.b_)
-        # Tikhonov-regularized least squares: β = (HᵀH + C·I)⁻¹ Hᵀ Y
-        # This replaces the bare pseudoinverse (la.pinv(H)) which is unstable
-        # when H is near-singular — a common occurrence when input features
-        # are nearly constant or highly correlated.
-        # C controls the bias-variance trade-off: larger C → more regularization.
-        I = np.eye(self.n_hidden)
-        self.beta_ = np.linalg.solve(H.T @ H + self.C * I, H.T @ Y)
-        return self
-        
-    def predict_proba(self, X):
-        H = self._activate(np.dot(X, self.w_) + self.b_)
-        raw_preds = np.dot(H, self.beta_)
-        # Softmax
-        # clip max to avoid exp overflow
-        max_rep = np.max(raw_preds, axis=1, keepdims=True)
-        exp_preds = np.exp(raw_preds - max_rep)
-        return exp_preds / np.sum(exp_preds, axis=1, keepdims=True)
-        
-    def predict(self, X):
-        H = self._activate(np.dot(X, self.w_) + self.b_)
-        raw_preds = np.dot(H, self.beta_)
-        return self.lb_.classes_[np.argmax(raw_preds, axis=1)]
-
 def _tune_hyperparameters(model, param_grid, X, y, model_name):
     print(f"\n  Tuning hyperparameters for {model_name}...")
     search = RandomizedSearchCV(
@@ -554,11 +495,6 @@ def train(X: np.ndarray, labels: np.ndarray,
 class EHDAClassifier:
     """
     Lightweight wrapper for live inference.
-    Loads the saved model + label encoder from disk.
-
-    Usage:
-        clf = EHDAClassifier.load("models/", model_name="random_forest")
-        pred, proba = clf.predict(x_normalized)
     """
     def __init__(self, model, label_encoder, class_names, feature_names):
         self.model         = model
@@ -567,30 +503,19 @@ class EHDAClassifier:
         self.feature_names = feature_names
 
     @classmethod
-    def load(cls, folder: str = "current_classification/models",
-             model_name: str = "random_forest") -> "EHDAClassifier":
+    def load(cls, folder: str = "models", model_name: str = "random_forest") -> "EHDAClassifier":
         folder = Path(folder)
         model         = joblib.load(folder / f"{model_name}.pkl")
         label_encoder = joblib.load(folder / "label_encoder.pkl")
         class_names   = joblib.load(folder / "class_names.pkl")
         feature_names = joblib.load(folder / "feature_names.pkl")
-        print(f"SUCCESS Loaded {model_name} from {folder}/")
         return cls(model, label_encoder, class_names, feature_names)
 
-    def predict(self, x: np.ndarray) -> tuple:
+    def predict(self, x_aligned: np.ndarray) -> tuple:
         """
-        Predict spray mode for a single normalized feature vector.
-
-        Parameters
-        ----------
-        x : 1D numpy array from prepare_inference_sample()
-
-        Returns
-        -------
-        prediction : str   e.g. "cone_jet"
-        probabilities : dict  e.g. {"cone_jet": 0.91, "dripping": 0.07, ...}
+        x_aligned: 1D array already aligned to self.feature_names
         """
-        x2d   = x.reshape(1, -1)
+        x2d   = x_aligned.reshape(1, -1)
         y_enc = self.model.predict(x2d)[0]
         proba = self.model.predict_proba(x2d)[0]
 
@@ -600,38 +525,15 @@ class EHDAClassifier:
         return prediction, probabilities
 
 
-def load_classifier(folder: str = "models",
-                    model_name: str = "random_forest") -> EHDAClassifier:
-    """Convenience function — same as EHDAClassifier.load()."""
-    return EHDAClassifier.load(folder, model_name)
-
-
-def predict(clf: EHDAClassifier, x: np.ndarray) -> tuple:
-    """Convenience function — same as clf.predict(x)."""
-    return clf.predict(x)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 # ENTRY POINT
 # ─────────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    import sys
-    sys.path.insert(0, ".")
-
-    from feature_extraction import process_multiple_files
-    from ehda_normalization import prepare_training_data
-
-    folder = sys.argv[1] if len(sys.argv) > 1 else "."
-    print(f"Loading data from: {folder}")
-
-    df = process_multiple_files("*.json", folder=folder)
-
-    df_norm, X, labels, feature_names, normalizer = prepare_training_data(df, drop_metadata=True, exclude_label="EXCLUDE")
-
-    results = train(X, labels, feature_names, normalizer=normalizer)
-
-    print(f"\n{'='*60}")
-    print(f"  DONE — files saved to:")
-    print(f"    models/   — trained model + label encoder")
-    print(f"    plots/    — feature importance, confusion matrices")
-    print(f"{'='*60}")
+    from mapping.software.electrospray import ElectrosprayDataProcessing
+    from ehda_normalization import EHDAFeatureNormalizer
+    
+    # Example of how you would now test a single raw file
+    proc = ElectrosprayDataProcessing(100000)
+    raw_data = np.load("sample.npy")

@@ -64,23 +64,14 @@ def acquire_and_process(scp,
     b, a = butter(6, Wn=cutoff, btype="low", analog=False)
 
     # ── Signal processing ─────────────────────────────────────────────
-    # A. Apply Filter
     processing.calculate_filter(a, b, datapoints)
-    
-    # B. Time Domain (Stats on filtered data, Peaks on raw to check clipping)
     processing.calculate_statistics(processing.datapoints_filtered)
-    max_val, qty_max, pct_max = processing.calculate_peaks_signal(datapoints)
-    
-    # C. Frequency Domain (Always use raw data to see full spectrum)
-    processing.calculate_fft_raw(processing.datapoints_filtered)
     processing.calculate_power_spectral_density(processing.datapoints_filtered)
-    
-    # D. Peak finding in FFT
-    fft_peaks, n_fft_peaks = processing.calculate_fft_peaks()
+    max_val, qty_max, pct_max = processing.calculate_peaks_signal(datapoints)
 
     # ── Build Results ─────────────────────────────────────────────────
     # Get the dictionary containing mean, std, and the new band_power features
-    stats = processing.get_statistics_dictionary()
+    stats = processing.get_db_features_dictionary()
 
     # Create the final return object
     results = {
@@ -92,7 +83,6 @@ def acquire_and_process(scp,
         "flow_rate":         float(flow_rate),
         "qty_max":           qty_max,  # Useful for detecting saturated sensors
         "pct_max":           pct_max,
-        "n_fft_peaks":       n_fft_peaks,
         "rf_classification": "N/A",
         "xgb_classification": "N/A",
     }

@@ -182,6 +182,8 @@ import numpy as np
 import json
 from scipy import signal
 from scipy.signal import lfilter, filtfilt, argrelextrema
+from scipy.integrate import trapezoid
+import pywt
 
 class ElectrosprayDataProcessing:
     def __init__(self, sample_rate):
@@ -195,21 +197,10 @@ class ElectrosprayDataProcessing:
         self.stddev = 0
         self.med = 0
         self.rms = 0
-        
         self.datapoints_filtered = np.array([])
-        self.fourier_transform = np.array([])
-        self.freq = np.array([])
         self.psd_freqs = np.array([])
         self.psd_welch = np.array([])
-        
-        self.fourier_peaks = []
-        self.all_fourier_peaks = []
-        
-        # Classification labels
-        self.shape_current = ""
-        #self.generalist_ml_shape_current = ""
-        #self.ml_shape_current = ""
-        #self.nn_shape_current = ""
+        self.ml_features = {} # Stores advanced features
 
     # ── Filtering ─────────────────────────────────────────────────────
     def calculate_filter(self, a_coef, b_coef, datapoints):
@@ -232,66 +223,75 @@ class ElectrosprayDataProcessing:
         return threshold, qty_max, pct_max
 
     # ── Frequency Domain ──────────────────────────────────────────────
-    def calculate_fft_raw(self, datapoints):
-        """Standard FFT for high-resolution frequency analysis."""
-        n = datapoints.size
-        self.fourier_transform = np.fft.rfft(datapoints)
-        self.freq = np.fft.rfftfreq(n, d=1/self.sample_rate)
-
     def calculate_power_spectral_density(self, data):
-        """
-        Welch's Method: Smoothes the spectrum by averaging windowed segments.
-        Better for ML as it reduces variance in frequency features.
-        """
-        # nperseg=1024 is standard, but you can adjust based on RECORD_LENGTH
-        self.psd_freqs, self.psd_welch = signal.welch(data, fs=self.sample_rate, nperseg=1024)
-        return self.psd_freqs, self.psd_welch
+        """Calculates PSD once using the high-res ML parameters (4096)."""
+        # Standardizing on 4096 for both DB and ML resolution
+        self.psd_freqs, self.psd_welch = signal.welch(
+            data, fs=self.sample_rate, nperseg=4096, noverlap=2048, window="hann"
+        )
 
     def calculate_band_powers(self):
-        if self.psd_welch.size == 0:
-            return {}
-
+        """Calculates the 5 bands required for the database."""
         bands = {
-            "v_low":  (0, 50),
-            "low":    (50, 500),
-            "mid":    (500, 2000),
-            "high":   (2000, 10000),
-            "v_high": (10000, self.sample_rate / 2)
+            "v_low": (0, 50), "low": (50, 500), "mid": (500, 2000),
+            "high": (2000, 10000), "v_high": (10000, self.sample_rate / 2)
         }
-
         band_energies = {}
         for name, (low, high) in bands.items():
             idx = np.logical_and(self.psd_freqs >= low, self.psd_freqs < high)
-
-            # Check if we have enough points to integrate
             if np.any(idx):
-                band_energies[f"band_power_{name}"] = trapezoid(self.psd_welch[idx], self.psd_freqs[idx])
+                band_energies[f"band_power_{name}"] = float(trapezoid(self.psd_welch[idx], self.psd_freqs[idx]))
             else:
                 band_energies[f"band_power_{name}"] = 0.0
-
         return band_energies
         
+    # ── Advanced ML Feature Extraction ──
+    def extract_advanced_ml_features(self):
+        """Calculates features only needed for ML models (crest, kurtosis, entropy, wavelets)."""
+        x = self.datapoints_filtered
+        total_power = np.sum(self.psd_welch)
         
-    def calculate_fft_peaks(self, min_freq=50, min_amp=1500):
-        """Consolidated peak finder to identify dominant oscillation frequencies."""
-        mag = np.abs(self.fourier_transform)
-        # Identify local maxima
-        indices = argrelextrema(mag, np.greater, order=5)[0]
-        
-        # Filter for physical relevance
-        mask = (self.freq[indices] > min_freq) & (mag[indices] > min_amp)
-        valid_idx = indices[mask]
-        
-        # Sort by amplitude descending
-        valid_idx = valid_idx[np.argsort(mag[valid_idx])[::-1]]
-        
-        self.fourier_peaks = []
-        for i, idx in enumerate(valid_idx[:3]):
-            rank = ["1st", "2nd", "3rd"][i]
-            self.fourier_peaks.append(f"{rank}: ")
-            self.fourier_peaks.append([float(mag[idx]), float(self.freq[idx])])
-            
-        return self.fourier_peaks, len(valid_idx)
+        # Advanced Time Domain
+        peak = np.max(np.abs(x))
+        self.ml_features.update({
+            "peak": float(peak),
+            "crest_factor": float(peak / self.rms if self.rms > 0 else 0.0),
+            "kurtosis": float(stats.kurtosis(x, fisher=True)),
+            "skewness": float(stats.skew(x)),
+            "peak_to_peak": float(np.max(x) - np.min(x)),
+            "zero_crossing_rate": float(np.sum(np.diff(np.sign(x - self.mean_value)) != 0) / len(x))
+        })
+
+        # Advanced Frequency Domain
+        if total_power > 0:
+            psd_norm = np.clip(self.psd_welch / total_power, 1e-12, None)
+            self.ml_features.update({
+                "dominant_freq": float(self.psd_freqs[np.argmax(self.psd_welch)]),
+                "mean_freq": float(np.sum(self.psd_freqs * self.psd_welch) / total_power),
+                "spectral_entropy": float(-np.sum(psd_norm * np.log2(psd_norm))),
+                "total_power": float(total_power)
+            })
+
+        # Wavelets
+        coeffs = pywt.wavedec(x, wavelet='db4', level=6)
+        total_energy = sum(np.sum(c**2) for c in coeffs)
+        for i, c in enumerate(coeffs):
+            label = f"wt_approx_L6" if i == 0 else f"wt_detail_L{7 - i}"
+            energy = np.sum(c**2)
+            self.ml_features[f"{label}_energy"] = float(energy)
+            self.ml_features[f"{label}_energy_rel"] = float(energy / total_energy if total_energy > 0 else 0.0)
+
+    def get_db_features_dictionary(self):
+        """Returns only the columns saved to the database."""
+        bp = self.calculate_band_powers()
+        return {
+            "mean_na": float(self.mean_value),
+            "variance_na": float(self.variance),
+            "deviation_na": float(self.stddev),
+            "median_na": float(self.med),
+            "rms_na": float(self.rms),
+            **bp
+        }
 
     # ── Data Export ───────────────────────────────────────────────────
     def get_statistics_dictionary(self):

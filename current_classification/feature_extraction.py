@@ -24,12 +24,6 @@ warnings.filterwarnings("ignore")
 
 
 
-# Layer 1 signal normalization — import here to keep extraction self-contained
-def _zscore(x: np.ndarray) -> np.ndarray:
-    """Z-score normalize: mean=0, std=1. Applied before all feature extraction."""
-    mu, sigma = np.mean(x), np.std(x)
-    return (x - mu) / sigma if sigma > 0 else x - mu
-
 # ─────────────────────────────────────────────
 # CONFIGURATION
 # ─────────────────────────────────────────────
@@ -216,25 +210,20 @@ def extract_features(sample: dict, normalize_signal: bool = False) -> dict:
         generalization need; amplitude features are strong spray-mode
         discriminators within a single solution.
     """
-    x_raw = np.array(sample["current"], dtype=np.float64)
+    datapoints = np.array(sample["current"], dtype=np.float64)
 
     # ── Layer 1: Signal normalization (optional) ────────────────────────────
-    if normalize_signal:
-        x = _zscore(x_raw)
-        # After z-score: mean≈0, std≈1 — precomputed JSON values no longer apply.
-        precomputed = {}
-    else:
-        x = x_raw
-        # Use precomputed values from JSON where available to avoid redundancy.
-        precomputed = {
-            "mean":     sample.get("mean"),
-            "deviation": sample.get("deviation"),
-            "median":   sample.get("median"),
-            "rms":      sample.get("rms"),
-            "variance": sample.get("variance"),
-        }
-        # Filter out None values so extract_time_domain falls back to computing them
-        precomputed = {k: v for k, v in precomputed.items() if v is not None}
+    
+    # Use precomputed values from JSON where available to avoid redundancy.
+    precomputed = {
+        "mean":     sample.get("mean"),
+        "deviation": sample.get("deviation"),
+        "median":   sample.get("median"),
+        "rms":      sample.get("rms"),
+        "variance": sample.get("variance"),
+    }
+    # Filter out None values so extract_time_domain falls back to computing them
+    precomputed = {k: v for k, v in precomputed.items() if v is not None}
 
     features = {}
     features["sample_id"] = sample.get("id")
@@ -243,9 +232,9 @@ def extract_features(sample: dict, normalize_signal: bool = False) -> dict:
     features["timestamp"] = sample.get("timestamp")
 
     features.update(extract_metadata(sample))
-    features.update(extract_time_domain(x, precomputed))
-    features.update(extract_frequency_domain(x))
-    features.update(extract_wavelet_features(x))
+    features.update(extract_time_domain(datapoints, precomputed))
+    features.update(extract_frequency_domain(datapoints))
+    features.update(extract_wavelet_features(datapoints))
 
     return features
 

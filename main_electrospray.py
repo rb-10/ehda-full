@@ -114,59 +114,58 @@ def get_experiment_metadata():
         "hv_position": hv_pos
     }
 
-def classify_sample(datapoints, actual_voltage, flow_rate, processing, ml_models):
+def classify_sample(processing, result, ml_models):
     if not ml_models:
         return "N/A", "N/A"
 
     try:
-        from current_classification.feature_extraction import extract_features
         from current_classification.ehda_normalization import prepare_inference_sample
         import pandas as pd
+        # 1. Calculate remaining ML features inside the class
+        processing.extract_advanced_ml_features()
 
-        sample = {
-            "id": None, "timestamp": None,
-            "target_voltage": float(actual_voltage),
-            "flow_rate":      float(flow_rate),
-            "spray_mode":     "N/A",
-            "current":        datapoints.tolist(),
-            "voltage":        float(actual_voltage),
-            "current_PS":     0.0,
-            "mean":           float(processing.mean_value),
-            "deviation":      float(processing.stddev),
-            "median":         float(processing.med),
-            "rms":            float(processing.rms),
-            "variance":       float(processing.variance),
-        }
+        # 2. Build the full raw feature vector (DB stats + ML stats + metadata)
+        all_features = processing.get_db_features_dictionary()
+        all_features.update(processing.ml_features)
+        all_features.update({
+            "actual_voltage": float(result["actual_voltage"]),
+            "target_voltage": float(result["target_voltage"]),
+            "flow_rate": float(result["flow_rate"]),
+            "voltage_error": float(result["actual_voltage"]) - float(result["target_voltage"])
+        })
 
-        feats  = extract_features(sample)
-        x_norm = prepare_inference_sample(feats, ml_models["normalizer"])
+        # 3. Normalization Pipeline
+        # prepare_inference_sample returns a 1D array aligned to the normalizer's columns
+        x_norm = prepare_inference_sample(all_features, ml_models["normalizer"])
 
-        # ── Align to the exact features the model was trained on ──────
-        # feature_names is saved by train() and loaded with the classifier
-        rf_feature_names = ml_models["rf"].feature_names  # list of 61 names
-        
-        # Build a 1-row DataFrame from the full 66-feature vector,
-        # then select only the 61 columns the model expects, in the right order
+        # 4. Final Alignment to Model
+        # Since the normalizer may have more columns than the RF model (e.g., 66 vs 61),
+        # we re-wrap and select the exact features the RF model expects.
         all_feature_names = ml_models["normalizer"].get_feature_columns()
         df_full = pd.DataFrame([x_norm], columns=all_feature_names)
-        x_aligned = df_full[rf_feature_names].values[0]
+        
+        # Select the 61 features the RF model expects
+        rf_features = ml_models["rf"].feature_names
+        x_rf_aligned = df_full[rf_features].values[0]
 
+        # 5. Prediction
         rf_result = "N/A"
         if "rf" in ml_models:
-            pred, proba = ml_models["rf"].predict(x_aligned)
-            conf        = proba.get(pred, 0.0)
-            rf_result   = f"{pred}  ({conf:.0%})"
+            pred, proba = ml_models["rf"].predict(x_rf_aligned)
+            rf_result = f"{pred} ({proba.get(pred, 0.0):.0%})"
 
         xgb_result = "N/A"
         if "xgb" in ml_models:
-            pred, proba = ml_models["xgb"].predict(x_aligned)
-            conf        = proba.get(pred, 0.0)
-            xgb_result  = f"{pred}  ({conf:.0%})"
+            # Re-align for XGB if it uses different features than RF
+            xgb_features = ml_models["xgb"].feature_names
+            x_xgb_aligned = df_full[xgb_features].values[0]
+            pred, proba = ml_models["xgb"].predict(x_xgb_aligned)
+            xgb_result = f"{pred} ({proba.get(pred, 0.0):.0%})"
 
         return rf_result, xgb_result
 
     except Exception as e:
-        print(f"\n[MAIN] Classification error: {e}")
+        print(f"[CLASSIFY] Error: {e}")
         return "error", "error"
 
 # ── Main ──────────────────────────────────────────────────────────────
@@ -275,10 +274,8 @@ if __name__ == "__main__":
                 result["hv_position"] = SESSION_HV
                 # 3. Classify
                 rf_result, xgb_result = classify_sample(
-                    result["datapoints"],
-                    result["actual_voltage"],
-                    float(flow_rate),
                     processing,
+                    result,
                     ml_models,
                 )
                 result["rf_classification"]  = rf_result
