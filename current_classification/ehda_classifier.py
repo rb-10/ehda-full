@@ -25,6 +25,8 @@ REQUIREMENTS:
 
 import numpy as np
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg') # Uses a non-interactive backend (No Tkinter)
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import seaborn as sns
@@ -178,7 +180,7 @@ def _plot_feature_importance(model, feature_names: list,
     fig.savefig(path, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {path}")
-
+    plt.close('all')
     return df_imp
 
 
@@ -209,6 +211,7 @@ def _plot_confusion_matrix(y_true, y_pred, class_names: list,
     fig.savefig(path, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {path}")
+    plt.close('all')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -243,6 +246,7 @@ def _plot_per_class_metrics(y_true, y_pred, class_names: list,
     fig.savefig(path, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {path}")
+    plt.close('all')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -279,7 +283,7 @@ def _train_one(model, model_name: str,
     _plot_per_class_metrics(y_test_labels, y_pred_labels,
                              class_names, model_name)
     df_imp = _plot_feature_importance(model, feature_names, model_name)
-
+    
     # Save model
     MODEL_DIR.mkdir(exist_ok=True)
     model_path = MODEL_DIR / f"{model_name.lower().replace(' ','_')}.pkl"
@@ -328,27 +332,13 @@ def _plot_model_comparison(all_results: list) -> None:
 # ─────────────────────────────────────────────────────────────────────────────
 # MAIN TRAIN FUNCTION
 # ─────────────────────────────────────────────────────────────────────────────
-def train(X: np.ndarray, labels: np.ndarray,
-          feature_names: list,
-          normalizer=None,
-          scaler_save_path: str = "current_classification/scalers") -> dict:
+def train(X, labels, feature_names, normalizer=None, save_folder="models", 
+          scaler_save_path="current_classification/scalers"):
     """
-    Full training pipeline.
-
-    Parameters
-    ----------
-    X             : RAW feature matrix from prepare_training_data()
-    labels        : string label array  e.g. ["dripping", "cone_jet", ...]
-    feature_names : list of feature column names (same order as X columns)
-    normalizer    : unfitted EHDAFeatureNormalizer returned by prepare_training_data().
-                    It will be fitted on X_train only (after the split) to prevent
-                    data leakage. Pass None to skip normalization entirely.
-    scaler_save_path : where to save the fitted scalers for inference reuse.
-
-    Returns
-    -------
-    dict with keys: "random_forest", "xgboost" (if available),
-                    "best_model", "label_encoder", "class_names"
+    X: The RAW feature matrix (not yet scaled)
+    labels: The string labels
+    feature_names: List of columns
+    normalizer: The EHDAFeatureNormalizer instance
     """
     le = LabelEncoder()
     y  = le.fit_transform(labels)
@@ -441,6 +431,7 @@ def train(X: np.ndarray, labels: np.ndarray,
         all_results.append(xgb_result)
 
     # ── ELM ──────────────────────────────────────────────────────────────────
+    from elm_study  import ELMClassifier  # Import the ELM implementation from elm_study.py 
     elm_base = ELMClassifier()
     elm_grid = {
         'n_hidden': [500, 1000, 2000],

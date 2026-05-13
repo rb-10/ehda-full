@@ -6,7 +6,7 @@ import numpy as np
 import csv
 import json
 from scipy.signal import argrelextrema
-from scipy import signal
+from scipy import signal, stats
 from scipy.signal import hilbert
 from scipy.signal import butter, lfilter
 from scipy.integrate import trapezoid

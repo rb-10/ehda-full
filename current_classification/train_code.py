@@ -26,11 +26,15 @@ CUTOFF_HZ     = 3_000
 
 EXCLUDE_FEATURES = [
     "actual_current_ps", # If you find it's too noisy
-    "wt_detail_L1_energy", # Often just high-frequency noise
-    "wt_detail_L1_energy_rel"
+    "current_PS",
+    "voltage_error",
+    "target_voltage",
+    "actual_voltage",
+    "mean_na",
+    "median_na"
 ]
 # List labels you want to ignore/drop
-INVALID_LABELS = ["undefined", "unknown", "noise", "", None]
+INVALID_LABELS = ["undefined","unconclusive", "noise", "", None]
 
 def build_feature_matrix(df_db, raw_dir, sample_rate):
     """
@@ -74,7 +78,7 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
                 "flow_rate":      float(row["flow_rate"]),
                 "voltage_error":  float(row["actual_voltage"]) - float(row["target_voltage"]),
                 "current_PS":     float(row.get("actual_current_ps", 0.0)),
-                "label":          row["image_classification"] or row["manual_classification"]
+                "label":          row["manual_classification"]
             })
             
             all_rows.append(feats)
@@ -89,7 +93,7 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
 
 
 # 0 - Init DB
-BASE = Path(r"C:\Users\HV\Desktop\bruno_work\main\data")
+BASE = Path(r"C:\Users\Bruno Duarte\Documents\ehda-full\data")
 db = ElectrosprayDatabase(str(BASE))
 
 
@@ -109,9 +113,15 @@ print(f"Training on {len(df_labeled)} samples with valid manual labels.")
 df_features = build_feature_matrix(df_labeled, BASE / "raw_waveforms", SAMPLING_FREQ)
 
 # 4. Normalize and Train
-# (The normalizer will now only see the columns remaining in df_features)
-df_norm, X, labels, feature_names, normalizer = prepare_training_data(
-    df_features, scaler_save_path="scalers"
-)
+# A. Prepare data using your custom normalization logic
+df_norm, X, labels, feature_names, normalizer = prepare_training_data(df_features)
 
-results = train(X, labels, feature_names, save_folder="models")
+# B. Pass the UN-FITTED normalizer into your original train function
+# The function will then fit it on the training split as you intended.
+training_results = train(
+    X=X, 
+    labels=labels, 
+    feature_names=feature_names, 
+    normalizer=normalizer, 
+    save_folder="current_classification/models"
+)
