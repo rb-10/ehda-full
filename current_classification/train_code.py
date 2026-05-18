@@ -34,7 +34,7 @@ EXCLUDE_FEATURES = [
     "median_na"
 ]
 # List labels you want to ignore/drop
-INVALID_LABELS = ["undefined","unconclusive", "noise", "", None]
+INVALID_LABELS = ["undefined","unconclusive","noise", "", None]
 
 def build_feature_matrix(df_db, raw_dir, sample_rate):
     """
@@ -95,7 +95,7 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
 # 0 - Init DB
 BASE = Path(r"C:\Users\Bruno Duarte\Documents\ehda-full\data")
 db = ElectrosprayDatabase(str(BASE))
-
+    
 
 # 1. Load Data
 df_db = db.load_training_dataframe()
