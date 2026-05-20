@@ -169,7 +169,7 @@ def main():
         return
 
     # Use the same path your main app uses
-    db = ElectrosprayDatabase("DMF") 
+    db = ElectrosprayDatabase("test") 
 
     # ── 2. Fetch all records ──────────────────────────────────────────────────
     # Using pandas via the existing load_training_dataframe logic to get all rows
@@ -197,9 +197,9 @@ def main():
                 rf_saved  not in ("", None, "N/A", "error") and
                 xgb_saved not in ("", None, "N/A", "error")
             )
-            if already_done:
-                n_skipped += 1
-                continue
+            #if already_done:
+                #n_skipped += 1
+                #continue
 
         # ── 4b. Restore waveform from disk ────────────────────────────────────
         try:
@@ -240,6 +240,7 @@ def main():
     print(f"  Skipped : {n_skipped}  (already classified)")
     print(f"  Errors  : {n_error}")
     print("─" * 60)
+    db.close()
 
 
 if __name__ == "__main__":

@@ -21,9 +21,9 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 # SETTINGS
 # ---------------------------------------------------------
-BASE = Path(r'C:\Users\HV\Desktop\bruno_work\main\data')
+BASE = Path(r'C:\Users\HV\Desktop\bruno_work\main\test')
 DB_PATH = str(BASE) # Assuming database file logic is handled inside ElectrosprayDatabase
-SOLUTION = "EWG343"
+SOLUTION = "experiment"
 # The four sources to plot
 PLOT_SOURCES = [
     'manual_classification', 
@@ -61,7 +61,7 @@ def clean_label(val):
         return 'unclassified'
     # Removes things like "(90%)" and extra spaces
     return str(val).split('(')[0].strip()
-
+df_raw.to_csv("DMF.csv")
 # ---------------------------------------------------------
 # PLOTTING FUNCTION
 # ---------------------------------------------------------

@@ -332,7 +332,7 @@ def process_json_file(
             npy_name  = f"{filepath.stem}_{safe_key}.npy"
             npy_path  = npy_dir / npy_name
             np.save(npy_path, np.asarray(raw_current, dtype=np.float32))
-            raw_data_file = str(npy_path)
+            raw_data_file = npy_name
         else:
             raw_data_file = None
 

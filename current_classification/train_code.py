@@ -29,9 +29,6 @@ EXCLUDE_FEATURES = [
     "current_PS",
     "voltage_error",
     "target_voltage",
-    "actual_voltage",
-    "mean_na",
-    "median_na"
 ]
 # List labels you want to ignore/drop
 INVALID_LABELS = ["undefined","unconclusive","noise", "", None]
@@ -93,7 +90,7 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
 
 
 # 0 - Init DB
-BASE = Path(r"C:\Users\Bruno Duarte\Documents\ehda-full\data")
+BASE = Path(r"data")
 db = ElectrosprayDatabase(str(BASE))
     
 

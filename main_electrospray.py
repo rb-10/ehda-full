@@ -287,7 +287,7 @@ if __name__ == "__main__":
                 db.save(result)
 
                 print(f"RF={rf_result}  XGB={xgb_result}  "
-                      f"I={result['mean']:.3f} nA")
+                      f"I={result['mean_na']:.3f} nA")
 
                 # 6. Wait before next step
                 time.sleep(step_time)

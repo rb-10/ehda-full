@@ -85,7 +85,13 @@ for idx, (img_path, current_class) in enumerate(all_images):
     if manual_class in CLASSES:
         print(f"[{idx+1}] Skipping: Already classified as '{manual_class}'")
         continue
-    if idx + 1 < 3360:
+    #if ai_label == "multi_jet (100%)":
+        #print(f"[{idx+1}] Skipping: Multi jet 100%")
+        #new_class = "multi_jet"
+        #db._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (new_class, db_id))
+        #db._conn.commit()
+        #continue
+    if idx + 1 < 4374:
         print(f"[{idx+1}] Skipping: Already classified as '{manual_class}'")
         #continue
     # Video setup
