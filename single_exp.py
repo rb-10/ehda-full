@@ -244,6 +244,7 @@ if __name__ == "__main__":
 
             hardware.stop_flow_rate()
             time.sleep(0.5)
+            hardware.set_voltage(5000)
             print(f"[MANUAL] Run {run_number} complete.")
 
     except KeyboardInterrupt:

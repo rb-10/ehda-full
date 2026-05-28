@@ -21,9 +21,9 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 # SETTINGS
 # ---------------------------------------------------------
-BASE = Path(r'C:\Users\HV\Desktop\bruno_work\main\test')
+BASE = Path(r'C:\Users\HV\Desktop\bruno_work\main\data')
 DB_PATH = str(BASE) # Assuming database file logic is handled inside ElectrosprayDatabase
-SOLUTION = "experiment"
+SOLUTION = "EW82"
 # The four sources to plot
 PLOT_SOURCES = [
     'manual_classification', 

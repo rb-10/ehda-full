@@ -91,6 +91,7 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
 
 # 0 - Init DB
 BASE = Path(r"data")
+print(os.getcwd())
 db = ElectrosprayDatabase(str(BASE))
     
 
