@@ -21,27 +21,29 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 # SETTINGS
 # ---------------------------------------------------------
-BASE = Path(r'C:\Users\HV\Desktop\bruno_work\main\data')
+BASE = Path(r'C:\Users\HV\Desktop\ehda-mapping')
 DB_PATH = str(BASE) # Assuming database file logic is handled inside ElectrosprayDatabase
-SOLUTION = "EW82"
+SOLUTION = "ew82"
 # The four sources to plot
 PLOT_SOURCES = [
-    'manual_classification', 
     'image_classification', 
-    'xgb_spray_mode', 
-    'rf_spray_mode'
+    'ml_classification', 
+    'nn_classification', 
+    'generalist_ml_classification'
 ]
 
 # Standard color palette
 class_palette = {
-    'dripping': "#011cfa",
-    'intermitent': "#ffa704",
-    'cone_jet': "#0a7f02",
-    'multi_jet': "#a13195",
-    'undefined': "#000000",
-    'unclassified': "#00FFDD",
-    'unconclusive': "#7d7e7b",
+    'dripping': "#2e62d4",
+    'intermitent': "#066400",
+    'cone_jet': "#e80101",
+    'multi_jet': "#830068",
+    'undefined': "#ffa700",
+    'unclassified': "#ffa700",
+    'unconclusive': "#ffa700",
     'EXCLUDE': '#7f7f7f',
+    'none': '#7f7f7f',
+    'corona': '#e200b2',
 }
 
 # ---------------------------------------------------------
@@ -49,7 +51,7 @@ class_palette = {
 # ---------------------------------------------------------
 print("Open DB")
 db = ElectrosprayDatabase(DB_PATH)
-query = f"SELECT flow_rate, actual_voltage as voltage, image_classification, manual_classification, xgb_spray_mode, rf_spray_mode FROM measurements WHERE solution_name = '{SOLUTION}'"
+query = f"SELECT flow_rate, actual_voltage as voltage, {PLOT_SOURCES[0]}, {PLOT_SOURCES[1]}, {PLOT_SOURCES[2]}, {PLOT_SOURCES[3]} FROM measurements WHERE solution_name = '{SOLUTION}'"
 
 # Load DB into DataFrame
 df_raw = pd.read_sql(query, db._conn)
@@ -110,13 +112,13 @@ def create_stability_plot(source_col, data):
                 print(f"Hull error for {label} in {source_col}: {e}")
 
     # Draw hulls for main modes
-    for mode in ['dripping', 'cone_jet', 'multi_jet', 'intermitent']:
-        color_area(mode, 10.0)
+    #for mode in ['cone_jet']:#'dripping', , 'multi_jet', 'intermitent']:
+        #color_area(mode, 7.0)
 
     # --- Scatter Plot ---
     sns.scatterplot(
         data=df, x='flow_rate', y='voltage', hue='classification',
-        palette=class_palette, alpha=0.8, edgecolor='k', s=70, zorder=2, ax=ax
+        palette=class_palette, alpha=0.8, edgecolor='none', s=70, zorder=2, ax=ax
     )
 
     ax.set_xscale('log')

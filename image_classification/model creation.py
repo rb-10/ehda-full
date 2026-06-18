@@ -18,7 +18,7 @@ from pathlib import Path
 import os
 
 # ── Config ────────────────────────────────────────────────────────────
-DATASET_PATH  = Path(r"C:\Users\HV\Desktop\bruno_work\EHDA Image Classificaton\ehda-image-classification\dataset\processed_images\training")
+DATASET_PATH  = Path(r"C:\Users\HV\Desktop\bruno_work\main\data\training_image")
 MODEL_ARCH   = squeezenet1_1
 EPOCHS       = 10
 BATCH_SIZE   = 64
@@ -74,6 +74,20 @@ if __name__ == "__main__":
     plt.savefig(OUTPUT_DIR / "confusion_matrix.png")
     plt.close()
     print(f"[TRAIN] Confusion matrix saved → {OUTPUT_DIR}/confusion_matrix.png")
+    # ── Weighted (normalized) confusion matrix ─────────────────────────
+
+    cm_weighted = cm.astype(float) / np.clip(cm.sum(axis=1, keepdims=True), 1, None)
+    disp_w = ConfusionMatrixDisplay(
+        confusion_matrix=cm_weighted,
+        display_labels=classes
+    )
+    fig, ax = plt.subplots(figsize=(6, 6))
+    disp_w.plot(ax=ax, cmap=plt.cm.Blues, xticks_rotation="vertical", values_format=".2f")
+    plt.title("Weighted Confusion Matrix (row-normalized)")
+    plt.tight_layout()
+    plt.savefig(OUTPUT_DIR / "confusion_matrix_weighted.png")
+    plt.close()
+    print(f"[TRAIN] Weighted confusion matrix saved → {OUTPUT_DIR}/confusion_matrix_weighted.png")
  
     # ── Save results ───────────────────────────────────────────────────
     results = {

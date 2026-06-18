@@ -1,1492 +1,1117 @@
-,flow_rate,voltage,image_classification,manual_classification,xgb_spray_mode,rf_spray_mode
-0,1.0,3000.48,intermitent (100%),intermitent,dripping  (81%),dripping  (34%)
-1,1.0,3200.38,dripping (96%),dripping,dripping  (61%),multi_jet  (29%)
-2,1.0,3400.63,dripping (98%),dripping,intermitent  (80%),multi_jet  (47%)
-3,1.0,3600.5,intermitent (80%),intermitent,intermitent  (86%),multi_jet  (49%)
-4,1.0,3800.61,dripping (100%),dripping,intermitent  (64%),multi_jet  (46%)
-5,1.0,4000.51,cone_jet (73%),cone_jet,intermitent  (62%),multi_jet  (45%)
-6,1.0,4200.66,intermitent (77%),intermitent,intermitent  (68%),intermitent  (41%)
-7,1.0,4400.52,multi_jet (57%),multi_jet,cone_jet  (59%),intermitent  (42%)
-8,1.0,4600.69,multi_jet (77%),multi_jet,cone_jet  (83%),cone_jet  (32%)
-9,1.0,4800.53,multi_jet (100%),multi_jet,cone_jet  (87%),multi_jet  (42%)
-10,1.0,5000.71,multi_jet (100%),multi_jet,cone_jet  (96%),cone_jet  (38%)
-11,1.0,5200.5,multi_jet (100%),multi_jet,cone_jet  (93%),multi_jet  (43%)
-12,1.0,5400.66,multi_jet (100%),multi_jet,cone_jet  (85%),cone_jet  (33%)
-13,1.0,5600.48,multi_jet (100%),multi_jet,multi_jet  (51%),cone_jet  (32%)
-14,1.0,5800.71,multi_jet (100%),multi_jet,multi_jet  (60%),multi_jet  (40%)
-15,1.0,6000.54,multi_jet (100%),multi_jet,multi_jet  (57%),cone_jet  (38%)
-16,1.0,6200.7,multi_jet (100%),multi_jet,multi_jet  (54%),multi_jet  (37%)
-17,1.0,6400.42,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (55%)
-18,1.0,6600.55,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (56%)
-19,1.0,6800.37,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (42%)
-20,1.0,7000.56,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (56%)
-21,1.0,7200.42,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (42%)
-22,1.0,7400.61,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (38%)
-23,1.0,7600.39,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (53%)
-24,1.0,7800.56,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (42%)
-25,1.0,8000.46,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (53%)
-26,1.0,8200.66,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (67%)
-27,1.0,8400.47,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (75%)
-28,1.0,8600.59,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (88%)
-29,1.0,8800.43,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (62%)
-30,1.0,9000.31,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (73%)
-31,2.0,3000.55,multi_jet (94%),undefined,dripping  (88%),dripping  (38%)
-32,2.0,3200.39,intermitent (100%),intermitent,dripping  (65%),intermitent  (36%)
-33,2.0,3400.54,intermitent (100%),intermitent,intermitent  (79%),intermitent  (46%)
-34,2.0,3600.37,intermitent (100%),intermitent,intermitent  (86%),intermitent  (51%)
-35,2.0,3800.65,intermitent (100%),intermitent,intermitent  (87%),intermitent  (52%)
-36,2.0,4000.48,intermitent (100%),intermitent,intermitent  (85%),intermitent  (39%)
-37,2.0,4200.61,cone_jet (99%),cone_jet,intermitent  (86%),intermitent  (46%)
-38,2.0,4400.48,cone_jet (100%),cone_jet,cone_jet  (55%),intermitent  (40%)
-39,2.0,4600.68,cone_jet (99%),cone_jet,cone_jet  (89%),intermitent  (38%)
-40,2.0,4800.54,cone_jet (81%),cone_jet,cone_jet  (87%),intermitent  (40%)
-41,2.0,5000.71,multi_jet (100%),multi_jet,cone_jet  (96%),cone_jet  (36%)
-42,2.0,5200.53,multi_jet (100%),multi_jet,cone_jet  (96%),cone_jet  (34%)
-43,2.0,5400.66,multi_jet (100%),multi_jet,cone_jet  (84%),intermitent  (43%)
-44,2.0,5600.49,multi_jet (100%),multi_jet,cone_jet  (65%),multi_jet  (33%)
-45,2.0,5800.71,multi_jet (100%),multi_jet,multi_jet  (66%),multi_jet  (37%)
-46,2.0,6000.53,multi_jet (100%),multi_jet,multi_jet  (79%),multi_jet  (36%)
-47,2.0,6200.7,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (36%)
-48,2.0,6400.43,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (43%)
-49,2.0,6600.54,multi_jet (100%),multi_jet,multi_jet  (74%),multi_jet  (37%)
-50,2.0,6800.4,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (45%)
-51,2.0,7000.59,multi_jet (100%),multi_jet,multi_jet  (88%),intermitent  (41%)
-52,2.0,7200.46,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (38%)
-53,2.0,7400.61,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (55%)
-54,2.0,7600.42,multi_jet (100%),multi_jet,multi_jet  (83%),multi_jet  (50%)
-55,2.0,7800.58,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (46%)
-56,2.0,8000.46,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (62%)
-57,2.0,8200.66,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (54%)
-58,2.0,8400.49,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (68%)
-59,2.0,8600.61,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (65%)
-60,2.0,8800.44,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (76%)
-61,2.0,9000.29,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (58%)
-62,3.0,3000.55,dripping (98%),dripping,dripping  (76%),intermitent  (40%)
-63,3.0,3200.39,intermitent (100%),intermitent,dripping  (75%),intermitent  (38%)
-64,3.0,3400.53,intermitent (100%),intermitent,intermitent  (83%),intermitent  (54%)
-65,3.0,3600.4,dripping (97%),dripping,intermitent  (86%),intermitent  (49%)
-66,3.0,3800.64,intermitent (100%),intermitent,intermitent  (85%),intermitent  (47%)
-67,3.0,4000.48,intermitent (100%),intermitent,intermitent  (54%),intermitent  (51%)
-68,3.0,4200.61,cone_jet (99%),cone_jet,intermitent  (57%),intermitent  (44%)
-69,3.0,4400.47,cone_jet (87%),cone_jet,cone_jet  (63%),intermitent  (44%)
-70,3.0,4600.69,cone_jet (99%),cone_jet,cone_jet  (93%),intermitent  (32%)
-71,3.0,4800.53,cone_jet (100%),cone_jet,cone_jet  (92%),intermitent  (36%)
-72,3.0,5000.72,cone_jet (76%),cone_jet,cone_jet  (83%),intermitent  (49%)
-73,3.0,5200.49,cone_jet (81%),cone_jet,cone_jet  (91%),intermitent  (33%)
-74,3.0,5400.67,multi_jet (100%),multi_jet,cone_jet  (90%),intermitent  (34%)
-75,3.0,5600.49,multi_jet (100%),multi_jet,cone_jet  (73%),multi_jet  (43%)
-76,3.0,5800.7,multi_jet (98%),multi_jet,cone_jet  (57%),multi_jet  (36%)
-77,3.0,6000.53,multi_jet (100%),multi_jet,cone_jet  (53%),multi_jet  (49%)
-78,3.0,6200.69,multi_jet (100%),multi_jet,multi_jet  (52%),multi_jet  (39%)
-79,3.0,6400.44,multi_jet (100%),multi_jet,multi_jet  (81%),multi_jet  (47%)
-80,3.0,6600.55,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (34%)
-81,3.0,6800.37,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (56%)
-82,3.0,7000.57,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (51%)
-83,3.0,7200.45,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (54%)
-84,3.0,7400.62,multi_jet (100%),multi_jet,multi_jet  (76%),multi_jet  (46%)
-85,3.0,7600.43,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (41%)
-86,3.0,7800.55,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (52%)
-87,3.0,8000.43,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (56%)
-88,3.0,8200.67,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (60%)
-89,3.0,8400.46,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (70%)
-90,3.0,8600.64,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (66%)
-91,3.0,8800.44,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (74%)
-92,3.0,9000.32,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (89%)
-93,4.0,3000.44,dripping (100%),dripping,dripping  (76%),intermitent  (34%)
-94,4.0,3200.35,intermitent (100%),intermitent,dripping  (90%),dripping  (33%)
-95,4.0,3400.63,intermitent (100%),intermitent,intermitent  (67%),intermitent  (46%)
-96,4.0,3600.36,intermitent (100%),intermitent,intermitent  (90%),intermitent  (38%)
-97,4.0,3800.63,intermitent (100%),intermitent,intermitent  (70%),intermitent  (44%)
-98,4.0,4000.48,intermitent (100%),intermitent,intermitent  (95%),multi_jet  (46%)
-99,4.0,4200.63,intermitent (100%),intermitent,intermitent  (93%),intermitent  (39%)
-100,4.0,4400.48,intermitent (100%),intermitent,intermitent  (48%),intermitent  (39%)
-101,4.0,4600.67,intermitent (46%),intermitent,cone_jet  (58%),intermitent  (36%)
-102,4.0,4800.56,intermitent (100%),intermitent,cone_jet  (75%),intermitent  (34%)
-103,4.0,5000.7,cone_jet (32%),cone_jet,cone_jet  (56%),intermitent  (31%)
-104,4.0,5200.48,intermitent (67%),intermitent,cone_jet  (64%),intermitent  (37%)
-105,4.0,5400.65,cone_jet (100%),cone_jet,cone_jet  (41%),multi_jet  (43%)
-106,4.0,5600.47,cone_jet (100%),cone_jet,multi_jet  (71%),cone_jet  (33%)
-107,4.0,5800.68,cone_jet (100%),cone_jet,multi_jet  (96%),multi_jet  (36%)
-108,4.0,6000.54,cone_jet (100%),cone_jet,multi_jet  (97%),multi_jet  (39%)
-109,4.0,6200.68,cone_jet (100%),cone_jet,multi_jet  (95%),multi_jet  (40%)
-110,4.0,6400.42,intermitent (97%),intermitent,multi_jet  (95%),multi_jet  (43%)
-111,4.0,6600.55,cone_jet (100%),cone_jet,multi_jet  (92%),multi_jet  (54%)
-112,4.0,6800.38,multi_jet (85%),multi_jet,multi_jet  (99%),multi_jet  (46%)
-113,4.0,7000.58,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (46%)
-114,4.0,7200.38,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (41%)
-115,4.0,7400.58,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (43%)
-116,4.0,7600.39,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (44%)
-117,4.0,7800.56,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (40%)
-118,4.0,8000.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (61%)
-119,4.0,8200.61,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (58%)
-120,4.0,8400.44,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (44%)
-121,4.0,8600.58,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (72%)
-122,4.0,8800.43,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (85%)
-123,4.0,9000.29,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (96%)
-124,5.0,3000.55,dripping (97%),dripping,dripping  (68%),intermitent  (39%)
-125,5.0,3200.39,intermitent (68%),intermitent,dripping  (68%),dripping  (36%)
-126,5.0,3400.63,intermitent (89%),intermitent,intermitent  (89%),multi_jet  (33%)
-127,5.0,3600.48,intermitent (100%),intermitent,intermitent  (94%),intermitent  (36%)
-128,5.0,3800.64,intermitent (100%),intermitent,intermitent  (94%),intermitent  (52%)
-129,5.0,4000.52,intermitent (100%),intermitent,intermitent  (75%),intermitent  (50%)
-130,5.0,4200.64,intermitent (98%),intermitent,intermitent  (96%),intermitent  (45%)
-131,5.0,4400.5,intermitent (100%),intermitent,intermitent  (91%),intermitent  (42%)
-132,5.0,4600.67,intermitent (99%),intermitent,intermitent  (88%),multi_jet  (42%)
-133,5.0,4800.53,intermitent (100%),intermitent,cone_jet  (50%),intermitent  (41%)
-134,5.0,5000.71,intermitent (99%),intermitent,intermitent  (35%),multi_jet  (34%)
-135,5.0,5200.46,cone_jet (100%),cone_jet,intermitent  (57%),intermitent  (34%)
-136,5.0,5400.66,cone_jet (100%),cone_jet,multi_jet  (42%),intermitent  (32%)
-137,5.0,5600.48,cone_jet (100%),cone_jet,multi_jet  (73%),cone_jet  (31%)
-138,5.0,5800.72,cone_jet (100%),cone_jet,multi_jet  (95%),multi_jet  (36%)
-139,5.0,6000.53,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (42%)
-140,5.0,6200.67,intermitent (59%),intermitent,multi_jet  (91%),multi_jet  (36%)
-141,5.0,6400.44,multi_jet (99%),multi_jet,multi_jet  (99%),multi_jet  (56%)
-142,5.0,6600.52,multi_jet (99%),multi_jet,multi_jet  (97%),multi_jet  (52%)
-143,5.0,6800.37,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (56%)
-144,5.0,7000.58,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (55%)
-145,5.0,7200.42,multi_jet (100%),multi_jet,multi_jet  (72%),multi_jet  (41%)
-146,5.0,7400.61,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (57%)
-147,5.0,7600.4,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (47%)
-148,5.0,7800.55,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (62%)
-149,5.0,8000.42,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (67%)
-150,5.0,8200.64,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (45%)
-151,5.0,8400.47,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (54%)
-152,5.0,8600.58,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (70%)
-153,5.0,8800.43,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (82%)
-154,5.0,9000.29,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (64%)
-155,6.0,3000.55,dripping (99%),dripping,dripping  (82%),intermitent  (35%)
-156,6.0,3200.4,dripping (100%),dripping,dripping  (85%),intermitent  (35%)
-157,6.0,3400.53,intermitent (99%),intermitent,intermitent  (67%),intermitent  (47%)
-158,6.0,3600.48,intermitent (100%),intermitent,intermitent  (93%),intermitent  (36%)
-159,6.0,3800.63,intermitent (100%),intermitent,intermitent  (95%),intermitent  (49%)
-160,6.0,4000.48,intermitent (100%),intermitent,intermitent  (94%),intermitent  (41%)
-161,6.0,4200.64,intermitent (100%),intermitent,intermitent  (95%),intermitent  (46%)
-162,6.0,4400.47,intermitent (99%),intermitent,intermitent  (89%),intermitent  (41%)
-163,6.0,4600.69,intermitent (98%),intermitent,intermitent  (49%),intermitent  (41%)
-164,6.0,4800.54,intermitent (86%),intermitent,intermitent  (85%),multi_jet  (37%)
-165,6.0,5000.73,intermitent (99%),intermitent,intermitent  (75%),intermitent  (43%)
-166,6.0,5200.5,cone_jet (96%),cone_jet,cone_jet  (41%),intermitent  (35%)
-167,6.0,5400.66,cone_jet (99%),cone_jet,intermitent  (73%),multi_jet  (36%)
-168,6.0,5600.49,cone_jet (100%),cone_jet,multi_jet  (89%),multi_jet  (34%)
-169,6.0,5800.7,multi_jet (100%),multi_jet,multi_jet  (69%),multi_jet  (36%)
-170,6.0,6000.53,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (49%)
-171,6.0,6200.7,multi_jet (100%),multi_jet,multi_jet  (72%),multi_jet  (44%)
-172,6.0,6400.43,multi_jet (100%),multi_jet,multi_jet  (54%),multi_jet  (55%)
-173,6.0,6600.56,multi_jet (100%),multi_jet,multi_jet  (98%),intermitent  (45%)
-174,6.0,6800.38,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (51%)
-175,6.0,7000.58,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (46%)
-176,6.0,7200.41,multi_jet (100%),multi_jet,multi_jet  (91%),intermitent  (35%)
-177,6.0,7400.61,multi_jet (100%),multi_jet,multi_jet  (84%),cone_jet  (32%)
-178,6.0,7600.42,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (35%)
-179,6.0,7800.56,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (51%)
-180,6.0,8000.42,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (62%)
-181,6.0,8200.66,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (45%)
-182,6.0,8400.48,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (58%)
-183,6.0,8600.6,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (54%)
-184,6.0,8800.44,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (78%)
-185,6.0,9000.3,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (64%)
-186,7.0,3000.46,dripping (100%),dripping,dripping  (84%),intermitent  (38%)
-187,7.0,3200.33,dripping (77%),dripping,dripping  (82%),dripping  (39%)
-188,7.0,3400.61,intermitent (100%),intermitent,intermitent  (88%),intermitent  (47%)
-189,7.0,3600.45,intermitent (100%),intermitent,intermitent  (90%),intermitent  (46%)
-190,7.0,3800.62,intermitent (100%),intermitent,intermitent  (91%),intermitent  (43%)
-191,7.0,4000.48,intermitent (100%),intermitent,intermitent  (93%),intermitent  (37%)
-192,7.0,4200.61,intermitent (100%),intermitent,intermitent  (76%),intermitent  (46%)
-193,7.0,4400.48,intermitent (100%),intermitent,intermitent  (93%),multi_jet  (32%)
-194,7.0,4600.67,intermitent (98%),intermitent,intermitent  (89%),intermitent  (31%)
-195,7.0,4800.54,intermitent (100%),intermitent,cone_jet  (37%),intermitent  (41%)
-196,7.0,5000.71,intermitent (99%),intermitent,intermitent  (83%),intermitent  (32%)
-197,7.0,5200.47,intermitent (100%),intermitent,cone_jet  (47%),intermitent  (36%)
-198,7.0,5400.63,cone_jet (77%),cone_jet,multi_jet  (44%),multi_jet  (36%)
-199,7.0,5600.48,cone_jet (100%),cone_jet,multi_jet  (93%),multi_jet  (42%)
-200,7.0,5800.67,cone_jet (100%),cone_jet,multi_jet  (98%),multi_jet  (43%)
-201,7.0,6000.52,cone_jet (100%),cone_jet,multi_jet  (83%),multi_jet  (35%)
-202,7.0,6200.68,cone_jet (95%),cone_jet,multi_jet  (81%),intermitent  (42%)
-203,7.0,6400.43,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (49%)
-204,7.0,6600.53,cone_jet (100%),cone_jet,multi_jet  (92%),multi_jet  (67%)
-205,7.0,6800.38,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (58%)
-206,7.0,7000.57,multi_jet (90%),multi_jet,multi_jet  (86%),multi_jet  (58%)
-207,7.0,7200.4,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (51%)
-208,7.0,7400.6,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (58%)
-209,7.0,7600.42,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (58%)
-210,7.0,7800.56,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (59%)
-211,7.0,8000.42,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (68%)
-212,7.0,8200.63,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (63%)
-213,7.0,8400.49,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (60%)
-214,7.0,8600.61,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (63%)
-215,7.0,8800.44,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (76%)
-216,7.0,9000.29,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (88%)
-217,8.0,3000.55,dripping (100%),dripping,dripping  (70%),dripping  (35%)
-218,8.0,3200.38,dripping (100%),dripping,dripping  (87%),dripping  (42%)
-219,8.0,3400.51,intermitent (100%),intermitent,intermitent  (87%),intermitent  (48%)
-220,8.0,3600.48,intermitent (100%),intermitent,intermitent  (91%),intermitent  (51%)
-221,8.0,3800.65,intermitent (94%),intermitent,intermitent  (82%),intermitent  (55%)
-222,8.0,4000.39,intermitent (100%),intermitent,intermitent  (93%),intermitent  (36%)
-223,8.0,4200.63,intermitent (100%),intermitent,intermitent  (95%),intermitent  (45%)
-224,8.0,4400.49,intermitent (100%),intermitent,intermitent  (72%),intermitent  (41%)
-225,8.0,4600.67,intermitent (100%),intermitent,intermitent  (90%),intermitent  (32%)
-226,8.0,4800.53,intermitent (61%),intermitent,intermitent  (85%),multi_jet  (45%)
-227,8.0,5000.7,dripping (95%),dripping,intermitent  (73%),intermitent  (37%)
-228,8.0,5200.5,intermitent (99%),intermitent,intermitent  (70%),intermitent  (38%)
-229,8.0,5400.65,cone_jet (100%),cone_jet,intermitent  (58%),multi_jet  (36%)
-230,8.0,5600.48,cone_jet (100%),cone_jet,multi_jet  (75%),multi_jet  (38%)
-231,8.0,5800.69,cone_jet (97%),cone_jet,multi_jet  (96%),multi_jet  (46%)
-232,8.0,6000.53,cone_jet (100%),cone_jet,multi_jet  (76%),multi_jet  (49%)
-233,8.0,6200.67,cone_jet (93%),undefined,multi_jet  (63%),multi_jet  (52%)
-234,8.0,6400.4,multi_jet (100%),multi_jet,multi_jet  (98%),intermitent  (46%)
-235,8.0,6600.53,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (59%)
-236,8.0,6800.33,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (57%)
-237,8.0,7000.6,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (60%)
-238,8.0,7200.43,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (61%)
-239,8.0,7400.58,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (56%)
-240,8.0,7600.4,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (64%)
-241,8.0,7800.56,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (65%)
-242,8.0,8000.42,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (58%)
-243,8.0,8200.65,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (66%)
-244,8.0,8400.43,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (55%)
-245,8.0,8600.58,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (67%)
-246,8.0,8800.43,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (66%)
-247,8.0,9000.3,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (76%)
-248,9.0,3000.52,dripping (100%),dripping,dripping  (60%),dripping  (34%)
-249,9.0,3200.35,dripping (100%),dripping,dripping  (75%),intermitent  (35%)
-250,9.0,3400.47,dripping (99%),dripping,intermitent  (89%),multi_jet  (37%)
-251,9.0,3600.36,intermitent (100%),intermitent,intermitent  (96%),intermitent  (48%)
-252,9.0,3800.64,intermitent (100%),intermitent,intermitent  (71%),intermitent  (46%)
-253,9.0,4000.48,intermitent (100%),intermitent,intermitent  (93%),intermitent  (43%)
-254,9.0,4200.61,intermitent (100%),intermitent,intermitent  (94%),multi_jet  (38%)
-255,9.0,4400.5,intermitent (100%),intermitent,intermitent  (45%),multi_jet  (39%)
-256,9.0,4600.67,intermitent (100%),intermitent,intermitent  (88%),intermitent  (37%)
-257,9.0,4800.54,intermitent (100%),intermitent,intermitent  (77%),multi_jet  (33%)
-258,9.0,5000.71,intermitent (100%),intermitent,cone_jet  (62%),multi_jet  (43%)
-259,9.0,5200.49,intermitent (94%),intermitent,intermitent  (72%),intermitent  (37%)
-260,9.0,5400.66,cone_jet (99%),cone_jet,cone_jet  (45%),multi_jet  (44%)
-261,9.0,5600.49,intermitent (84%),undefined,multi_jet  (96%),multi_jet  (50%)
-262,9.0,5800.69,multi_jet (85%),undefined,multi_jet  (87%),multi_jet  (57%)
-263,9.0,6000.53,multi_jet (81%),undefined,multi_jet  (99%),multi_jet  (61%)
-264,9.0,6200.68,cone_jet (100%),cone_jet,multi_jet  (98%),multi_jet  (58%)
-265,9.0,6400.44,multi_jet (99%),multi_jet,multi_jet  (97%),multi_jet  (51%)
-266,9.0,6600.54,dripping (84%),multi_jet,multi_jet  (99%),multi_jet  (59%)
-267,9.0,6800.37,intermitent (81%),multi_jet,multi_jet  (99%),multi_jet  (53%)
-268,9.0,7000.58,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (58%)
-269,9.0,7200.44,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (75%)
-270,9.0,7400.61,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (56%)
-271,9.0,7600.42,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (66%)
-272,9.0,7800.56,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (72%)
-273,9.0,8000.48,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (76%)
-274,9.0,8200.66,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (64%)
-275,9.0,8400.47,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (55%)
-276,9.0,8600.6,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (69%)
-277,9.0,8800.43,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (76%)
-278,9.0,9000.31,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (66%)
-279,10.0,3000.48,dripping (100%),dripping,dripping  (69%),dripping  (33%)
-280,10.0,3200.39,intermitent (99%),dripping,dripping  (80%),intermitent  (35%)
-281,10.0,3400.53,intermitent (100%),intermitent,intermitent  (91%),intermitent  (44%)
-282,10.0,3600.49,intermitent (58%),intermitent,intermitent  (95%),intermitent  (45%)
-283,10.0,3800.66,intermitent (100%),intermitent,intermitent  (94%),intermitent  (42%)
-284,10.0,4000.49,intermitent (100%),intermitent,intermitent  (96%),multi_jet  (36%)
-285,10.0,4200.65,intermitent (100%),intermitent,intermitent  (97%),intermitent  (35%)
-286,10.0,4400.52,intermitent (100%),intermitent,intermitent  (92%),intermitent  (39%)
-287,10.0,4600.7,intermitent (100%),intermitent,intermitent  (91%),multi_jet  (40%)
-288,10.0,4800.58,intermitent (100%),intermitent,intermitent  (43%),intermitent  (37%)
-289,10.0,5000.74,intermitent (100%),intermitent,intermitent  (74%),intermitent  (35%)
-290,10.0,5200.51,intermitent (100%),intermitent,intermitent  (82%),multi_jet  (39%)
-291,10.0,5400.68,intermitent (100%),intermitent,intermitent  (64%),multi_jet  (39%)
-292,10.0,5600.51,intermitent (100%),intermitent,multi_jet  (77%),multi_jet  (50%)
-293,10.0,5800.71,cone_jet (100%),cone_jet,multi_jet  (86%),multi_jet  (43%)
-294,10.0,6000.56,multi_jet (65%),cone_jet,multi_jet  (92%),multi_jet  (55%)
-295,10.0,6200.71,intermitent (97%),cone_jet,multi_jet  (96%),multi_jet  (55%)
-296,10.0,6400.44,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (59%)
-297,10.0,6600.55,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (60%)
-298,10.0,6800.38,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (59%)
-299,10.0,7000.59,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (59%)
-300,10.0,7200.43,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (67%)
-301,10.0,7400.62,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (58%)
-302,10.0,7600.44,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (59%)
-303,10.0,7800.58,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (66%)
-304,10.0,8000.5,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (72%)
-305,10.0,8200.66,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (59%)
-306,10.0,8400.5,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (74%)
-307,10.0,8600.6,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (84%)
-308,10.0,8800.44,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (82%)
-309,10.0,9000.3,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-310,12.0,3000.56,dripping (100%),dripping,dripping  (73%),dripping  (35%)
-311,12.0,3200.4,dripping (99%),dripping,dripping  (73%),intermitent  (34%)
-312,12.0,3400.55,intermitent (99%),intermitent,intermitent  (66%),intermitent  (38%)
-313,12.0,3600.48,intermitent (96%),intermitent,intermitent  (93%),intermitent  (39%)
-314,12.0,3800.65,intermitent (100%),intermitent,intermitent  (96%),intermitent  (39%)
-315,12.0,4000.51,intermitent (100%),intermitent,intermitent  (76%),intermitent  (44%)
-316,12.0,4200.66,intermitent (100%),intermitent,intermitent  (79%),intermitent  (44%)
-317,12.0,4400.5,intermitent (100%),intermitent,intermitent  (59%),multi_jet  (42%)
-318,12.0,4600.7,intermitent (100%),intermitent,intermitent  (91%),intermitent  (36%)
-319,12.0,4800.56,intermitent (100%),intermitent,intermitent  (89%),multi_jet  (47%)
-320,12.0,5000.74,intermitent (100%),intermitent,intermitent  (39%),multi_jet  (40%)
-321,12.0,5200.52,cone_jet (100%),cone_jet,intermitent  (79%),multi_jet  (34%)
-322,12.0,5400.68,cone_jet (100%),cone_jet,intermitent  (73%),multi_jet  (38%)
-323,12.0,5600.5,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (52%)
-324,12.0,5800.7,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (57%)
-325,12.0,6000.55,multi_jet (100%),multi_jet,multi_jet  (74%),multi_jet  (57%)
-326,12.0,6200.7,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (66%)
-327,12.0,6400.45,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (63%)
-328,12.0,6600.56,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (69%)
-329,12.0,6800.39,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (77%)
-330,12.0,7000.62,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (70%)
-331,12.0,7200.46,multi_jet (100%),multi_jet,multi_jet  (77%),multi_jet  (45%)
-332,12.0,7400.61,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (67%)
-333,12.0,7600.43,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (65%)
-334,12.0,7800.6,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (71%)
-335,12.0,8000.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (78%)
-336,12.0,8200.67,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (87%)
-337,12.0,8400.5,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (61%)
-338,12.0,8600.63,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (80%)
-339,12.0,8800.43,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (73%)
-340,12.0,9000.32,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (89%)
-341,14.0,3000.54,dripping (100%),dripping,dripping  (75%),dripping  (31%)
-342,14.0,3200.39,dripping (100%),dripping,dripping  (67%),dripping  (37%)
-343,14.0,3400.51,intermitent (94%),intermitent,intermitent  (92%),multi_jet  (37%)
-344,14.0,3600.39,intermitent (100%),intermitent,intermitent  (97%),intermitent  (48%)
-345,14.0,3800.65,intermitent (100%),intermitent,intermitent  (94%),intermitent  (41%)
-346,14.0,4000.48,intermitent (100%),intermitent,intermitent  (96%),intermitent  (46%)
-347,14.0,4200.54,intermitent (100%),intermitent,intermitent  (96%),intermitent  (42%)
-348,14.0,4400.47,dripping (98%),intermitent,intermitent  (68%),intermitent  (42%)
-349,14.0,4600.69,intermitent (100%),intermitent,intermitent  (87%),intermitent  (36%)
-350,14.0,4800.56,intermitent (100%),intermitent,intermitent  (87%),multi_jet  (41%)
-351,14.0,5000.73,intermitent (100%),intermitent,intermitent  (80%),intermitent  (33%)
-352,14.0,5200.5,multi_jet (69%),undefined,intermitent  (45%),multi_jet  (37%)
-353,14.0,5400.64,cone_jet (66%),undefined,multi_jet  (52%),multi_jet  (32%)
-354,14.0,5600.5,multi_jet (86%),multi_jet,intermitent  (50%),multi_jet  (43%)
-355,14.0,5800.71,multi_jet (100%),multi_jet,multi_jet  (68%),multi_jet  (41%)
-356,14.0,6000.54,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (61%)
-357,14.0,6200.73,multi_jet (100%),multi_jet,multi_jet  (84%),multi_jet  (60%)
-358,14.0,6400.42,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (69%)
-359,14.0,6600.54,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (60%)
-360,14.0,6800.39,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (71%)
-361,14.0,7000.64,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (61%)
-362,14.0,7200.45,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (51%)
-363,14.0,7400.63,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (66%)
-364,14.0,7600.42,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (69%)
-365,14.0,7800.57,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (70%)
-366,14.0,8000.45,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (75%)
-367,14.0,8200.68,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (65%)
-368,14.0,8400.47,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (75%)
-369,14.0,8600.6,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (73%)
-370,14.0,8800.44,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (63%)
-371,14.0,9000.33,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (64%)
-372,16.0,3000.46,intermitent (85%),dripping,dripping  (73%),dripping  (34%)
-373,16.0,3200.36,dripping (66%),dripping,dripping  (72%),intermitent  (31%)
-374,16.0,3400.52,intermitent (99%),dripping,intermitent  (72%),intermitent  (47%)
-375,16.0,3600.49,intermitent (100%),intermitent,intermitent  (97%),intermitent  (47%)
-376,16.0,3800.65,intermitent (99%),intermitent,intermitent  (93%),intermitent  (42%)
-377,16.0,4000.4,intermitent (100%),intermitent,intermitent  (63%),intermitent  (50%)
-378,16.0,4200.62,intermitent (100%),intermitent,intermitent  (97%),intermitent  (62%)
-379,16.0,4400.5,intermitent (100%),intermitent,cone_jet  (52%),intermitent  (38%)
-380,16.0,4600.72,intermitent (100%),intermitent,intermitent  (92%),intermitent  (34%)
-381,16.0,4800.55,intermitent (100%),intermitent,intermitent  (85%),intermitent  (46%)
-382,16.0,5000.72,intermitent (100%),intermitent,intermitent  (57%),intermitent  (39%)
-383,16.0,5200.51,intermitent (100%),intermitent,intermitent  (51%),intermitent  (33%)
-384,16.0,5400.66,intermitent (75%),intermitent,intermitent  (72%),intermitent  (39%)
-385,16.0,5600.51,intermitent (100%),intermitent,multi_jet  (62%),multi_jet  (37%)
-386,16.0,5800.71,intermitent (100%),intermitent,multi_jet  (57%),multi_jet  (44%)
-387,16.0,6000.55,intermitent (94%),undefined,multi_jet  (73%),multi_jet  (47%)
-388,16.0,6200.69,multi_jet (84%),undefined,multi_jet  (61%),multi_jet  (64%)
-389,16.0,6400.45,intermitent (52%),undefined,multi_jet  (88%),multi_jet  (67%)
-390,16.0,6600.55,intermitent (60%),multi_jet,multi_jet  (97%),multi_jet  (60%)
-391,16.0,6800.39,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (65%)
-392,16.0,7000.64,multi_jet (80%),multi_jet,multi_jet  (98%),multi_jet  (68%)
-393,16.0,7200.47,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (74%)
-394,16.0,7400.63,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (67%)
-395,16.0,7600.42,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (72%)
-396,16.0,7800.59,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (71%)
-397,16.0,8000.45,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (74%)
-398,16.0,8200.66,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (71%)
-399,16.0,8400.48,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (67%)
-400,16.0,8600.6,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (70%)
-401,16.0,8800.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (74%)
-402,16.0,9000.32,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (71%)
-403,18.0,3000.57,dripping (79%),dripping,dripping  (75%),intermitent  (35%)
-404,18.0,3200.41,dripping (90%),dripping,dripping  (73%),intermitent  (35%)
-405,18.0,3400.53,intermitent (100%),intermitent,intermitent  (93%),intermitent  (38%)
-406,18.0,3600.51,intermitent (100%),intermitent,intermitent  (96%),intermitent  (43%)
-407,18.0,3800.66,intermitent (100%),intermitent,intermitent  (96%),intermitent  (56%)
-408,18.0,4000.52,intermitent (100%),intermitent,intermitent  (93%),intermitent  (43%)
-409,18.0,4200.64,intermitent (100%),intermitent,intermitent  (97%),intermitent  (56%)
-410,18.0,4400.5,intermitent (100%),intermitent,intermitent  (95%),intermitent  (37%)
-411,18.0,4600.7,intermitent (100%),intermitent,intermitent  (64%),intermitent  (40%)
-412,18.0,4800.57,intermitent (100%),intermitent,intermitent  (80%),multi_jet  (44%)
-413,18.0,5000.74,intermitent (100%),intermitent,intermitent  (88%),multi_jet  (44%)
-414,18.0,5200.51,intermitent (100%),intermitent,intermitent  (52%),intermitent  (36%)
-415,18.0,5400.67,intermitent (90%),undefined,intermitent  (61%),multi_jet  (44%)
-416,18.0,5600.51,intermitent (91%),undefined,multi_jet  (72%),multi_jet  (48%)
-417,18.0,5800.73,multi_jet (95%),multi_jet,multi_jet  (78%),multi_jet  (47%)
-418,18.0,6000.56,intermitent (92%),multi_jet,multi_jet  (59%),multi_jet  (59%)
-419,18.0,6200.7,intermitent (98%),multi_jet,multi_jet  (57%),multi_jet  (55%)
-420,18.0,6400.47,intermitent (68%),multi_jet,multi_jet  (89%),multi_jet  (61%)
-421,18.0,6600.55,multi_jet (96%),multi_jet,multi_jet  (93%),multi_jet  (65%)
-422,18.0,6800.41,multi_jet (98%),multi_jet,multi_jet  (88%),multi_jet  (72%)
-423,18.0,7000.66,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (68%)
-424,18.0,7200.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (73%)
-425,18.0,7400.65,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (70%)
-426,18.0,7600.45,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (67%)
-427,18.0,7800.6,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (75%)
-428,18.0,8000.51,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (76%)
-429,18.0,8200.67,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (80%)
-430,18.0,8400.51,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (79%)
-431,18.0,8600.63,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (74%)
-432,18.0,8800.45,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (75%)
-433,18.0,9000.34,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (66%)
-434,20.0,3000.57,dripping (94%),dripping,dripping  (77%),intermitent  (38%)
-435,20.0,3200.42,dripping (100%),dripping,dripping  (76%),dripping  (32%)
-436,20.0,3400.66,intermitent (100%),intermitent,intermitent  (87%),intermitent  (53%)
-437,20.0,3000.46,dripping (96%),dripping,dripping  (89%),dripping  (44%)
-438,20.0,3200.38,intermitent (95%),intermitent,dripping  (96%),dripping  (49%)
-439,20.0,3400.63,intermitent (100%),intermitent,intermitent  (63%),intermitent  (59%)
-440,20.0,3600.5,intermitent (100%),intermitent,intermitent  (89%),intermitent  (60%)
-441,20.0,3800.65,intermitent (100%),intermitent,intermitent  (85%),intermitent  (56%)
-442,20.0,4000.5,intermitent (100%),intermitent,intermitent  (84%),intermitent  (66%)
-443,20.0,4200.64,intermitent (100%),intermitent,intermitent  (93%),intermitent  (50%)
-444,20.0,4400.5,intermitent (99%),intermitent,intermitent  (93%),intermitent  (39%)
-445,20.0,4600.71,intermitent (93%),intermitent,intermitent  (87%),intermitent  (41%)
-446,20.0,4800.56,intermitent (96%),intermitent,intermitent  (83%),intermitent  (42%)
-447,20.0,5000.72,multi_jet (66%),cone_jet,intermitent  (76%),intermitent  (43%)
-448,20.0,5200.53,multi_jet (95%),undefined,intermitent  (62%),intermitent  (52%)
-449,20.0,5400.71,intermitent (51%),undefined,intermitent  (50%),intermitent  (49%)
-450,20.0,5600.52,cone_jet (71%),multi_jet,intermitent  (55%),intermitent  (43%)
-451,20.0,5800.75,multi_jet (100%),multi_jet,multi_jet  (63%),multi_jet  (44%)
-452,20.0,6000.55,multi_jet (100%),multi_jet,multi_jet  (81%),multi_jet  (54%)
-453,20.0,6200.74,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (59%)
-454,20.0,6400.47,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (54%)
-455,20.0,6600.58,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (67%)
-456,20.0,6800.42,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (57%)
-457,20.0,7000.65,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (52%)
-458,20.0,7200.47,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (55%)
-459,20.0,7400.65,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (64%)
-460,20.0,7600.44,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (52%)
-461,20.0,7800.6,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (60%)
-462,20.0,8000.48,multi_jet (100%),multi_jet,multi_jet  (73%),multi_jet  (65%)
-463,20.0,8200.68,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (62%)
-464,20.0,8400.51,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-465,20.0,8600.61,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (78%)
-466,20.0,8800.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-467,20.0,9000.34,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-468,25.0,3000.59,dripping (100%),dripping,dripping  (89%),dripping  (39%)
-469,25.0,3200.55,intermitent (100%),intermitent,dripping  (96%),dripping  (47%)
-470,25.0,3400.55,intermitent (100%),intermitent,intermitent  (91%),intermitent  (48%)
-471,25.0,3600.4,intermitent (100%),intermitent,intermitent  (93%),intermitent  (49%)
-472,25.0,3800.67,intermitent (100%),intermitent,intermitent  (89%),intermitent  (62%)
-473,25.0,4000.51,intermitent (100%),intermitent,intermitent  (94%),intermitent  (50%)
-474,25.0,4200.67,intermitent (98%),intermitent,intermitent  (85%),intermitent  (67%)
-475,25.0,4400.52,intermitent (100%),intermitent,intermitent  (90%),intermitent  (46%)
-476,25.0,4600.72,intermitent (100%),intermitent,intermitent  (88%),intermitent  (49%)
-477,25.0,4800.58,intermitent (57%),undefined,intermitent  (84%),intermitent  (42%)
-478,25.0,5000.73,multi_jet (100%),multi_jet,intermitent  (78%),intermitent  (45%)
-479,25.0,5200.52,intermitent (51%),undefined,intermitent  (83%),intermitent  (42%)
-480,25.0,5400.7,multi_jet (89%),multi_jet,intermitent  (58%),intermitent  (63%)
-481,25.0,5600.53,multi_jet (100%),multi_jet,intermitent  (66%),multi_jet  (37%)
-482,25.0,5800.72,multi_jet (100%),multi_jet,multi_jet  (55%),multi_jet  (50%)
-483,25.0,6000.58,multi_jet (100%),multi_jet,multi_jet  (61%),multi_jet  (50%)
-484,25.0,6200.72,multi_jet (100%),multi_jet,multi_jet  (79%),multi_jet  (57%)
-485,25.0,6400.46,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (70%)
-486,25.0,6600.56,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (66%)
-487,25.0,6800.4,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (68%)
-488,25.0,7000.65,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (65%)
-489,25.0,7200.48,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (52%)
-490,25.0,7400.63,multi_jet (100%),multi_jet,multi_jet  (67%),multi_jet  (45%)
-491,25.0,7600.45,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (59%)
-492,25.0,7800.59,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (60%)
-493,25.0,8000.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (83%)
-494,25.0,8200.68,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-495,25.0,8400.5,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (78%)
-496,25.0,8600.63,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-497,25.0,8800.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-498,25.0,9000.32,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-499,30.0,3000.55,dripping (100%),dripping,dripping  (96%),dripping  (47%)
-500,30.0,3200.41,intermitent (100%),intermitent,dripping  (93%),dripping  (48%)
-501,30.0,3400.51,intermitent (98%),intermitent,intermitent  (60%),intermitent  (57%)
-502,30.0,3600.5,intermitent (100%),intermitent,intermitent  (90%),intermitent  (67%)
-503,30.0,3800.67,intermitent (100%),intermitent,intermitent  (86%),intermitent  (50%)
-504,30.0,4000.4,intermitent (100%),intermitent,intermitent  (71%),intermitent  (61%)
-505,30.0,4200.66,intermitent (100%),intermitent,intermitent  (87%),intermitent  (50%)
-506,30.0,4400.52,intermitent (100%),intermitent,intermitent  (63%),intermitent  (64%)
-507,30.0,4600.71,intermitent (70%),undefined,dripping  (48%),intermitent  (55%)
-508,30.0,4800.56,multi_jet (100%),multi_jet,intermitent  (80%),intermitent  (52%)
-509,30.0,5000.75,multi_jet (89%),undefined,dripping  (63%),intermitent  (57%)
-510,30.0,5200.52,multi_jet (70%),undefined,intermitent  (60%),intermitent  (44%)
-511,30.0,5400.69,multi_jet (100%),multi_jet,dripping  (42%),intermitent  (44%)
-512,30.0,5600.53,multi_jet (100%),multi_jet,intermitent  (36%),intermitent  (54%)
-513,30.0,5800.72,multi_jet (100%),multi_jet,multi_jet  (59%),intermitent  (46%)
-514,30.0,6000.58,multi_jet (100%),multi_jet,multi_jet  (56%),multi_jet  (48%)
-515,30.0,6200.71,multi_jet (100%),multi_jet,cone_jet  (39%),multi_jet  (44%)
-516,30.0,6400.43,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (55%)
-517,30.0,6600.57,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (65%)
-518,30.0,6800.42,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (54%)
-519,30.0,7000.63,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (59%)
-520,30.0,7200.48,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (62%)
-521,30.0,7400.64,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (52%)
-522,30.0,7600.43,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (58%)
-523,30.0,7800.59,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (69%)
-524,30.0,8000.47,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (66%)
-525,30.0,8200.7,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (52%)
-526,30.0,8400.48,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (86%)
-527,30.0,8600.64,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-528,30.0,8800.48,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (73%)
-529,30.0,9000.32,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-530,35.0,3000.46,intermitent (100%),intermitent,dripping  (99%),dripping  (46%)
-531,35.0,3200.37,intermitent (99%),intermitent,dripping  (96%),dripping  (42%)
-532,35.0,3400.65,intermitent (100%),intermitent,dripping  (91%),intermitent  (52%)
-533,35.0,3600.5,intermitent (100%),intermitent,intermitent  (78%),intermitent  (68%)
-534,35.0,3800.67,intermitent (100%),intermitent,intermitent  (82%),intermitent  (74%)
-535,35.0,4000.49,intermitent (100%),intermitent,intermitent  (90%),intermitent  (66%)
-536,35.0,4200.64,intermitent (100%),intermitent,intermitent  (68%),intermitent  (66%)
-537,35.0,4400.51,multi_jet (87%),intermitent,intermitent  (74%),intermitent  (52%)
-538,35.0,4600.69,intermitent (96%),intermitent,dripping  (89%),intermitent  (55%)
-539,35.0,4800.59,multi_jet (78%),intermitent,dripping  (90%),intermitent  (60%)
-540,35.0,5000.74,multi_jet (73%),undefined,intermitent  (66%),intermitent  (55%)
-541,35.0,5200.5,multi_jet (76%),undefined,intermitent  (81%),intermitent  (57%)
-542,35.0,5400.67,multi_jet (71%),undefined,intermitent  (61%),intermitent  (34%)
-543,35.0,5600.51,multi_jet (70%),multi_jet,intermitent  (46%),intermitent  (39%)
-544,35.0,5800.72,multi_jet (100%),multi_jet,intermitent  (42%),intermitent  (50%)
-545,35.0,6000.55,multi_jet (100%),multi_jet,multi_jet  (51%),intermitent  (38%)
-546,35.0,6200.72,multi_jet (100%),multi_jet,cone_jet  (36%),multi_jet  (48%)
-547,35.0,6400.43,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (54%)
-548,35.0,6600.56,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (67%)
-549,35.0,6800.42,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (62%)
-550,35.0,7000.62,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (70%)
-551,35.0,7200.45,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (59%)
-552,35.0,7400.64,multi_jet (100%),multi_jet,multi_jet  (79%),multi_jet  (60%)
-553,35.0,7600.45,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (65%)
-554,35.0,7800.59,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (69%)
-555,35.0,8000.45,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (66%)
-556,35.0,8200.68,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (60%)
-557,35.0,8400.49,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (70%)
-558,35.0,8600.62,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (74%)
-559,35.0,8800.47,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (76%)
-560,35.0,9000.33,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (78%)
-561,40.0,3000.6,dripping (100%),dripping,dripping  (98%),dripping  (49%)
-562,40.0,3200.42,intermitent (100%),intermitent,dripping  (97%),dripping  (46%)
-563,40.0,3400.65,intermitent (100%),intermitent,dripping  (92%),intermitent  (46%)
-564,40.0,3600.49,intermitent (100%),intermitent,dripping  (80%),intermitent  (47%)
-565,40.0,3800.65,intermitent (100%),intermitent,dripping  (91%),intermitent  (58%)
-566,40.0,4000.48,intermitent (100%),intermitent,intermitent  (51%),intermitent  (62%)
-567,40.0,4200.64,multi_jet (50%),intermitent,intermitent  (87%),intermitent  (72%)
-568,40.0,4400.48,multi_jet (61%),intermitent,intermitent  (77%),intermitent  (66%)
-569,40.0,4600.72,intermitent (80%),intermitent,dripping  (51%),intermitent  (53%)
-570,40.0,4800.56,multi_jet (97%),intermitent,intermitent  (50%),intermitent  (66%)
-571,40.0,5000.75,intermitent (70%),undefined,dripping  (84%),intermitent  (52%)
-572,40.0,5200.51,intermitent (94%),undefined,intermitent  (57%),intermitent  (40%)
-573,40.0,5400.69,multi_jet (76%),undefined,dripping  (84%),intermitent  (51%)
-574,40.0,5600.51,multi_jet (88%),multi_jet,intermitent  (44%),intermitent  (57%)
-575,40.0,5800.72,multi_jet (99%),multi_jet,intermitent  (71%),intermitent  (62%)
-576,40.0,6000.57,multi_jet (100%),multi_jet,intermitent  (63%),multi_jet  (42%)
-577,40.0,6200.72,multi_jet (100%),multi_jet,intermitent  (42%),multi_jet  (53%)
-578,40.0,6400.47,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (59%)
-579,40.0,6600.56,multi_jet (100%),multi_jet,multi_jet  (72%),multi_jet  (58%)
-580,40.0,6800.4,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (65%)
-581,40.0,7000.65,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (69%)
-582,40.0,7200.48,multi_jet (100%),multi_jet,multi_jet  (53%),multi_jet  (66%)
-583,40.0,7400.65,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (76%)
-584,40.0,7600.44,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (70%)
-585,40.0,7800.62,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (58%)
-586,40.0,8000.46,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (66%)
-587,40.0,8200.67,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (78%)
-588,40.0,8400.5,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (74%)
-589,40.0,8600.64,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (74%)
-590,40.0,8800.48,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (67%)
-591,40.0,9000.34,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (62%)
-592,50.0,3000.45,dripping (100%),dripping,dripping  (98%),dripping  (47%)
-593,50.0,3200.48,dripping (99%),dripping,dripping  (98%),dripping  (50%)
-594,50.0,3400.6,intermitent (99%),intermitent,dripping  (94%),intermitent  (52%)
-595,50.0,3600.44,intermitent (100%),intermitent,dripping  (96%),intermitent  (54%)
-596,50.0,3800.62,intermitent (100%),undefined,dripping  (92%),intermitent  (56%)
-597,50.0,4000.46,intermitent (100%),intermitent,dripping  (86%),intermitent  (60%)
-598,50.0,4200.59,intermitent (100%),intermitent,dripping  (94%),intermitent  (54%)
-599,50.0,4400.44,intermitent (100%),intermitent,intermitent  (59%),intermitent  (44%)
-600,50.0,4600.63,intermitent (100%),intermitent,dripping  (86%),intermitent  (52%)
-601,50.0,4800.49,intermitent (100%),intermitent,intermitent  (65%),intermitent  (43%)
-602,50.0,5000.66,intermitent (100%),intermitent,dripping  (76%),intermitent  (53%)
-603,50.0,5200.43,intermitent (95%),intermitent,intermitent  (67%),intermitent  (47%)
-604,50.0,5400.6,intermitent (100%),intermitent,cone_jet  (68%),multi_jet  (42%)
-605,50.0,5600.42,intermitent (67%),undefined,multi_jet  (40%),multi_jet  (46%)
-606,50.0,5800.63,intermitent (99%),undefined,cone_jet  (58%),multi_jet  (54%)
-607,50.0,6000.48,multi_jet (100%),multi_jet,cone_jet  (52%),multi_jet  (57%)
-608,50.0,6200.6,multi_jet (100%),multi_jet,cone_jet  (42%),multi_jet  (59%)
-609,50.0,6400.35,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (78%)
-610,50.0,6600.49,multi_jet (100%),multi_jet,multi_jet  (68%),multi_jet  (82%)
-611,50.0,6800.33,multi_jet (100%),multi_jet,multi_jet  (78%),multi_jet  (83%)
-612,50.0,7000.51,multi_jet (100%),multi_jet,multi_jet  (49%),multi_jet  (62%)
-613,50.0,7200.33,multi_jet (100%),multi_jet,multi_jet  (61%),multi_jet  (61%)
-614,50.0,7400.48,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (83%)
-615,50.0,7600.31,multi_jet (100%),multi_jet,multi_jet  (71%),multi_jet  (80%)
-616,50.0,7800.44,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (85%)
-617,50.0,8000.31,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (92%)
-618,50.0,8200.49,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (93%)
-619,50.0,8400.33,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (92%)
-620,50.0,8600.47,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (93%)
-621,50.0,8800.31,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (95%)
-622,50.0,9000.19,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (94%)
-623,60.0,3000.51,dripping (100%),dripping,dripping  (98%),dripping  (47%)
-624,60.0,3200.37,dripping (100%),dripping,dripping  (97%),dripping  (47%)
-625,60.0,3400.62,dripping (98%),intermitent,dripping  (97%),intermitent  (50%)
-626,60.0,3600.46,intermitent (100%),intermitent,dripping  (96%),intermitent  (54%)
-627,60.0,3800.62,intermitent (100%),intermitent,dripping  (83%),intermitent  (53%)
-628,60.0,4000.47,intermitent (100%),intermitent,intermitent  (64%),intermitent  (56%)
-629,60.0,4200.6,intermitent (100%),intermitent,intermitent  (80%),intermitent  (55%)
-630,60.0,4400.43,intermitent (100%),intermitent,dripping  (75%),intermitent  (51%)
-631,60.0,4600.65,intermitent (99%),intermitent,dripping  (89%),intermitent  (49%)
-632,60.0,4800.51,intermitent (100%),intermitent,dripping  (88%),intermitent  (49%)
-633,60.0,5000.68,intermitent (100%),intermitent,intermitent  (75%),intermitent  (42%)
-634,60.0,5200.45,multi_jet (41%),undefined,intermitent  (81%),intermitent  (48%)
-635,60.0,5400.61,intermitent (94%),undefined,intermitent  (58%),multi_jet  (36%)
-636,60.0,5600.43,intermitent (97%),undefined,intermitent  (42%),multi_jet  (51%)
-637,60.0,5800.63,intermitent (95%),undefined,multi_jet  (41%),multi_jet  (61%)
-638,60.0,6000.48,multi_jet (96%),multi_jet,multi_jet  (87%),multi_jet  (77%)
-639,60.0,6200.61,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (83%)
-640,60.0,6400.36,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (85%)
-641,60.0,6600.52,multi_jet (100%),multi_jet,multi_jet  (83%),multi_jet  (80%)
-642,60.0,6800.35,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (91%)
-643,60.0,7000.52,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (84%)
-644,60.0,7200.34,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (90%)
-645,60.0,7400.5,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (88%)
-646,60.0,7600.3,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (95%)
-647,60.0,7800.5,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (95%)
-648,60.0,8000.38,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (88%)
-649,60.0,8200.56,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (93%)
-650,60.0,8400.39,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (94%)
-651,60.0,8600.52,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (96%)
-652,60.0,8800.33,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (95%)
-653,60.0,9000.2,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (95%)
-654,70.0,3000.51,dripping (100%),dripping,dripping  (98%),dripping  (47%)
-655,70.0,3200.51,dripping (86%),dripping,dripping  (99%),dripping  (47%)
-656,70.0,3400.63,intermitent (100%),intermitent,dripping  (94%),intermitent  (56%)
-657,70.0,3600.46,intermitent (100%),intermitent,dripping  (94%),intermitent  (51%)
-658,70.0,3800.62,intermitent (100%),intermitent,intermitent  (83%),intermitent  (60%)
-659,70.0,4000.46,intermitent (100%),intermitent,dripping  (94%),intermitent  (49%)
-660,70.0,4200.59,intermitent (100%),intermitent,intermitent  (72%),intermitent  (57%)
-661,70.0,4400.43,intermitent (100%),intermitent,intermitent  (69%),intermitent  (56%)
-662,70.0,4600.64,intermitent (100%),intermitent,intermitent  (61%),intermitent  (47%)
-663,70.0,4800.49,intermitent (100%),intermitent,dripping  (88%),intermitent  (52%)
-664,70.0,5000.68,intermitent (97%),undefined,dripping  (55%),intermitent  (50%)
-665,70.0,5200.43,intermitent (64%),undefined,intermitent  (78%),intermitent  (40%)
-666,70.0,5400.6,intermitent (54%),undefined,intermitent  (82%),intermitent  (42%)
-667,70.0,5600.46,dripping (79%),undefined,multi_jet  (45%),multi_jet  (51%)
-668,70.0,5800.64,multi_jet (96%),undefined,multi_jet  (90%),multi_jet  (76%)
-669,70.0,6000.49,multi_jet (99%),multi_jet,multi_jet  (83%),multi_jet  (76%)
-670,70.0,6200.61,multi_jet (100%),multi_jet,multi_jet  (73%),multi_jet  (82%)
-671,70.0,6400.38,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (91%)
-672,70.0,6600.49,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (91%)
-673,70.0,6800.35,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (91%)
-674,70.0,7000.52,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (90%)
-675,70.0,7200.34,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (84%)
-676,70.0,7400.54,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (88%)
-677,70.0,7600.31,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (89%)
-678,70.0,7800.47,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (88%)
-679,70.0,8000.39,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (92%)
-680,70.0,8200.58,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (94%)
-681,70.0,8400.41,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (95%)
-682,70.0,8600.53,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (92%)
-683,70.0,8800.36,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (95%)
-684,70.0,9000.22,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-685,80.0,3000.43,dripping (100%),dripping,dripping  (99%),dripping  (45%)
-686,80.0,3200.33,dripping (89%),intermitent,dripping  (98%),dripping  (44%)
-687,80.0,3400.61,intermitent (100%),intermitent,dripping  (95%),intermitent  (57%)
-688,80.0,3600.44,intermitent (100%),intermitent,intermitent  (77%),intermitent  (61%)
-689,80.0,3800.61,intermitent (100%),intermitent,dripping  (95%),intermitent  (47%)
-690,80.0,4000.45,intermitent (100%),intermitent,dripping  (91%),intermitent  (53%)
-691,80.0,4200.57,intermitent (100%),intermitent,dripping  (91%),intermitent  (51%)
-692,80.0,4400.42,intermitent (99%),intermitent,dripping  (88%),intermitent  (51%)
-693,80.0,4600.65,intermitent (100%),intermitent,dripping  (88%),intermitent  (53%)
-694,80.0,4800.49,intermitent (100%),intermitent,intermitent  (72%),intermitent  (41%)
-695,80.0,5000.66,dripping (51%),intermitent,intermitent  (88%),intermitent  (44%)
-696,80.0,5200.46,intermitent (92%),undefined,intermitent  (81%),intermitent  (52%)
-697,80.0,5400.61,intermitent (51%),undefined,intermitent  (85%),multi_jet  (47%)
-698,80.0,5600.44,multi_jet (90%),undefined,multi_jet  (50%),multi_jet  (50%)
-699,80.0,5800.63,intermitent (58%),undefined,intermitent  (58%),multi_jet  (64%)
-700,80.0,6000.49,multi_jet (65%),undefined,multi_jet  (87%),multi_jet  (80%)
-701,80.0,6200.64,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (82%)
-702,80.0,6400.37,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (89%)
-703,80.0,6600.49,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (89%)
-704,80.0,6800.33,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (90%)
-705,80.0,7000.53,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (92%)
-706,80.0,7200.33,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (92%)
-707,80.0,7400.51,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (89%)
-708,80.0,7600.31,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (93%)
-709,80.0,7800.47,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (93%)
-710,80.0,8000.39,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (92%)
-711,80.0,8200.53,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-712,80.0,8400.38,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (95%)
-713,80.0,8600.5,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (94%)
-714,80.0,8800.33,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (95%)
-715,80.0,9000.2,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-716,100.0,3000.51,dripping (100%),dripping,dripping  (98%),dripping  (44%)
-717,100.0,3200.35,dripping (100%),dripping,dripping  (97%),intermitent  (45%)
-718,100.0,3400.61,intermitent (91%),intermitent,dripping  (95%),intermitent  (51%)
-719,100.0,3600.49,intermitent (100%),intermitent,dripping  (94%),intermitent  (50%)
-720,100.0,3800.61,intermitent (100%),intermitent,dripping  (85%),intermitent  (52%)
-721,100.0,4000.46,intermitent (84%),intermitent,intermitent  (74%),intermitent  (55%)
-722,100.0,4200.6,intermitent (100%),intermitent,intermitent  (73%),intermitent  (57%)
-723,100.0,4400.46,intermitent (100%),intermitent,intermitent  (72%),intermitent  (50%)
-724,100.0,4600.65,intermitent (100%),intermitent,dripping  (59%),intermitent  (49%)
-725,100.0,4800.5,intermitent (88%),intermitent,dripping  (57%),intermitent  (50%)
-726,100.0,5000.66,intermitent (95%),undefined,intermitent  (76%),intermitent  (44%)
-727,100.0,5200.45,intermitent (62%),undefined,intermitent  (74%),multi_jet  (43%)
-728,100.0,5400.61,intermitent (93%),undefined,intermitent  (70%),multi_jet  (47%)
-729,100.0,5600.45,intermitent (90%),undefined,multi_jet  (69%),multi_jet  (54%)
-730,100.0,5800.66,multi_jet (98%),undefined,multi_jet  (51%),multi_jet  (60%)
-731,100.0,6000.47,multi_jet (89%),undefined,multi_jet  (89%),multi_jet  (81%)
-732,100.0,6200.63,intermitent (100%),multi_jet,multi_jet  (86%),multi_jet  (83%)
-733,100.0,6400.37,multi_jet (99%),multi_jet,multi_jet  (90%),multi_jet  (87%)
-734,100.0,6600.52,multi_jet (100%),multi_jet,multi_jet  (85%),multi_jet  (92%)
-735,100.0,6800.32,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (94%)
-736,100.0,7000.52,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (91%)
-737,100.0,7200.35,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (93%)
-738,100.0,7400.52,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (92%)
-739,100.0,7600.33,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (93%)
-740,100.0,7800.52,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (85%)
-741,100.0,8000.39,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-742,100.0,8200.57,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (92%)
-743,100.0,8400.36,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (93%)
-744,100.0,8600.5,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (93%)
-745,100.0,8800.33,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (91%)
-746,100.0,9000.21,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (92%)
-747,80.0,3100.34,dripping (100%),dripping,dripping  (99%),dripping  (47%)
-748,80.0,3300.55,intermitent (100%),intermitent,dripping  (98%),intermitent  (51%)
-749,80.0,3500.56,intermitent (100%),intermitent,intermitent  (53%),intermitent  (55%)
-750,80.0,3700.7,intermitent (100%),intermitent,dripping  (94%),intermitent  (53%)
-751,80.0,3900.57,dripping (76%),intermitent,intermitent  (88%),intermitent  (57%)
-752,80.0,4100.69,intermitent (98%),intermitent,intermitent  (83%),intermitent  (61%)
-753,80.0,4300.56,intermitent (100%),intermitent,intermitent  (83%),intermitent  (49%)
-754,80.0,4500.76,intermitent (100%),intermitent,intermitent  (84%),intermitent  (48%)
-755,80.0,4700.59,intermitent (100%),intermitent,intermitent  (54%),intermitent  (47%)
-756,80.0,4900.75,intermitent (98%),intermitent,intermitent  (65%),intermitent  (38%)
-757,80.0,5100.52,dripping (67%),undefined,intermitent  (89%),intermitent  (47%)
-758,80.0,5300.36,dripping (67%),undefined,intermitent  (87%),multi_jet  (41%)
-759,80.0,5500.54,intermitent (53%),undefined,intermitent  (75%),multi_jet  (51%)
-760,80.0,5700.4,intermitent (98%),undefined,intermitent  (77%),multi_jet  (56%)
-761,80.0,5900.55,multi_jet (100%),multi_jet,multi_jet  (53%),multi_jet  (76%)
-762,80.0,6100.39,multi_jet (98%),multi_jet,multi_jet  (85%),multi_jet  (78%)
-763,80.0,6300.56,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (84%)
-764,80.0,6500.3,multi_jet (99%),multi_jet,multi_jet  (88%),multi_jet  (81%)
-765,80.0,6700.43,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (86%)
-766,80.0,6900.26,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (88%)
-767,80.0,7100.47,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (85%)
-768,80.0,7300.32,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (88%)
-769,80.0,7500.45,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (91%)
-770,80.0,7700.31,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (89%)
-771,80.0,7900.45,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (90%)
-772,80.0,8100.3,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (92%)
-773,80.0,8300.47,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-774,80.0,8500.28,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (89%)
-775,80.0,8700.42,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (88%)
-776,80.0,8900.01,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (90%)
-777,80.0,9100.11,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (91%)
-778,100.0,3100.42,dripping (100%),dripping,dripping  (98%),intermitent  (46%)
-779,100.0,3300.74,intermitent (86%),dripping,dripping  (98%),intermitent  (51%)
-780,100.0,3500.57,intermitent (99%),intermitent,dripping  (96%),intermitent  (51%)
-781,100.0,3700.71,intermitent (97%),intermitent,dripping  (90%),intermitent  (53%)
-782,100.0,3900.56,intermitent (82%),intermitent,intermitent  (72%),intermitent  (48%)
-783,100.0,4100.72,intermitent (100%),intermitent,intermitent  (78%),intermitent  (57%)
-784,100.0,4300.54,intermitent (100%),intermitent,intermitent  (83%),intermitent  (44%)
-785,100.0,4500.77,intermitent (100%),intermitent,intermitent  (70%),intermitent  (48%)
-786,100.0,4700.59,intermitent (100%),intermitent,intermitent  (84%),intermitent  (39%)
-787,100.0,4900.74,intermitent (90%),undefined,intermitent  (85%),intermitent  (42%)
-788,100.0,5100.52,intermitent (99%),undefined,intermitent  (80%),multi_jet  (44%)
-789,100.0,5300.36,dripping (53%),undefined,intermitent  (88%),multi_jet  (40%)
-790,100.0,5500.53,intermitent (99%),undefined,intermitent  (59%),multi_jet  (58%)
-791,100.0,5700.4,multi_jet (70%),undefined,intermitent  (59%),multi_jet  (50%)
-792,100.0,5900.58,multi_jet (61%),undefined,multi_jet  (89%),multi_jet  (80%)
-793,100.0,6100.38,multi_jet (97%),undefined,multi_jet  (80%),multi_jet  (81%)
-794,100.0,6300.53,multi_jet (98%),multi_jet,multi_jet  (86%),multi_jet  (81%)
-795,100.0,6500.32,multi_jet (97%),multi_jet,multi_jet  (89%),multi_jet  (85%)
-796,100.0,6700.42,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (88%)
-797,100.0,6900.27,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (91%)
-798,100.0,7100.44,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (91%)
-799,100.0,7300.32,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (90%)
-800,100.0,7500.49,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (91%)
-801,100.0,7700.3,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (90%)
-802,100.0,7900.43,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (89%)
-803,100.0,8100.32,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (90%)
-804,100.0,8300.49,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-805,100.0,8500.29,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-806,100.0,8700.41,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (90%)
-807,100.0,8900.0,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (89%)
-808,100.0,9100.15,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-809,50.0,3100.32,intermitent (99%),dripping,dripping  (99%),dripping  (47%)
-810,50.0,3300.68,intermitent (99%),intermitent,dripping  (98%),intermitent  (48%)
-811,50.0,3500.45,intermitent (100%),intermitent,dripping  (92%),intermitent  (48%)
-812,50.0,3700.68,intermitent (100%),intermitent,intermitent  (80%),intermitent  (54%)
-813,50.0,3900.54,intermitent (100%),intermitent,intermitent  (81%),intermitent  (56%)
-814,50.0,4100.71,intermitent (100%),intermitent,intermitent  (84%),intermitent  (63%)
-815,50.0,4300.53,intermitent (100%),intermitent,dripping  (88%),intermitent  (52%)
-816,50.0,4500.77,intermitent (100%),intermitent,dripping  (76%),intermitent  (53%)
-817,50.0,4700.61,intermitent (100%),intermitent,intermitent  (65%),intermitent  (47%)
-818,50.0,4900.74,intermitent (91%),undefined,cone_jet  (68%),multi_jet  (39%)
-819,50.0,5100.53,intermitent (59%),undefined,intermitent  (67%),intermitent  (42%)
-820,50.0,5300.36,intermitent (48%),undefined,cone_jet  (52%),intermitent  (42%)
-821,50.0,5500.55,multi_jet (83%),undefined,intermitent  (42%),multi_jet  (44%)
-822,50.0,5700.42,multi_jet (100%),multi_jet,intermitent  (34%),multi_jet  (59%)
-823,50.0,5900.58,multi_jet (100%),multi_jet,multi_jet  (69%),multi_jet  (74%)
-824,50.0,6100.39,multi_jet (100%),multi_jet,multi_jet  (50%),multi_jet  (81%)
-825,50.0,6300.54,multi_jet (100%),multi_jet,multi_jet  (74%),multi_jet  (80%)
-826,50.0,6500.32,multi_jet (100%),multi_jet,multi_jet  (85%),multi_jet  (79%)
-827,50.0,6700.45,multi_jet (100%),multi_jet,multi_jet  (72%),multi_jet  (76%)
-828,50.0,6900.27,multi_jet (100%),multi_jet,multi_jet  (81%),multi_jet  (74%)
-829,50.0,7100.46,multi_jet (100%),multi_jet,multi_jet  (60%),multi_jet  (78%)
-830,50.0,7300.33,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (79%)
-831,50.0,7500.48,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (82%)
-832,50.0,7700.29,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (93%)
-833,50.0,7900.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-834,50.0,8100.31,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-835,50.0,8300.48,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (94%)
-836,50.0,8500.3,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (91%)
-837,50.0,8700.44,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-838,50.0,8900.03,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (94%)
-839,50.0,9100.14,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-840,60.0,3100.44,dripping (100%),dripping,dripping  (99%),dripping  (48%)
-841,60.0,3300.58,intermitent (97%),intermitent,dripping  (90%),intermitent  (52%)
-842,60.0,3500.45,intermitent (99%),intermitent,intermitent  (51%),intermitent  (54%)
-843,60.0,3700.71,intermitent (100%),intermitent,dripping  (95%),intermitent  (51%)
-844,60.0,3900.57,intermitent (100%),intermitent,intermitent  (79%),intermitent  (57%)
-845,60.0,4100.7,intermitent (100%),intermitent,intermitent  (69%),intermitent  (53%)
-846,60.0,4300.57,intermitent (100%),intermitent,dripping  (93%),intermitent  (55%)
-847,60.0,4500.76,intermitent (99%),intermitent,cone_jet  (58%),intermitent  (37%)
-848,60.0,4700.61,intermitent (99%),intermitent,cone_jet  (63%),multi_jet  (38%)
-849,60.0,4900.76,intermitent (67%),intermitent,cone_jet  (57%),multi_jet  (36%)
-850,60.0,5100.52,multi_jet (89%),intermitent,intermitent  (51%),multi_jet  (38%)
-851,60.0,5300.36,multi_jet (72%),undefined,cone_jet  (54%),multi_jet  (41%)
-852,60.0,5500.53,multi_jet (100%),multi_jet,intermitent  (47%),multi_jet  (45%)
-853,60.0,5700.39,multi_jet (100%),multi_jet,intermitent  (48%),multi_jet  (53%)
-854,60.0,5900.56,multi_jet (100%),multi_jet,multi_jet  (48%),multi_jet  (63%)
-855,60.0,6100.4,multi_jet (100%),multi_jet,multi_jet  (71%),multi_jet  (79%)
-856,60.0,6300.55,multi_jet (100%),multi_jet,multi_jet  (78%),multi_jet  (76%)
-857,60.0,6500.34,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (81%)
-858,60.0,6700.44,multi_jet (100%),multi_jet,multi_jet  (78%),multi_jet  (76%)
-859,60.0,6900.28,multi_jet (100%),multi_jet,multi_jet  (63%),multi_jet  (78%)
-860,60.0,7100.48,multi_jet (100%),multi_jet,multi_jet  (70%),multi_jet  (72%)
-861,60.0,7300.34,multi_jet (100%),multi_jet,multi_jet  (69%),multi_jet  (66%)
-862,60.0,7500.5,multi_jet (100%),multi_jet,multi_jet  (60%),multi_jet  (65%)
-863,60.0,7700.31,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (88%)
-864,60.0,7900.46,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (95%)
-865,60.0,8100.32,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (94%)
-866,60.0,8300.5,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (84%)
-867,60.0,8500.32,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (94%)
-868,60.0,8700.44,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-869,60.0,8900.05,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (92%)
-870,60.0,9100.15,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-871,70.0,3100.44,dripping (100%),dripping,dripping  (98%),dripping  (45%)
-872,70.0,3300.57,intermitent (98%),intermitent,dripping  (99%),intermitent  (49%)
-873,70.0,3500.58,intermitent (100%),intermitent,dripping  (96%),intermitent  (50%)
-874,70.0,3700.72,intermitent (94%),intermitent,intermitent  (68%),intermitent  (57%)
-875,70.0,3900.57,intermitent (100%),intermitent,dripping  (94%),intermitent  (54%)
-876,70.0,4100.71,intermitent (100%),intermitent,intermitent  (74%),intermitent  (52%)
-877,70.0,4300.57,intermitent (99%),intermitent,dripping  (94%),intermitent  (51%)
-878,70.0,4500.78,intermitent (100%),intermitent,dripping  (97%),intermitent  (48%)
-879,70.0,4700.61,intermitent (100%),intermitent,dripping  (90%),intermitent  (49%)
-880,70.0,4900.77,intermitent (100%),intermitent,dripping  (52%),intermitent  (50%)
-881,70.0,5100.55,dripping (94%),undefined,intermitent  (67%),intermitent  (41%)
-882,70.0,5300.4,intermitent (73%),undefined,intermitent  (74%),intermitent  (40%)
-883,70.0,5500.56,intermitent (79%),undefined,intermitent  (71%),multi_jet  (43%)
-884,70.0,5700.42,multi_jet (100%),multi_jet,intermitent  (62%),multi_jet  (54%)
-885,70.0,5900.56,multi_jet (100%),multi_jet,intermitent  (64%),multi_jet  (55%)
-886,70.0,6100.41,multi_jet (100%),multi_jet,multi_jet  (83%),multi_jet  (75%)
-887,70.0,6300.57,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (79%)
-888,70.0,6500.34,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (83%)
-889,70.0,6700.45,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (80%)
-890,70.0,6900.29,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (79%)
-891,70.0,7100.48,multi_jet (100%),multi_jet,multi_jet  (82%),multi_jet  (78%)
-892,70.0,7300.37,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (79%)
-893,70.0,7500.5,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (79%)
-894,70.0,7700.31,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (78%)
-895,70.0,7900.46,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (87%)
-896,70.0,8100.32,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (91%)
-897,70.0,8300.51,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-898,70.0,8500.31,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (95%)
-899,70.0,8700.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (94%)
-900,70.0,8900.04,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (95%)
-901,70.0,9100.16,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-902,35.0,3100.34,dripping (58%),dripping,dripping  (96%),dripping  (45%)
-903,35.0,3300.7,dripping (76%),dripping,dripping  (99%),intermitent  (49%)
-904,35.0,3500.58,intermitent (99%),intermitent,intermitent  (82%),intermitent  (61%)
-905,35.0,3700.72,intermitent (100%),intermitent,dripping  (76%),intermitent  (57%)
-906,35.0,3900.57,intermitent (100%),intermitent,intermitent  (85%),intermitent  (54%)
-907,35.0,4100.7,intermitent (99%),intermitent,intermitent  (57%),intermitent  (55%)
-908,35.0,4300.57,intermitent (100%),intermitent,intermitent  (78%),intermitent  (49%)
-909,35.0,4500.78,intermitent (100%),intermitent,cone_jet  (53%),intermitent  (41%)
-910,35.0,4700.62,intermitent (100%),intermitent,cone_jet  (49%),multi_jet  (41%)
-911,35.0,4900.76,intermitent (100%),intermitent,cone_jet  (84%),multi_jet  (41%)
-912,35.0,5100.56,intermitent (100%),undefined,cone_jet  (80%),multi_jet  (49%)
-913,35.0,5300.37,intermitent (96%),undefined,cone_jet  (54%),multi_jet  (42%)
-914,35.0,5500.54,multi_jet (93%),undefined,cone_jet  (72%),multi_jet  (52%)
-915,35.0,5700.41,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (68%)
-916,35.0,5900.58,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (79%)
-917,35.0,6100.41,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (77%)
-918,35.0,6300.54,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (82%)
-919,35.0,6500.33,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (83%)
-920,35.0,6700.43,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (87%)
-921,35.0,6900.29,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (88%)
-922,35.0,7100.45,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (77%)
-923,35.0,7300.35,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (81%)
-924,35.0,7500.48,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (77%)
-925,35.0,7700.32,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (85%)
-926,35.0,7900.44,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-927,35.0,8100.32,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (89%)
-928,35.0,8300.47,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-929,35.0,8500.31,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (95%)
-930,35.0,8700.43,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (95%)
-931,35.0,8900.01,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-932,35.0,9100.13,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-933,40.0,3100.44,dripping (100%),dripping,dripping  (98%),dripping  (45%)
-934,40.0,3300.59,dripping (100%),dripping,dripping  (99%),intermitent  (49%)
-935,40.0,3500.59,intermitent (100%),intermitent,intermitent  (73%),intermitent  (59%)
-936,40.0,3700.72,intermitent (100%),intermitent,intermitent  (81%),intermitent  (54%)
-937,40.0,3900.58,intermitent (99%),intermitent,intermitent  (72%),intermitent  (55%)
-938,40.0,4100.72,intermitent (100%),intermitent,intermitent  (57%),intermitent  (53%)
-939,40.0,4300.57,intermitent (100%),intermitent,intermitent  (75%),intermitent  (48%)
-940,40.0,4500.8,intermitent (100%),intermitent,cone_jet  (52%),intermitent  (40%)
-941,40.0,4700.63,intermitent (100%),intermitent,cone_jet  (58%),multi_jet  (38%)
-942,40.0,4900.79,intermitent (100%),intermitent,intermitent  (67%),intermitent  (48%)
-943,40.0,5100.56,intermitent (98%),intermitent,cone_jet  (61%),multi_jet  (42%)
-944,40.0,5300.38,multi_jet (50%),undefined,cone_jet  (71%),multi_jet  (41%)
-945,40.0,5500.55,intermitent (96%),undefined,cone_jet  (62%),multi_jet  (54%)
-946,40.0,5700.43,multi_jet (95%),undefined,multi_jet  (86%),multi_jet  (69%)
-947,40.0,5900.57,intermitent (90%),multi_jet,multi_jet  (94%),multi_jet  (81%)
-948,40.0,6100.4,multi_jet (97%),multi_jet,multi_jet  (94%),multi_jet  (79%)
-949,40.0,6300.57,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (83%)
-950,40.0,6500.32,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (87%)
-951,40.0,6700.43,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (88%)
-952,40.0,6900.29,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (90%)
-953,40.0,7100.5,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (86%)
-954,40.0,7300.35,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (89%)
-955,40.0,7500.5,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (83%)
-956,40.0,7700.33,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (88%)
-957,40.0,7900.47,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-958,40.0,8100.31,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (91%)
-959,40.0,8300.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-960,40.0,8500.31,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-961,40.0,8700.45,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-962,40.0,8900.06,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-963,40.0,9100.16,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-964,25.0,3100.34,intermitent (100%),intermitent,intermitent  (66%),intermitent  (56%)
-965,25.0,3300.55,intermitent (100%),intermitent,intermitent  (56%),intermitent  (56%)
-966,25.0,3500.57,intermitent (100%),intermitent,intermitent  (73%),intermitent  (58%)
-967,25.0,3700.57,intermitent (100%),intermitent,intermitent  (85%),intermitent  (66%)
-968,25.0,3900.58,intermitent (100%),intermitent,intermitent  (85%),intermitent  (60%)
-969,25.0,4100.7,intermitent (100%),intermitent,intermitent  (92%),intermitent  (56%)
-970,25.0,4300.56,intermitent (100%),intermitent,intermitent  (83%),intermitent  (61%)
-971,25.0,4500.8,intermitent (100%),intermitent,intermitent  (84%),intermitent  (49%)
-972,25.0,4700.61,intermitent (100%),intermitent,intermitent  (71%),intermitent  (52%)
-973,25.0,4900.75,intermitent (100%),intermitent,intermitent  (74%),intermitent  (59%)
-974,25.0,5100.54,intermitent (89%),undefined,cone_jet  (86%),multi_jet  (41%)
-975,25.0,5300.37,intermitent (60%),undefined,cone_jet  (92%),multi_jet  (45%)
-976,25.0,5500.56,multi_jet (77%),undefined,cone_jet  (85%),multi_jet  (55%)
-977,25.0,5700.42,multi_jet (100%),multi_jet,multi_jet  (81%),multi_jet  (61%)
-978,25.0,5900.57,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (71%)
-979,25.0,6100.41,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (72%)
-980,25.0,6300.55,multi_jet (100%),multi_jet,cone_jet  (51%),multi_jet  (70%)
-981,25.0,6500.33,multi_jet (100%),multi_jet,multi_jet  (75%),multi_jet  (61%)
-982,25.0,6700.44,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (77%)
-983,25.0,6900.26,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (64%)
-984,25.0,7100.48,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (69%)
-985,25.0,7300.35,multi_jet (100%),multi_jet,multi_jet  (75%),multi_jet  (63%)
-986,25.0,7500.5,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (68%)
-987,25.0,7700.33,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (79%)
-988,25.0,7900.47,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (81%)
-989,25.0,8100.33,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (91%)
-990,25.0,8300.5,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-991,25.0,8500.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-992,25.0,8700.44,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-993,25.0,8900.03,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-994,25.0,9100.15,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-995,30.0,3100.44,dripping (100%),dripping,dripping  (97%),dripping  (46%)
-996,30.0,3300.73,dripping (100%),dripping,dripping  (94%),intermitent  (54%)
-997,30.0,3500.59,intermitent (95%),intermitent,intermitent  (65%),intermitent  (59%)
-998,30.0,3700.72,intermitent (100%),intermitent,intermitent  (89%),intermitent  (52%)
-999,30.0,3900.59,intermitent (100%),intermitent,intermitent  (80%),intermitent  (57%)
-1000,30.0,4100.74,intermitent (100%),intermitent,intermitent  (89%),intermitent  (54%)
-1001,30.0,4300.58,intermitent (100%),intermitent,intermitent  (87%),intermitent  (53%)
-1002,30.0,4500.79,intermitent (100%),intermitent,intermitent  (49%),intermitent  (36%)
-1003,30.0,4700.65,intermitent (99%),intermitent,intermitent  (71%),intermitent  (42%)
-1004,30.0,4900.77,intermitent (100%),intermitent,intermitent  (81%),intermitent  (47%)
-1005,30.0,5100.56,intermitent (57%),undefined,cone_jet  (66%),multi_jet  (41%)
-1006,30.0,5300.41,multi_jet (76%),undefined,cone_jet  (79%),multi_jet  (43%)
-1007,30.0,5500.56,multi_jet (87%),undefined,cone_jet  (63%),multi_jet  (53%)
-1008,30.0,5700.41,multi_jet (98%),multi_jet,multi_jet  (80%),multi_jet  (60%)
-1009,30.0,5900.58,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (74%)
-1010,30.0,6100.43,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (82%)
-1011,30.0,6300.57,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (81%)
-1012,30.0,6500.33,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (81%)
-1013,30.0,6700.45,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (74%)
-1014,30.0,6900.3,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (76%)
-1015,30.0,7100.46,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (80%)
-1016,30.0,7300.37,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (80%)
-1017,30.0,7500.51,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (81%)
-1018,30.0,7700.33,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (87%)
-1019,30.0,7900.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (85%)
-1020,30.0,8100.33,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1021,30.0,8300.48,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1022,30.0,8500.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1023,30.0,8700.45,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1024,30.0,8900.05,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1025,30.0,9100.15,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1026,16.0,3100.34,intermitent (100%),intermitent,dripping  (46%),intermitent  (47%)
-1027,16.0,3300.69,intermitent (100%),intermitent,dripping  (96%),intermitent  (53%)
-1028,16.0,3500.43,intermitent (100%),intermitent,intermitent  (94%),intermitent  (61%)
-1029,16.0,3700.69,intermitent (100%),intermitent,intermitent  (81%),intermitent  (61%)
-1030,16.0,3900.58,intermitent (100%),intermitent,intermitent  (78%),intermitent  (58%)
-1031,16.0,4100.7,intermitent (100%),intermitent,intermitent  (93%),intermitent  (51%)
-1032,16.0,4300.57,intermitent (100%),intermitent,intermitent  (75%),intermitent  (59%)
-1033,16.0,4500.76,intermitent (100%),intermitent,intermitent  (66%),intermitent  (56%)
-1034,16.0,4700.62,intermitent (57%),intermitent,intermitent  (57%),intermitent  (59%)
-1035,16.0,4900.75,cone_jet (99%),cone_jet,intermitent  (63%),intermitent  (43%)
-1036,16.0,5100.56,cone_jet (82%),multi_jet,cone_jet  (57%),multi_jet  (38%)
-1037,16.0,5300.38,multi_jet (100%),multi_jet,cone_jet  (69%),multi_jet  (40%)
-1038,16.0,5500.53,multi_jet (100%),multi_jet,cone_jet  (58%),multi_jet  (47%)
-1039,16.0,5700.42,multi_jet (100%),multi_jet,multi_jet  (81%),multi_jet  (53%)
-1040,16.0,5900.55,multi_jet (100%),multi_jet,multi_jet  (85%),multi_jet  (61%)
-1041,16.0,6100.39,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (59%)
-1042,16.0,6300.55,multi_jet (100%),multi_jet,multi_jet  (73%),multi_jet  (56%)
-1043,16.0,6500.33,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (57%)
-1044,16.0,6700.45,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (57%)
-1045,16.0,6900.27,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (56%)
-1046,16.0,7100.45,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (59%)
-1047,16.0,7300.33,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (58%)
-1048,16.0,7500.49,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (90%)
-1049,16.0,7700.3,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1050,16.0,7900.45,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1051,16.0,8100.33,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1052,16.0,8300.5,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-1053,16.0,8500.34,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1054,16.0,8700.45,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1055,16.0,8900.05,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1056,16.0,9100.16,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1057,18.0,3100.43,dripping (100%),dripping,dripping  (95%),dripping  (45%)
-1058,18.0,3300.72,dripping (100%),dripping,dripping  (93%),intermitent  (53%)
-1059,18.0,3500.56,intermitent (100%),intermitent,intermitent  (92%),intermitent  (55%)
-1060,18.0,3700.73,intermitent (100%),intermitent,intermitent  (90%),intermitent  (50%)
-1061,18.0,3900.58,intermitent (100%),intermitent,intermitent  (78%),intermitent  (61%)
-1062,18.0,4100.71,intermitent (100%),intermitent,intermitent  (75%),intermitent  (60%)
-1063,18.0,4300.55,intermitent (100%),intermitent,intermitent  (92%),intermitent  (42%)
-1064,18.0,4500.77,intermitent (100%),intermitent,intermitent  (64%),intermitent  (59%)
-1065,18.0,4700.62,intermitent (100%),intermitent,intermitent  (62%),intermitent  (58%)
-1066,18.0,4900.75,cone_jet (100%),cone_jet,cone_jet  (55%),multi_jet  (36%)
-1067,18.0,5100.55,intermitent (100%),undefined,cone_jet  (59%),multi_jet  (42%)
-1068,18.0,5300.37,multi_jet (88%),undefined,cone_jet  (91%),multi_jet  (45%)
-1069,18.0,5500.55,multi_jet (100%),multi_jet,cone_jet  (58%),multi_jet  (53%)
-1070,18.0,5700.4,multi_jet (100%),multi_jet,multi_jet  (83%),multi_jet  (58%)
-1071,18.0,5900.58,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (63%)
-1072,18.0,6100.41,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (64%)
-1073,18.0,6300.59,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (62%)
-1074,18.0,6500.35,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (59%)
-1075,18.0,6700.45,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (60%)
-1076,18.0,6900.3,multi_jet (100%),multi_jet,multi_jet  (84%),multi_jet  (52%)
-1077,18.0,7100.49,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (61%)
-1078,18.0,7300.37,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (64%)
-1079,18.0,7500.5,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (64%)
-1080,18.0,7700.32,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1081,18.0,7900.48,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1082,18.0,8100.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1083,18.0,8300.5,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1084,18.0,8500.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1085,18.0,8700.47,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1086,18.0,8900.04,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1087,18.0,9100.17,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1088,20.0,3100.45,dripping (100%),dripping,dripping  (96%),dripping  (48%)
-1089,20.0,3300.73,dripping (100%),dripping,dripping  (95%),intermitent  (53%)
-1090,20.0,3500.55,intermitent (100%),intermitent,intermitent  (96%),intermitent  (59%)
-1091,20.0,3700.71,intermitent (100%),intermitent,intermitent  (95%),intermitent  (59%)
-1092,20.0,3900.59,intermitent (100%),intermitent,intermitent  (94%),intermitent  (55%)
-1093,20.0,4100.73,intermitent (100%),intermitent,intermitent  (94%),intermitent  (50%)
-1094,20.0,4300.58,intermitent (100%),intermitent,intermitent  (82%),intermitent  (59%)
-1095,20.0,4500.78,intermitent (100%),intermitent,intermitent  (49%),multi_jet  (35%)
-1096,20.0,4700.63,intermitent (100%),intermitent,cone_jet  (56%),multi_jet  (38%)
-1097,20.0,4900.77,cone_jet (100%),cone_jet,cone_jet  (54%),multi_jet  (40%)
-1098,20.0,5100.57,intermitent (99%),undefined,cone_jet  (71%),multi_jet  (42%)
-1099,20.0,5300.39,intermitent (95%),undefined,cone_jet  (67%),multi_jet  (49%)
-1100,20.0,5500.53,multi_jet (100%),multi_jet,cone_jet  (48%),multi_jet  (49%)
-1101,20.0,5700.43,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (60%)
-1102,20.0,5900.59,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (70%)
-1103,20.0,6100.41,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (76%)
-1104,20.0,6300.57,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (72%)
-1105,20.0,6500.32,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (65%)
-1106,20.0,6700.46,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (63%)
-1107,20.0,6900.3,multi_jet (100%),multi_jet,multi_jet  (98%),multi_jet  (68%)
-1108,20.0,7100.51,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (68%)
-1109,20.0,7300.38,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (71%)
-1110,20.0,7500.5,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (66%)
-1111,20.0,7700.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1112,20.0,7900.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1113,20.0,8100.32,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1114,20.0,8300.5,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1115,20.0,8500.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1116,20.0,8700.46,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1117,20.0,8900.06,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1118,20.0,9100.15,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1119,10.0,3100.35,intermitent (100%),intermitent,dripping  (96%),dripping  (46%)
-1120,10.0,3300.57,intermitent (100%),intermitent,intermitent  (57%),intermitent  (52%)
-1121,10.0,3500.55,intermitent (100%),intermitent,intermitent  (82%),intermitent  (59%)
-1122,10.0,3700.7,intermitent (100%),intermitent,intermitent  (92%),intermitent  (53%)
-1123,10.0,3900.56,intermitent (100%),intermitent,intermitent  (90%),intermitent  (57%)
-1124,10.0,4100.71,intermitent (99%),intermitent,intermitent  (79%),intermitent  (58%)
-1125,10.0,4300.55,intermitent (100%),intermitent,intermitent  (74%),intermitent  (61%)
-1126,10.0,4500.77,intermitent (98%),intermitent,intermitent  (68%),intermitent  (57%)
-1127,10.0,4700.6,cone_jet (98%),cone_jet,intermitent  (62%),intermitent  (52%)
-1128,10.0,4900.77,multi_jet (98%),multi_jet,cone_jet  (50%),intermitent  (36%)
-1129,10.0,5100.56,multi_jet (96%),multi_jet,cone_jet  (59%),intermitent  (35%)
-1130,10.0,5300.39,multi_jet (100%),multi_jet,cone_jet  (79%),multi_jet  (39%)
-1131,10.0,5500.55,multi_jet (100%),multi_jet,cone_jet  (72%),multi_jet  (44%)
-1132,10.0,5700.4,multi_jet (100%),multi_jet,multi_jet  (81%),multi_jet  (49%)
-1133,10.0,5900.58,multi_jet (100%),multi_jet,multi_jet  (85%),multi_jet  (54%)
-1134,10.0,6100.41,multi_jet (100%),multi_jet,multi_jet  (79%),multi_jet  (49%)
-1135,10.0,6300.57,multi_jet (100%),multi_jet,multi_jet  (71%),multi_jet  (51%)
-1136,10.0,6500.33,multi_jet (100%),multi_jet,multi_jet  (86%),multi_jet  (51%)
-1137,10.0,6700.45,multi_jet (100%),multi_jet,multi_jet  (60%),multi_jet  (50%)
-1138,10.0,6900.3,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (49%)
-1139,10.0,7100.51,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (87%)
-1140,10.0,7300.41,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-1141,10.0,7500.51,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-1142,10.0,7700.3,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1143,10.0,7900.47,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1144,10.0,8100.35,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-1145,10.0,8300.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1146,10.0,8500.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1147,10.0,8700.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1148,10.0,8900.06,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1149,10.0,9100.17,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1150,12.0,3100.44,dripping (100%),dripping,dripping  (95%),dripping  (47%)
-1151,12.0,3300.72,dripping (100%),dripping,dripping  (94%),intermitent  (53%)
-1152,12.0,3500.58,intermitent (100%),intermitent,intermitent  (93%),intermitent  (52%)
-1153,12.0,3700.6,intermitent (100%),intermitent,intermitent  (93%),intermitent  (51%)
-1154,12.0,3900.59,intermitent (100%),intermitent,intermitent  (83%),intermitent  (63%)
-1155,12.0,4100.72,intermitent (100%),intermitent,intermitent  (78%),intermitent  (59%)
-1156,12.0,4300.57,intermitent (100%),intermitent,intermitent  (70%),intermitent  (56%)
-1157,12.0,4500.76,intermitent (100%),intermitent,intermitent  (69%),intermitent  (59%)
-1158,12.0,4700.62,intermitent (98%),intermitent,intermitent  (60%),intermitent  (60%)
-1159,12.0,4900.77,cone_jet (98%),cone_jet,intermitent  (53%),intermitent  (34%)
-1160,12.0,5100.55,multi_jet (56%),multi_jet,cone_jet  (59%),multi_jet  (39%)
-1161,12.0,5300.39,multi_jet (78%),multi_jet,cone_jet  (90%),multi_jet  (43%)
-1162,12.0,5500.57,multi_jet (100%),multi_jet,cone_jet  (61%),multi_jet  (45%)
-1163,12.0,5700.45,multi_jet (100%),multi_jet,multi_jet  (75%),multi_jet  (49%)
-1164,12.0,5900.59,multi_jet (100%),multi_jet,multi_jet  (76%),multi_jet  (56%)
-1165,12.0,6100.41,multi_jet (100%),multi_jet,multi_jet  (69%),multi_jet  (52%)
-1166,12.0,6300.57,multi_jet (100%),multi_jet,multi_jet  (63%),multi_jet  (54%)
-1167,12.0,6500.31,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (54%)
-1168,12.0,6700.44,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (57%)
-1169,12.0,6900.3,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (56%)
-1170,12.0,7100.48,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (58%)
-1171,12.0,7300.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1172,12.0,7500.49,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (88%)
-1173,12.0,7700.32,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1174,12.0,7900.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1175,12.0,8100.3,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1176,12.0,8300.52,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-1177,12.0,8500.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1178,12.0,8700.46,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1179,12.0,8900.06,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1180,12.0,9100.16,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1181,14.0,3100.44,dripping (100%),dripping,dripping  (96%),dripping  (47%)
-1182,14.0,3300.73,dripping (100%),dripping,dripping  (95%),intermitent  (53%)
-1183,14.0,3500.46,intermitent (100%),intermitent,intermitent  (82%),intermitent  (60%)
-1184,14.0,3700.71,intermitent (100%),intermitent,intermitent  (86%),intermitent  (62%)
-1185,14.0,3900.59,intermitent (100%),intermitent,intermitent  (94%),intermitent  (54%)
-1186,14.0,4100.72,intermitent (100%),intermitent,intermitent  (91%),intermitent  (51%)
-1187,14.0,4300.6,intermitent (100%),intermitent,intermitent  (95%),intermitent  (56%)
-1188,14.0,4500.78,intermitent (99%),intermitent,intermitent  (70%),intermitent  (42%)
-1189,14.0,4700.62,cone_jet (87%),cone_jet,cone_jet  (50%),multi_jet  (37%)
-1190,14.0,4900.76,cone_jet (87%),cone_jet,intermitent  (58%),intermitent  (34%)
-1191,14.0,5100.56,cone_jet (75%),cone_jet,cone_jet  (72%),cone_jet  (34%)
-1192,14.0,5300.4,multi_jet (98%),multi_jet,cone_jet  (80%),multi_jet  (42%)
-1193,14.0,5500.56,multi_jet (100%),multi_jet,cone_jet  (59%),multi_jet  (47%)
-1194,14.0,5700.43,multi_jet (100%),multi_jet,multi_jet  (61%),multi_jet  (55%)
-1195,14.0,5900.58,multi_jet (100%),multi_jet,multi_jet  (78%),multi_jet  (58%)
-1196,14.0,6100.42,multi_jet (100%),multi_jet,multi_jet  (68%),multi_jet  (59%)
-1197,14.0,6300.58,multi_jet (100%),multi_jet,multi_jet  (84%),multi_jet  (60%)
-1198,14.0,6500.32,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (53%)
-1199,14.0,6700.47,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (53%)
-1200,14.0,6900.31,multi_jet (100%),multi_jet,multi_jet  (80%),multi_jet  (59%)
-1201,14.0,7100.52,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (58%)
-1202,14.0,7300.38,multi_jet (100%),multi_jet,multi_jet  (64%),multi_jet  (61%)
-1203,14.0,7500.49,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (81%)
-1204,14.0,7700.34,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1205,14.0,7900.46,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (90%)
-1206,14.0,8100.34,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (93%)
-1207,14.0,8300.53,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1208,14.0,8500.34,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1209,14.0,8700.47,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1210,14.0,8900.06,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1211,14.0,9100.17,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1212,7.0,3100.37,intermitent (100%),intermitent,intermitent  (44%),intermitent  (55%)
-1213,7.0,3300.69,intermitent (100%),intermitent,intermitent  (50%),intermitent  (60%)
-1214,7.0,3500.58,intermitent (100%),intermitent,intermitent  (85%),intermitent  (59%)
-1215,7.0,3700.72,intermitent (100%),intermitent,intermitent  (96%),intermitent  (58%)
-1216,7.0,3900.48,intermitent (99%),intermitent,intermitent  (83%),intermitent  (63%)
-1217,7.0,4100.7,intermitent (98%),intermitent,intermitent  (88%),intermitent  (65%)
-1218,7.0,4300.55,intermitent (92%),intermitent,intermitent  (83%),intermitent  (60%)
-1219,7.0,4500.81,cone_jet (99%),cone_jet,intermitent  (75%),intermitent  (57%)
-1220,7.0,4700.63,intermitent (51%),cone_jet,intermitent  (47%),intermitent  (60%)
-1221,7.0,4900.77,multi_jet (99%),multi_jet,cone_jet  (55%),intermitent  (39%)
-1222,7.0,5100.56,multi_jet (100%),multi_jet,cone_jet  (55%),intermitent  (41%)
-1223,7.0,5300.41,multi_jet (100%),multi_jet,cone_jet  (86%),multi_jet  (36%)
-1224,7.0,5500.54,multi_jet (100%),multi_jet,cone_jet  (70%),cone_jet  (35%)
-1225,7.0,5700.44,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (48%)
-1226,7.0,5900.59,multi_jet (100%),multi_jet,multi_jet  (88%),multi_jet  (42%)
-1227,7.0,6100.43,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (36%)
-1228,7.0,6300.59,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (56%)
-1229,7.0,6500.34,multi_jet (100%),multi_jet,multi_jet  (94%),intermitent  (48%)
-1230,7.0,6700.47,multi_jet (100%),multi_jet,multi_jet  (93%),intermitent  (58%)
-1231,7.0,6900.3,multi_jet (100%),multi_jet,multi_jet  (96%),intermitent  (52%)
-1232,7.0,7100.48,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (48%)
-1233,7.0,7300.39,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1234,7.0,7500.51,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1235,7.0,7700.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (89%)
-1236,7.0,7900.48,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1237,7.0,8100.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1238,7.0,8300.53,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1239,7.0,8500.34,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1240,7.0,8700.47,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (95%)
-1241,7.0,8900.03,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (95%)
-1242,7.0,9100.14,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1243,8.0,3100.45,dripping (100%),dripping,dripping  (96%),dripping  (47%)
-1244,8.0,3300.59,dripping (100%),dripping,dripping  (97%),intermitent  (52%)
-1245,8.0,3500.46,intermitent (100%),intermitent,intermitent  (85%),intermitent  (60%)
-1246,8.0,3700.72,intermitent (99%),intermitent,intermitent  (92%),intermitent  (56%)
-1247,8.0,3900.6,intermitent (100%),intermitent,intermitent  (88%),intermitent  (61%)
-1248,8.0,4100.71,intermitent (100%),intermitent,intermitent  (83%),intermitent  (59%)
-1249,8.0,4300.57,intermitent (90%),intermitent,intermitent  (92%),intermitent  (46%)
-1250,8.0,4500.79,cone_jet (99%),cone_jet,intermitent  (72%),intermitent  (38%)
-1251,8.0,4700.62,cone_jet (99%),cone_jet,intermitent  (69%),intermitent  (47%)
-1252,8.0,4900.79,cone_jet (85%),cone_jet,intermitent  (53%),intermitent  (43%)
-1253,8.0,5100.55,cone_jet (91%),multi_jet,cone_jet  (62%),multi_jet  (37%)
-1254,8.0,5300.39,multi_jet (100%),multi_jet,cone_jet  (71%),multi_jet  (40%)
-1255,8.0,5500.56,multi_jet (100%),multi_jet,cone_jet  (76%),multi_jet  (46%)
-1256,8.0,5700.45,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (50%)
-1257,8.0,5900.59,multi_jet (100%),multi_jet,multi_jet  (91%),multi_jet  (40%)
-1258,8.0,6100.42,multi_jet (99%),multi_jet,multi_jet  (85%),multi_jet  (38%)
-1259,8.0,6300.58,multi_jet (100%),multi_jet,multi_jet  (93%),multi_jet  (51%)
-1260,8.0,6500.32,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (39%)
-1261,8.0,6700.45,multi_jet (100%),multi_jet,multi_jet  (95%),intermitent  (45%)
-1262,8.0,6900.3,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (89%)
-1263,8.0,7100.49,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (45%)
-1264,8.0,7300.38,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1265,8.0,7500.53,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1266,8.0,7700.36,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1267,8.0,7900.48,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1268,8.0,8100.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1269,8.0,8300.53,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1270,8.0,8500.34,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1271,8.0,8700.46,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1272,8.0,8900.08,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1273,8.0,9100.17,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1274,9.0,3100.45,dripping (100%),dripping,dripping  (97%),dripping  (47%)
-1275,9.0,3300.72,intermitent (91%),intermitent,dripping  (94%),intermitent  (54%)
-1276,9.0,3500.47,intermitent (100%),intermitent,intermitent  (82%),intermitent  (60%)
-1277,9.0,3700.7,intermitent (99%),intermitent,intermitent  (96%),intermitent  (61%)
-1278,9.0,3900.58,intermitent (100%),intermitent,intermitent  (82%),intermitent  (59%)
-1279,9.0,4100.71,intermitent (98%),intermitent,intermitent  (94%),intermitent  (54%)
-1280,9.0,4300.57,intermitent (82%),intermitent,intermitent  (93%),intermitent  (43%)
-1281,9.0,4500.79,cone_jet (94%),cone_jet,intermitent  (65%),intermitent  (43%)
-1282,9.0,4700.63,cone_jet (73%),cone_jet,intermitent  (64%),intermitent  (45%)
-1283,9.0,4900.77,dripping (83%),cone_jet,cone_jet  (70%),multi_jet  (36%)
-1284,9.0,5100.55,multi_jet (100%),multi_jet,cone_jet  (49%),multi_jet  (36%)
-1285,9.0,5300.4,multi_jet (100%),multi_jet,cone_jet  (74%),multi_jet  (43%)
-1286,9.0,5500.56,multi_jet (100%),multi_jet,cone_jet  (75%),multi_jet  (45%)
-1287,9.0,5700.43,multi_jet (100%),multi_jet,multi_jet  (66%),multi_jet  (49%)
-1288,9.0,5900.61,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (44%)
-1289,9.0,6100.45,multi_jet (100%),multi_jet,multi_jet  (83%),multi_jet  (50%)
-1290,9.0,6300.57,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (53%)
-1291,9.0,6500.31,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (53%)
-1292,9.0,6700.49,multi_jet (100%),multi_jet,multi_jet  (94%),multi_jet  (57%)
-1293,9.0,6900.37,multi_jet (100%),multi_jet,multi_jet  (96%),multi_jet  (39%)
-1294,9.0,7100.52,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (88%)
-1295,9.0,7300.4,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-1296,9.0,7500.54,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (90%)
-1297,9.0,7700.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (95%)
-1298,9.0,7900.5,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1299,9.0,8100.36,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1300,9.0,8300.52,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1301,9.0,8500.36,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1302,9.0,8700.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1303,9.0,8900.08,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1304,9.0,9100.19,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1305,4.0,3100.37,intermitent (100%),intermitent,dripping  (94%),dripping  (45%)
-1306,4.0,3300.56,intermitent (100%),intermitent,dripping  (93%),intermitent  (55%)
-1307,4.0,3500.58,intermitent (100%),intermitent,intermitent  (92%),intermitent  (55%)
-1308,4.0,3700.59,intermitent (100%),intermitent,intermitent  (80%),intermitent  (59%)
-1309,4.0,3900.57,intermitent (100%),intermitent,intermitent  (86%),intermitent  (56%)
-1310,4.0,4100.7,intermitent (100%),intermitent,intermitent  (82%),intermitent  (57%)
-1311,4.0,4300.56,intermitent (99%),intermitent,intermitent  (83%),intermitent  (54%)
-1312,4.0,4500.76,cone_jet (99%),cone_jet,intermitent  (71%),intermitent  (50%)
-1313,4.0,4700.62,cone_jet (78%),cone_jet,cone_jet  (36%),intermitent  (57%)
-1314,4.0,4900.77,multi_jet (100%),multi_jet,cone_jet  (75%),intermitent  (42%)
-1315,4.0,5100.57,multi_jet (100%),multi_jet,cone_jet  (48%),intermitent  (55%)
-1316,4.0,5300.4,multi_jet (100%),multi_jet,cone_jet  (61%),intermitent  (50%)
-1317,4.0,5500.56,multi_jet (100%),multi_jet,cone_jet  (49%),intermitent  (50%)
-1318,4.0,5700.43,multi_jet (100%),multi_jet,multi_jet  (88%),intermitent  (43%)
-1319,4.0,5900.57,multi_jet (100%),multi_jet,multi_jet  (86%),intermitent  (43%)
-1320,4.0,6100.42,multi_jet (100%),multi_jet,multi_jet  (90%),multi_jet  (42%)
-1321,4.0,6300.55,multi_jet (100%),multi_jet,multi_jet  (89%),multi_jet  (45%)
-1322,4.0,6500.3,multi_jet (100%),multi_jet,multi_jet  (93%),intermitent  (53%)
-1323,4.0,6700.45,multi_jet (100%),multi_jet,multi_jet  (97%),multi_jet  (61%)
-1324,4.0,6900.29,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (88%)
-1325,4.0,7100.49,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-1326,4.0,7300.4,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1327,4.0,7500.52,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1328,4.0,7700.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1329,4.0,7900.49,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1330,4.0,8100.34,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1331,4.0,8300.5,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1332,4.0,8500.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1333,4.0,8700.46,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1334,4.0,8900.07,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1335,4.0,9100.18,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1336,5.0,3100.43,dripping (100%),dripping,dripping  (95%),dripping  (46%)
-1337,5.0,3300.61,intermitent (98%),intermitent,dripping  (94%),intermitent  (53%)
-1338,5.0,3500.47,intermitent (100%),intermitent,intermitent  (93%),intermitent  (60%)
-1339,5.0,3700.6,intermitent (100%),intermitent,intermitent  (78%),intermitent  (57%)
-1340,5.0,3900.58,intermitent (98%),intermitent,intermitent  (77%),intermitent  (56%)
-1341,5.0,4100.7,cone_jet (78%),cone_jet,intermitent  (85%),intermitent  (57%)
-1342,5.0,4300.57,cone_jet (96%),cone_jet,intermitent  (90%),intermitent  (56%)
-1343,5.0,4500.78,cone_jet (91%),cone_jet,intermitent  (65%),intermitent  (57%)
-1344,5.0,4700.62,cone_jet (99%),cone_jet,intermitent  (57%),intermitent  (54%)
-1345,5.0,4900.77,multi_jet (49%),undefined,cone_jet  (51%),intermitent  (43%)
-1346,5.0,5100.57,multi_jet (100%),multi_jet,cone_jet  (53%),intermitent  (42%)
-1347,5.0,5300.4,multi_jet (100%),multi_jet,intermitent  (51%),intermitent  (44%)
-1348,5.0,5500.57,multi_jet (100%),multi_jet,cone_jet  (60%),intermitent  (42%)
-1349,5.0,5700.43,multi_jet (100%),multi_jet,multi_jet  (82%),multi_jet  (46%)
-1350,5.0,5900.6,multi_jet (100%),multi_jet,multi_jet  (87%),multi_jet  (50%)
-1351,5.0,6100.43,multi_jet (100%),multi_jet,multi_jet  (74%),intermitent  (44%)
-1352,5.0,6300.57,multi_jet (100%),multi_jet,multi_jet  (85%),multi_jet  (40%)
-1353,5.0,6500.34,multi_jet (100%),multi_jet,multi_jet  (90%),intermitent  (53%)
-1354,5.0,6700.47,multi_jet (100%),multi_jet,multi_jet  (95%),multi_jet  (56%)
-1355,5.0,6900.32,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (78%)
-1356,5.0,7100.5,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-1357,5.0,7300.4,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1358,5.0,7500.54,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1359,5.0,7700.37,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1360,5.0,7900.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (95%)
-1361,5.0,8100.36,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1362,5.0,8300.51,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1363,5.0,8500.32,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1364,5.0,8700.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1365,5.0,8900.08,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1366,5.0,9100.18,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1367,6.0,3100.45,dripping (100%),dripping,dripping  (94%),dripping  (45%)
-1368,6.0,3300.74,intermitent (100%),intermitent,dripping  (93%),intermitent  (52%)
-1369,6.0,3500.48,intermitent (100%),intermitent,intermitent  (84%),intermitent  (57%)
-1370,6.0,3700.72,intermitent (100%),intermitent,intermitent  (72%),intermitent  (60%)
-1371,6.0,3900.58,intermitent (99%),intermitent,intermitent  (91%),intermitent  (63%)
-1372,6.0,4100.7,intermitent (100%),intermitent,intermitent  (78%),intermitent  (57%)
-1373,6.0,4300.57,cone_jet (92%),cone_jet,intermitent  (86%),intermitent  (60%)
-1374,6.0,4500.79,cone_jet (99%),cone_jet,intermitent  (78%),intermitent  (57%)
-1375,6.0,4700.63,cone_jet (97%),cone_jet,intermitent  (68%),intermitent  (53%)
-1376,6.0,4900.77,cone_jet (80%),multi_jet,cone_jet  (72%),intermitent  (42%)
-1377,6.0,5100.58,multi_jet (100%),multi_jet,cone_jet  (81%),multi_jet  (40%)
-1378,6.0,5300.39,multi_jet (100%),multi_jet,cone_jet  (73%),intermitent  (36%)
-1379,6.0,5500.54,multi_jet (100%),multi_jet,cone_jet  (63%),multi_jet  (36%)
-1380,6.0,5700.44,multi_jet (100%),multi_jet,multi_jet  (87%),intermitent  (41%)
-1381,6.0,5900.6,multi_jet (100%),multi_jet,multi_jet  (85%),intermitent  (47%)
-1382,6.0,6100.42,multi_jet (100%),multi_jet,multi_jet  (89%),intermitent  (38%)
-1383,6.0,6300.59,multi_jet (100%),multi_jet,multi_jet  (89%),intermitent  (50%)
-1384,6.0,6500.32,multi_jet (100%),multi_jet,multi_jet  (92%),multi_jet  (53%)
-1385,6.0,6700.44,multi_jet (100%),multi_jet,multi_jet  (80%),intermitent  (50%)
-1386,6.0,6900.35,multi_jet (100%),multi_jet,multi_jet  (85%),multi_jet  (52%)
-1387,6.0,7100.52,multi_jet (99%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1388,6.0,7300.36,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1389,6.0,7500.52,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1390,6.0,7700.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1391,6.0,7900.47,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1392,6.0,8100.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1393,6.0,8300.51,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1394,6.0,8500.33,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1395,6.0,8700.46,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1396,6.0,8900.07,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1397,6.0,9100.19,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1398,1.0,3100.34,multi_jet (80%),unconclusive,dripping  (94%),dripping  (41%)
-1399,1.0,3300.57,multi_jet (100%),multi_jet,dripping  (90%),intermitent  (55%)
-1400,1.0,3500.44,dripping (100%),unconclusive,intermitent  (76%),intermitent  (57%)
-1401,1.0,3700.7,intermitent (100%),intermitent,intermitent  (76%),intermitent  (56%)
-1402,1.0,3900.57,intermitent (73%),intermitent,intermitent  (75%),intermitent  (59%)
-1403,1.0,4100.7,cone_jet (98%),cone_jet,intermitent  (77%),intermitent  (55%)
-1404,1.0,4300.58,cone_jet (49%),cone_jet,intermitent  (64%),intermitent  (55%)
-1405,1.0,4500.79,dripping (96%),cone_jet,intermitent  (41%),intermitent  (53%)
-1406,1.0,4700.63,multi_jet (99%),multi_jet,cone_jet  (78%),intermitent  (55%)
-1407,1.0,4900.76,multi_jet (100%),multi_jet,cone_jet  (79%),intermitent  (50%)
-1408,1.0,5100.56,multi_jet (100%),multi_jet,cone_jet  (80%),intermitent  (53%)
-1409,1.0,5300.39,multi_jet (99%),multi_jet,cone_jet  (79%),intermitent  (47%)
-1410,1.0,5500.54,multi_jet (100%),multi_jet,cone_jet  (80%),intermitent  (43%)
-1411,1.0,5700.43,multi_jet (100%),multi_jet,multi_jet  (69%),intermitent  (47%)
-1412,1.0,5900.59,multi_jet (100%),multi_jet,multi_jet  (48%),intermitent  (47%)
-1413,1.0,6100.4,multi_jet (97%),multi_jet,multi_jet  (42%),intermitent  (47%)
-1414,1.0,6300.58,multi_jet (100%),multi_jet,multi_jet  (81%),intermitent  (45%)
-1415,1.0,6500.3,multi_jet (98%),multi_jet,multi_jet  (89%),intermitent  (41%)
-1416,1.0,6700.45,multi_jet (92%),multi_jet,multi_jet  (99%),multi_jet  (84%)
-1417,1.0,6900.31,multi_jet (93%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-1418,1.0,7100.52,multi_jet (98%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1419,1.0,7300.38,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1420,1.0,7500.51,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (91%)
-1421,1.0,7700.35,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1422,1.0,7900.5,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1423,1.0,8100.36,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1424,1.0,8300.54,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1425,1.0,8500.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1426,1.0,8700.48,multi_jet (99%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1427,1.0,8900.06,multi_jet (98%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1428,1.0,9100.19,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1429,2.0,3100.45,dripping (55%),undefined,dripping  (93%),intermitent  (44%)
-1430,2.0,3300.61,dripping (100%),dripping,dripping  (91%),intermitent  (52%)
-1431,2.0,3500.47,intermitent (99%),intermitent,intermitent  (77%),intermitent  (56%)
-1432,2.0,3700.63,intermitent (88%),intermitent,intermitent  (75%),intermitent  (55%)
-1433,2.0,3900.6,intermitent (99%),intermitent,intermitent  (78%),intermitent  (58%)
-1434,2.0,4100.73,cone_jet (98%),cone_jet,intermitent  (78%),intermitent  (56%)
-1435,2.0,4300.58,cone_jet (98%),cone_jet,intermitent  (76%),intermitent  (55%)
-1436,2.0,4500.79,cone_jet (85%),cone_jet,cone_jet  (53%),intermitent  (50%)
-1437,2.0,4700.64,multi_jet (76%),multi_jet,cone_jet  (82%),intermitent  (48%)
-1438,2.0,4900.79,multi_jet (100%),multi_jet,cone_jet  (55%),intermitent  (51%)
-1439,2.0,5100.57,multi_jet (100%),multi_jet,cone_jet  (74%),intermitent  (51%)
-1440,2.0,5300.41,multi_jet (100%),multi_jet,cone_jet  (83%),intermitent  (52%)
-1441,2.0,5500.56,multi_jet (100%),multi_jet,cone_jet  (73%),intermitent  (41%)
-1442,2.0,5700.45,multi_jet (100%),multi_jet,multi_jet  (52%),intermitent  (42%)
-1443,2.0,5900.61,multi_jet (100%),multi_jet,multi_jet  (61%),intermitent  (45%)
-1444,2.0,6100.43,multi_jet (100%),multi_jet,multi_jet  (83%),intermitent  (40%)
-1445,2.0,6300.59,multi_jet (100%),multi_jet,multi_jet  (92%),intermitent  (45%)
-1446,2.0,6500.32,multi_jet (100%),multi_jet,multi_jet  (81%),intermitent  (49%)
-1447,2.0,6700.47,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (82%)
-1448,2.0,6900.38,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (83%)
-1449,2.0,7100.53,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1450,2.0,7300.41,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1451,2.0,7500.55,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (91%)
-1452,2.0,7700.35,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (92%)
-1453,2.0,7900.5,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1454,2.0,8100.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1455,2.0,8300.55,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1456,2.0,8500.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1457,2.0,8700.47,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1458,2.0,8900.09,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
-1459,2.0,9100.19,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1460,3.0,3100.45,dripping (100%),dripping,dripping  (94%),intermitent  (43%)
-1461,3.0,3300.59,intermitent (82%),intermitent,dripping  (94%),intermitent  (54%)
-1462,3.0,3500.46,intermitent (98%),intermitent,intermitent  (89%),intermitent  (58%)
-1463,3.0,3700.7,intermitent (99%),intermitent,intermitent  (78%),intermitent  (56%)
-1464,3.0,3900.59,intermitent (97%),intermitent,intermitent  (78%),intermitent  (61%)
-1465,3.0,4100.72,cone_jet (52%),cone_jet,intermitent  (77%),intermitent  (61%)
-1466,3.0,4300.57,cone_jet (93%),cone_jet,intermitent  (72%),intermitent  (54%)
-1467,3.0,4500.8,cone_jet (54%),cone_jet,cone_jet  (55%),intermitent  (49%)
-1468,3.0,4700.63,multi_jet (74%),multi_jet,cone_jet  (66%),intermitent  (52%)
-1469,3.0,4900.77,multi_jet (100%),multi_jet,cone_jet  (77%),intermitent  (46%)
-1470,3.0,5100.56,multi_jet (100%),multi_jet,cone_jet  (61%),intermitent  (51%)
-1471,3.0,5300.39,multi_jet (100%),multi_jet,cone_jet  (79%),intermitent  (46%)
-1472,3.0,5500.54,multi_jet (100%),multi_jet,cone_jet  (77%),intermitent  (49%)
-1473,3.0,5700.43,multi_jet (100%),multi_jet,multi_jet  (83%),intermitent  (47%)
-1474,3.0,5900.6,multi_jet (100%),multi_jet,multi_jet  (63%),intermitent  (40%)
-1475,3.0,6100.42,multi_jet (100%),multi_jet,multi_jet  (42%),intermitent  (49%)
-1476,3.0,6300.58,multi_jet (100%),multi_jet,multi_jet  (76%),intermitent  (40%)
-1477,3.0,6500.31,multi_jet (100%),multi_jet,multi_jet  (86%),intermitent  (42%)
-1478,3.0,6700.46,multi_jet (100%),multi_jet,multi_jet  (90%),intermitent  (42%)
-1479,3.0,6900.35,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1480,3.0,7100.55,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (90%)
-1481,3.0,7300.37,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1482,3.0,7500.51,multi_jet (100%),multi_jet,multi_jet  (99%),multi_jet  (89%)
-1483,3.0,7700.34,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1484,3.0,7900.49,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (91%)
-1485,3.0,8100.36,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1486,3.0,8300.53,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (92%)
-1487,3.0,8500.36,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1488,3.0,8700.48,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1489,3.0,8900.08,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (93%)
-1490,3.0,9100.2,multi_jet (100%),multi_jet,multi_jet  (100%),multi_jet  (94%)
+,flow_rate,voltage,image_classification,ml_classification,nn_classification,generalist_ml_classification
+0,5.0,3000.45,dripping (89%),intermitent,dripping,intermitent
+1,5.0,3200.33,dripping (95%),intermitent,dripping,intermitent
+2,5.0,3400.5,dripping (99%),undefined,dripping,undefined
+3,5.0,3600.46,dripping (90%),dripping,dripping,dripping
+4,5.0,3800.6,dripping (100%),undefined,dripping,undefined
+5,5.0,4000.49,dripping (99%),intermitent,dripping,intermitent
+6,5.0,4200.62,dripping (100%),intermitent,dripping,intermitent
+7,5.0,4400.45,dripping (97%),dripping,dripping,dripping
+8,5.0,4600.67,dripping (88%),cone_jet,intermitent,undefined
+9,5.0,4800.53,intermitent (99%),undefined,dripping,undefined
+10,5.0,5000.7,dripping (81%),cone_jet,intermitent,undefined
+11,5.0,5200.47,intermitent (100%),cone_jet,cone_jet,cone_jet
+12,5.0,5400.64,intermitent (97%),intermitent,intermitent,intermitent
+13,5.0,5600.47,intermitent (88%),undefined,intermitent,undefined
+14,5.0,5800.67,intermitent (95%),cone_jet,intermitent,undefined
+15,5.0,6000.52,dripping (95%),undefined,intermitent,undefined
+16,5.0,6200.66,cone_jet (99%),cone_jet,multi_jet,cone_jet
+17,5.0,6400.38,cone_jet (99%),cone_jet,multi_jet,cone_jet
+18,5.0,6600.51,cone_jet (100%),undefined,intermitent,undefined
+19,5.0,6800.34,cone_jet (99%),undefined,intermitent,undefined
+20,5.0,7000.55,cone_jet (87%),dripping,intermitent,undefined
+21,5.0,7200.36,multi_jet (99%),dripping,intermitent,undefined
+22,5.0,7400.58,multi_jet (100%),dripping,intermitent,undefined
+23,5.0,7600.36,multi_jet (96%),dripping,intermitent,undefined
+24,5.0,7800.53,multi_jet (100%),dripping,intermitent,undefined
+25,5.0,8000.43,multi_jet (96%),dripping,intermitent,undefined
+26,5.0,8200.59,multi_jet (100%),dripping,intermitent,undefined
+27,5.0,8400.4,multi_jet (100%),dripping,intermitent,undefined
+28,5.0,8600.55,multi_jet (100%),dripping,intermitent,undefined
+29,5.0,8800.36,multi_jet (89%),dripping,intermitent,undefined
+30,5.0,9000.22,multi_jet (99%),dripping,intermitent,undefined
+31,10.0,3000.6,dripping (86%),undefined,dripping,undefined
+32,10.0,3200.38,dripping (99%),intermitent,dripping,intermitent
+33,10.0,3400.48,dripping (99%),intermitent,intermitent,intermitent
+34,10.0,3600.46,dripping (94%),cone_jet,intermitent,undefined
+35,10.0,3800.6,dripping (99%),intermitent,intermitent,intermitent
+36,10.0,4000.45,dripping (98%),intermitent,intermitent,intermitent
+37,10.0,4200.61,dripping (99%),cone_jet,intermitent,undefined
+38,10.0,4400.44,dripping (99%),intermitent,intermitent,intermitent
+39,10.0,4600.64,dripping (98%),intermitent,dripping,intermitent
+40,10.0,4800.52,dripping (60%),cone_jet,intermitent,undefined
+41,10.0,5000.69,dripping (65%),intermitent,dripping,intermitent
+42,10.0,5200.45,intermitent (99%),cone_jet,cone_jet,cone_jet
+43,10.0,5400.63,intermitent (75%),intermitent,intermitent,intermitent
+44,10.0,5600.46,dripping (81%),undefined,intermitent,undefined
+45,10.0,5800.66,dripping (80%),undefined,intermitent,undefined
+46,10.0,6000.48,multi_jet (50%),undefined,intermitent,undefined
+47,10.0,6200.65,cone_jet (97%),undefined,intermitent,undefined
+48,10.0,6400.39,cone_jet (100%),undefined,intermitent,undefined
+49,10.0,6600.53,cone_jet (98%),undefined,intermitent,undefined
+50,10.0,6800.34,cone_jet (99%),undefined,intermitent,undefined
+51,10.0,7000.53,cone_jet (99%),undefined,intermitent,undefined
+52,10.0,7200.35,multi_jet (100%),undefined,intermitent,undefined
+53,10.0,7400.54,multi_jet (99%),undefined,intermitent,undefined
+54,10.0,7600.37,multi_jet (100%),intermitent,intermitent,undefined
+55,10.0,7800.52,multi_jet (100%),undefined,intermitent,undefined
+56,10.0,8000.38,multi_jet (100%),dripping,undefined,undefined
+57,10.0,8200.59,multi_jet (100%),dripping,none,undefined
+58,10.0,8400.41,multi_jet (99%),undefined,intermitent,undefined
+59,10.0,8600.54,multi_jet (100%),undefined,intermitent,undefined
+60,10.0,8800.38,multi_jet (100%),undefined,intermitent,undefined
+61,10.0,9000.23,multi_jet (100%),dripping,none,undefined
+62,15.0,3000.57,dripping (94%),undefined,dripping,intermitent
+63,15.0,3200.37,dripping (98%),intermitent,intermitent,intermitent
+64,15.0,3400.61,dripping (75%),intermitent,dripping,intermitent
+65,15.0,3600.47,dripping (100%),undefined,dripping,undefined
+66,15.0,3800.61,dripping (97%),intermitent,intermitent,intermitent
+67,15.0,4000.46,dripping (100%),intermitent,dripping,intermitent
+68,15.0,4200.61,dripping (99%),intermitent,dripping,intermitent
+69,15.0,4400.45,dripping (94%),intermitent,dripping,intermitent
+70,15.0,4600.67,intermitent (97%),intermitent,intermitent,intermitent
+71,15.0,4800.52,dripping (56%),intermitent,intermitent,intermitent
+72,15.0,5000.69,intermitent (75%),intermitent,intermitent,intermitent
+73,15.0,5200.45,intermitent (96%),undefined,intermitent,undefined
+74,15.0,5400.65,intermitent (95%),undefined,intermitent,undefined
+75,15.0,5600.46,intermitent (57%),undefined,intermitent,undefined
+76,15.0,5800.67,dripping (90%),intermitent,dripping,intermitent
+77,15.0,6000.53,intermitent (76%),undefined,intermitent,undefined
+78,15.0,6200.68,cone_jet (99%),undefined,intermitent,undefined
+79,15.0,6400.41,cone_jet (99%),undefined,intermitent,undefined
+80,15.0,6600.51,cone_jet (100%),undefined,intermitent,undefined
+81,15.0,6800.35,cone_jet (96%),undefined,intermitent,undefined
+82,15.0,7000.54,dripping (56%),undefined,intermitent,undefined
+83,15.0,7200.42,multi_jet (99%),undefined,intermitent,undefined
+84,15.0,7400.58,multi_jet (90%),undefined,intermitent,undefined
+85,15.0,7600.38,multi_jet (100%),undefined,intermitent,undefined
+86,15.0,7800.53,multi_jet (100%),dripping,intermitent,undefined
+87,15.0,8000.38,multi_jet (100%),dripping,undefined,undefined
+88,15.0,8200.6,multi_jet (100%),intermitent,intermitent,intermitent
+89,15.0,8400.44,multi_jet (100%),intermitent,intermitent,intermitent
+90,15.0,8600.57,multi_jet (100%),intermitent,intermitent,intermitent
+91,15.0,8800.39,multi_jet (100%),intermitent,intermitent,undefined
+92,15.0,9000.25,multi_jet (100%),intermitent,intermitent,corona
+93,6.0,3000.45,multi_jet (100%),intermitent,dripping,intermitent
+94,6.0,3200.32,dripping (84%),intermitent,dripping,intermitent
+95,6.0,3400.47,dripping (54%),intermitent,intermitent,intermitent
+96,6.0,3600.45,dripping (98%),intermitent,dripping,intermitent
+97,6.0,3800.61,dripping (97%),cone_jet,intermitent,undefined
+98,6.0,4000.44,dripping (99%),undefined,intermitent,undefined
+99,6.0,4200.59,dripping (97%),intermitent,intermitent,intermitent
+100,6.0,4400.46,dripping (83%),undefined,intermitent,undefined
+101,6.0,4600.64,dripping (97%),intermitent,intermitent,intermitent
+102,6.0,4800.52,dripping (45%),cone_jet,intermitent,undefined
+103,6.0,5000.68,intermitent (95%),cone_jet,intermitent,undefined
+104,6.0,5200.47,intermitent (97%),cone_jet,intermitent,undefined
+105,6.0,5400.6,dripping (87%),cone_jet,intermitent,undefined
+106,6.0,5600.44,intermitent (98%),undefined,intermitent,undefined
+107,6.0,5800.66,intermitent (99%),undefined,intermitent,undefined
+108,6.0,6000.49,cone_jet (75%),undefined,intermitent,undefined
+109,6.0,6200.66,cone_jet (99%),undefined,intermitent,undefined
+110,6.0,6400.39,multi_jet (92%),multi_jet,multi_jet,cone_jet
+111,6.0,6600.52,cone_jet (62%),undefined,intermitent,undefined
+112,6.0,6800.34,cone_jet (96%),undefined,intermitent,undefined
+113,6.0,7000.55,cone_jet (86%),undefined,intermitent,undefined
+114,6.0,7200.4,multi_jet (93%),undefined,intermitent,undefined
+115,6.0,7400.57,multi_jet (96%),multi_jet,intermitent,undefined
+116,6.0,7600.4,multi_jet (100%),undefined,intermitent,undefined
+117,6.0,7800.53,multi_jet (100%),undefined,intermitent,undefined
+118,6.0,8000.38,multi_jet (100%),undefined,intermitent,undefined
+119,6.0,8200.59,multi_jet (100%),undefined,intermitent,undefined
+120,6.0,8400.43,multi_jet (100%),undefined,intermitent,undefined
+121,6.0,8600.55,multi_jet (100%),undefined,intermitent,undefined
+122,6.0,8800.38,multi_jet (100%),undefined,intermitent,undefined
+123,6.0,9000.27,multi_jet (100%),undefined,intermitent,undefined
+124,7.0,3000.6,multi_jet (61%),intermitent,dripping,intermitent
+125,7.0,3200.38,dripping (72%),intermitent,intermitent,intermitent
+126,7.0,3400.49,dripping (100%),intermitent,dripping,intermitent
+127,7.0,3600.47,dripping (98%),cone_jet,intermitent,undefined
+128,7.0,3800.63,dripping (100%),intermitent,intermitent,intermitent
+129,7.0,4000.49,dripping (97%),cone_jet,intermitent,undefined
+130,7.0,4200.63,dripping (95%),intermitent,intermitent,intermitent
+131,7.0,4400.49,dripping (91%),undefined,intermitent,undefined
+132,7.0,4600.67,dripping (94%),undefined,intermitent,undefined
+133,7.0,4800.53,intermitent (96%),intermitent,intermitent,intermitent
+134,7.0,5000.71,dripping (95%),cone_jet,intermitent,undefined
+135,7.0,5200.48,intermitent (93%),intermitent,intermitent,intermitent
+136,7.0,5400.64,intermitent (93%),intermitent,intermitent,intermitent
+137,7.0,5600.49,dripping (68%),undefined,intermitent,undefined
+138,7.0,5800.67,intermitent (87%),intermitent,intermitent,intermitent
+139,7.0,6000.5,intermitent (99%),undefined,intermitent,undefined
+140,7.0,6200.67,cone_jet (87%),undefined,intermitent,undefined
+141,7.0,6400.41,multi_jet (53%),undefined,intermitent,undefined
+142,7.0,6600.49,cone_jet (97%),undefined,intermitent,undefined
+143,7.0,6800.36,multi_jet (71%),undefined,intermitent,undefined
+144,7.0,7000.56,cone_jet (94%),multi_jet,intermitent,undefined
+145,7.0,7200.42,multi_jet (95%),undefined,intermitent,undefined
+146,7.0,7400.59,multi_jet (98%),multi_jet,intermitent,undefined
+147,7.0,7600.38,multi_jet (100%),undefined,intermitent,undefined
+148,7.0,7800.52,multi_jet (100%),undefined,intermitent,undefined
+149,7.0,8000.39,multi_jet (100%),undefined,intermitent,undefined
+150,7.0,8200.63,multi_jet (100%),undefined,intermitent,undefined
+151,7.0,8400.44,multi_jet (100%),undefined,intermitent,undefined
+152,7.0,8600.58,multi_jet (100%),undefined,intermitent,undefined
+153,7.0,8800.37,multi_jet (100%),undefined,intermitent,undefined
+154,7.0,9000.26,multi_jet (100%),undefined,intermitent,undefined
+155,8.0,3000.59,dripping (79%),intermitent,intermitent,intermitent
+156,8.0,3200.35,dripping (95%),intermitent,intermitent,intermitent
+157,8.0,3400.63,dripping (100%),undefined,intermitent,undefined
+158,8.0,3600.49,dripping (96%),cone_jet,intermitent,undefined
+159,8.0,3800.64,dripping (100%),undefined,intermitent,undefined
+160,8.0,4000.36,dripping (98%),cone_jet,intermitent,undefined
+161,8.0,4200.61,dripping (73%),cone_jet,intermitent,undefined
+162,8.0,4400.47,dripping (93%),intermitent,intermitent,intermitent
+163,8.0,4600.66,dripping (84%),undefined,intermitent,undefined
+164,8.0,4800.52,intermitent (99%),intermitent,intermitent,intermitent
+165,8.0,5000.68,dripping (88%),cone_jet,intermitent,undefined
+166,8.0,5200.48,intermitent (95%),cone_jet,intermitent,undefined
+167,8.0,5400.62,intermitent (88%),cone_jet,intermitent,undefined
+168,8.0,5600.47,intermitent (87%),undefined,intermitent,undefined
+169,8.0,5800.66,intermitent (70%),undefined,intermitent,undefined
+170,8.0,6000.5,intermitent (97%),undefined,intermitent,undefined
+171,8.0,6200.64,multi_jet (58%),undefined,intermitent,undefined
+172,8.0,6400.38,cone_jet (98%),undefined,intermitent,undefined
+173,8.0,6600.47,multi_jet (98%),undefined,intermitent,undefined
+174,8.0,6800.34,cone_jet (81%),undefined,intermitent,undefined
+175,8.0,7000.59,multi_jet (82%),undefined,intermitent,undefined
+176,8.0,7200.42,multi_jet (89%),undefined,intermitent,undefined
+177,8.0,7400.57,multi_jet (79%),undefined,intermitent,undefined
+178,8.0,7600.37,multi_jet (100%),undefined,intermitent,undefined
+179,8.0,7800.54,multi_jet (100%),undefined,intermitent,undefined
+180,8.0,8000.4,multi_jet (100%),undefined,intermitent,undefined
+181,8.0,8200.61,multi_jet (100%),undefined,intermitent,undefined
+182,8.0,8400.43,multi_jet (100%),undefined,intermitent,undefined
+183,8.0,8600.56,multi_jet (100%),undefined,intermitent,undefined
+184,8.0,8800.41,multi_jet (100%),undefined,intermitent,undefined
+185,8.0,9000.25,multi_jet (100%),undefined,intermitent,undefined
+186,9.0,3000.58,dripping (87%),cone_jet,intermitent,undefined
+187,9.0,3200.36,dripping (97%),intermitent,intermitent,intermitent
+188,9.0,3400.5,dripping (99%),intermitent,intermitent,undefined
+189,9.0,3600.34,dripping (100%),intermitent,intermitent,intermitent
+190,9.0,3800.62,dripping (100%),cone_jet,intermitent,undefined
+191,9.0,4000.35,dripping (87%),undefined,intermitent,undefined
+192,9.0,4200.6,dripping (95%),intermitent,intermitent,intermitent
+193,9.0,4400.44,dripping (95%),cone_jet,intermitent,undefined
+194,9.0,4600.65,dripping (54%),cone_jet,intermitent,undefined
+195,9.0,4800.52,dripping (88%),intermitent,intermitent,intermitent
+196,9.0,5000.7,dripping (84%),undefined,intermitent,undefined
+197,9.0,5200.46,intermitent (78%),cone_jet,intermitent,undefined
+198,9.0,5400.61,dripping (63%),cone_jet,intermitent,undefined
+199,9.0,5600.46,intermitent (48%),dripping,intermitent,dripping
+200,9.0,5800.66,intermitent (93%),undefined,intermitent,undefined
+201,9.0,6000.49,cone_jet (95%),undefined,intermitent,undefined
+202,9.0,6200.66,cone_jet (100%),undefined,intermitent,undefined
+203,9.0,6400.37,cone_jet (53%),undefined,intermitent,undefined
+204,9.0,6600.52,multi_jet (67%),undefined,intermitent,undefined
+205,9.0,6800.35,multi_jet (57%),undefined,intermitent,undefined
+206,9.0,7000.54,cone_jet (78%),undefined,intermitent,undefined
+207,9.0,7200.38,multi_jet (58%),undefined,intermitent,undefined
+208,9.0,7400.58,multi_jet (98%),undefined,intermitent,undefined
+209,9.0,7600.39,multi_jet (97%),undefined,intermitent,undefined
+210,9.0,7800.51,multi_jet (96%),undefined,intermitent,undefined
+211,9.0,8000.39,multi_jet (100%),undefined,intermitent,undefined
+212,9.0,8200.62,multi_jet (100%),undefined,intermitent,undefined
+213,9.0,8400.4,multi_jet (100%),undefined,intermitent,undefined
+214,9.0,8600.59,multi_jet (100%),undefined,intermitent,undefined
+215,9.0,8800.4,multi_jet (100%),undefined,intermitent,undefined
+216,9.0,9000.26,multi_jet (100%),undefined,intermitent,undefined
+217,11.0,3000.43,dripping (100%),intermitent,intermitent,intermitent
+218,11.0,3200.45,dripping (99%),undefined,intermitent,undefined
+219,11.0,3400.6,dripping (100%),intermitent,intermitent,intermitent
+220,11.0,3600.34,dripping (92%),intermitent,intermitent,intermitent
+221,11.0,3800.6,dripping (100%),undefined,intermitent,undefined
+222,11.0,4000.45,dripping (99%),undefined,intermitent,undefined
+223,11.0,4200.6,dripping (100%),undefined,intermitent,undefined
+224,11.0,4400.45,dripping (99%),cone_jet,intermitent,undefined
+225,11.0,4600.68,dripping (96%),undefined,intermitent,undefined
+226,11.0,4800.51,dripping (91%),cone_jet,intermitent,undefined
+227,11.0,5000.68,intermitent (61%),cone_jet,intermitent,undefined
+228,11.0,5200.47,dripping (90%),undefined,intermitent,undefined
+229,11.0,5400.63,dripping (58%),cone_jet,intermitent,undefined
+230,11.0,5600.47,intermitent (95%),intermitent,intermitent,intermitent
+231,11.0,5800.65,intermitent (91%),undefined,intermitent,undefined
+232,11.0,6000.5,intermitent (65%),intermitent,intermitent,intermitent
+233,11.0,6200.69,intermitent (93%),undefined,intermitent,undefined
+234,11.0,6400.37,multi_jet (84%),undefined,intermitent,undefined
+235,11.0,6600.52,dripping (96%),undefined,intermitent,undefined
+236,11.0,6800.34,cone_jet (97%),undefined,intermitent,undefined
+237,11.0,7000.55,cone_jet (89%),undefined,intermitent,undefined
+238,11.0,7200.41,cone_jet (86%),undefined,intermitent,undefined
+239,11.0,7400.58,multi_jet (99%),undefined,intermitent,undefined
+240,11.0,7600.38,multi_jet (42%),multi_jet,multi_jet,multi_jet
+241,11.0,7800.55,multi_jet (99%),undefined,intermitent,undefined
+242,11.0,8000.41,multi_jet (100%),undefined,intermitent,undefined
+243,11.0,8200.63,multi_jet (100%),undefined,intermitent,undefined
+244,11.0,8400.43,multi_jet (94%),undefined,intermitent,undefined
+245,11.0,8600.53,multi_jet (100%),undefined,intermitent,undefined
+246,11.0,8800.37,multi_jet (100%),undefined,intermitent,undefined
+247,11.0,9000.26,multi_jet (100%),undefined,intermitent,undefined
+248,12.0,3000.58,dripping (90%),undefined,intermitent,undefined
+249,12.0,3200.38,dripping (100%),intermitent,dripping,intermitent
+250,12.0,3400.64,dripping (99%),undefined,intermitent,undefined
+251,12.0,3600.34,dripping (97%),intermitent,intermitent,intermitent
+252,12.0,3800.64,dripping (99%),undefined,intermitent,undefined
+253,12.0,4000.47,dripping (98%),intermitent,intermitent,intermitent
+254,12.0,4200.64,dripping (95%),intermitent,intermitent,intermitent
+255,12.0,4400.48,intermitent (97%),cone_jet,cone_jet,cone_jet
+256,12.0,4600.67,dripping (81%),intermitent,intermitent,intermitent
+257,12.0,4800.5,dripping (75%),undefined,intermitent,undefined
+258,12.0,5000.69,dripping (50%),cone_jet,intermitent,undefined
+259,12.0,5200.48,dripping (70%),cone_jet,intermitent,undefined
+260,12.0,5400.64,intermitent (65%),cone_jet,intermitent,undefined
+261,12.0,5600.46,intermitent (43%),cone_jet,cone_jet,cone_jet
+262,12.0,5800.67,intermitent (88%),undefined,intermitent,undefined
+263,12.0,6000.5,dripping (96%),undefined,intermitent,undefined
+264,12.0,6200.65,multi_jet (33%),undefined,intermitent,undefined
+265,12.0,6400.41,cone_jet (99%),undefined,intermitent,undefined
+266,12.0,6600.5,cone_jet (100%),undefined,intermitent,undefined
+267,12.0,6800.34,cone_jet (75%),undefined,intermitent,undefined
+268,12.0,7000.55,cone_jet (76%),undefined,intermitent,undefined
+269,12.0,7200.41,multi_jet (51%),undefined,intermitent,undefined
+270,12.0,7400.59,multi_jet (97%),undefined,intermitent,undefined
+271,12.0,7600.39,cone_jet (85%),undefined,intermitent,undefined
+272,12.0,7800.54,intermitent (58%),undefined,intermitent,undefined
+273,12.0,8000.39,multi_jet (99%),undefined,intermitent,undefined
+274,12.0,8200.61,multi_jet (100%),undefined,intermitent,undefined
+275,12.0,8400.43,multi_jet (100%),undefined,intermitent,undefined
+276,12.0,8600.57,multi_jet (100%),undefined,intermitent,undefined
+277,12.0,8800.39,multi_jet (100%),dripping,none,undefined
+278,12.0,9000.25,multi_jet (100%),undefined,intermitent,undefined
+279,13.0,3000.58,dripping (87%),intermitent,intermitent,intermitent
+280,13.0,3200.52,dripping (94%),undefined,intermitent,undefined
+281,13.0,3400.51,dripping (100%),intermitent,intermitent,undefined
+282,13.0,3600.46,dripping (95%),intermitent,intermitent,intermitent
+283,13.0,3800.6,dripping (99%),undefined,intermitent,undefined
+284,13.0,4000.46,dripping (100%),cone_jet,intermitent,undefined
+285,13.0,4200.6,dripping (99%),cone_jet,intermitent,undefined
+286,13.0,4400.47,dripping (82%),undefined,intermitent,undefined
+287,13.0,4600.66,dripping (71%),cone_jet,intermitent,undefined
+288,13.0,4800.52,intermitent (96%),cone_jet,intermitent,undefined
+289,13.0,5000.67,dripping (95%),cone_jet,intermitent,undefined
+290,13.0,5200.49,multi_jet (54%),cone_jet,intermitent,undefined
+291,13.0,5400.64,intermitent (100%),cone_jet,intermitent,undefined
+292,13.0,5600.48,intermitent (73%),undefined,intermitent,undefined
+293,13.0,5800.69,intermitent (100%),undefined,intermitent,undefined
+294,13.0,6000.53,multi_jet (87%),undefined,intermitent,undefined
+295,13.0,6200.66,dripping (65%),undefined,intermitent,undefined
+296,13.0,6400.37,multi_jet (100%),undefined,intermitent,undefined
+297,13.0,6600.51,dripping (87%),undefined,intermitent,undefined
+298,13.0,6800.36,multi_jet (61%),undefined,intermitent,undefined
+299,13.0,7000.59,multi_jet (100%),undefined,intermitent,undefined
+300,13.0,7200.44,multi_jet (98%),undefined,intermitent,undefined
+301,13.0,7400.6,multi_jet (98%),undefined,intermitent,undefined
+302,13.0,7600.39,multi_jet (99%),undefined,intermitent,undefined
+303,13.0,7800.54,multi_jet (99%),undefined,intermitent,undefined
+304,13.0,8000.39,multi_jet (100%),undefined,intermitent,undefined
+305,13.0,8200.6,multi_jet (100%),undefined,intermitent,undefined
+306,13.0,8400.44,multi_jet (99%),undefined,intermitent,undefined
+307,13.0,8600.59,multi_jet (100%),undefined,intermitent,undefined
+308,13.0,8800.42,multi_jet (100%),undefined,intermitent,undefined
+309,13.0,9000.28,multi_jet (100%),undefined,intermitent,undefined
+310,14.0,3000.39,dripping (100%),dripping,dripping,dripping
+311,14.0,3200.3,dripping (96%),dripping,dripping,dripping
+312,14.0,3400.45,dripping (100%),cone_jet,intermitent,undefined
+313,14.0,3600.43,dripping (100%),cone_jet,intermitent,undefined
+314,14.0,3800.57,dripping (100%),cone_jet,intermitent,undefined
+315,14.0,4000.42,dripping (100%),cone_jet,intermitent,undefined
+316,14.0,4200.56,dripping (100%),cone_jet,intermitent,undefined
+317,14.0,4400.4,dripping (99%),cone_jet,intermitent,undefined
+318,14.0,4600.61,dripping (100%),cone_jet,intermitent,undefined
+319,14.0,4800.49,dripping (96%),undefined,intermitent,undefined
+320,14.0,5000.63,intermitent (99%),cone_jet,intermitent,undefined
+321,14.0,5200.44,dripping (96%),cone_jet,intermitent,undefined
+322,14.0,5400.6,dripping (99%),cone_jet,intermitent,undefined
+323,14.0,5600.43,intermitent (84%),undefined,intermitent,undefined
+324,14.0,5800.63,intermitent (90%),undefined,intermitent,undefined
+325,14.0,6000.45,intermitent (64%),undefined,intermitent,undefined
+326,14.0,6200.63,dripping (96%),undefined,intermitent,undefined
+327,14.0,6400.36,cone_jet (99%),undefined,intermitent,undefined
+328,14.0,6600.49,cone_jet (93%),undefined,intermitent,undefined
+329,14.0,6800.31,cone_jet (100%),undefined,intermitent,undefined
+330,14.0,7000.5,cone_jet (92%),undefined,intermitent,undefined
+331,14.0,7200.32,cone_jet (91%),undefined,intermitent,undefined
+332,14.0,7400.54,dripping (42%),undefined,intermitent,undefined
+333,14.0,7600.31,cone_jet (53%),undefined,intermitent,undefined
+334,14.0,7800.47,multi_jet (99%),undefined,intermitent,undefined
+335,14.0,8000.38,multi_jet (97%),undefined,intermitent,undefined
+336,14.0,8200.58,multi_jet (100%),undefined,intermitent,undefined
+337,14.0,8400.38,multi_jet (100%),undefined,intermitent,undefined
+338,14.0,8600.51,multi_jet (100%),undefined,intermitent,undefined
+339,14.0,8800.34,multi_jet (100%),undefined,intermitent,undefined
+340,14.0,9000.18,multi_jet (100%),undefined,intermitent,undefined
+341,16.0,3000.54,dripping (96%),cone_jet,intermitent,undefined
+342,16.0,3200.47,dripping (100%),undefined,intermitent,undefined
+343,16.0,3400.47,dripping (100%),cone_jet,intermitent,undefined
+344,16.0,3600.44,dripping (99%),cone_jet,intermitent,undefined
+345,16.0,3800.59,dripping (100%),cone_jet,intermitent,undefined
+346,16.0,4000.42,dripping (99%),cone_jet,intermitent,undefined
+347,16.0,4200.59,dripping (100%),cone_jet,intermitent,undefined
+348,16.0,4400.43,dripping (99%),cone_jet,intermitent,undefined
+349,16.0,4600.64,dripping (52%),cone_jet,intermitent,undefined
+350,16.0,4800.5,dripping (99%),cone_jet,intermitent,undefined
+351,16.0,5000.65,intermitent (98%),cone_jet,intermitent,undefined
+352,16.0,5200.42,intermitent (82%),undefined,intermitent,undefined
+353,16.0,5400.6,dripping (34%),cone_jet,intermitent,undefined
+354,16.0,5600.41,dripping (92%),undefined,intermitent,undefined
+355,16.0,5800.63,dripping (77%),undefined,intermitent,undefined
+356,16.0,6000.46,intermitent (63%),undefined,intermitent,undefined
+357,16.0,6200.62,dripping (87%),undefined,intermitent,undefined
+358,16.0,6400.35,cone_jet (56%),undefined,intermitent,undefined
+359,16.0,6600.48,cone_jet (78%),undefined,intermitent,undefined
+360,16.0,6800.31,cone_jet (99%),undefined,intermitent,undefined
+361,16.0,7000.53,cone_jet (99%),undefined,intermitent,undefined
+362,16.0,7200.35,cone_jet (94%),undefined,intermitent,undefined
+363,16.0,7400.55,multi_jet (53%),undefined,intermitent,undefined
+364,16.0,7600.34,multi_jet (59%),undefined,intermitent,undefined
+365,16.0,7800.48,multi_jet (42%),undefined,intermitent,undefined
+366,16.0,8000.38,multi_jet (100%),undefined,intermitent,undefined
+367,16.0,8200.58,multi_jet (99%),undefined,intermitent,undefined
+368,16.0,8400.4,multi_jet (100%),undefined,intermitent,undefined
+369,16.0,8600.54,multi_jet (100%),undefined,intermitent,undefined
+370,16.0,8800.38,multi_jet (100%),undefined,intermitent,undefined
+371,16.0,9000.24,multi_jet (100%),undefined,intermitent,undefined
+372,17.0,3000.53,dripping (97%),cone_jet,intermitent,undefined
+373,17.0,3200.32,dripping (98%),cone_jet,intermitent,undefined
+374,17.0,3400.6,dripping (51%),cone_jet,intermitent,undefined
+375,17.0,3600.43,dripping (100%),cone_jet,intermitent,undefined
+376,17.0,3800.59,dripping (100%),undefined,intermitent,undefined
+377,17.0,4000.43,dripping (83%),cone_jet,intermitent,undefined
+378,17.0,4200.57,dripping (100%),undefined,intermitent,undefined
+379,17.0,4400.43,dripping (99%),cone_jet,intermitent,undefined
+380,17.0,4600.62,dripping (68%),cone_jet,intermitent,undefined
+381,17.0,4800.49,dripping (96%),cone_jet,intermitent,undefined
+382,17.0,5000.68,dripping (87%),cone_jet,intermitent,undefined
+383,17.0,5200.45,dripping (84%),cone_jet,intermitent,undefined
+384,17.0,5400.63,intermitent (97%),cone_jet,intermitent,undefined
+385,17.0,5600.43,intermitent (95%),undefined,intermitent,undefined
+386,17.0,5800.64,intermitent (60%),undefined,intermitent,undefined
+387,17.0,6000.46,intermitent (92%),undefined,intermitent,undefined
+388,17.0,6200.64,cone_jet (57%),undefined,intermitent,undefined
+389,17.0,6400.37,cone_jet (100%),undefined,intermitent,undefined
+390,17.0,6600.47,cone_jet (93%),undefined,intermitent,undefined
+391,17.0,6800.31,cone_jet (79%),undefined,intermitent,undefined
+392,17.0,7000.51,cone_jet (98%),undefined,intermitent,undefined
+393,17.0,7200.38,multi_jet (56%),undefined,intermitent,undefined
+394,17.0,7400.55,cone_jet (70%),undefined,intermitent,undefined
+395,17.0,7600.34,multi_jet (100%),undefined,intermitent,undefined
+396,17.0,7800.52,multi_jet (98%),undefined,intermitent,undefined
+397,17.0,8000.38,multi_jet (100%),undefined,intermitent,undefined
+398,17.0,8200.6,multi_jet (99%),undefined,intermitent,undefined
+399,17.0,8400.41,multi_jet (100%),undefined,intermitent,undefined
+400,17.0,8600.53,multi_jet (100%),undefined,intermitent,undefined
+401,17.0,8800.34,multi_jet (100%),undefined,intermitent,undefined
+402,17.0,9000.22,multi_jet (100%),undefined,intermitent,undefined
+403,18.0,3000.46,dripping (100%),undefined,intermitent,undefined
+404,18.0,3200.36,dripping (100%),undefined,intermitent,undefined
+405,18.0,3400.51,dripping (97%),undefined,intermitent,undefined
+406,18.0,3600.35,dripping (100%),undefined,intermitent,undefined
+407,18.0,3800.62,dripping (100%),undefined,intermitent,undefined
+408,18.0,4000.48,dripping (98%),undefined,intermitent,undefined
+409,18.0,4200.62,dripping (99%),undefined,intermitent,undefined
+410,18.0,4400.48,dripping (99%),undefined,intermitent,undefined
+411,18.0,4600.68,dripping (100%),undefined,intermitent,undefined
+412,18.0,4800.52,dripping (97%),undefined,intermitent,undefined
+413,18.0,5000.71,intermitent (60%),undefined,intermitent,undefined
+414,18.0,5200.47,intermitent (69%),undefined,intermitent,undefined
+415,18.0,5400.63,dripping (87%),undefined,intermitent,undefined
+416,18.0,5600.49,intermitent (98%),undefined,intermitent,undefined
+417,18.0,5800.67,multi_jet (52%),undefined,intermitent,undefined
+418,18.0,6000.53,cone_jet (88%),undefined,intermitent,undefined
+419,18.0,6200.69,cone_jet (89%),undefined,intermitent,undefined
+420,18.0,6400.4,cone_jet (58%),undefined,intermitent,undefined
+421,18.0,6600.52,cone_jet (90%),undefined,intermitent,undefined
+422,18.0,6800.37,cone_jet (67%),undefined,intermitent,undefined
+423,18.0,7000.57,intermitent (97%),undefined,intermitent,undefined
+424,18.0,7200.41,multi_jet (94%),undefined,intermitent,undefined
+425,18.0,7400.59,multi_jet (97%),undefined,intermitent,undefined
+426,18.0,7600.39,multi_jet (100%),undefined,intermitent,undefined
+427,18.0,7800.55,multi_jet (100%),dripping,intermitent,dripping
+428,18.0,8000.41,multi_jet (100%),intermitent,intermitent,corona
+429,18.0,8200.62,multi_jet (100%),intermitent,intermitent,corona
+430,18.0,8400.43,multi_jet (100%),intermitent,intermitent,corona
+431,18.0,8600.58,multi_jet (100%),intermitent,intermitent,corona
+432,18.0,8800.43,multi_jet (100%),intermitent,intermitent,corona
+433,18.0,9000.26,multi_jet (100%),intermitent,intermitent,corona
+434,19.0,3000.61,dripping (79%),undefined,intermitent,undefined
+435,19.0,3200.38,dripping (95%),undefined,intermitent,undefined
+436,19.0,3400.51,dripping (99%),undefined,intermitent,undefined
+437,19.0,3600.48,dripping (95%),undefined,intermitent,undefined
+438,19.0,3800.62,dripping (98%),cone_jet,intermitent,undefined
+439,19.0,4000.47,dripping (95%),cone_jet,intermitent,undefined
+440,19.0,4200.63,intermitent (51%),cone_jet,intermitent,undefined
+441,19.0,4400.47,dripping (99%),cone_jet,intermitent,undefined
+442,19.0,4600.67,intermitent (99%),undefined,intermitent,undefined
+443,19.0,4800.56,dripping (69%),undefined,intermitent,undefined
+444,19.0,5000.71,dripping (72%),undefined,intermitent,undefined
+445,19.0,5200.49,intermitent (97%),undefined,intermitent,undefined
+446,19.0,5400.65,intermitent (98%),undefined,intermitent,undefined
+447,19.0,5600.48,intermitent (97%),undefined,intermitent,undefined
+448,19.0,5800.69,cone_jet (89%),undefined,intermitent,undefined
+449,19.0,6000.54,cone_jet (94%),undefined,intermitent,undefined
+450,19.0,6200.69,cone_jet (99%),undefined,intermitent,undefined
+451,19.0,6400.41,cone_jet (78%),undefined,intermitent,undefined
+452,19.0,6600.53,cone_jet (93%),undefined,intermitent,undefined
+453,19.0,6800.4,cone_jet (85%),undefined,intermitent,undefined
+454,19.0,7000.6,multi_jet (99%),dripping,undefined,undefined
+455,19.0,7200.44,multi_jet (79%),dripping,intermitent,undefined
+456,19.0,7400.6,multi_jet (100%),dripping,intermitent,undefined
+457,19.0,7600.4,multi_jet (100%),dripping,intermitent,undefined
+458,19.0,7800.55,multi_jet (100%),intermitent,intermitent,intermitent
+459,19.0,8000.4,multi_jet (100%),intermitent,intermitent,corona
+460,19.0,8200.63,multi_jet (100%),intermitent,intermitent,intermitent
+461,19.0,8400.44,multi_jet (98%),undefined,intermitent,undefined
+462,19.0,8600.58,multi_jet (100%),multi_jet,undefined,multi_jet
+463,19.0,8800.42,multi_jet (100%),intermitent,intermitent,corona
+464,19.0,9000.26,multi_jet (100%),intermitent,intermitent,corona
+465,20.0,3000.61,dripping (84%),cone_jet,intermitent,undefined
+466,20.0,3200.41,dripping (95%),undefined,intermitent,undefined
+467,20.0,3400.53,dripping (99%),cone_jet,intermitent,undefined
+468,20.0,3600.47,dripping (62%),cone_jet,intermitent,undefined
+469,20.0,3800.64,dripping (98%),cone_jet,intermitent,undefined
+470,20.0,4000.47,dripping (99%),cone_jet,intermitent,undefined
+471,20.0,4200.63,dripping (83%),cone_jet,intermitent,undefined
+472,20.0,4400.46,dripping (99%),cone_jet,intermitent,undefined
+473,20.0,4600.67,dripping (94%),undefined,intermitent,undefined
+474,20.0,4800.53,intermitent (94%),undefined,intermitent,undefined
+475,20.0,5000.71,intermitent (64%),undefined,intermitent,undefined
+476,20.0,5200.49,intermitent (63%),undefined,intermitent,undefined
+477,20.0,5400.64,cone_jet (62%),undefined,intermitent,undefined
+478,20.0,5600.47,cone_jet (64%),undefined,intermitent,undefined
+479,20.0,5800.67,cone_jet (90%),undefined,intermitent,undefined
+480,20.0,6000.53,cone_jet (98%),undefined,intermitent,undefined
+481,20.0,6200.68,cone_jet (97%),undefined,intermitent,undefined
+482,20.0,6400.39,cone_jet (98%),undefined,intermitent,undefined
+483,20.0,6600.51,cone_jet (100%),undefined,intermitent,undefined
+484,20.0,6800.38,cone_jet (70%),undefined,intermitent,undefined
+485,20.0,7000.58,cone_jet (90%),undefined,intermitent,undefined
+486,20.0,7200.42,cone_jet (98%),undefined,intermitent,undefined
+487,20.0,7400.62,intermitent (100%),undefined,intermitent,undefined
+488,20.0,7600.4,multi_jet (100%),undefined,intermitent,undefined
+489,20.0,7800.55,multi_jet (100%),undefined,intermitent,undefined
+490,20.0,8000.42,multi_jet (100%),dripping,intermitent,undefined
+491,20.0,8200.64,multi_jet (100%),dripping,intermitent,undefined
+492,20.0,8400.46,multi_jet (100%),undefined,none,corona
+493,20.0,8600.59,multi_jet (100%),intermitent,intermitent,corona
+494,20.0,8800.43,multi_jet (100%),intermitent,intermitent,corona
+495,20.0,9000.3,multi_jet (100%),intermitent,intermitent,corona
+496,21.0,3000.61,dripping (90%),cone_jet,intermitent,undefined
+497,21.0,3200.38,dripping (100%),cone_jet,intermitent,undefined
+498,21.0,3400.5,dripping (100%),cone_jet,intermitent,undefined
+499,21.0,3600.36,dripping (99%),cone_jet,intermitent,undefined
+500,21.0,3800.65,dripping (100%),cone_jet,intermitent,undefined
+501,21.0,4000.46,dripping (98%),cone_jet,intermitent,undefined
+502,21.0,4200.61,dripping (100%),cone_jet,intermitent,undefined
+503,21.0,4400.47,dripping (95%),cone_jet,intermitent,undefined
+504,21.0,4600.66,intermitent (94%),undefined,intermitent,undefined
+505,21.0,4800.55,dripping (95%),undefined,intermitent,undefined
+506,21.0,5000.72,dripping (78%),undefined,intermitent,undefined
+507,21.0,5200.49,intermitent (100%),undefined,intermitent,undefined
+508,21.0,5400.66,intermitent (96%),undefined,intermitent,undefined
+509,21.0,5600.47,multi_jet (59%),undefined,intermitent,undefined
+510,21.0,5800.7,intermitent (95%),dripping,intermitent,undefined
+511,21.0,6000.51,cone_jet (92%),undefined,intermitent,undefined
+512,21.0,6200.68,multi_jet (69%),undefined,intermitent,undefined
+513,21.0,6400.37,cone_jet (98%),undefined,intermitent,undefined
+514,21.0,6600.54,cone_jet (61%),undefined,intermitent,undefined
+515,21.0,6800.43,cone_jet (100%),undefined,intermitent,undefined
+516,21.0,7000.61,cone_jet (99%),undefined,intermitent,undefined
+517,21.0,7200.42,dripping (45%),undefined,intermitent,undefined
+518,21.0,7400.61,multi_jet (98%),undefined,intermitent,undefined
+519,21.0,7600.4,multi_jet (100%),dripping,intermitent,undefined
+520,21.0,7800.58,multi_jet (100%),dripping,undefined,undefined
+521,21.0,8000.4,multi_jet (100%),dripping,intermitent,undefined
+522,21.0,8200.64,multi_jet (100%),dripping,intermitent,undefined
+523,21.0,8400.45,multi_jet (100%),dripping,intermitent,undefined
+524,21.0,8600.63,multi_jet (100%),intermitent,intermitent,corona
+525,21.0,8800.43,multi_jet (100%),undefined,none,corona
+526,21.0,9000.31,multi_jet (100%),intermitent,intermitent,corona
+527,1.0,3000.4,dripping (98%),dripping,none,dripping
+528,1.0,3200.32,cone_jet (62%),cone_jet,intermitent,undefined
+529,1.0,3400.59,cone_jet (86%),cone_jet,intermitent,undefined
+530,1.0,3600.44,cone_jet (89%),dripping,none,dripping
+531,1.0,3800.62,cone_jet (79%),dripping,none,dripping
+532,1.0,4000.45,cone_jet (99%),cone_jet,intermitent,undefined
+533,1.0,4200.59,cone_jet (80%),cone_jet,intermitent,undefined
+534,1.0,4400.44,cone_jet (69%),cone_jet,intermitent,undefined
+535,1.0,4600.64,cone_jet (99%),cone_jet,intermitent,undefined
+536,1.0,4800.48,cone_jet (89%),cone_jet,intermitent,undefined
+537,1.0,5000.64,cone_jet (61%),cone_jet,intermitent,undefined
+538,1.0,5200.42,intermitent (97%),cone_jet,intermitent,undefined
+539,1.0,5400.59,cone_jet (72%),cone_jet,intermitent,undefined
+540,1.0,5600.42,cone_jet (96%),undefined,intermitent,undefined
+541,1.0,5800.62,multi_jet (73%),undefined,intermitent,undefined
+542,1.0,6000.47,cone_jet (76%),undefined,intermitent,undefined
+543,1.0,6200.61,cone_jet (99%),undefined,intermitent,undefined
+544,1.0,6400.34,cone_jet (74%),undefined,intermitent,undefined
+545,1.0,6600.49,multi_jet (90%),undefined,intermitent,undefined
+546,1.0,6800.33,multi_jet (98%),undefined,intermitent,undefined
+547,1.0,7000.52,multi_jet (100%),dripping,intermitent,undefined
+548,1.0,7200.32,multi_jet (100%),dripping,intermitent,undefined
+549,1.0,7400.5,multi_jet (100%),dripping,intermitent,undefined
+550,1.0,7600.3,multi_jet (100%),dripping,intermitent,undefined
+551,1.0,7800.45,multi_jet (100%),dripping,intermitent,undefined
+552,1.0,8000.3,multi_jet (100%),dripping,intermitent,undefined
+553,1.0,8200.51,multi_jet (100%),dripping,intermitent,undefined
+554,1.0,8400.35,multi_jet (100%),dripping,intermitent,undefined
+555,1.0,8600.52,multi_jet (100%),dripping,intermitent,undefined
+556,1.0,8800.32,multi_jet (92%),dripping,intermitent,undefined
+557,1.0,9000.18,multi_jet (100%),dripping,intermitent,undefined
+558,2.0,3000.54,multi_jet (100%),cone_jet,intermitent,undefined
+559,2.0,3200.33,multi_jet (100%),cone_jet,intermitent,undefined
+560,2.0,3400.59,cone_jet (69%),cone_jet,intermitent,undefined
+561,2.0,3600.43,cone_jet (55%),cone_jet,intermitent,undefined
+562,2.0,3800.6,dripping (59%),cone_jet,intermitent,undefined
+563,2.0,4000.44,dripping (75%),cone_jet,intermitent,undefined
+564,2.0,4200.59,cone_jet (66%),cone_jet,intermitent,undefined
+565,2.0,4400.42,dripping (84%),cone_jet,intermitent,undefined
+566,2.0,4600.63,dripping (51%),cone_jet,intermitent,undefined
+567,2.0,4800.47,cone_jet (65%),cone_jet,intermitent,undefined
+568,2.0,5000.64,cone_jet (51%),cone_jet,intermitent,undefined
+569,2.0,5200.41,cone_jet (94%),cone_jet,intermitent,undefined
+570,2.0,5400.56,dripping (87%),cone_jet,intermitent,undefined
+571,2.0,5600.44,dripping (52%),undefined,intermitent,undefined
+572,2.0,5800.62,cone_jet (75%),undefined,intermitent,undefined
+573,2.0,6000.46,cone_jet (94%),undefined,intermitent,undefined
+574,2.0,6200.58,cone_jet (51%),undefined,intermitent,undefined
+575,2.0,6400.36,cone_jet (97%),undefined,intermitent,undefined
+576,2.0,6600.5,multi_jet (99%),undefined,intermitent,undefined
+577,2.0,6800.33,multi_jet (100%),undefined,intermitent,undefined
+578,2.0,7000.51,multi_jet (100%),dripping,intermitent,undefined
+579,2.0,7200.31,multi_jet (100%),dripping,intermitent,undefined
+580,2.0,7400.49,multi_jet (100%),dripping,intermitent,undefined
+581,2.0,7600.3,multi_jet (100%),dripping,intermitent,undefined
+582,2.0,7800.43,multi_jet (100%),dripping,intermitent,undefined
+583,2.0,8000.37,multi_jet (100%),dripping,intermitent,undefined
+584,2.0,8200.54,multi_jet (100%),undefined,intermitent,undefined
+585,2.0,8400.36,multi_jet (97%),dripping,intermitent,undefined
+586,2.0,8600.49,multi_jet (100%),dripping,intermitent,undefined
+587,2.0,8800.34,multi_jet (100%),dripping,intermitent,undefined
+588,2.0,9000.19,multi_jet (100%),dripping,intermitent,undefined
+589,3.0,3000.55,multi_jet (98%),cone_jet,intermitent,undefined
+590,3.0,3200.46,cone_jet (98%),cone_jet,intermitent,undefined
+591,3.0,3400.6,cone_jet (74%),cone_jet,intermitent,undefined
+592,3.0,3600.44,cone_jet (66%),cone_jet,intermitent,undefined
+593,3.0,3800.59,dripping (64%),cone_jet,intermitent,undefined
+594,3.0,4000.43,cone_jet (56%),cone_jet,intermitent,undefined
+595,3.0,4200.56,dripping (93%),cone_jet,intermitent,undefined
+596,3.0,4400.41,intermitent (85%),cone_jet,intermitent,undefined
+597,3.0,4600.63,dripping (65%),cone_jet,intermitent,undefined
+598,3.0,4800.49,dripping (70%),cone_jet,intermitent,undefined
+599,3.0,5000.63,dripping (84%),cone_jet,intermitent,undefined
+600,3.0,5200.43,intermitent (99%),cone_jet,intermitent,undefined
+601,3.0,5400.59,intermitent (99%),cone_jet,intermitent,undefined
+602,3.0,5600.43,cone_jet (97%),undefined,intermitent,undefined
+603,3.0,5800.65,cone_jet (90%),undefined,intermitent,undefined
+604,3.0,6000.47,cone_jet (96%),undefined,intermitent,undefined
+605,3.0,6200.62,cone_jet (99%),undefined,intermitent,undefined
+606,3.0,6400.37,cone_jet (99%),undefined,intermitent,undefined
+607,3.0,6600.49,multi_jet (100%),undefined,intermitent,undefined
+608,3.0,6800.32,multi_jet (96%),undefined,intermitent,undefined
+609,3.0,7000.51,multi_jet (100%),dripping,intermitent,undefined
+610,3.0,7200.34,multi_jet (100%),dripping,intermitent,undefined
+611,3.0,7400.49,multi_jet (65%),dripping,intermitent,undefined
+612,3.0,7600.3,multi_jet (100%),dripping,intermitent,undefined
+613,3.0,7800.49,multi_jet (98%),dripping,intermitent,undefined
+614,3.0,8000.35,multi_jet (100%),dripping,intermitent,undefined
+615,3.0,8200.56,multi_jet (100%),dripping,intermitent,undefined
+616,3.0,8400.36,multi_jet (99%),dripping,intermitent,undefined
+617,3.0,8600.53,multi_jet (100%),dripping,intermitent,undefined
+618,3.0,8800.34,multi_jet (100%),dripping,intermitent,undefined
+619,3.0,9000.2,multi_jet (100%),dripping,intermitent,undefined
+620,4.0,3000.54,multi_jet (87%),cone_jet,intermitent,undefined
+621,4.0,3200.35,dripping (70%),cone_jet,intermitent,undefined
+622,4.0,3400.59,cone_jet (73%),cone_jet,intermitent,undefined
+623,4.0,3600.31,dripping (65%),cone_jet,intermitent,undefined
+624,4.0,3800.58,dripping (59%),cone_jet,intermitent,undefined
+625,4.0,4000.46,dripping (50%),cone_jet,intermitent,undefined
+626,4.0,4200.57,dripping (48%),cone_jet,intermitent,undefined
+627,4.0,4400.41,dripping (67%),cone_jet,intermitent,undefined
+628,4.0,4600.62,dripping (67%),cone_jet,intermitent,undefined
+629,4.0,4800.49,intermitent (47%),cone_jet,intermitent,undefined
+630,4.0,5000.65,intermitent (100%),cone_jet,intermitent,undefined
+631,4.0,5200.43,intermitent (99%),cone_jet,intermitent,undefined
+632,4.0,5400.6,intermitent (98%),cone_jet,intermitent,undefined
+633,4.0,5600.43,cone_jet (100%),undefined,intermitent,undefined
+634,4.0,5800.64,cone_jet (99%),undefined,intermitent,undefined
+635,4.0,6000.46,cone_jet (99%),undefined,intermitent,undefined
+636,4.0,6200.61,cone_jet (98%),undefined,intermitent,undefined
+637,4.0,6400.37,cone_jet (96%),undefined,intermitent,undefined
+638,4.0,6600.52,multi_jet (100%),undefined,intermitent,undefined
+639,4.0,6800.3,multi_jet (100%),undefined,intermitent,undefined
+640,4.0,7000.5,multi_jet (94%),dripping,intermitent,undefined
+641,4.0,7200.34,multi_jet (100%),dripping,intermitent,undefined
+642,4.0,7400.51,multi_jet (98%),dripping,intermitent,undefined
+643,4.0,7600.33,multi_jet (99%),dripping,intermitent,undefined
+644,4.0,7800.48,multi_jet (100%),dripping,intermitent,undefined
+645,4.0,8000.4,multi_jet (100%),dripping,intermitent,undefined
+646,4.0,8200.56,multi_jet (100%),dripping,intermitent,undefined
+647,4.0,8400.36,multi_jet (94%),dripping,intermitent,undefined
+648,4.0,8600.51,multi_jet (100%),dripping,intermitent,undefined
+649,4.0,8800.32,multi_jet (100%),dripping,intermitent,undefined
+650,4.0,9000.21,multi_jet (100%),dripping,intermitent,undefined
+651,22.0,3000.41,dripping (100%),cone_jet,intermitent,undefined
+652,22.0,3200.32,dripping (98%),dripping,intermitent,undefined
+653,22.0,3400.6,dripping (100%),cone_jet,intermitent,undefined
+654,22.0,3600.47,dripping (100%),dripping,none,undefined
+655,22.0,3800.61,dripping (66%),cone_jet,intermitent,undefined
+656,22.0,4000.48,dripping (70%),cone_jet,intermitent,undefined
+657,22.0,4200.59,intermitent (76%),cone_jet,intermitent,undefined
+658,22.0,4400.44,intermitent (100%),cone_jet,intermitent,undefined
+659,22.0,4600.66,intermitent (99%),dripping,none,undefined
+660,22.0,4800.5,intermitent (98%),dripping,none,undefined
+661,22.0,5000.69,intermitent (83%),dripping,none,undefined
+662,22.0,5200.46,intermitent (96%),dripping,intermitent,undefined
+663,22.0,5400.62,cone_jet (100%),undefined,intermitent,undefined
+664,22.0,5600.45,cone_jet (99%),undefined,intermitent,undefined
+665,22.0,5800.67,cone_jet (99%),cone_jet,intermitent,cone_jet
+666,22.0,6000.48,cone_jet (97%),undefined,intermitent,undefined
+667,22.0,6200.62,cone_jet (99%),dripping,none,undefined
+668,22.0,6400.37,intermitent (87%),undefined,intermitent,undefined
+669,22.0,6600.5,multi_jet (100%),undefined,intermitent,undefined
+670,22.0,6800.32,multi_jet (100%),undefined,intermitent,undefined
+671,22.0,7000.53,multi_jet (88%),multi_jet,multi_jet,multi_jet
+672,22.0,7200.34,multi_jet (100%),dripping,intermitent,undefined
+673,22.0,7400.49,multi_jet (67%),dripping,intermitent,undefined
+674,22.0,7600.35,multi_jet (98%),intermitent,intermitent,corona
+675,22.0,7800.5,multi_jet (97%),intermitent,intermitent,corona
+676,22.0,8000.4,multi_jet (87%),intermitent,intermitent,corona
+677,22.0,8200.55,multi_jet (99%),multi_jet,multi_jet,multi_jet
+678,22.0,8400.38,multi_jet (100%),multi_jet,multi_jet,multi_jet
+679,22.0,8600.53,multi_jet (100%),dripping,none,undefined
+680,22.0,8800.34,multi_jet (100%),undefined,intermitent,undefined
+681,22.0,9000.22,multi_jet (100%),dripping,intermitent,undefined
+682,23.0,3000.57,dripping (81%),cone_jet,intermitent,undefined
+683,23.0,3200.51,dripping (99%),cone_jet,intermitent,undefined
+684,23.0,3400.52,dripping (100%),cone_jet,intermitent,undefined
+685,23.0,3600.46,dripping (100%),cone_jet,intermitent,undefined
+686,23.0,3800.65,dripping (97%),cone_jet,intermitent,undefined
+687,23.0,4000.37,intermitent (99%),cone_jet,intermitent,undefined
+688,23.0,4200.63,dripping (98%),cone_jet,intermitent,undefined
+689,23.0,4400.44,dripping (80%),cone_jet,intermitent,undefined
+690,23.0,4600.65,dripping (58%),dripping,none,undefined
+691,23.0,4800.51,intermitent (95%),undefined,intermitent,undefined
+692,23.0,5000.7,intermitent (100%),cone_jet,intermitent,undefined
+693,23.0,5200.48,intermitent (97%),undefined,intermitent,undefined
+694,23.0,5400.63,cone_jet (99%),undefined,intermitent,cone_jet
+695,23.0,5600.46,cone_jet (94%),undefined,intermitent,undefined
+696,23.0,5800.68,cone_jet (61%),undefined,intermitent,undefined
+697,23.0,6000.51,cone_jet (99%),undefined,intermitent,undefined
+698,23.0,6200.65,cone_jet (96%),undefined,intermitent,undefined
+699,23.0,6400.4,cone_jet (58%),undefined,intermitent,undefined
+700,23.0,6600.51,cone_jet (47%),undefined,intermitent,undefined
+701,23.0,6800.32,multi_jet (100%),dripping,intermitent,undefined
+702,23.0,7000.54,multi_jet (97%),dripping,intermitent,corona
+703,23.0,7200.36,multi_jet (97%),dripping,intermitent,corona
+704,23.0,7400.57,cone_jet (73%),intermitent,intermitent,corona
+705,23.0,7600.35,multi_jet (100%),intermitent,intermitent,corona
+706,23.0,7800.49,multi_jet (100%),intermitent,intermitent,corona
+707,23.0,8000.42,multi_jet (100%),intermitent,intermitent,corona
+708,23.0,8200.59,cone_jet (59%),intermitent,intermitent,corona
+709,23.0,8400.41,multi_jet (95%),dripping,intermitent,corona
+710,23.0,8600.55,multi_jet (100%),dripping,intermitent,undefined
+711,23.0,8800.38,multi_jet (100%),dripping,intermitent,corona
+712,23.0,9000.24,multi_jet (100%),dripping,intermitent,undefined
+713,24.0,3000.58,dripping (90%),undefined,intermitent,undefined
+714,24.0,3200.37,dripping (92%),cone_jet,intermitent,undefined
+715,24.0,3400.49,dripping (100%),cone_jet,intermitent,undefined
+716,24.0,3600.46,dripping (100%),cone_jet,intermitent,undefined
+717,24.0,3800.62,dripping (96%),cone_jet,intermitent,undefined
+718,24.0,4000.45,intermitent (100%),undefined,intermitent,undefined
+719,24.0,4200.6,dripping (76%),cone_jet,intermitent,undefined
+720,24.0,4400.45,intermitent (100%),cone_jet,intermitent,undefined
+721,24.0,4600.67,intermitent (100%),dripping,intermitent,undefined
+722,24.0,4800.52,intermitent (92%),undefined,intermitent,undefined
+723,24.0,5000.68,intermitent (100%),undefined,intermitent,undefined
+724,24.0,5200.47,intermitent (100%),dripping,intermitent,undefined
+725,24.0,5400.65,cone_jet (100%),undefined,intermitent,undefined
+726,24.0,5600.47,cone_jet (100%),undefined,intermitent,undefined
+727,24.0,5800.66,cone_jet (100%),undefined,intermitent,undefined
+728,24.0,6000.49,cone_jet (98%),undefined,intermitent,undefined
+729,24.0,6200.66,cone_jet (97%),undefined,intermitent,undefined
+730,24.0,6400.4,intermitent (77%),undefined,intermitent,undefined
+731,24.0,6600.52,multi_jet (94%),undefined,intermitent,undefined
+732,24.0,6800.33,multi_jet (100%),undefined,intermitent,undefined
+733,24.0,7000.53,multi_jet (100%),dripping,undefined,undefined
+734,24.0,7200.35,multi_jet (100%),dripping,intermitent,corona
+735,24.0,7400.57,multi_jet (100%),intermitent,intermitent,corona
+736,24.0,7600.34,multi_jet (99%),intermitent,intermitent,corona
+737,24.0,7800.51,multi_jet (100%),intermitent,intermitent,corona
+738,24.0,8000.37,multi_jet (100%),intermitent,intermitent,corona
+739,24.0,8200.59,multi_jet (100%),intermitent,intermitent,corona
+740,24.0,8400.4,multi_jet (100%),intermitent,intermitent,corona
+741,24.0,8600.53,multi_jet (100%),dripping,intermitent,undefined
+742,24.0,8800.36,multi_jet (100%),dripping,intermitent,undefined
+743,24.0,9000.24,multi_jet (100%),dripping,intermitent,undefined
+744,25.0,3000.44,dripping (100%),cone_jet,intermitent,undefined
+745,25.0,3200.34,dripping (100%),cone_jet,intermitent,undefined
+746,25.0,3400.5,dripping (100%),cone_jet,intermitent,undefined
+747,25.0,3600.47,dripping (99%),cone_jet,intermitent,undefined
+748,25.0,3800.62,dripping (86%),cone_jet,intermitent,undefined
+749,25.0,4000.46,dripping (75%),cone_jet,intermitent,undefined
+750,25.0,4200.61,intermitent (61%),cone_jet,intermitent,undefined
+751,25.0,4400.44,dripping (87%),cone_jet,intermitent,undefined
+752,25.0,4600.65,intermitent (99%),undefined,intermitent,undefined
+753,25.0,4800.52,intermitent (100%),undefined,intermitent,undefined
+754,25.0,5000.68,intermitent (73%),undefined,intermitent,undefined
+755,25.0,5200.48,intermitent (100%),undefined,intermitent,undefined
+756,25.0,5400.63,intermitent (93%),dripping,intermitent,undefined
+757,25.0,5600.46,cone_jet (100%),undefined,intermitent,undefined
+758,25.0,5800.66,cone_jet (100%),undefined,intermitent,undefined
+759,25.0,6000.5,cone_jet (100%),undefined,intermitent,undefined
+760,25.0,6200.64,cone_jet (98%),undefined,intermitent,undefined
+761,25.0,6400.39,cone_jet (95%),dripping,none,undefined
+762,25.0,6600.51,multi_jet (86%),undefined,intermitent,undefined
+763,25.0,6800.34,multi_jet (97%),undefined,intermitent,undefined
+764,25.0,7000.54,multi_jet (100%),intermitent,intermitent,corona
+765,25.0,7200.38,multi_jet (100%),intermitent,intermitent,corona
+766,25.0,7400.57,multi_jet (100%),intermitent,intermitent,corona
+767,25.0,7600.38,multi_jet (100%),dripping,intermitent,undefined
+768,25.0,7800.5,multi_jet (100%),intermitent,intermitent,corona
+769,25.0,8000.43,multi_jet (100%),dripping,intermitent,corona
+770,25.0,8200.59,multi_jet (100%),intermitent,intermitent,corona
+771,25.0,8400.4,multi_jet (100%),intermitent,intermitent,corona
+772,25.0,8600.54,multi_jet (100%),dripping,intermitent,undefined
+773,25.0,8800.4,multi_jet (100%),dripping,intermitent,corona
+774,25.0,9000.23,multi_jet (100%),intermitent,intermitent,corona
+775,30.0,3000.43,dripping (100%),cone_jet,intermitent,undefined
+776,30.0,3200.35,dripping (100%),cone_jet,intermitent,undefined
+777,30.0,3400.46,dripping (100%),cone_jet,intermitent,undefined
+778,30.0,3600.45,dripping (52%),cone_jet,intermitent,undefined
+779,30.0,3800.61,cone_jet (49%),cone_jet,intermitent,undefined
+780,30.0,4000.46,dripping (81%),cone_jet,intermitent,undefined
+781,30.0,4200.61,dripping (97%),cone_jet,intermitent,undefined
+782,30.0,4400.45,intermitent (99%),cone_jet,intermitent,undefined
+783,30.0,4600.66,dripping (95%),cone_jet,intermitent,undefined
+784,30.0,4800.53,intermitent (100%),cone_jet,intermitent,undefined
+785,30.0,5000.7,intermitent (98%),cone_jet,intermitent,undefined
+786,30.0,5200.46,intermitent (67%),cone_jet,intermitent,undefined
+787,30.0,5400.63,intermitent (49%),undefined,intermitent,undefined
+788,30.0,5600.47,intermitent (81%),undefined,intermitent,undefined
+789,30.0,5800.67,cone_jet (100%),undefined,intermitent,undefined
+790,30.0,6000.5,cone_jet (92%),undefined,intermitent,undefined
+791,30.0,6200.67,cone_jet (100%),undefined,intermitent,undefined
+792,30.0,6400.4,cone_jet (93%),undefined,intermitent,undefined
+793,30.0,6600.53,multi_jet (66%),dripping,intermitent,undefined
+794,30.0,6800.33,multi_jet (100%),undefined,intermitent,undefined
+795,30.0,7000.55,multi_jet (100%),undefined,intermitent,undefined
+796,30.0,7200.41,multi_jet (100%),dripping,intermitent,undefined
+797,30.0,7400.58,multi_jet (100%),intermitent,intermitent,corona
+798,30.0,7600.38,multi_jet (100%),intermitent,intermitent,corona
+799,30.0,7800.52,multi_jet (100%),intermitent,intermitent,corona
+800,30.0,8000.39,multi_jet (100%),intermitent,intermitent,corona
+801,30.0,8200.6,multi_jet (100%),intermitent,intermitent,corona
+802,30.0,8400.44,multi_jet (100%),intermitent,intermitent,corona
+803,30.0,8600.56,multi_jet (100%),intermitent,intermitent,corona
+804,30.0,8800.39,multi_jet (100%),intermitent,intermitent,corona
+805,30.0,9000.24,multi_jet (100%),dripping,intermitent,undefined
+806,35.0,3000.6,dripping (99%),cone_jet,intermitent,undefined
+807,35.0,3200.4,dripping (100%),cone_jet,intermitent,undefined
+808,35.0,3400.52,dripping (100%),cone_jet,intermitent,undefined
+809,35.0,3600.38,dripping (93%),cone_jet,intermitent,undefined
+810,35.0,3800.62,dripping (96%),cone_jet,intermitent,undefined
+811,35.0,4000.48,dripping (79%),cone_jet,intermitent,undefined
+812,35.0,4200.54,intermitent (100%),cone_jet,intermitent,undefined
+813,35.0,4400.46,intermitent (100%),cone_jet,intermitent,undefined
+814,35.0,4600.66,intermitent (100%),dripping,intermitent,undefined
+815,35.0,4800.53,intermitent (100%),cone_jet,intermitent,undefined
+816,35.0,5000.7,intermitent (100%),cone_jet,intermitent,undefined
+817,35.0,5200.48,intermitent (100%),cone_jet,intermitent,undefined
+818,35.0,5400.62,intermitent (100%),undefined,intermitent,undefined
+819,35.0,5600.47,cone_jet (89%),undefined,intermitent,undefined
+820,35.0,5800.68,cone_jet (60%),undefined,intermitent,undefined
+821,35.0,6000.52,cone_jet (100%),undefined,intermitent,undefined
+822,35.0,6200.68,cone_jet (100%),undefined,intermitent,undefined
+823,35.0,6400.4,cone_jet (100%),undefined,intermitent,undefined
+824,35.0,6600.51,cone_jet (100%),undefined,intermitent,undefined
+825,35.0,6800.35,multi_jet (100%),undefined,intermitent,undefined
+826,35.0,7000.63,multi_jet (100%),dripping,intermitent,undefined
+827,35.0,7200.42,multi_jet (100%),dripping,intermitent,undefined
+828,35.0,7400.59,multi_jet (100%),dripping,intermitent,undefined
+829,35.0,7600.39,multi_jet (100%),dripping,intermitent,undefined
+830,35.0,7800.51,multi_jet (100%),intermitent,intermitent,corona
+831,35.0,8000.41,multi_jet (100%),intermitent,intermitent,corona
+832,35.0,8200.61,multi_jet (100%),intermitent,intermitent,corona
+833,35.0,8400.43,multi_jet (100%),intermitent,intermitent,corona
+834,35.0,8600.58,multi_jet (100%),intermitent,intermitent,corona
+835,35.0,8800.4,multi_jet (100%),dripping,intermitent,undefined
+836,35.0,9000.27,multi_jet (100%),dripping,intermitent,undefined
+837,40.0,3000.43,dripping (100%),cone_jet,intermitent,undefined
+838,40.0,3200.33,dripping (100%),cone_jet,intermitent,undefined
+839,40.0,3400.61,dripping (100%),cone_jet,intermitent,undefined
+840,40.0,3600.33,dripping (100%),cone_jet,intermitent,undefined
+841,40.0,3800.63,intermitent (99%),cone_jet,intermitent,undefined
+842,40.0,4000.46,intermitent (100%),cone_jet,intermitent,undefined
+843,40.0,4200.62,dripping (96%),cone_jet,intermitent,undefined
+844,40.0,4400.45,intermitent (99%),dripping,intermitent,undefined
+845,40.0,4600.69,intermitent (100%),cone_jet,intermitent,undefined
+846,40.0,4800.53,intermitent (100%),cone_jet,intermitent,undefined
+847,40.0,5000.71,intermitent (100%),cone_jet,intermitent,undefined
+848,40.0,5200.49,intermitent (96%),dripping,intermitent,undefined
+849,40.0,5400.66,cone_jet (71%),undefined,intermitent,undefined
+850,40.0,5600.47,intermitent (86%),undefined,intermitent,undefined
+851,40.0,5800.68,cone_jet (84%),undefined,intermitent,undefined
+852,40.0,6000.51,cone_jet (100%),undefined,intermitent,undefined
+853,40.0,6200.67,cone_jet (100%),dripping,none,undefined
+854,40.0,6400.42,cone_jet (96%),undefined,intermitent,undefined
+855,40.0,6600.53,cone_jet (62%),undefined,intermitent,undefined
+856,40.0,6800.35,multi_jet (100%),undefined,intermitent,undefined
+857,40.0,7000.58,multi_jet (100%),dripping,undefined,undefined
+858,40.0,7200.42,multi_jet (99%),dripping,intermitent,undefined
+859,40.0,7400.57,multi_jet (100%),intermitent,intermitent,corona
+860,40.0,7600.38,multi_jet (99%),intermitent,intermitent,corona
+861,40.0,7800.53,multi_jet (100%),intermitent,intermitent,corona
+862,40.0,8000.42,multi_jet (100%),intermitent,intermitent,corona
+863,40.0,8200.62,multi_jet (100%),intermitent,intermitent,corona
+864,40.0,8400.44,multi_jet (100%),intermitent,intermitent,corona
+865,40.0,8600.57,multi_jet (100%),intermitent,intermitent,corona
+866,40.0,8800.39,multi_jet (100%),intermitent,intermitent,corona
+867,40.0,9000.25,multi_jet (100%),intermitent,intermitent,corona
+868,50.0,3000.44,dripping (100%),undefined,intermitent,undefined
+869,50.0,3200.33,dripping (99%),intermitent,intermitent,intermitent
+870,50.0,3400.48,dripping (100%),undefined,intermitent,undefined
+871,50.0,3600.34,dripping (100%),intermitent,intermitent,intermitent
+872,50.0,3800.51,intermitent (100%),intermitent,intermitent,intermitent
+873,50.0,4000.45,intermitent (99%),undefined,intermitent,undefined
+874,50.0,4200.62,intermitent (100%),intermitent,intermitent,intermitent
+875,50.0,4400.45,dripping (55%),undefined,intermitent,undefined
+876,50.0,4600.66,intermitent (100%),intermitent,intermitent,intermitent
+877,50.0,4800.52,intermitent (100%),intermitent,intermitent,intermitent
+878,50.0,5000.68,intermitent (100%),cone_jet,cone_jet,cone_jet
+879,50.0,5200.46,cone_jet (84%),cone_jet,cone_jet,cone_jet
+880,50.0,5400.63,intermitent (100%),undefined,intermitent,undefined
+881,50.0,5600.46,multi_jet (66%),cone_jet,cone_jet,cone_jet
+882,50.0,5800.67,cone_jet (100%),cone_jet,multi_jet,cone_jet
+883,50.0,6000.51,cone_jet (90%),undefined,multi_jet,cone_jet
+884,50.0,6200.67,cone_jet (99%),undefined,multi_jet,cone_jet
+885,50.0,6400.39,multi_jet (59%),multi_jet,multi_jet,cone_jet
+886,50.0,6600.51,multi_jet (99%),multi_jet,multi_jet,cone_jet
+887,50.0,6800.33,multi_jet (100%),multi_jet,multi_jet,cone_jet
+888,50.0,7000.54,multi_jet (100%),multi_jet,multi_jet,multi_jet
+889,50.0,7200.39,multi_jet (100%),multi_jet,multi_jet,multi_jet
+890,50.0,7400.57,multi_jet (100%),multi_jet,multi_jet,multi_jet
+891,50.0,7600.37,multi_jet (100%),multi_jet,multi_jet,multi_jet
+892,50.0,7800.52,multi_jet (100%),multi_jet,multi_jet,multi_jet
+893,50.0,8000.38,multi_jet (100%),multi_jet,multi_jet,multi_jet
+894,50.0,8200.59,multi_jet (100%),multi_jet,multi_jet,multi_jet
+895,50.0,8400.41,multi_jet (100%),multi_jet,multi_jet,multi_jet
+896,50.0,8600.55,multi_jet (100%),multi_jet,multi_jet,multi_jet
+897,50.0,8800.36,multi_jet (100%),multi_jet,multi_jet,multi_jet
+898,50.0,9000.26,multi_jet (100%),multi_jet,multi_jet,multi_jet
+899,60.0,3000.6,dripping (100%),undefined,intermitent,undefined
+900,60.0,3200.38,dripping (100%),undefined,intermitent,undefined
+901,60.0,3400.51,dripping (100%),intermitent,intermitent,intermitent
+902,60.0,3600.46,intermitent (83%),undefined,intermitent,undefined
+903,60.0,3800.65,intermitent (84%),cone_jet,cone_jet,cone_jet
+904,60.0,4000.47,intermitent (95%),undefined,intermitent,undefined
+905,60.0,4200.62,intermitent (100%),undefined,intermitent,undefined
+906,60.0,4400.46,intermitent (100%),cone_jet,cone_jet,cone_jet
+907,60.0,4600.66,intermitent (100%),undefined,intermitent,undefined
+908,60.0,4800.54,intermitent (100%),undefined,intermitent,undefined
+909,60.0,5000.69,intermitent (100%),cone_jet,cone_jet,cone_jet
+910,60.0,5200.46,intermitent (54%),cone_jet,cone_jet,cone_jet
+911,60.0,5400.64,dripping (85%),undefined,intermitent,undefined
+912,60.0,5600.47,intermitent (58%),cone_jet,cone_jet,cone_jet
+913,60.0,5800.67,cone_jet (98%),cone_jet,multi_jet,cone_jet
+914,60.0,6000.52,cone_jet (99%),undefined,multi_jet,cone_jet
+915,60.0,6200.65,cone_jet (99%),undefined,multi_jet,cone_jet
+916,60.0,6400.36,cone_jet (99%),multi_jet,multi_jet,cone_jet
+917,60.0,6600.49,multi_jet (100%),multi_jet,multi_jet,cone_jet
+918,60.0,6800.35,multi_jet (100%),multi_jet,multi_jet,cone_jet
+919,60.0,7000.58,multi_jet (100%),multi_jet,multi_jet,multi_jet
+920,60.0,7200.41,multi_jet (100%),multi_jet,multi_jet,multi_jet
+921,60.0,7400.56,multi_jet (100%),multi_jet,multi_jet,multi_jet
+922,60.0,7600.39,multi_jet (100%),multi_jet,multi_jet,multi_jet
+923,60.0,7800.55,multi_jet (100%),multi_jet,multi_jet,multi_jet
+924,60.0,8000.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+925,60.0,8200.61,multi_jet (100%),multi_jet,multi_jet,multi_jet
+926,60.0,8400.43,multi_jet (100%),multi_jet,multi_jet,multi_jet
+927,60.0,8600.56,multi_jet (100%),multi_jet,multi_jet,multi_jet
+928,60.0,8800.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+929,60.0,9000.24,multi_jet (100%),multi_jet,multi_jet,multi_jet
+930,70.0,3000.58,dripping (100%),undefined,intermitent,undefined
+931,70.0,3200.38,dripping (100%),intermitent,intermitent,intermitent
+932,70.0,3400.5,dripping (100%),undefined,intermitent,undefined
+933,70.0,3600.34,dripping (97%),undefined,intermitent,undefined
+934,70.0,3800.5,intermitent (100%),intermitent,intermitent,intermitent
+935,70.0,4000.46,dripping (99%),undefined,intermitent,undefined
+936,70.0,4200.61,dripping (68%),intermitent,intermitent,intermitent
+937,70.0,4400.44,intermitent (100%),cone_jet,cone_jet,cone_jet
+938,70.0,4600.68,intermitent (100%),cone_jet,cone_jet,cone_jet
+939,70.0,4800.52,intermitent (100%),cone_jet,intermitent,cone_jet
+940,70.0,5000.69,intermitent (100%),intermitent,intermitent,intermitent
+941,70.0,5200.46,multi_jet (40%),cone_jet,cone_jet,cone_jet
+942,70.0,5400.65,intermitent (100%),cone_jet,cone_jet,cone_jet
+943,70.0,5600.48,cone_jet (50%),cone_jet,cone_jet,cone_jet
+944,70.0,5800.68,intermitent (96%),cone_jet,multi_jet,cone_jet
+945,70.0,6000.5,multi_jet (100%),undefined,intermitent,undefined
+946,70.0,6200.65,multi_jet (78%),undefined,multi_jet,cone_jet
+947,70.0,6400.38,dripping (91%),undefined,intermitent,undefined
+948,70.0,6600.52,multi_jet (100%),multi_jet,multi_jet,cone_jet
+949,70.0,6800.38,multi_jet (100%),multi_jet,multi_jet,cone_jet
+950,70.0,7000.58,multi_jet (100%),multi_jet,multi_jet,multi_jet
+951,70.0,7200.43,multi_jet (100%),multi_jet,multi_jet,multi_jet
+952,70.0,7400.58,multi_jet (99%),multi_jet,multi_jet,multi_jet
+953,70.0,7600.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+954,70.0,7800.53,multi_jet (100%),multi_jet,multi_jet,multi_jet
+955,70.0,8000.39,multi_jet (100%),multi_jet,multi_jet,multi_jet
+956,70.0,8200.63,multi_jet (100%),multi_jet,multi_jet,multi_jet
+957,70.0,8400.43,multi_jet (100%),multi_jet,multi_jet,multi_jet
+958,70.0,8600.57,multi_jet (100%),multi_jet,multi_jet,multi_jet
+959,70.0,8800.39,multi_jet (100%),multi_jet,multi_jet,multi_jet
+960,70.0,9000.26,multi_jet (100%),multi_jet,multi_jet,multi_jet
+961,80.0,3000.58,dripping (100%),undefined,intermitent,undefined
+962,80.0,3200.37,dripping (100%),intermitent,intermitent,intermitent
+963,80.0,3400.59,dripping (100%),undefined,intermitent,undefined
+964,80.0,3600.33,dripping (100%),undefined,intermitent,undefined
+965,80.0,3800.6,intermitent (51%),cone_jet,cone_jet,cone_jet
+966,80.0,4000.44,intermitent (100%),undefined,intermitent,undefined
+967,80.0,4200.61,intermitent (99%),undefined,intermitent,undefined
+968,80.0,4400.46,intermitent (100%),cone_jet,cone_jet,cone_jet
+969,80.0,4600.67,intermitent (100%),cone_jet,cone_jet,cone_jet
+970,80.0,4800.53,intermitent (99%),undefined,intermitent,undefined
+971,80.0,5000.68,intermitent (100%),cone_jet,cone_jet,cone_jet
+972,80.0,5200.45,intermitent (100%),cone_jet,cone_jet,cone_jet
+973,80.0,5400.63,intermitent (100%),cone_jet,intermitent,cone_jet
+974,80.0,5600.46,intermitent (78%),cone_jet,intermitent,cone_jet
+975,80.0,5800.68,intermitent (96%),cone_jet,cone_jet,cone_jet
+976,80.0,6000.52,intermitent (97%),undefined,multi_jet,cone_jet
+977,80.0,6200.67,multi_jet (54%),undefined,intermitent,undefined
+978,80.0,6400.37,multi_jet (78%),multi_jet,multi_jet,cone_jet
+979,80.0,6600.51,multi_jet (96%),multi_jet,multi_jet,cone_jet
+980,80.0,6800.35,multi_jet (83%),multi_jet,multi_jet,cone_jet
+981,80.0,7000.57,multi_jet (100%),multi_jet,multi_jet,multi_jet
+982,80.0,7200.42,multi_jet (100%),multi_jet,multi_jet,multi_jet
+983,80.0,7400.59,multi_jet (100%),multi_jet,multi_jet,multi_jet
+984,80.0,7600.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+985,80.0,7800.55,multi_jet (100%),multi_jet,multi_jet,multi_jet
+986,80.0,8000.38,multi_jet (100%),multi_jet,multi_jet,multi_jet
+987,80.0,8200.63,multi_jet (100%),multi_jet,multi_jet,multi_jet
+988,80.0,8400.45,multi_jet (100%),multi_jet,multi_jet,multi_jet
+989,80.0,8600.57,multi_jet (100%),multi_jet,multi_jet,multi_jet
+990,80.0,8800.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+991,80.0,9000.25,multi_jet (100%),multi_jet,multi_jet,multi_jet
+992,45.0,3000.44,dripping (100%),intermitent,intermitent,intermitent
+993,45.0,3200.35,dripping (100%),intermitent,intermitent,intermitent
+994,45.0,3400.47,dripping (99%),undefined,intermitent,undefined
+995,45.0,3600.45,intermitent (100%),intermitent,intermitent,intermitent
+996,45.0,3800.63,intermitent (100%),undefined,intermitent,undefined
+997,45.0,4000.46,dripping (92%),intermitent,intermitent,intermitent
+998,45.0,4200.61,intermitent (99%),undefined,intermitent,undefined
+999,45.0,4400.44,intermitent (95%),undefined,intermitent,undefined
+1000,45.0,4600.62,intermitent (99%),undefined,intermitent,undefined
+1001,45.0,4800.5,cone_jet (57%),cone_jet,cone_jet,cone_jet
+1002,45.0,5000.7,intermitent (93%),cone_jet,cone_jet,cone_jet
+1003,45.0,5200.47,cone_jet (93%),undefined,intermitent,undefined
+1004,45.0,5400.66,cone_jet (70%),cone_jet,cone_jet,cone_jet
+1005,45.0,5600.47,cone_jet (95%),cone_jet,cone_jet,cone_jet
+1006,45.0,5800.69,cone_jet (93%),cone_jet,multi_jet,cone_jet
+1007,45.0,6000.5,cone_jet (89%),undefined,multi_jet,cone_jet
+1008,45.0,6200.66,cone_jet (81%),undefined,multi_jet,cone_jet
+1009,45.0,6400.4,multi_jet (100%),multi_jet,multi_jet,cone_jet
+1010,45.0,6600.51,multi_jet (100%),multi_jet,multi_jet,cone_jet
+1011,45.0,6800.33,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1012,45.0,7000.59,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1013,45.0,7200.43,multi_jet (99%),multi_jet,multi_jet,multi_jet
+1014,45.0,7400.58,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1015,45.0,7600.37,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1016,45.0,7800.52,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1017,45.0,8000.38,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1018,45.0,8200.61,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1019,45.0,8400.42,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1020,45.0,8600.57,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1021,45.0,8800.41,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1022,45.0,9000.27,dripping (100%),multi_jet,multi_jet,multi_jet
+1023,65.0,3000.58,dripping (100%),undefined,intermitent,undefined
+1024,65.0,3200.37,dripping (100%),undefined,intermitent,undefined
+1025,65.0,3400.5,dripping (100%),intermitent,intermitent,intermitent
+1026,65.0,3600.47,intermitent (99%),intermitent,intermitent,intermitent
+1027,65.0,3800.62,dripping (98%),cone_jet,cone_jet,cone_jet
+1028,65.0,4000.48,intermitent (100%),intermitent,intermitent,intermitent
+1029,65.0,4200.62,intermitent (100%),cone_jet,cone_jet,cone_jet
+1030,65.0,4400.46,intermitent (100%),intermitent,intermitent,intermitent
+1031,65.0,4600.67,intermitent (99%),intermitent,intermitent,intermitent
+1032,65.0,4800.54,intermitent (100%),undefined,intermitent,undefined
+1033,65.0,5000.7,intermitent (64%),undefined,intermitent,undefined
+1034,65.0,5200.46,intermitent (45%),cone_jet,cone_jet,cone_jet
+1035,65.0,5400.62,dripping (87%),cone_jet,cone_jet,cone_jet
+1036,65.0,5600.47,cone_jet (76%),cone_jet,multi_jet,cone_jet
+1037,65.0,5800.69,multi_jet (51%),cone_jet,multi_jet,cone_jet
+1038,65.0,6000.52,cone_jet (100%),undefined,multi_jet,cone_jet
+1039,65.0,6200.66,cone_jet (92%),undefined,multi_jet,cone_jet
+1040,65.0,6400.39,multi_jet (100%),multi_jet,multi_jet,cone_jet
+1041,65.0,6600.52,multi_jet (100%),multi_jet,multi_jet,cone_jet
+1042,65.0,6800.36,multi_jet (100%),multi_jet,multi_jet,cone_jet
+1043,65.0,7000.54,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1044,65.0,7200.42,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1045,65.0,7400.61,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1046,65.0,7600.39,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1047,65.0,7800.54,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1048,65.0,8000.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1049,65.0,8200.63,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1050,65.0,8400.45,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1051,65.0,8600.56,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1052,65.0,8800.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1053,65.0,9000.27,dripping (100%),multi_jet,multi_jet,multi_jet
+1054,90.0,3000.58,dripping (100%),undefined,intermitent,undefined
+1055,90.0,3200.37,dripping (100%),intermitent,intermitent,intermitent
+1056,90.0,3400.49,intermitent (98%),intermitent,intermitent,intermitent
+1057,90.0,3600.47,intermitent (100%),intermitent,intermitent,intermitent
+1058,90.0,3800.63,intermitent (100%),intermitent,intermitent,intermitent
+1059,90.0,4000.38,intermitent (100%),undefined,intermitent,undefined
+1060,90.0,4200.62,intermitent (100%),cone_jet,cone_jet,cone_jet
+1061,90.0,4400.46,intermitent (100%),cone_jet,cone_jet,cone_jet
+1062,90.0,4600.66,intermitent (99%),cone_jet,cone_jet,cone_jet
+1063,90.0,4800.5,intermitent (100%),undefined,intermitent,undefined
+1064,90.0,5000.69,intermitent (100%),intermitent,intermitent,intermitent
+1065,90.0,5200.47,intermitent (98%),undefined,intermitent,undefined
+1066,90.0,5400.63,intermitent (100%),cone_jet,cone_jet,cone_jet
+1067,90.0,5600.47,intermitent (99%),cone_jet,cone_jet,cone_jet
+1068,90.0,5800.68,multi_jet (97%),cone_jet,cone_jet,cone_jet
+1069,90.0,6000.52,intermitent (56%),undefined,multi_jet,cone_jet
+1070,90.0,6200.66,multi_jet (99%),undefined,multi_jet,cone_jet
+1071,90.0,6400.38,intermitent (54%),multi_jet,multi_jet,cone_jet
+1072,90.0,6600.52,multi_jet (96%),multi_jet,multi_jet,cone_jet
+1073,90.0,6800.41,intermitent (95%),multi_jet,multi_jet,cone_jet
+1074,90.0,7000.58,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1075,90.0,7200.41,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1076,90.0,7400.55,multi_jet (99%),multi_jet,multi_jet,multi_jet
+1077,90.0,7600.41,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1078,90.0,7800.55,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1079,90.0,8000.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1080,90.0,8200.63,multi_jet (100%),undefined,undefined,undefined
+1081,90.0,8400.44,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1082,90.0,8600.55,multi_jet (100%),multi_jet,undefined,undefined
+1083,90.0,8800.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1084,90.0,9000.28,dripping (100%),multi_jet,multi_jet,multi_jet
+1085,100.0,3000.58,dripping (100%),undefined,intermitent,undefined
+1086,100.0,3200.39,dripping (100%),intermitent,intermitent,intermitent
+1087,100.0,3400.62,intermitent (98%),intermitent,intermitent,intermitent
+1088,100.0,3600.35,intermitent (100%),undefined,intermitent,undefined
+1089,100.0,3800.52,intermitent (100%),cone_jet,cone_jet,cone_jet
+1090,100.0,4000.36,intermitent (100%),cone_jet,cone_jet,cone_jet
+1091,100.0,4200.62,intermitent (99%),intermitent,intermitent,intermitent
+1092,100.0,4400.46,intermitent (100%),cone_jet,intermitent,cone_jet
+1093,100.0,4600.66,intermitent (100%),cone_jet,cone_jet,cone_jet
+1094,100.0,4800.51,intermitent (100%),cone_jet,cone_jet,cone_jet
+1095,100.0,5000.71,intermitent (100%),cone_jet,cone_jet,cone_jet
+1096,100.0,5200.47,intermitent (78%),cone_jet,cone_jet,cone_jet
+1097,100.0,5400.66,intermitent (85%),intermitent,intermitent,intermitent
+1098,100.0,5600.49,multi_jet (99%),cone_jet,cone_jet,cone_jet
+1099,100.0,5800.69,intermitent (100%),undefined,intermitent,undefined
+1100,100.0,6000.53,multi_jet (86%),undefined,multi_jet,cone_jet
+1101,100.0,6200.67,intermitent (96%),undefined,multi_jet,cone_jet
+1102,100.0,6400.36,intermitent (86%),multi_jet,multi_jet,cone_jet
+1103,100.0,6600.5,multi_jet (70%),multi_jet,multi_jet,cone_jet
+1104,100.0,6800.36,multi_jet (99%),multi_jet,multi_jet,cone_jet
+1105,100.0,7000.61,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1106,100.0,7200.41,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1107,100.0,7400.6,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1108,100.0,7600.4,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1109,100.0,7800.54,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1110,100.0,8000.39,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1111,100.0,8200.64,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1112,100.0,8400.45,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1113,100.0,8600.59,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1114,100.0,8800.42,multi_jet (100%),multi_jet,multi_jet,multi_jet
+1115,100.0,9000.25,N/A,multi_jet,multi_jet,multi_jet

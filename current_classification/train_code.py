@@ -29,6 +29,7 @@ EXCLUDE_FEATURES = [
     "current_PS",
     "voltage_error",
     "target_voltage",
+    "actual_voltage"
 ]
 # List labels you want to ignore/drop
 INVALID_LABELS = ["undefined","unconclusive","noise", "", None]
@@ -89,37 +90,38 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
     return df
 
 
-# 0 - Init DB
-BASE = Path(r"data")
-print(os.getcwd())
-db = ElectrosprayDatabase(str(BASE))
+if __name__ == '__main__':
+    # 0 - Init DB
+    BASE = Path(r"data")
+    print(os.getcwd())
+    db = ElectrosprayDatabase(str(BASE))
+        
     
-
-# 1. Load Data
-df_db = db.load_training_dataframe()
-
-# 2. FILTER SAMPLES: Keep only rows with valid manual labels
-# This removes NaN values and values in your INVALID_LABELS list
-df_labeled = df_db[
-    df_db['manual_classification'].notna() & 
-    (~df_db['manual_classification'].isin(INVALID_LABELS))
-].copy()
-
-print(f"Training on {len(df_labeled)} samples with valid manual labels.")
-
-# 3. Build Matrix
-df_features = build_feature_matrix(df_labeled, BASE / "raw_waveforms", SAMPLING_FREQ)
-
-# 4. Normalize and Train
-# A. Prepare data using your custom normalization logic
-df_norm, X, labels, feature_names, normalizer = prepare_training_data(df_features)
-
-# B. Pass the UN-FITTED normalizer into your original train function
-# The function will then fit it on the training split as you intended.
-training_results = train(
-    X=X, 
-    labels=labels, 
-    feature_names=feature_names, 
-    normalizer=normalizer, 
-    save_folder="current_classification/models"
-)
+    # 1. Load Data
+    df_db = db.load_training_dataframe()
+    
+    # 2. FILTER SAMPLES: Keep only rows with valid manual labels
+    # This removes NaN values and values in your INVALID_LABELS list
+    df_labeled = df_db[
+        df_db['manual_classification'].notna() & 
+        (~df_db['manual_classification'].isin(INVALID_LABELS))
+    ].copy()
+    
+    print(f"Training on {len(df_labeled)} samples with valid manual labels.")
+    
+    # 3. Build Matrix
+    df_features = build_feature_matrix(df_labeled, BASE / "raw_waveforms", SAMPLING_FREQ)
+    
+    # 4. Normalize and Train
+    # A. Prepare data using your custom normalization logic
+    df_norm, X, labels, feature_names, normalizer = prepare_training_data(df_features)
+    
+    # B. Pass the UN-FITTED normalizer into your original train function
+    # The function will then fit it on the training split as you intended.
+    training_results = train(
+        X=X, 
+        labels=labels, 
+        feature_names=feature_names, 
+        normalizer=normalizer, 
+        save_folder="current_classification/models"
+    )

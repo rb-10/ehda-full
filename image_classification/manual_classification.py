@@ -85,15 +85,21 @@ for idx, (img_path, current_class) in enumerate(all_images):
     if manual_class in CLASSES:
         print(f"[{idx+1}] Skipping: Already classified as '{manual_class}'")
         continue
-    #if ai_label == "multi_jet (100%)":
-        #print(f"[{idx+1}] Skipping: Multi jet 100%")
-        #new_class = "multi_jet"
-        #db._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (new_class, db_id))
-        #db._conn.commit()
-        #continue
-    if idx + 1 < 4374:
+    if ai_label == "multi_jet (100%)":
+        print(f"[{idx+1}] Skipping: Multi jet 100%")
+        new_class = "multi_jet"
+        db._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (new_class, db_id))
+        db._conn.commit()
+        continue
+    if ai_label == "dripping (100%)":
+        print(f"[{idx+1}] Skipping: Multi jet 100%")
+        new_class = "dripping"
+        db._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (new_class, db_id))
+        db._conn.commit()
+        continue
+    if idx + 1 < 320:
         print(f"[{idx+1}] Skipping: Already classified as '{manual_class}'")
-        #continue
+        continue
     # Video setup
     video_path = CLIPS_FOLDER / (img_path.stem + ".mp4")
     cap = cv2.VideoCapture(str(video_path))
