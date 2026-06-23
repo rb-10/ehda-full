@@ -43,10 +43,8 @@ def create_feature_plots():
     df_normalized = normalizer.fit_transform(df_features)
     
     # Create output directories for the plots
-    output_dir_raw = Path("current_classification/plots/raw")
-    output_dir_norm = Path("current_classification/plots/normalized")
-    output_dir_raw.mkdir(parents=True, exist_ok=True)
-    output_dir_norm.mkdir(parents=True, exist_ok=True)
+    output_dir_raw = Path("current_classification/plots/comparison")
+
     
     # Set seaborn style for better visuals
     sns.set_theme(style="whitegrid")
@@ -88,10 +86,10 @@ def create_feature_plots():
         plt.tight_layout()
         
         # Save figure
-        fig.savefig(output_dir_raw.parent / f"{feature}_comparison.png", dpi=150)
+        fig.savefig(output_dir_raw / f"{feature}_comparison.png", dpi=150)
         plt.close(fig)
         
-    print(f"Plots saved successfully in {output_dir_raw.parent.absolute()}")
+    print(f"Plots saved successfully in {output_dir_raw.absolute()}")
 
 if __name__ == "__main__":
     create_feature_plots()

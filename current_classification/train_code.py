@@ -29,7 +29,9 @@ EXCLUDE_FEATURES = [
     "current_PS",
     "voltage_error",
     "target_voltage",
-    "actual_voltage"
+    "actual_voltage",
+    "mean_na",
+    "median_na"
 ]
 # List labels you want to ignore/drop
 INVALID_LABELS = ["undefined","unconclusive","noise", "", None]
@@ -124,4 +126,4 @@ if __name__ == '__main__':
         feature_names=feature_names, 
         normalizer=normalizer, 
         save_folder="current_classification/models"
-    )
+    )
