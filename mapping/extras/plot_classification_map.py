@@ -104,6 +104,23 @@ def create_stability_plot(source_col, data):
     df = data.copy()
     df['classification'] = df[source_col].apply(clean_label)
 
+    # --- Aggregate duplicate (flow_rate, actual_voltage) points ---
+    if source_col == 'image_classification':
+        # Pick the non-unclassified label; fall back to 'unclassified' if all are
+        def image_agg(labels):
+            non_unc = [l for l in labels if l != 'unclassified']
+            return non_unc[0] if non_unc else 'unclassified'
+        df = (
+            df.groupby(['flow_rate', 'actual_voltage'], as_index=False)
+              .agg(classification=('classification', image_agg))
+        )
+    else:
+        # Most common label (mode); ties broken by first occurrence
+        df = (
+            df.groupby(['flow_rate', 'actual_voltage'], as_index=False)
+              .agg(classification=('classification', lambda x: x.mode().iloc[0]))
+        )
+
     fig, ax = plt.subplots(figsize=(16, 8))
 
     def color_area(label, alpha_val):
