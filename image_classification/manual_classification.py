@@ -97,7 +97,7 @@ for idx, (img_path, current_class) in enumerate(all_images):
         db._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (new_class, db_id))
         db._conn.commit()
         continue
-    if idx + 1 < 320:
+    if idx + 1 < 0:
         print(f"[{idx+1}] Skipping: Already classified as '{manual_class}'")
         continue
     # Video setup

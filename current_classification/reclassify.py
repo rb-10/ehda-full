@@ -28,8 +28,8 @@ DEFAULT_MODEL_FOLDER  = "current_classification/models"
 DEFAULT_SCALER_FOLDER = "current_classification/scalers"
 
 # Set to True to skip samples that already have both classifications saved.
-SKIP_ALREADY_CLASSIFIED = True
-
+SKIP_ALREADY_CLASSIFIED = False
+solution_name = 'TEST3_NOCAP'
 SAMPLING_FREQ = 1e5
 RECORD_LENGTH = 50_000
 MULTIPLIER_NA = 500
@@ -169,12 +169,12 @@ def main():
         return
 
     # Use the same path your main app uses
-    db = ElectrosprayDatabase("test") 
+    db = ElectrosprayDatabase("data") 
 
     # ── 2. Fetch all records ──────────────────────────────────────────────────
     # Using pandas via the existing load_training_dataframe logic to get all rows
     print("[MAIN] Fetching records from database...")
-    all_records_df = pd.read_sql_query("SELECT * FROM measurements", db._conn)
+    all_records_df = pd.read_sql_query(f"SELECT * FROM measurements WHERE solution_name='{solution_name}'", db._conn)
     all_records = all_records_df.to_dict(orient="records")
     
     total = len(all_records)

@@ -55,6 +55,7 @@ def acquire_and_process(scp,
         time.sleep(0.01)
 
     raw = scp.get_data()
+    
     timestamp = datetime.now()
     datapoints = np.array(raw[1]) * MULTIPLIER_NA   # [nA]
 

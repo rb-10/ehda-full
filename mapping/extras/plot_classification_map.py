@@ -21,7 +21,7 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 BASE = Path(r'C:\Users\HV\Desktop\bruno_work\main\data')
 DB_PATH = str(BASE)
-SOLUTION = "TEST1"
+SOLUTION = "TEST3_NOCAP"
 
 PLOT_SOURCES = [
     'image_classification',

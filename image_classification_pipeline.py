@@ -135,11 +135,22 @@ if __name__ == "__main__":
 
     df = pd.read_csv(results_csv)
 
-    # Load ALL measurements once; we'll work in-memory
+    # Load ALL measurements once and pre-group by video_file for fast lookup.
+    # Rows within each video are sorted by id (insertion order = experiment order).
     all_rows = pd.read_sql("SELECT * FROM measurements", db._conn)
+    rows_by_video = {
+        video: grp.sort_values('id').reset_index(drop=True)
+        for video, grp in all_rows.groupby('video_file')
+    }
+
+    # Diagnostic summary so mismatches are easy to spot
+    print("Video → DB row counts:")
+    for v, grp in rows_by_video.items():
+        print(f"  {v}: {len(grp)} rows ({len(grp) // SAMPLES_PER_STEP} steps)")
 
     updated_count = 0
     skipped_count = 0
+    warn_count    = 0
 
     for _, clip_row in df.iterrows():
         clip_filename = clip_row['clip_filename']
@@ -148,40 +159,42 @@ if __name__ == "__main__":
         original_name, experiment_idx = parse_clip_name(clip_filename)
         if original_name is None:
             print(f"  [WARNING] Could not parse clip name: {clip_filename} — skipping")
+            warn_count += 1
             continue
 
-        # The solution name is the last '_'-separated token of the original video name
-        # e.g. '2026-06-24_10-58-40_TEST1' → 'TEST1'
-        solution_name = original_name.rsplit('_', 1)[-1]
-
-        # Filter to this solution's rows, ordered the same way the DB was built
-        # (assumes rows are stored in experiment order; adjust sort key if needed)
-        solution_rows = (
-            all_rows[all_rows['solution_name'].str.strip() == solution_name]
-            .sort_values('id')
-            .reset_index(drop=True)
+        # Match original_name against the video_file column.
+        # video_file may include an extension (.mp4) so we try both.
+        video_key = next(
+            (k for k in rows_by_video
+             if Path(k).stem == original_name or k == original_name),
+            None
         )
-
-        if solution_rows.empty:
-            print(f"  [WARNING] No DB rows found for solution '{solution_name}' — skipping {clip_filename}")
+        if video_key is None:
+            print(f"  [WARNING] '{original_name}' not found in video_file column — skipping {clip_filename}")
+            print(f"            Available video_file values: {list(rows_by_video.keys())}")
+            warn_count += 1
             continue
 
-        # Each experiment index maps to a block of SAMPLES_PER_STEP consecutive rows
+        video_rows = rows_by_video[video_key]
+
+        # experiment_idx resets to 0 per video, so index directly into that video's rows
         start = experiment_idx * SAMPLES_PER_STEP
         end   = start + SAMPLES_PER_STEP
-        target_rows = solution_rows.iloc[start:end]
+        target_rows = video_rows.iloc[start:end]
 
         if target_rows.empty:
-            print(f"  [WARNING] Experiment index {experiment_idx} out of range for '{solution_name}' — skipping")
+            print(f"  [WARNING] Experiment index {experiment_idx} out of range for "
+                  f"'{video_key}' ({len(video_rows)} rows) — skipping {clip_filename}")
+            warn_count += 1
             continue
 
         # Skip if every row in this block is already classified
-        already_classified = target_rows['image_classification'].notna() & \
-                             (target_rows['image_classification'].str.strip() != '') & \
-                             (target_rows['image_classification'].str.strip() != 'N/A')
-
+        already_classified = (
+            target_rows['image_classification'].notna() &
+            (target_rows['image_classification'].str.strip() != '') &
+            (target_rows['image_classification'].str.strip() != 'N/A')
+        )
         if already_classified.all():
-            print(f"  [SKIP] {clip_filename} — all {SAMPLES_PER_STEP} rows already classified")
             skipped_count += 1
             continue
 
@@ -190,8 +203,10 @@ if __name__ == "__main__":
             db.update_image_classification(db_id, pred_class)
             updated_count += 1
 
-        print(f"  [OK] {clip_filename} → '{pred_class}' written to {len(target_rows)} rows "
-              f"(experiment {experiment_idx}, solution '{solution_name}')")
+        print(f"  [OK] {clip_filename} → '{pred_class}' "
+              f"(video '{video_key}', step {experiment_idx}, {len(target_rows)} rows)")
 
     db.close()
-    print(f"\nDone. {updated_count} rows updated, {skipped_count} steps skipped (already classified).")
+    print(f"\nDone. {updated_count} rows updated, "
+          f"{skipped_count} steps skipped (already classified), "
+          f"{warn_count} warnings.")

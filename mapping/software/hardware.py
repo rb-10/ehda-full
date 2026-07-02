@@ -19,7 +19,6 @@ from mapping.software.PUMP_functions import (PUMP_initialize, set_pump_direction
 
 class Hardware:
 
-    SAMPLING_FREQ = 1e5   # Hz  (100 kHz → 50 k samples = 0.5 s)
 
     def __init__(self, cfg: dict):
         meas = cfg["typeofmeasurement"]
@@ -85,14 +84,15 @@ class Hardware:
         for item in libtiepie.device_list:
             if item.can_open(libtiepie.DEVICETYPE_OSCILLOSCOPE):
                 self.scp = item.open_oscilloscope()
-                break
+                if self.scp.measure_modes & libtiepie.MM_BLOCK:
+                    break
+                else: 
+                    self.scp = None
         if self.scp is None:
             print("[HARDWARE] FATAL: No oscilloscope found")
             self.set_voltage(0)
             sys.exit(1)
-        self.scp = configuration_tiepie.config_TiePieScope(
-            self.scp, self.SAMPLING_FREQ
-        )
+        self.scp = configuration_tiepie.config_TiePieScope(self.scp)
         print("[HARDWARE] Oscilloscope ready")
 
     # ── Shutdown ───────────────────────────────────────────────────────

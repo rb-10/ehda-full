@@ -31,7 +31,8 @@ EXCLUDE_FEATURES = [
     "target_voltage",
     "actual_voltage",
     "mean_na",
-    "median_na"
+    "median_na",
+    "rms_na"
 ]
 # List labels you want to ignore/drop
 INVALID_LABELS = ["undefined","unconclusive","noise", "", None]
