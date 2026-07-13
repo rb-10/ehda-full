@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from scipy.signal import butter
 from tqdm import tqdm
+import re
 
 # Add project root to Python path
 project_root = Path(__file__).parent.parent  # Goes up 3 levels to 'main/'
@@ -35,7 +36,7 @@ EXCLUDE_FEATURES = [
     "rms_na"
 ]
 # List labels you want to ignore/drop
-INVALID_LABELS = ["undefined","unconclusive","noise", "", None]
+INVALID_LABELS = ["N/A","undefined","unconclusive","noise", "", None]
 
 def build_feature_matrix(df_db, raw_dir, sample_rate):
     """
@@ -79,7 +80,7 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
                 "flow_rate":      float(row["flow_rate"]),
                 "voltage_error":  float(row["actual_voltage"]) - float(row["target_voltage"]),
                 "current_PS":     float(row.get("actual_current_ps", 0.0)),
-                "label":          row["manual_classification"]
+                "label":          row["final_label"]
             })
             
             all_rows.append(feats)
@@ -92,6 +93,30 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
     df = df.drop(columns=[c for c in EXCLUDE_FEATURES if c in df.columns])        
     return df
 
+def clean_label(label):
+    """
+    Strips confidence annotations like '(98%)' from image_classification labels,
+    normalizes whitespace/case, and returns None for empty/invalid values.
+    """
+    if label is None or (isinstance(label, float) and pd.isna(label)):
+        return None
+    label = str(label)
+    # Remove anything in parentheses, e.g. "cone_jet (98%)" -> "cone_jet"
+    label = re.sub(r"\(.*?\)", "", label).strip()
+    return label if label else None
+
+def resolve_label(row):
+    """
+    Returns manual_classification if it's valid, otherwise falls back to
+    a cleaned-up image_classification label.
+    """
+    manual = row.get("manual_classification")
+    if pd.notna(manual) and manual not in INVALID_LABELS:
+        return manual
+
+    fallback = clean_label(row.get("image_classification"))
+    return fallback  # could still be None/invalid, filtered out later
+
 
 if __name__ == '__main__':
     # 0 - Init DB
@@ -103,11 +128,13 @@ if __name__ == '__main__':
     # 1. Load Data
     df_db = db.load_training_dataframe()
     
+    df_db["final_label"] = df_db.apply(resolve_label, axis=1)
+
     # 2. FILTER SAMPLES: Keep only rows with valid manual labels
     # This removes NaN values and values in your INVALID_LABELS list
     df_labeled = df_db[
-        df_db['manual_classification'].notna() & 
-        (~df_db['manual_classification'].isin(INVALID_LABELS))
+        df_db['final_label'].notna() & 
+        (~df_db['final_label'].isin(INVALID_LABELS))
     ].copy()
     
     print(f"Training on {len(df_labeled)} samples with valid manual labels.")

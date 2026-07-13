@@ -15,7 +15,7 @@ import os
 import random
 import math
 from pathlib import Path
-
+import re
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -32,7 +32,7 @@ from current_classification.train_code import SAMPLING_FREQ, INVALID_LABELS, CUT
 #  USER CONFIGURATION  ── edit these values
 # ══════════════════════════════════════════════════════════════════════════════
 
-N_SAMPLES   = 4      # total number of random samples to draw
+N_SAMPLES   = 8     # total number of random samples to draw
 RANDOM_SEED = 42      # set to None for a different pick each run
 
 # Max columns for the plot grid (2 or 3 is best for visibility)
@@ -70,7 +70,7 @@ def build_time_axis(n_points: int, sample_rate: float) -> np.ndarray:
 
 def plot_waveforms(df_samples: pd.DataFrame, raw_dir: Path, b, a, output_path: Path, solutions_str: str):
     # Sort by label so they are visually grouped together
-    df_samples = df_samples.sort_values(by="manual_classification").reset_index(drop=True)
+    df_samples = df_samples.sort_values(by="final_label").reset_index(drop=True)
     
     n_total = len(df_samples)
     n_rows = math.ceil(n_total / N_COLS)
@@ -88,13 +88,13 @@ def plot_waveforms(df_samples: pd.DataFrame, raw_dir: Path, b, a, output_path: P
         c = idx % N_COLS
         ax = axes[r, c]
         
-        label = sample_row["manual_classification"]
+        label = sample_row["final_label"]
         colour = LABEL_COLOURS.get(label, DEFAULT_COLOUR)
         file_path = raw_dir / str(sample_row["raw_data_file"])
         
         if not file_path.exists():
             ax.text(0.5, 0.5, "file not found", ha="center", va="center", color="red", fontsize=10)
-            ax.set_title(f"Label: {label} | ID: {sample_row.get('id', '?')}", fontsize=10)
+            ax.set_title(f"Label: {label} | ID: {sample_row.get('id', '?')} | V: {sample_row.get('target_voltage', '?')} | Flow: {sample_row.get('flow_rate', '?')}", fontsize=10)
             continue
             
         try:
@@ -107,7 +107,7 @@ def plot_waveforms(df_samples: pd.DataFrame, raw_dir: Path, b, a, output_path: P
             if SHOW_FILTERED:
                 ax.plot(t_ms, filtered, color=colour, alpha=0.9, linewidth=1.5, label="Filtered")
                 
-            ax.set_title(f"Label: {label} | Sol: {sample_row.get('solution_name', '?')} | ID: {sample_row.get('id', '?')}", fontsize=10)
+            ax.set_title(f"Label: {label} | ID: {sample_row.get('id', '?')} | V: {sample_row.get('target_voltage', '?')} | Flow: {sample_row.get('flow_rate', '?')}", fontsize=10)
             ax.set_xlabel("Time (ms)", fontsize=9)
             ax.set_ylabel("Current (nA)", fontsize=9)
             ax.grid(True, linestyle="--", alpha=0.5)
@@ -131,6 +131,29 @@ def plot_waveforms(df_samples: pd.DataFrame, raw_dir: Path, b, a, output_path: P
     plt.close(fig)
     print(f"  Saved -> {output_path.resolve()}")
 
+def clean_label(label):
+    """
+    Strips confidence annotations like '(98%)' from image_classification labels,
+    normalizes whitespace/case, and returns None for empty/invalid values.
+    """
+    if label is None or (isinstance(label, float) and pd.isna(label)):
+        return None
+    label = str(label)
+    # Remove anything in parentheses, e.g. "cone_jet (98%)" -> "cone_jet"
+    label = re.sub(r"\(.*?\)", "", label).strip()
+    return label if label else None
+
+def resolve_label(row):
+    """
+    Returns manual_classification if it's valid, otherwise falls back to
+    a cleaned-up image_classification label.
+    """
+    manual = row.get("manual_classification")
+    if pd.notna(manual) and manual not in INVALID_LABELS:
+        return manual
+
+    fallback = clean_label(row.get("image_classification"))
+    return fallback  # could still be None/invalid, filtered out later
 
 def main():
     BASE    = project_root / "data"
@@ -141,10 +164,10 @@ def main():
     
     # db.load_training_dataframe() will interactively ask for solution(s)
     df_db = db.load_training_dataframe()
-
+    
     if df_db.empty:
         raise ValueError("No data returned from database.")
-
+    
     # Get the names of the solutions that were selected
     SOLUTION_COL = "solution_name"
     solutions_selected = []
@@ -155,11 +178,11 @@ def main():
         solutions_str = "Unknown"
 
     print(f"[2/4] Found {len(df_db)} samples across selected solutions: {solutions_str}")
-
+    df_db["final_label"] = df_db.apply(resolve_label, axis=1)
     # ── 2. Filter out invalid labels ──────────────────────────────────────────
     df_valid = df_db[
-        df_db["manual_classification"].notna() &
-        (~df_db["manual_classification"].isin(INVALID_LABELS))
+        df_db["final_label"].notna() &
+        (~df_db["final_label"].isin(INVALID_LABELS))
     ].copy()
 
     if df_valid.empty:
@@ -177,7 +200,7 @@ def main():
     sampled_indices = rng.sample(list(df_valid.index), n)
     df_sampled = df_valid.loc[sampled_indices].copy()
 
-    label_counts = df_sampled["manual_classification"].value_counts().to_dict()
+    label_counts = df_sampled["final_label"].value_counts().to_dict()
     print(f"[3/4] Selected {n} samples  ->  label breakdown: {label_counts}")
 
     # ── 4. Build filter & plot ─────────────────────────────────────────────────

@@ -84,6 +84,6 @@ def split_video(folder, file_name):
 
 if __name__ == "__main__":
     solution = "ethanol_hv_nozzle"
-    folder = Path(rf"C:\Users\HV\Desktop\bruno_work\save_electrospray\{solution}")
+    folder = Path(rf"C:\Users\HV\Desktop\bruno_work\main\data\images")
     for file_name in Path(folder / 'raw').glob('*.mp4'):
         split_video(folder, file_name)

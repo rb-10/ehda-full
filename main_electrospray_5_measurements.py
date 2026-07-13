@@ -316,7 +316,7 @@ if __name__ == "__main__":
 
     finally:
         hardware.shutdown()
-        print(f"Save video with thhis name: \n{db.finalize_session(SESSION_SOLUTION, SESSION_START).rsplit('.', 1)[0]}")
+        print(f"Save video with this name: \n{db.finalize_session(SESSION_SOLUTION, SESSION_START).rsplit('.', 1)[0]}")
         db.close()
 
     print(f"\n[MAIN] Done.  Results saved to: {cfg['save_path']}")

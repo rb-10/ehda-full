@@ -10,7 +10,8 @@ from tqdm import tqdm
 project_root = Path(__file__).parent.parent  # Goes up 3 levels to 'main/'
 sys.path.insert(0, str(project_root))
 
-
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="sklearn.utils.parallel")
 from mapping.software.database import ElectrosprayDatabase  # Import your DB class
 from mapping.software.electrospray import ElectrosprayDataProcessing
 # Current Classification Imports
@@ -29,7 +30,7 @@ DEFAULT_SCALER_FOLDER = "current_classification/scalers"
 
 # Set to True to skip samples that already have both classifications saved.
 SKIP_ALREADY_CLASSIFIED = False
-solution_name = 'TEST3_NOCAP'
+solution_name = 'TEST3'
 SAMPLING_FREQ = 1e5
 RECORD_LENGTH = 50_000
 MULTIPLIER_NA = 500
@@ -182,15 +183,17 @@ def main():
 
     # ── 3. Counters ───────────────────────────────────────────────────────────
     n_skipped = n_ok = n_error = 0
+    n_changed = 0
 
     # ── 4. Iterate ────────────────────────────────────────────────────────────
     for record in tqdm(all_records, desc="Reclassifying", unit="sample"):
         record_id = record.get("id")
+        old_rf = record.get("rf_spray_mode", "")
 
         # ── 4a. Optional skip ─────────────────────────────────────────────────
         if SKIP_ALREADY_CLASSIFIED:
             # Note: Using your actual DB column names here
-            rf_saved  = record.get("rf_spray_mode", "")
+            rf_saved  = old_rf
             xgb_saved = record.get("xgb_spray_mode", "")
             
             already_done = (
@@ -216,6 +219,9 @@ def main():
         if rf_result == "error" or xgb_result == "error":
             n_error += 1
             continue
+            
+        if rf_result != old_rf:
+            n_changed += 1
 
         # ── 4d. Persist results ───────────────────────────────────────────────
         try:
@@ -237,6 +243,7 @@ def main():
     print(f"[MAIN] Reclassification complete.")
     print(f"  Total   : {total}")
     print(f"  OK      : {n_ok}")
+    print(f"  Classification Changed: {n_changed}")
     print(f"  Skipped : {n_skipped}  (already classified)")
     print(f"  Errors  : {n_error}")
     print("─" * 60)

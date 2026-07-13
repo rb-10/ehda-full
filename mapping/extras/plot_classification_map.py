@@ -21,7 +21,8 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 BASE = Path(r'C:\Users\HV\Desktop\bruno_work\main\data')
 DB_PATH = str(BASE)
-SOLUTION = "TEST3_NOCAP"
+SOLUTION = "TEST4"
+COMPARISON_MAP = True
 
 PLOT_SOURCES = [
     'image_classification',
@@ -183,11 +184,96 @@ def create_stability_plot(source_col, data):
     print(f"  Saved: {filename}")
     plt.close()
 
+def create_comparison_plot(truth_col, pred_col, data):
+    df = data.copy()
+    df['truth'] = df[truth_col].apply(clean_label)
+    df['pred'] = df[pred_col].apply(clean_label)
+
+    # --- Aggregate duplicate (flow_rate, actual_voltage) points ---
+    def image_agg(labels):
+        non_unc = [l for l in labels if l != 'unclassified']
+        return non_unc[0] if non_unc else 'unclassified'
+        
+    df = (
+        df.groupby(['flow_rate', 'actual_voltage'], as_index=False)
+          .agg(truth=('truth', image_agg), pred=('pred', lambda x: x.mode().iloc[0]))
+    )
+
+    df['match'] = df['truth'] == df['pred']
+    df['plot_color_label'] = df.apply(lambda row: row['truth'] if row['match'] else 'Incorrect', axis=1)
+
+    fig, ax = plt.subplots(figsize=(16, 8))
+
+    custom_palette = class_palette.copy()
+    custom_palette['Incorrect'] = '#000000'
+
+    sns.scatterplot(
+        data=df, x='flow_rate', y='actual_voltage', hue='plot_color_label',
+        palette=custom_palette, alpha=0.8, edgecolor='none', s=70, zorder=2, ax=ax,
+    )
+
+    ax.set_xscale('log')
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda x, _: f'{int(x)}' if x >= 1 else f'{x}'))
+    ax.set_xlabel('Flow Rate ($\\mu L/min$)')
+    ax.set_ylabel('Voltage ($V$)')
+    ax.set_title(
+        f'{SOLUTION_NORM}\nComparison: {pred_col} vs {truth_col} (Truth)'
+    )
+    
+    ax.legend(title='Classification (Match/Incorrect)', bbox_to_anchor=(1.02, 1), loc='upper left')
+    ax.grid(True, which="both", ls="-", alpha=0.2)
+    
+    # Confusion matrix
+    valid_mask = ~df['truth'].isin(['unclassified', 'EXCLUDE', 'none'])
+    df_eval = df[valid_mask]
+    
+    if len(df_eval) > 0:
+        accuracy = (df_eval['match'].sum() / len(df_eval)) * 100
+        
+        all_labels = sorted(list(set(df_eval['truth'].unique()).union(set(df_eval['pred'].unique()))))
+        truth_cat = pd.Categorical(df_eval['truth'], categories=all_labels)
+        pred_cat = pd.Categorical(df_eval['pred'], categories=all_labels)
+        
+        cm = pd.crosstab(truth_cat, pred_cat, normalize='index', dropna=False) * 100
+        
+        # Inset axes below the legend
+        ax_cm = ax.inset_axes([1.02, 0.0, 0.35, 0.45])
+        
+        sns.heatmap(cm, annot=True, fmt='.1f', cmap='Blues', ax=ax_cm, cbar=False, 
+                    annot_kws={"size": 8}, vmin=0, vmax=100)
+        ax_cm.set_title(f"Confusion Matrix (%)\nOverall Acc: {accuracy:.1f}%", fontsize=10)
+        ax_cm.set_ylabel('Truth', fontsize=9)
+        ax_cm.set_xlabel('Prediction', fontsize=9)
+        ax_cm.set_xticklabels(ax_cm.get_xticklabels(), rotation=45, ha='right', fontsize=8)
+        ax_cm.set_yticklabels(ax_cm.get_yticklabels(), rotation=0, fontsize=8)
+    else:
+        ax_cm = ax.inset_axes([1.02, 0.0, 0.35, 0.45])
+        ax_cm.axis('off')
+        ax_cm.text(0.5, 0.5, "No valid data", ha='center', va='center')
+
+    plt.tight_layout()
+    os.makedirs('data/plots', exist_ok=True)
+    filename = f'data/plots/comparison_{SOLUTION_NORM}_{truth_col}_vs_{pred_col}.png'
+    plt.savefig(filename, dpi=300, bbox_inches='tight')
+    print(f"  Saved: {filename}")
+    plt.close()
+
 # ---------------------------------------------------------
 # EXECUTION
 # ---------------------------------------------------------
 for source in available_sources:
     print(f"Generating plot for '{SOLUTION_NORM}': {source}")
     create_stability_plot(source, df_raw)
+
+if COMPARISON_MAP:
+    if 'image_classification' in df_raw.columns and 'rf_spray_mode' in df_raw.columns:
+        print(f"Generating comparison plot for '{SOLUTION_NORM}': image_classification vs rf_spray_mode")
+        create_comparison_plot('image_classification', 'rf_spray_mode', df_raw)
+    if 'image_classification' in df_raw.columns and 'classical_classification' in df_raw.columns:
+        print(f"Generating comparison plot for '{SOLUTION_NORM}': image_classification vs classical_classification")
+        create_comparison_plot('image_classification', 'classical_classification', df_raw)
+    if 'image_classification' in df_raw.columns and 'xgb_spray_mode' in df_raw.columns:
+        print(f"Generating comparison plot for '{SOLUTION_NORM}': image_classification vs xgb_spray_mode")
+        create_comparison_plot('image_classification', 'xgb_spray_mode', df_raw)
 
 print("\nDone. All stability maps have been generated.")
