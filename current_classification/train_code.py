@@ -67,7 +67,7 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
             processing.calculate_filter(a, b, datapoints)
             processing.calculate_statistics(processing.datapoints_filtered)
             processing.calculate_power_spectral_density(processing.datapoints_filtered)
-            processing.extract_advanced_ml_features()
+            processing.extract_advanced_ml_features(ratio_to_previous_step=float(row["ratio_to_previous_step"]))
             
             # 3. Harvest Features
             feats = processing.get_db_features_dictionary() # mean_na, etc.
@@ -117,7 +117,46 @@ def resolve_label(row):
     fallback = clean_label(row.get("image_classification"))
     return fallback  # could still be None/invalid, filtered out later
 
+def compute_ratio_to_previous_step(df_db):
+    """
+    Vectorized equivalent of database.get_previous_step_mean_na(), computed
+    over the full historical dataframe instead of one DB query per row.
 
+    Assumes df_db is ordered by `id` ascending (matches insertion/time order).
+    A "step" is a contiguous run of rows sharing the same target_voltage.
+    For each row, looks at the previous step (the run of rows immediately
+    before the current step began) and, if that previous step's flow_rate
+    matches the current row's flow_rate, sets
+    ratio = current mean_na / mean(previous step's mean_na).
+    Otherwise (no previous step, or flow_rate differs) ratio = 1.0.
+    """
+    df = df_db.sort_values("id").reset_index(drop=True)
+
+    # Assign a step id: increments every time target_voltage changes
+    step_id = (df["target_voltage"] != df["target_voltage"].shift()).cumsum()
+
+    step_mean_na = df.groupby(step_id)["mean_na"].mean()
+    step_flow    = df.groupby(step_id)["flow_rate"].first()
+
+    unique_steps = step_id.drop_duplicates().tolist()
+    ratios = np.ones(len(df))
+
+    for i, sid in enumerate(unique_steps):
+        mask = (step_id == sid).values
+        if i == 0:
+            continue  # no earlier step -> ratio stays 1.0
+
+        prev_sid = unique_steps[i - 1]
+        prev_mean = step_mean_na.loc[prev_sid]
+        prev_flow = step_flow.loc[prev_sid]
+        cur_flow  = step_flow.loc[sid]
+
+        if cur_flow == prev_flow and pd.notna(prev_mean) and prev_mean != 0:
+            ratios[mask] = df.loc[mask, "mean_na"].values / prev_mean
+        # else leave as 1.0 (flow_rate mismatch or invalid previous mean)
+
+    df["ratio_to_previous_step"] = ratios
+    return df
 if __name__ == '__main__':
     # 0 - Init DB
     BASE = Path(r"data")
@@ -127,7 +166,7 @@ if __name__ == '__main__':
     
     # 1. Load Data
     df_db = db.load_training_dataframe()
-    
+    df_db = compute_ratio_to_previous_step(df_db)
     df_db["final_label"] = df_db.apply(resolve_label, axis=1)
 
     # 2. FILTER SAMPLES: Keep only rows with valid manual labels

@@ -63,6 +63,7 @@ INVARIANT_FEATURES = [
     "median_freq",           # Hz
     "spectral_bandwidth",    # Hz
     "spectral_rolloff",      # Hz
+    "ratio_to_previous_step",
     # Relative band powers are fractions (sum to 1) — already amplitude-free
     "band_power_very_low_rel", "band_power_low_rel", "band_power_mid_rel",
     "band_power_high_rel", "band_power_very_high_rel",
@@ -349,6 +350,7 @@ class EHDAFeatureNormalizer:
         "shape_factor",
         "skewness", "kurtosis",
         "peak", "peak_to_peak", "crest_factor",
+        "ratio_to_previous_step",
     ]
 
     # Strategy 4: Passthrough (already normalized)

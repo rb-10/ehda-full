@@ -114,15 +114,26 @@ def get_experiment_metadata():
         "hv_position": hv_pos
     }
 
-def classify_sample(processing, result, ml_models):
+def classify_sample(processing, result, ml_models, db):
     if not ml_models:
         return "N/A", "N/A"
 
     try:
         from current_classification.ehda_normalization import prepare_inference_sample
         import pandas as pd
+        # 0. Look up the previous step's mean_na for ratio_to_previous_step
+        current_id = db.get_last_id()
+        ratio_to_previous_step = 1.0
+        if current_id is not None:
+            prev_mean = db.get_previous_step_mean_na(
+                current_id=current_id,
+                target_voltage=float(result["target_voltage"]),
+                flow_rate=float(result["flow_rate"]),
+            )
+            if prev_mean not in (None, 0):
+                ratio_to_previous_step = float(processing.mean_value) / prev_mean
         # 1. Calculate remaining ML features inside the class
-        processing.extract_advanced_ml_features()
+        processing.extract_advanced_ml_features(ratio_to_previous_step=ratio_to_previous_step)
 
         # 2. Build the full raw feature vector (DB stats + ML stats + metadata)
         all_features = processing.get_db_features_dictionary()
@@ -277,6 +288,7 @@ if __name__ == "__main__":
                     processing,
                     result,
                     ml_models,
+                    db
                 )
                 result["rf_classification"]  = rf_result
                 result["xgb_classification"] = xgb_result

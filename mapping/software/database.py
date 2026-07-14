@@ -195,4 +195,54 @@ class ElectrosprayDatabase:
 
         print(f"[DB] Loaded {len(df)} samples.")
         return df
-    
+    def get_previous_step_mean_na(self, current_id, target_voltage: float, flow_rate: float):
+        """
+        Looks backwards from current_id (exclusive) for the most recent step
+        (a run of rows sharing the same target_voltage), where that step's
+        target_voltage differs from the current one but flow_rate matches.
+
+        Returns the average mean_na across all rows of that previous step,
+        or None if no such step exists or its flow_rate doesn't match the
+        current one (caller should treat None as "use ratio = 1").
+        """
+        row = self._conn.execute(
+            """
+            SELECT target_voltage, flow_rate FROM measurements
+            WHERE id < ? AND target_voltage != ?
+            ORDER BY id DESC LIMIT 1
+            """,
+            (current_id, target_voltage)
+        ).fetchone()
+
+        if row is None:
+            return None  # no earlier step at all
+
+        prev_voltage = row["target_voltage"]
+        prev_flow_rate = row["flow_rate"]
+
+        if prev_flow_rate != flow_rate:
+            return None
+
+        cursor = self._conn.execute(
+            """
+            SELECT mean_na, target_voltage FROM measurements
+            WHERE id < ? ORDER BY id DESC
+            """,
+            (current_id,)
+        )
+
+        vals = []
+        for r in cursor.fetchall():
+            if r["target_voltage"] != prev_voltage:
+                break
+            if r["mean_na"] is not None:
+                vals.append(r["mean_na"])
+
+        if not vals:
+            return None
+
+        return float(np.mean(vals))
+    def get_last_id(self):
+        """Returns the highest id currently in the table, or None if empty."""
+        row = self._conn.execute("SELECT MAX(id) AS max_id FROM measurements").fetchone()
+        return row["max_id"] if row and row["max_id"] is not None else None

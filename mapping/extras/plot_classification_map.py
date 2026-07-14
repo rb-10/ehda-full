@@ -19,7 +19,7 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 # SETTINGS
 # ---------------------------------------------------------
-BASE = Path(r'C:\Users\HV\Desktop\bruno_work\main\data')
+BASE = Path(r"C:\Users\Bruno Duarte\Documents\ehda-full\data")
 DB_PATH = str(BASE)
 SOLUTION = "TEST4"
 COMPARISON_MAP = True

@@ -246,7 +246,7 @@ class ElectrosprayDataProcessing:
         return band_energies
         
     # ── Advanced ML Feature Extraction ──
-    def extract_advanced_ml_features(self):
+    def extract_advanced_ml_features(self, ratio_to_previous_step: float = 1.0):
         """Calculates features only needed for ML models (crest, kurtosis, entropy, wavelets)."""
         x = self.datapoints_filtered
         total_power = np.sum(self.psd_welch)
@@ -259,7 +259,8 @@ class ElectrosprayDataProcessing:
             "kurtosis": float(stats.kurtosis(x, fisher=True)),
             "skewness": float(stats.skew(x)),
             "peak_to_peak": float(np.max(x) - np.min(x)),
-            "zero_crossing_rate": float(np.sum(np.diff(np.sign(x - self.mean_value)) != 0) / len(x))
+            "zero_crossing_rate": float(np.sum(np.diff(np.sign(x - self.mean_value)) != 0) / len(x)),
+            "ratio_to_previous_step": float(ratio_to_previous_step)
         })
 
         # Advanced Frequency Domain
