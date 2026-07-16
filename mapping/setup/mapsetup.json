@@ -1,0 +1,39 @@
+{
+    "config": "nozzle to plate",
+    "model_dir":  "current_classification/models/",
+    "scaler_dir": "current_classification/scalers/",
+    "nozzle to plate or ring distance": 1.6,
+    "nozzle diameter": 0.136,
+    "nozzle outside": 0.091,
+    "nozzle_outer_radius" : 0.00068,
+    "nozzle height": 3.5,
+    "high voltage": "HV on the ground",
+    "diameter syringe": "15",
+    "units": "mm",
+    "coflow gas type": "none",
+    "osc_impedance": 2000000,
+    "save_data": "True",
+    "save_processing": "True",
+    "save_config": "True",
+    "save_validation": "False",
+    "save_json": "True",
+    "plot_real_time": "True",
+    "save_path": "D:/AcEHDA-ML/data",
+    "number_camera_partitions": 10,
+    "arduino_com_port" : 0,
+    "fug_com_port" : 2,
+    "pump_com_port" : 1,
+    "flow_stabilization_time": 10,
+    "typeofmeasurement": {
+        "sequence": "map",
+        "voltage_start": 3000,
+        "voltage_stop": 9000,
+        "slope": 1000000,
+        "step_size": 200,
+        "step_time": 0.4,
+        "stab_time": 3,
+        "flow_rate": [
+            "15"
+        ]
+    }
+}
