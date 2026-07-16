@@ -17,7 +17,7 @@ if str(project_root) not in sys.path:
 from mapping.software.database import ElectrosprayDatabase
 
 def main():
-    BASE = project_root / "data"
+    BASE = project_root / "dmf"
     RAW_DIR = BASE / "raw_waveforms"
     
     print(f"Loading database from: {BASE}")

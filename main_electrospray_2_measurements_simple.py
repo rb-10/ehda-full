@@ -174,13 +174,13 @@ if __name__ == "__main__":
                 hardware.set_voltage(voltage)
                 time.sleep(stab_time)
 
-                for measurement_idx in range(5):
+                for measurement_idx in range(2):
                     if abort or keyboard.is_pressed("q"):
                         print("[MAIN] Q pressed – aborting cleanly during measurement loop")
                         abort = True
                         break
                     
-                    current_trigger_fn = trigger_fn if measurement_idx == 4 else None
+                    current_trigger_fn = trigger_fn if measurement_idx == 1 else None
 
                     # Use our simple_acquire function instead of acquire_and_process
                     result = simple_acquire(

@@ -4,7 +4,7 @@ import sqlite3
 from pathlib import Path
 
 def main():
-    base_dir = Path("data")
+    base_dir = Path("dmf")
     db_path = base_dir / "data.db"
     raw_dir = base_dir / "raw_waveforms"
     excluded_dir = base_dir / "excluded_raw_waveforms"
