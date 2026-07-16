@@ -127,7 +127,7 @@ def save_experiments(experiments: list[list], save_path: str):
 
 if __name__ == "__main__":
 
-    save_path   = "C:/Users/HV/Desktop/bruno_work/main/data"
+    save_path   = "D:/AcEHDA-ML/data"
     rows        = load_rows(save_path)
     experiments = split_into_experiments(rows)
 
