@@ -109,9 +109,21 @@ def get_experiment_metadata():
     choice = input("Select (1 or 2): ")
     hv_pos = "nozzle" if choice == "1" else "counter-electrode"
     
+    while True:
+        try:
+            sample_rate = float(input("\nEnter Sample rate (Hz) [default 100000]: ") or 100000)
+            n_samples = int(input("Enter Record length (samples) [default 50000]: ") or 50000)
+            if sample_rate <= 0 or n_samples < 1:
+                raise ValueError("Must be positive")
+            break
+        except ValueError:
+            print("[!] Invalid input. Please enter valid numbers.")
+    
     return {
         "solution": solution,
-        "hv_position": hv_pos
+        "hv_position": hv_pos,
+        "sample_rate": sample_rate,
+        "n_samples": n_samples
     }
 
 def classify_sample(processing, result, ml_models, db):
@@ -142,7 +154,8 @@ def classify_sample(processing, result, ml_models, db):
             "actual_voltage": float(result["actual_voltage"]),
             "target_voltage": float(result["target_voltage"]),
             "flow_rate": float(result["flow_rate"]),
-            "voltage_error": float(result["actual_voltage"]) - float(result["target_voltage"])
+            "voltage_error": float(result["actual_voltage"]) - float(result["target_voltage"]),
+            "deviation_ratio": float(processing.stddev / processing.mean_value if processing.mean_value != 0 else 0.0)
         })
 
         # 3. Normalization Pipeline
@@ -193,9 +206,6 @@ if __name__ == "__main__":
     step_time      = float(meas.get("step_time",              5.0))
     flow_stab_time = float(cfg.get("flow_stabilization_time", 3.0))
 
-    # ── Signal processing ─────────────────────────────────────────────
-    processing = ElectrosprayDataProcessing(1e5)
-
     # ── ML models ─────────────────────────────────────────────────────
     ml_models = load_ml_models(cfg)
     
@@ -214,9 +224,17 @@ if __name__ == "__main__":
     metadata = get_experiment_metadata()
     SESSION_SOLUTION = metadata["solution"]
     SESSION_HV = metadata["hv_position"]
+    SESSION_SAMPLE_RATE = metadata["sample_rate"]
+    SESSION_N_SAMPLES = metadata["n_samples"]
     SESSION_START = datetime.now() # Capture start time for the final filename
+
+    # ── Signal processing ─────────────────────────────────────────────
+    processing = ElectrosprayDataProcessing(SESSION_SAMPLE_RATE)
+
     # ── Hardware ──────────────────────────────────────────────────────
     hardware = Hardware(cfg)
+    hardware.scp.sample_rate = SESSION_SAMPLE_RATE
+    hardware.scp.record_length = SESSION_N_SAMPLES
 
     # ── Storage ───────────────────────────────────────────────────────
     db = ElectrosprayDatabase(cfg["save_path"])
@@ -283,6 +301,8 @@ if __name__ == "__main__":
                 )
                 result["solution_name"] = SESSION_SOLUTION
                 result["hv_position"] = SESSION_HV
+                result["sample_rate"] = SESSION_SAMPLE_RATE
+                result["n_samples"] = SESSION_N_SAMPLES
                 # 3. Classify
                 rf_result, xgb_result = classify_sample(
                     processing,

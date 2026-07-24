@@ -19,9 +19,9 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 # SETTINGS
 # ---------------------------------------------------------
-BASE = Path(r"C:\Users\bruno\Documents\EHDA\ehda-full\dmf")
+BASE = Path(r"C:\Users\HV\Desktop\bruno_work\main\data")
 DB_PATH = str(BASE)
-SOLUTION = "dmf"
+SOLUTION = "1KHZ_TEST1"
 COMPARISON_MAP = True
 
 PLOT_SOURCES = [

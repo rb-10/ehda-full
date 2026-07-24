@@ -12,7 +12,7 @@ project_root = Path(__file__).parent.parent  # Goes up 3 levels to 'main/'
 sys.path.insert(0, str(project_root))
 
 from mapping.software.database import ElectrosprayDatabase
-from current_classification.train_code import build_feature_matrix, SAMPLING_FREQ, INVALID_LABELS
+from current_classification.train_code import build_feature_matrix, INVALID_LABELS, compute_ratio_to_previous_step, resolve_label
 from current_classification.ehda_normalization import prepare_training_data
 
 def create_feature_plots():
@@ -22,18 +22,40 @@ def create_feature_plots():
     
     # 1. Load Data
     df_db = db.load_training_dataframe()
+    if df_db.empty:
+        print("No data loaded. Exiting.")
+        sys.exit(0)
+        
+    # Backwards compatibility for DB columns
+    if "sample_rate" not in df_db.columns:
+        df_db["sample_rate"] = 100000.0
+    if "n_samples" not in df_db.columns:
+        df_db["n_samples"] = 50000
+
+    df_db["sample_rate"] = df_db["sample_rate"].fillna(100000.0)
+    df_db["n_samples"] = df_db["n_samples"].fillna(50000)
+
+    unique_rates = df_db["sample_rate"].unique()
+    if len(unique_rates) > 1:
+        print(f"Error: Selected solutions have different sampling rates: {unique_rates}.")
+        sys.exit(1)
+    
+    current_sample_rate = float(unique_rates[0])
+
+    df_db = compute_ratio_to_previous_step(df_db)
+    df_db["final_label"] = df_db.apply(resolve_label, axis=1)
     
     # 2. Filter Samples
     df_labeled = df_db[
-        df_db['manual_classification'].notna() & 
-        (~df_db['manual_classification'].isin(INVALID_LABELS))
+        df_db['final_label'].notna() & 
+        (~df_db['final_label'].isin(INVALID_LABELS))
     ].copy()
     
     print(f"Loaded {len(df_labeled)} samples with valid manual labels.")
     
     # 3. Build Matrix
     print("Extracting features...")
-    df_features = build_feature_matrix(df_labeled, BASE / "raw_waveforms", SAMPLING_FREQ)
+    df_features = build_feature_matrix(df_labeled, BASE / "raw_waveforms", current_sample_rate)
     
     # 4. Get raw features and normalizer
     _, _, labels, feature_names, normalizer = prepare_training_data(df_features)
@@ -44,6 +66,7 @@ def create_feature_plots():
     
     # Create output directories for the plots
     output_dir_raw = Path("current_classification/plots/comparison")
+    output_dir_raw.mkdir(parents=True, exist_ok=True)
 
     
     # Set seaborn style for better visuals

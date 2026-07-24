@@ -21,8 +21,6 @@ from scipy.signal import butter
 from typing import Callable, Optional
 
 
-SAMPLING_FREQ = 1e5
-RECORD_LENGTH = 50_000
 MULTIPLIER_NA = 500
 CUTOFF_HZ     = 3_000
 
@@ -60,12 +58,14 @@ def acquire_and_process(scp,
     datapoints = np.array(raw[1]) * MULTIPLIER_NA   # [nA]
 
     # ── Filter Design ─────────────────────────────────────────────────
-    # We keep this here if CUTOFF_HZ or SAMPLING_FREQ are global/config vars
-    cutoff = CUTOFF_HZ / (0.5 * SAMPLING_FREQ)
-    b, a = butter(6, Wn=cutoff, btype="low", analog=False)
-
-    # ── Signal processing ─────────────────────────────────────────────
-    processing.calculate_filter(a, b, datapoints)
+    sample_rate = processing.sample_rate
+    
+    if sample_rate < 6000:
+        processing.datapoints_filtered = datapoints
+    else:
+        cutoff = CUTOFF_HZ / (0.5 * sample_rate)
+        b, a = butter(6, Wn=cutoff, btype="low", analog=False)
+        processing.calculate_filter(a, b, datapoints)
     processing.calculate_statistics(processing.datapoints_filtered)
     processing.calculate_power_spectral_density(processing.datapoints_filtered)
     max_val, qty_max, pct_max = processing.calculate_peaks_signal(datapoints)

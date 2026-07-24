@@ -19,8 +19,6 @@ from ehda_normalization import prepare_training_data
 from ehda_classifier import train
 
 
-SAMPLING_FREQ = 1e5
-RECORD_LENGTH = 50_000
 MULTIPLIER_NA = 1.0 # Data save in DB already in nA, no need to multiply
 CUTOFF_HZ     = 3_000
 
@@ -33,7 +31,8 @@ EXCLUDE_FEATURES = [
     "actual_voltage",
     "mean_na",
     "median_na",
-    "rms_na"
+    "rms_na",
+    "ratio_to_previous_step"
 ]
 # List labels you want to ignore/drop
 INVALID_LABELS = ["N/A","undefined","unconclusive","noise", "", None]
@@ -45,9 +44,14 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
     """
     processing = ElectrosprayDataProcessing(sample_rate)
     
-    # Filter setup (same as live)
-    cutoff = CUTOFF_HZ / (0.5 * sample_rate)
-    b, a = butter(6, Wn=cutoff, btype="low", analog=False)
+    apply_filter = True
+    if sample_rate < 6000:
+        apply_filter = False
+        print(f"Sampling rate ({sample_rate} Hz) is < 6kHz. Low-pass filter deactivated.")
+    else:
+        # Filter setup (same as live)
+        cutoff = CUTOFF_HZ / (0.5 * sample_rate)
+        b, a = butter(6, Wn=cutoff, btype="low", analog=False)
     
     all_rows = []
     
@@ -64,7 +68,11 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
             processing.clear_results()
             
             # 2. Process (Matches live acquire_and_process logic)
-            processing.calculate_filter(a, b, datapoints)
+            if apply_filter:
+                processing.calculate_filter(a, b, datapoints)
+            else:
+                processing.datapoints_filtered = datapoints
+
             processing.calculate_statistics(processing.datapoints_filtered)
             processing.calculate_power_spectral_density(processing.datapoints_filtered)
             processing.extract_advanced_ml_features(ratio_to_previous_step=float(row["ratio_to_previous_step"]))
@@ -80,7 +88,8 @@ def build_feature_matrix(df_db, raw_dir, sample_rate):
                 "flow_rate":      float(row["flow_rate"]),
                 "voltage_error":  float(row["actual_voltage"]) - float(row["target_voltage"]),
                 "current_PS":     float(row.get("actual_current_ps", 0.0)),
-                "label":          row["final_label"]
+                "label":          row["final_label"],
+                "deviation_ratio": float (row["deviation_na"]) / float(row["mean_na"])
             })
             
             all_rows.append(feats)
@@ -159,13 +168,33 @@ def compute_ratio_to_previous_step(df_db):
     return df
 if __name__ == '__main__':
     # 0 - Init DB
-    BASE = Path(r"data")
+    BASE = Path(r"C:\Users\HV\Desktop\bruno_work\main\data\backup 3")
     print(os.getcwd())
     db = ElectrosprayDatabase(str(BASE))
         
     
     # 1. Load Data
     df_db = db.load_training_dataframe()
+    if df_db.empty:
+        sys.exit(0)
+        
+    # Backwards compatibility for DB columns
+    if "sample_rate" not in df_db.columns:
+        df_db["sample_rate"] = 100000.0
+    if "n_samples" not in df_db.columns:
+        df_db["n_samples"] = 50000
+
+    # Fill NaNs in backwards compatible columns if they were NULL in the DB
+    df_db["sample_rate"] = df_db["sample_rate"].fillna(100000.0)
+    df_db["n_samples"] = df_db["n_samples"].fillna(50000)
+
+    unique_rates = df_db["sample_rate"].unique()
+    if len(unique_rates) > 1:
+        print(f"Error: Selected solutions have different sampling rates: {unique_rates}. Cannot train a single model on mixed sampling rates.")
+        sys.exit(1)
+    
+    current_sample_rate = float(unique_rates[0])
+
     df_db = compute_ratio_to_previous_step(df_db)
     df_db["final_label"] = df_db.apply(resolve_label, axis=1)
 
@@ -179,7 +208,7 @@ if __name__ == '__main__':
     print(f"Training on {len(df_labeled)} samples with valid manual labels.")
     
     # 3. Build Matrix
-    df_features = build_feature_matrix(df_labeled, BASE / "raw_waveforms", SAMPLING_FREQ)
+    df_features = build_feature_matrix(df_labeled, BASE / "raw_waveforms", current_sample_rate)
     
     # 4. Normalize and Train
     # A. Prepare data using your custom normalization logic

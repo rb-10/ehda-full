@@ -500,6 +500,10 @@ class EHDAClassifier:
         label_encoder = joblib.load(folder / "label_encoder.pkl")
         class_names   = joblib.load(folder / "class_names.pkl")
         feature_names = joblib.load(folder / "feature_names.pkl")
+        
+        if hasattr(model, "n_jobs"):
+            model.n_jobs = 1
+
         return cls(model, label_encoder, class_names, feature_names)
 
     def predict(self, x_aligned: np.ndarray) -> tuple:

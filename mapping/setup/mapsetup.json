@@ -8,7 +8,7 @@
     "nozzle_outer_radius" : 0.00068,
     "nozzle height": 3.5,
     "high voltage": "HV on the ground",
-    "diameter syringe": "3",
+    "diameter syringe": "12",
     "units": "mm",
     "coflow gas type": "none",
     "osc_impedance": 2000000,
@@ -18,7 +18,7 @@
     "save_validation": "False",
     "save_json": "True",
     "plot_real_time": "True",
-    "save_path": "C:/Users/bruno/Documents/EHDA/ehda-full/dmf",
+    "save_path": "C:/Users/HV/Desktop/bruno_work/main/data",
     "number_camera_partitions": 10,
     "arduino_com_port" : 0,
     "fug_com_port" : 2,
@@ -26,18 +26,14 @@
     "flow_stabilization_time": 10,
     "typeofmeasurement": {
         "sequence": "map",
-        "voltage_start": 4000,
-        "voltage_stop": 6000,
+        "voltage_start": 3000,
+        "voltage_stop": 9000,
         "slope": 1000000,
         "step_size": 200,
         "step_time": 0.4,
-        "stab_time": 3,
+        "stab_time": 4,
         "flow_rate": [
-            "4",
-            "5",
-            "6",
-            "7",
-            "8"
+            "35"
         ]
     }
 }

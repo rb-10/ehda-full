@@ -487,8 +487,14 @@ def prepare_inference_sample(
     x_norm : 1D numpy array ready for model.predict()
     """
     df = pd.DataFrame([features])
-    df_norm = normalizer.transform(df)
+    
+    # Ensure all expected feature columns exist in df before scaling
     feature_names = normalizer.get_feature_columns()
+    for col in feature_names:
+        if col not in df.columns:
+            df[col] = 0.0
+
+    df_norm = normalizer.transform(df)
     return df_norm[feature_names].values[0]
 
 

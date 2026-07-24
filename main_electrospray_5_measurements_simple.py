@@ -26,9 +26,6 @@ from mapping.software.camera              import CameraClassifier
 
 warnings.filterwarnings("ignore")
 
-# --- CONFIGURATION OVERRIDES ---
-CUSTOM_SAMPLE_RATE = 100000  # Set your desired frequency here
-CUSTOM_RECORD_LENGTH = 50000 # Set the number of samples you want to acquire
 
 def voltage_steps(meas: dict) -> list:
     """Return the ordered list of voltage set-points."""
@@ -54,9 +51,21 @@ def get_experiment_metadata():
     choice = input("Select (1 or 2): ")
     hv_pos = "nozzle" if choice == "1" else "counter-electrode"
     
+    while True:
+        try:
+            sample_rate = float(input("\nEnter Sample rate (Hz) [default 100000]: ") or 100000)
+            n_samples = int(input("Enter Record length (samples) [default 50000]: ") or 50000)
+            if sample_rate <= 0 or n_samples < 1:
+                raise ValueError("Must be positive")
+            break
+        except ValueError:
+            print("[!] Invalid input. Please enter valid numbers.")
+    
     return {
         "solution": solution,
-        "hv_position": hv_pos
+        "hv_position": hv_pos,
+        "sample_rate": sample_rate,
+        "n_samples": n_samples
     }
 
 def simple_acquire(scp, target_voltage: float, flow_rate, actual_voltage: float, actual_current_ps: float, trigger_fn=None) -> dict:
@@ -116,15 +125,17 @@ if __name__ == "__main__":
     metadata = get_experiment_metadata()
     SESSION_SOLUTION = metadata["solution"]
     SESSION_HV = metadata["hv_position"]
+    SESSION_SAMPLE_RATE = metadata["sample_rate"]
+    SESSION_N_SAMPLES = metadata["n_samples"]
     SESSION_START = datetime.now() 
     
     # ── Hardware ──────────────────────────────────────────────────────
     hardware = Hardware(cfg)
     
     # Override TiePie settings after hardware initializes it
-    hardware.scp.sample_rate = CUSTOM_SAMPLE_RATE
-    hardware.scp.record_length = CUSTOM_RECORD_LENGTH
-    print(f"[MAIN] TiePie Sample Rate set to {CUSTOM_SAMPLE_RATE} Hz")
+    hardware.scp.sample_rate = SESSION_SAMPLE_RATE
+    hardware.scp.record_length = SESSION_N_SAMPLES
+    print(f"[MAIN] TiePie Sample Rate set to {SESSION_SAMPLE_RATE} Hz")
 
     # ── Storage ───────────────────────────────────────────────────────
     db = ElectrosprayDatabase(cfg["save_path"])
@@ -194,6 +205,8 @@ if __name__ == "__main__":
                     
                     result["solution_name"] = SESSION_SOLUTION
                     result["hv_position"] = SESSION_HV
+                    result["sample_rate"] = SESSION_SAMPLE_RATE
+                    result["n_samples"] = SESSION_N_SAMPLES
                     
                     # 5. Save to database and .npy
                     db.save(result)

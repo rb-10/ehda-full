@@ -30,9 +30,9 @@ DEFAULT_SCALER_FOLDER = "current_classification/scalers"
 
 # Set to True to skip samples that already have both classifications saved.
 SKIP_ALREADY_CLASSIFIED = False
-solution_name = 'TEST4'
-SAMPLING_FREQ = 1e5
-RECORD_LENGTH = 50_000
+DEFAULT_SOLUTION_NAME = '200KHZ_TEST2'
+DEFAULT_SAMPLING_FREQ = 100_000
+DEFAULT_RECORD_LENGTH = 50_000
 MULTIPLIER_NA = 500
 CUTOFF_HZ     = 3_000
 # ─────────────────────────────────────────────────────────────────────────────
@@ -94,7 +94,8 @@ def restore_processing_from_record(processing, record, db_instance):
 
     # 2. FORCE-FEED: Assign the waveform to all common internal names 
     # to ensure extract_advanced_ml_features() finds it.
-    cutoff = CUTOFF_HZ / (0.5 * SAMPLING_FREQ)
+    sample_rate = float(record.get("sample_rate") or processing.sample_rate)
+    cutoff = CUTOFF_HZ / (0.5 * sample_rate)
     b, a = butter(6, Wn=cutoff, btype="low", analog=False)
 
     # ── Signal processing ─────────────────────────────────────────────
@@ -134,7 +135,12 @@ def classify_sample(processing, result, ml_models, db):
             "actual_voltage": float(result["actual_voltage"]),
             "target_voltage": float(result["target_voltage"]),
             "flow_rate": float(result["flow_rate"]),
-            "voltage_error": float(result["actual_voltage"]) - float(result["target_voltage"])
+            "voltage_error": float(result["actual_voltage"]) - float(result["target_voltage"]),
+            "deviation_ratio": float(processing.stddev / processing.mean_value if processing.mean_value != 0 else 0.0),
+            "solution_name": result.get("solution_name"),
+            "hv_position": result.get("hv_position"),
+            "sample_rate": float(result.get("sample_rate") or processing.sample_rate),
+            "n_samples": int(result.get("n_samples") or len(processing.datapoints_filtered))
         })
 
         # 3. Normalization Pipeline
@@ -177,9 +183,10 @@ def classify_sample(processing, result, ml_models, db):
 # ─────────────────────────────────────────────────────────────────────────────
 def main():
     # ── 1. Initialise ─────────────────────────────────────────────────────────
-    # Note: Ensure processing frequency matches your hardware (1e5 = 100kHz)
-    processing = ElectrosprayDataProcessing(1e5)
-    ml_models  = load_ml_models()
+    sol_input = input(f"Enter solution name to reclassify [default {DEFAULT_SOLUTION_NAME}]: ").strip()
+    solution_name = sol_input if sol_input else DEFAULT_SOLUTION_NAME
+
+    ml_models = load_ml_models()
 
     if not ml_models:
         print("[MAIN] Aborting — no models could be loaded.")
@@ -197,6 +204,11 @@ def main():
     total = len(all_records)
     print(f"[MAIN] {total} samples found.")
 
+    if total == 0:
+        print(f"[MAIN] No records found for solution '{solution_name}'. Exiting.")
+        db.close()
+        return
+
     # ── 3. Counters ───────────────────────────────────────────────────────────
     n_skipped = n_ok = n_error = 0
     n_changed = 0
@@ -205,6 +217,9 @@ def main():
     for record in tqdm(all_records, desc="Reclassifying", unit="sample"):
         record_id = record.get("id")
         old_rf = record.get("rf_spray_mode", "")
+
+        sample_rate = float(record.get("sample_rate") or DEFAULT_SAMPLING_FREQ)
+        processing = ElectrosprayDataProcessing(sample_rate)
 
         # ── 4a. Optional skip ─────────────────────────────────────────────────
         if SKIP_ALREADY_CLASSIFIED:
@@ -267,4 +282,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()

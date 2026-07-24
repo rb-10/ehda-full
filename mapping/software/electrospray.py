@@ -226,8 +226,10 @@ class ElectrosprayDataProcessing:
     def calculate_power_spectral_density(self, data):
         """Calculates PSD once using the high-res ML parameters (4096)."""
         # Standardizing on 4096 for both DB and ML resolution
+        nperseg = min(4096, len(data))
+        noverlap = nperseg // 2
         self.psd_freqs, self.psd_welch = signal.welch(
-            data, fs=self.sample_rate, nperseg=4096, noverlap=2048, window="hann"
+            data, fs=self.sample_rate, nperseg=nperseg, noverlap=noverlap, window="hann"
         )
 
     def calculate_band_powers(self):
@@ -260,7 +262,8 @@ class ElectrosprayDataProcessing:
             "skewness": float(stats.skew(x)),
             "peak_to_peak": float(np.max(x) - np.min(x)),
             "zero_crossing_rate": float(np.sum(np.diff(np.sign(x - self.mean_value)) != 0) / len(x)),
-            "ratio_to_previous_step": float(ratio_to_previous_step)
+            "ratio_to_previous_step": float(ratio_to_previous_step),
+            "deviation_ratio": float(self.stddev / self.mean_value if self.mean_value != 0 else 0.0)
         })
 
         # Advanced Frequency Domain

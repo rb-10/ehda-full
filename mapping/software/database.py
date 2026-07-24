@@ -15,16 +15,10 @@ CREATE TABLE IF NOT EXISTS measurements (
     flow_rate           REAL,
     mean_na             REAL,
     deviation_na        REAL,
-    median_na           REAL,
-    rms_na              REAL,
-    variance_na         REAL,
     qty_max             INTEGER,
     pct_max             REAL,
-    band_power_v_low    REAL,
-    band_power_low      REAL,
-    band_power_mid      REAL,
-    band_power_high     REAL,
-    band_power_v_high   REAL,
+    sample_rate         REAL,
+    n_samples           INTEGER,
     rf_spray_mode       TEXT,
     xgb_spray_mode      TEXT,
     image_classification  TEXT,
@@ -34,16 +28,14 @@ CREATE TABLE IF NOT EXISTS measurements (
 );
 """
 
-# Now 25 columns, 25 placeholders
+# Now 19 columns, 19 placeholders
 _INSERT = """
 INSERT INTO measurements (
     timestamp, solution_name, hv_position, target_voltage, actual_voltage, actual_current_ps,
-    flow_rate, mean_na, deviation_na, median_na, rms_na, variance_na,
-    qty_max, pct_max, 
-    band_power_v_low, band_power_low, band_power_mid, band_power_high, band_power_v_high,
+    flow_rate, mean_na, deviation_na, qty_max, pct_max, sample_rate, n_samples,
     rf_spray_mode, xgb_spray_mode, image_classification, manual_classification,
     video_file, raw_data_file
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 """
 
 _MIGRATIONS = [
@@ -51,9 +43,10 @@ _MIGRATIONS = [
     ("nn_spray_mode",         "xgb_spray_mode",        "TEXT", "'N/A'"),
     ("qty_max",               "qty_max",               "INTEGER", "0"),
     ("pct_max",               "pct_max",               "REAL", "0.0"),
-    ("band_power_mid",        "band_power_mid",        "REAL", "0.0"), 
     ("image_classification",  "image_classification",  "TEXT", "'N/A'"),
     ("manual_classification", "manual_classification", "TEXT", "'N/A'"),
+    ("sample_rate",           "sample_rate",           "REAL", "100000.0"),
+    ("n_samples",             "n_samples",             "INTEGER", "50000"),
 ]
 
 def _migrate(conn):
@@ -103,16 +96,10 @@ class ElectrosprayDatabase:
             result.get("flow_rate"),
             float(result.get("mean_na", 0)),
             float(result.get("deviation_na", 0)),
-            float(result.get("median_na", 0)),
-            float(result.get("rms_na", 0)),
-            float(result.get("variance_na", 0)),
             int(result.get("qty_max", 0)),
             float(result.get("pct_max", 0)),
-            float(result.get("band_power_v_low", 0)),
-            float(result.get("band_power_low", 0)),
-            float(result.get("band_power_mid", 0)),
-            float(result.get("band_power_high", 0)),
-            float(result.get("band_power_v_high", 0)),
+            float(result.get("sample_rate", 100000.0)),
+            int(result.get("n_samples", 50000)),
             result.get("rf_classification", "N/A"),
             result.get("xgb_classification", "N/A"),
             result.get("image_classification", "N/A"),

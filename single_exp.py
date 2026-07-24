@@ -16,104 +16,66 @@ import keyboard
 import numpy as np
 from datetime import datetime
 
-from mapping.software.electrospray        import ElectrosprayConfig, ElectrosprayDataProcessing
+from mapping.software.electrospray        import ElectrosprayConfig
 from mapping.software.hardware            import Hardware
-from mapping.software.acquire_and_process import acquire_and_process
 from mapping.software.database            import ElectrosprayDatabase
 from mapping.software.camera              import CameraClassifier
 
 warnings.filterwarnings("ignore")
 
-from current_classification.ehda_classifier    import EHDAClassifier
-from current_classification.ehda_normalization import EHDAFeatureNormalizer
-
 # ── Reuse helpers from main ────────────────────────────────────────────────────
 
-def load_ml_models(cfg: dict) -> dict:
-    model_dir  = cfg.get("model_dir",  "current_classification/models/")
-    scaler_dir = cfg.get("scaler_dir", "current_classification/scalers/")
-    models     = {}
+def simple_acquire(scp, target_voltage: float, flow_rate, actual_voltage: float, actual_current_ps: float, trigger_fn=None) -> dict:
+    """
+    Acquires data directly without using ElectrosprayDataProcessing.
+    This avoids the Butterworth filter crashing on different sampling rates.
+    """
+    scp.start()
 
-    try:
-        models["rf"] = EHDAClassifier.load(model_dir, model_name="random_forest")
-        print(f"[MANUAL] Random Forest loaded from {model_dir}")
-    except Exception as e:
-        print(f"[MANUAL] Could not load Random Forest: {e}")
+    if trigger_fn is not None:
+        try:
+            trigger_fn()
+        except Exception as e:
+            print(f"[ACQ] Trigger error: {e}")
 
-    try:
-        models["xgb"] = EHDAClassifier.load(model_dir, model_name="xgboost")
-        print(f"[MANUAL] XGBoost loaded from {model_dir}")
-    except Exception as e:
-        print(f"[MANUAL] Could not load XGBoost: {e}")
+    while not scp.is_data_ready:
+        time.sleep(0.01)
 
-    try:
-        models["normalizer"] = EHDAFeatureNormalizer.load(scaler_dir)
-        print(f"[MANUAL] Normalizer loaded from {scaler_dir}")
-    except Exception as e:
-        print(f"[MANUAL] Could not load normalizer: {e}")
+    raw = scp.get_data()
+    timestamp = datetime.now()
+    
+    # Channel 2 (raw[1]) with 500 multiplier
+    datapoints = np.array(raw[1]) * 500  
 
-    return models
-
-
-def classify_sample(processing, result, ml_models):
-    if not ml_models:
-        return "N/A", "N/A"
-
-    try:
-        from current_classification.ehda_normalization import prepare_inference_sample
-        import pandas as pd
-
-        processing.extract_advanced_ml_features()
-
-        all_features = processing.get_db_features_dictionary()
-        all_features.update(processing.ml_features)
-        all_features.update({
-            "actual_voltage": float(result["actual_voltage"]),
-            "target_voltage": float(result["target_voltage"]),
-            "flow_rate":      float(result["flow_rate"]),
-            "voltage_error":  float(result["actual_voltage"]) - float(result["target_voltage"])
-        })
-
-        x_norm = prepare_inference_sample(all_features, ml_models["normalizer"])
-        all_feature_names = ml_models["normalizer"].get_feature_columns()
-        df_full = pd.DataFrame([x_norm], columns=all_feature_names)
-
-        rf_result = "N/A"
-        if "rf" in ml_models:
-            rf_features    = ml_models["rf"].feature_names
-            x_rf_aligned   = df_full[rf_features].values[0]
-            pred, proba    = ml_models["rf"].predict(x_rf_aligned)
-            rf_result      = f"{pred} ({proba.get(pred, 0.0):.0%})"
-
-        xgb_result = "N/A"
-        if "xgb" in ml_models:
-            xgb_features   = ml_models["xgb"].feature_names
-            x_xgb_aligned  = df_full[xgb_features].values[0]
-            pred, proba    = ml_models["xgb"].predict(x_xgb_aligned)
-            xgb_result     = f"{pred} ({proba.get(pred, 0.0):.0%})"
-
-        return rf_result, xgb_result
-
-    except Exception as e:
-        print(f"[CLASSIFY] Error: {e}")
-        return "error", "error"
+    return {
+        "datapoints":        datapoints,
+        "timestamp":         timestamp,
+        "target_voltage":    target_voltage,
+        "actual_voltage":    actual_voltage,
+        "actual_current_ps": actual_current_ps,
+        "flow_rate":         float(flow_rate),
+        "mean_na":           float(np.mean(datapoints)),
+        "deviation_na":      float(np.std(datapoints)),
+        "rf_classification": "N/A",
+        "xgb_classification": "N/A",
+    }
 
 
 # ── Manual input prompt ────────────────────────────────────────────────────────
 
 def prompt_run_parameters() -> tuple[float, float, int]:
-    """Ask the user for voltage, flow rate, and sample count."""
+    """Ask the user for voltage, flow rate, and number of measurements."""
     print("\n" + "=" * 40)
     print("  MANUAL ACQUISITION PARAMETERS")
     print("=" * 40)
 
     while True:
         try:
-            voltage   = float(input("  Target voltage   (V)       : "))
-            flow_rate = float(input("  Flow rate        (µL/min)  : "))
-            n_samples = int(input(  "  Number of samples          : "))
+            voltage       = float(input("  Target voltage   (V)       : "))
+            flow_rate     = float(input("  Flow rate        (µL/min)  : "))
+            n_samples     = int(input(  "  Number of measurements     : "))
             if n_samples < 1:
-                raise ValueError("Must record at least 1 sample.")
+                raise ValueError("Must record at least 1 measurement.")
             break
         except ValueError as e:
             print(f"  [!] Invalid input — {e}. Please try again.\n")
@@ -134,7 +96,22 @@ def get_experiment_metadata() -> dict:
     choice = input("  Select (1 or 2): ")
     hv_pos = "nozzle" if choice.strip() == "1" else "counter-electrode"
 
-    return {"solution": solution, "hv_position": hv_pos}
+    while True:
+        try:
+            sample_rate = float(input("\n  Enter Sample rate (Hz) [default 100000]: ") or 100000)
+            n_samples = int(input("  Enter Record length (samples) [default 50000]: ") or 50000)
+            if sample_rate <= 0 or n_samples < 1:
+                raise ValueError("Must be positive")
+            break
+        except ValueError:
+            print("  [!] Invalid input. Please enter valid numbers.")
+
+    return {
+        "solution": solution,
+        "hv_position": hv_pos,
+        "sample_rate": sample_rate,
+        "n_samples": n_samples
+    }
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -152,9 +129,6 @@ if __name__ == "__main__":
     flow_stab_time = float(cfg.get("flow_stabilization_time", 3.0))
 
     # ── Shared infrastructure ─────────────────────────────────────────
-    processing = ElectrosprayDataProcessing(1e5)
-    ml_models  = load_ml_models(cfg)
-
     camera     = CameraClassifier(
         com_port_idx = cfg.get("arduino_com_port", 0),
         model_path   = None,
@@ -165,13 +139,19 @@ if __name__ == "__main__":
     metadata         = get_experiment_metadata()
     SESSION_SOLUTION = metadata["solution"]
     SESSION_HV       = metadata["hv_position"]
+    SESSION_SAMPLE_RATE = metadata["sample_rate"]
+    SESSION_N_SAMPLES   = metadata["n_samples"]
     SESSION_START    = datetime.now()
 
     hardware = Hardware(cfg)
+    
+    # Override TiePie settings after hardware initializes it
+    hardware.scp.sample_rate = SESSION_SAMPLE_RATE
+    hardware.scp.record_length = SESSION_N_SAMPLES
+
     db       = ElectrosprayDatabase(cfg["save_path"])
 
-    print(f"\n[MANUAL] RF loaded:  {'yes' if 'rf'  in ml_models else 'no'}"
-          f"   XGB loaded: {'yes' if 'xgb' in ml_models else 'no'}")
+    print("[MANUAL] Starting simple manual acquisition.")
     print("[MANUAL] Press  Q  at any time to abort\n")
 
     # ── Acquisition loop — runs until the user quits ──────────────────
@@ -191,7 +171,8 @@ if __name__ == "__main__":
 
             time_estimate = (stab_time + 0.5 + step_time) * n_samples + flow_stab_time
             print(f"\n[MANUAL] Voltage={voltage} V  |  Flow={flow_rate} µL/min  "
-                  f"|  Samples={n_samples}  |  Est. ≥{time_estimate/60:.1f} min")
+                  f"|  Measurements={n_samples}  |  Sample Rate={SESSION_SAMPLE_RATE} Hz  |  Record Length={SESSION_N_SAMPLES}  "
+                  f"|  Est. ≥{time_estimate/60:.1f} min")
 
             # Set flow and let it stabilise (done once per run)
             hardware.set_flow_rate(str(flow_rate))
@@ -217,26 +198,22 @@ if __name__ == "__main__":
                       f"{voltage:.0f} V  |  {flow_rate} µL/min",
                       end="  ", flush=True)
 
-                result = acquire_and_process(
+                result = simple_acquire(
                     hardware.scp,
                     voltage,
                     flow_rate,
                     hardware.actual_voltage(),
                     hardware.actual_current(),
-                    processing,
                     trigger_fn=trigger_fn,
                 )
                 result["solution_name"]  = SESSION_SOLUTION
                 result["hv_position"]    = SESSION_HV
-
-                rf_result, xgb_result = classify_sample(processing, result, ml_models)
-                result["rf_classification"]  = rf_result
-                result["xgb_classification"] = xgb_result
+                result["sample_rate"]    = SESSION_SAMPLE_RATE
+                result["n_samples"]      = SESSION_N_SAMPLES
 
                 db.save(result)
 
-                print(f"RF={rf_result}  XGB={xgb_result}  "
-                      f"I={result['mean_na']:.3f} nA")
+                print(f"I={result['mean_na']:.3f} nA (Saved without ML)")
 
                 # Wait between samples (skip after the last one)
                 if i < n_samples:
