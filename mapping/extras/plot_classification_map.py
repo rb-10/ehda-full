@@ -19,7 +19,7 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 # SETTINGS
 # ---------------------------------------------------------
-BASE = Path(r"C:\Users\HV\Desktop\bruno_work\main\data")
+BASE = Path(r"data")
 DB_PATH = str(BASE)
 SOLUTION = "1KHZ_TEST1"
 COMPARISON_MAP = True
@@ -31,7 +31,7 @@ PLOT_SOURCES = [
     'generalist_ml_classification',
     'rf_spray_mode',
     'xgb_spray_mode',
-    'classical_classification',
+    'manual_classification',
 ]
 
 class_palette = {
@@ -200,7 +200,7 @@ def create_comparison_plot(truth_col, pred_col, data):
     )
 
     df['match'] = df['truth'] == df['pred']
-    df['plot_color_label'] = df.apply(lambda row: row['truth'] if row['match'] else 'Incorrect', axis=1)
+    df['plot_color_label'] = df.apply(lambda row: 'undefined' if row['truth'] == 'undefined' else (row['truth'] if row['match'] else 'Incorrect'), axis=1)
 
     fig, ax = plt.subplots(figsize=(16, 8))
 
@@ -224,7 +224,7 @@ def create_comparison_plot(truth_col, pred_col, data):
     ax.grid(True, which="both", ls="-", alpha=0.2)
     
     # Confusion matrix
-    valid_mask = ~df['truth'].isin(['unclassified', 'EXCLUDE', 'none'])
+    valid_mask = ~df['truth'].isin(['unclassified', 'EXCLUDE', 'none', 'undefined'])
     df_eval = df[valid_mask]
     
     if len(df_eval) > 0:
@@ -266,14 +266,25 @@ for source in available_sources:
     create_stability_plot(source, df_raw)
 
 if COMPARISON_MAP:
-    if 'image_classification' in df_raw.columns and 'rf_spray_mode' in df_raw.columns:
+    if 'manual_classification' in df_raw.columns and 'rf_spray_mode' in df_raw.columns:
+        print(f"Generating comparison plot for '{SOLUTION_NORM}': manual_classification vs rf_spray_mode")
+        create_comparison_plot('manual_classification', 'rf_spray_mode', df_raw)
+    elif 'image_classification' in df_raw.columns and 'rf_spray_mode' in df_raw.columns:
         print(f"Generating comparison plot for '{SOLUTION_NORM}': image_classification vs rf_spray_mode")
         create_comparison_plot('image_classification', 'rf_spray_mode', df_raw)
-    if 'image_classification' in df_raw.columns and 'classical_classification' in df_raw.columns:
+
+    if 'manual' in df_raw.columns and 'classical_classification' in df_raw.columns:
+        print(f"Generating comparison plot for '{SOLUTION_NORM}': manual vs classical_classification")
+        create_comparison_plot('manual', 'classical_classification', df_raw)
+    elif 'image_classification' in df_raw.columns and 'classical_classification' in df_raw.columns:
         print(f"Generating comparison plot for '{SOLUTION_NORM}': image_classification vs classical_classification")
         create_comparison_plot('image_classification', 'classical_classification', df_raw)
-    if 'image_classification' in df_raw.columns and 'xgb_spray_mode' in df_raw.columns:
+
+    
+    if 'manual_classification' in df_raw.columns and 'xgb_spray_mode' in df_raw.columns:
+        print(f"Generating comparison plot for '{SOLUTION_NORM}': manual_classification vs xgb_spray_mode")
+        create_comparison_plot('manual_classification', 'xgb_spray_mode', df_raw)
+    elif 'image_classification' in df_raw.columns and 'xgb_spray_mode' in df_raw.columns:
         print(f"Generating comparison plot for '{SOLUTION_NORM}': image_classification vs xgb_spray_mode")
         create_comparison_plot('image_classification', 'xgb_spray_mode', df_raw)
-
 print("\nDone. All stability maps have been generated.")

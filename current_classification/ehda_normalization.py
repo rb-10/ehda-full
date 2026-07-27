@@ -149,7 +149,7 @@ def _classify_columns(df: pd.DataFrame) -> Tuple[list, list, list, list]:
     amplitude_cols, metadata_cols, invariant_cols, skip_cols = [], [], [], []
 
     for col in all_cols:
-        if col in NON_FEATURE_COLS:
+        if col in NON_FEATURE_COLS or not pd.api.types.is_numeric_dtype(df[col]):
             skip_cols.append(col)
             continue
         if col in METADATA_FEATURES:
@@ -380,7 +380,7 @@ class EHDAFeatureNormalizer:
         }
 
         for col in all_cols:
-            if col in NON_FEATURE_COLS:
+            if col in NON_FEATURE_COLS or not pd.api.types.is_numeric_dtype(df[col]):
                 classification["skip"].append(col)
             elif col in self._LINEAR_FEATURES:
                 classification["linear"].append(col)
