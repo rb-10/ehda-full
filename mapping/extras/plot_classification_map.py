@@ -21,7 +21,7 @@ from mapping.software.database import ElectrosprayDatabase
 # ---------------------------------------------------------
 BASE = Path(r"data")
 DB_PATH = str(BASE)
-SOLUTION = "1KHZ_TEST1"
+SOLUTION = "200KHZ_TEST2"
 COMPARISON_MAP = True
 
 PLOT_SOURCES = [
