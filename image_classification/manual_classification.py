@@ -13,7 +13,7 @@ from pathlib import Path
 from mapping.software.database import ElectrosprayDatabase
 
 # ── Config ────────────────────────────────────────────────────────────
-BASE         = Path(r"C:\Users\HV\Desktop\bruno_work\main\data")
+BASE         = Path(r"data")
 
 # Folder Structure
 CLIPS_FOLDER = BASE / "images" / "SPLIT" / "SPLIT CLIPS"

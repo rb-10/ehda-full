@@ -43,8 +43,8 @@ from mapping.software.database import ElectrosprayDatabase
 
 
 # -------- SETTINGS --------#
-images_data_folder = Path(r"C:\Users\HV\Desktop\bruno_work\main\data/images")
-master_data_folder = Path(r"C:\Users\HV\Desktop\bruno_work\main\data")
+images_data_folder = Path(r"data/images")
+master_data_folder = Path(r"data")
 RAW_VIDEO_DIR      = images_data_folder / "raw"
 SLPIT_VIDEO_DIR    = images_data_folder / "SPLIT"
 PROCESSED_CLIPS_DIR = images_data_folder / 'PROCESSED CLIPS'

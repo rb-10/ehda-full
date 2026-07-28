@@ -13,7 +13,7 @@ from pathlib import Path
 from mapping.software.database import ElectrosprayDatabase
 
 # ── Config ────────────────────────────────────────────────────────────
-BASE         = Path(r"C:\Users\HV\Desktop\bruno_work\main\data")
+BASE         = Path(r"data")
 
 # Folder Structure
 CLIPS_FOLDER = BASE / "images" / "SPLIT" / "SPLIT CLIPS"
@@ -199,7 +199,7 @@ for idx, (img_path, current_class) in enumerate(all_images):
         #    db._conn.execute("UPDATE measurements SET manual_classification = ? WHERE id = ?", (new_class, sid))
         #db._conn.commit()
         #continue
-    if idx + 1 < 141:
+    if idx + 1 < 1000:
         print(f"[{idx+1}] Skipping: Already classified as '{manual_class}'")
         continue
     # Video setup
