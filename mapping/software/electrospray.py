@@ -216,7 +216,7 @@ class ElectrosprayDataProcessing:
         self.med = np.median(data)
         self.rms = np.sqrt(np.mean(data ** 2))
 
-    def calculate_peaks_signal(self, data, threshold=39950):#Osciloscope caps out at 80 volts
+    def calculate_peaks_signal(self, data, threshold=1990):#Osciloscope caps out at 4 volts
         """Calculates saturation/clipping metrics (useful for ML to detect 'Out of Range')."""
         qty_max = np.sum(data >= threshold)
         pct_max = (qty_max / len(data)) * 100

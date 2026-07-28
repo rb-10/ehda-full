@@ -182,53 +182,80 @@ class ElectrosprayDatabase:
 
         print(f"[DB] Loaded {len(df)} samples.")
         return df
-    def get_previous_step_mean_na(self, current_id, target_voltage: float, flow_rate: float):
+    def get_previous_step_mean_na(self, current_id, target_voltage: float, flow_rate: float, max_steps_back: int = 50):
         """
-        Looks backwards from current_id (exclusive) for the most recent step
-        (a run of rows sharing the same target_voltage), where that step's
-        target_voltage differs from the current one but flow_rate matches.
-
-        Returns the average mean_na across all rows of that previous step,
-        or None if no such step exists or its flow_rate doesn't match the
-        current one (caller should treat None as "use ratio = 1").
+        `current_id` is the id of the most recently inserted row (the current
+        sample itself has not been inserted yet, so there is no id for it).
+        Looks backward *including* current_id for the most recent step whose
+        target_voltage differs from `target_voltage` (the upcoming sample's
+        voltage), capped at `max_steps_back` step-transitions.
         """
-        row = self._conn.execute(
-            """
-            SELECT target_voltage, flow_rate FROM measurements
-            WHERE id < ? AND target_voltage != ?
-            ORDER BY id DESC LIMIT 1
-            """,
-            (current_id, target_voltage)
-        ).fetchone()
-
-        if row is None:
-            return None  # no earlier step at all
-
-        prev_voltage = row["target_voltage"]
-        prev_flow_rate = row["flow_rate"]
-
-        if prev_flow_rate != flow_rate:
-            return None
-
         cursor = self._conn.execute(
             """
-            SELECT mean_na, target_voltage FROM measurements
-            WHERE id < ? ORDER BY id DESC
+            SELECT id, target_voltage, flow_rate, mean_na FROM measurements
+            WHERE id <= ?
+            ORDER BY id DESC
             """,
             (current_id,)
         )
-
+    
+        current_step_voltage = target_voltage  # the voltage the NEW sample will have
+        step_count = 0
+        prev_voltage = None
+        prev_flow_rate = None
         vals = []
-        for r in cursor.fetchall():
-            if r["target_voltage"] != prev_voltage:
+    
+        for r in cursor:
+            v = r["target_voltage"]
+    
+            if v != current_step_voltage:
+                step_count += 1
+                current_step_voltage = v
+    
+                if step_count > max_steps_back:
+                    break
+                
+                if step_count == 1:
+                    prev_voltage = v
+                    prev_flow_rate = r["flow_rate"]
+    
+            if step_count == 1:
+                if r["mean_na"] is not None:
+                    vals.append(r["mean_na"])
+            elif step_count >= 2:
                 break
-            if r["mean_na"] is not None:
-                vals.append(r["mean_na"])
-
-        if not vals:
+            
+        if prev_voltage is None or prev_flow_rate != flow_rate or not vals:
             return None
-
+    
         return float(np.mean(vals))
+
+    def get_previous_step_classification(self, current_id, target_voltage: float, flow_rate: float):
+        """
+        Returns the rf_spray_mode of the most-recent measurement that belongs
+        to a *different* voltage step (different target_voltage, same flow_rate),
+        looking at rows with id <= current_id.
+
+        Returns None if no such previous step exists — this is the case when
+        the current measurement is the first step of the flow-rate sweep, so
+        callers can distinguish "no previous step" from a non-multi_jet label.
+        """
+        row = self._conn.execute(
+            """
+            SELECT id, rf_spray_mode FROM measurements
+            WHERE id <= ? AND target_voltage != ? AND flow_rate = ?
+            ORDER BY id DESC LIMIT 1
+            """,
+            (current_id, target_voltage, flow_rate)
+        ).fetchone()
+        
+        if row is None:
+            return None  # no earlier step with a different voltage → first step of sweep
+        elif abs(int(row["id"]) - current_id) > 10:
+            return None
+        else:
+            return row["rf_spray_mode"]
+
     def get_last_id(self):
         """Returns the highest id currently in the table, or None if empty."""
         row = self._conn.execute("SELECT MAX(id) AS max_id FROM measurements").fetchone()

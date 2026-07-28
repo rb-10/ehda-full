@@ -49,7 +49,7 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 from mapping.software.database import ElectrosprayDatabase
-from current_classification.train_code import SAMPLING_FREQ, INVALID_LABELS, CUTOFF_HZ, MULTIPLIER_NA
+from current_classification.train_code import INVALID_LABELS, CUTOFF_HZ, MULTIPLIER_NA
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  USER CONFIGURATION  ── edit these values
@@ -64,7 +64,7 @@ SHOW_FILTERED = True
 
 # Fixed Y-axis limits (current, in nA) as a (min, max) tuple, e.g. (-50, 200).
 # Set to None to let matplotlib auto-scale the Y-axis for each sample instead.
-Y_LIMITS = (-10, 110)
+Y_LIMITS = (-100, 1000)
 
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -84,11 +84,11 @@ def _make_butter_filter(cutoff_hz: float, sample_rate: float):
     return b, a
 
 
-def load_and_filter_waveform(file_path: Path, b, a) -> tuple[np.ndarray, np.ndarray]:
+def load_and_filter_waveform(file_path: Path, cutoff_hz: float, sample_rate: float) -> tuple[np.ndarray, np.ndarray]:
     raw = np.load(file_path) * MULTIPLIER_NA
+    b, a = _make_butter_filter(cutoff_hz, sample_rate)
     filtered = filtfilt(b, a, raw)
     return raw, filtered
-
 
 def build_time_axis(n_points: int, sample_rate: float) -> np.ndarray:
     return np.arange(n_points) / sample_rate * 1_000  # ms
@@ -123,11 +123,10 @@ class WaveformBrowser:
     """Steps through a dataframe of samples, one waveform at a time,
     using the left/right arrow keys."""
 
-    def __init__(self, df_samples: pd.DataFrame, raw_dir: Path, b, a, solutions_str: str):
+    def __init__(self, df_samples: pd.DataFrame, raw_dir: Path, cutoff_hz: float, solutions_str: str):
         self.df = df_samples.reset_index(drop=True)
         self.raw_dir = raw_dir
-        self.b = b
-        self.a = a
+        self.cutoff_hz = cutoff_hz
         self.solutions_str = solutions_str
         self.idx = 0
         self.n_total = len(self.df)
@@ -191,9 +190,8 @@ class WaveformBrowser:
             self.ax.set_title(header, fontsize=10)
         else:
             try:
-                raw, filtered = load_and_filter_waveform(file_path, self.b, self.a)
-                t_ms = build_time_axis(len(raw), SAMPLING_FREQ)
-                filtered =raw
+                raw, filtered = load_and_filter_waveform(file_path, self.cutoff_hz, float(sample_row["sample_rate"]))
+                t_ms = build_time_axis(len(raw), float(sample_row["sample_rate"]))
                 self.ax.plot(t_ms, raw, color=colour, alpha=0.35, linewidth=0.8, label="Raw")
                 if SHOW_FILTERED:
                     self.ax.plot(t_ms, filtered, color=colour, alpha=0.9, linewidth=1.5, label="Filtered")
@@ -221,7 +219,7 @@ class WaveformBrowser:
 
 
 def main():
-    BASE = Path("D:/AcEHDA-ML/data")
+    BASE = Path("data")
     RAW_DIR = BASE / "raw_waveforms"
 
     print(f"[1/4] Loading database from: {BASE}")
@@ -266,10 +264,9 @@ def main():
 
     print(f"[3/4] Browsing {len(df_valid)} samples in order.")
 
-    b, a = _make_butter_filter(CUTOFF_HZ, SAMPLING_FREQ)
 
     print("[4/4] Opening interactive viewer — use ← / → to navigate, q to quit.")
-    browser = WaveformBrowser(df_valid, RAW_DIR, b, a, solutions_str)
+    browser = WaveformBrowser(df_valid, RAW_DIR, CUTOFF_HZ, solutions_str)
     browser.show()
 
     print("\nDone.")

@@ -41,6 +41,7 @@ warnings.filterwarnings("ignore")
 #Current Classification Imports
 from current_classification.ehda_classifier    import EHDAClassifier
 from current_classification.ehda_normalization import EHDAFeatureNormalizer
+from current_classification.classify           import classify_sample
 
 # ── Helpers ───────────────────────────────────────────────────────────
 
@@ -125,72 +126,6 @@ def get_experiment_metadata():
         "sample_rate": sample_rate,
         "n_samples": n_samples
     }
-
-def classify_sample(processing, result, ml_models, db):
-    if not ml_models:
-        return "N/A", "N/A"
-
-    try:
-        from current_classification.ehda_normalization import prepare_inference_sample
-        import pandas as pd
-        # 0. Look up the previous step's mean_na for ratio_to_previous_step
-        current_id = db.get_last_id()
-        ratio_to_previous_step = 1.0
-        if current_id is not None:
-            prev_mean = db.get_previous_step_mean_na(
-                current_id=current_id,
-                target_voltage=float(result["target_voltage"]),
-                flow_rate=float(result["flow_rate"]),
-            )
-            if prev_mean not in (None, 0):
-                ratio_to_previous_step = float(processing.mean_value) / prev_mean
-        # 1. Calculate remaining ML features inside the class
-        processing.extract_advanced_ml_features(ratio_to_previous_step=ratio_to_previous_step)
-
-        # 2. Build the full raw feature vector (DB stats + ML stats + metadata)
-        all_features = processing.get_db_features_dictionary()
-        all_features.update(processing.ml_features)
-        all_features.update({
-            "actual_voltage": float(result["actual_voltage"]),
-            "target_voltage": float(result["target_voltage"]),
-            "flow_rate": float(result["flow_rate"]),
-            "voltage_error": float(result["actual_voltage"]) - float(result["target_voltage"]),
-            "deviation_ratio": float(processing.stddev / processing.mean_value if processing.mean_value != 0 else 0.0)
-        })
-
-        # 3. Normalization Pipeline
-        # prepare_inference_sample returns a 1D array aligned to the normalizer's columns
-        x_norm = prepare_inference_sample(all_features, ml_models["normalizer"])
-
-        # 4. Final Alignment to Model
-        # Since the normalizer may have more columns than the RF model (e.g., 66 vs 61),
-        # we re-wrap and select the exact features the RF model expects.
-        all_feature_names = ml_models["normalizer"].get_feature_columns()
-        df_full = pd.DataFrame([x_norm], columns=all_feature_names)
-        
-        # Select the 61 features the RF model expects
-        rf_features = ml_models["rf"].feature_names
-        x_rf_aligned = df_full[rf_features].values[0]
-
-        # 5. Prediction
-        rf_result = "N/A"
-        if "rf" in ml_models:
-            pred, proba = ml_models["rf"].predict(x_rf_aligned)
-            rf_result = f"{pred} ({proba.get(pred, 0.0):.0%})"
-
-        xgb_result = "N/A"
-        if "xgb" in ml_models:
-            # Re-align for XGB if it uses different features than RF
-            xgb_features = ml_models["xgb"].feature_names
-            x_xgb_aligned = df_full[xgb_features].values[0]
-            pred, proba = ml_models["xgb"].predict(x_xgb_aligned)
-            xgb_result = f"{pred} ({proba.get(pred, 0.0):.0%})"
-
-        return rf_result, xgb_result
-
-    except Exception as e:
-        print(f"[CLASSIFY] Error: {e}")
-        return "error", "error"
 
 # ── Main ──────────────────────────────────────────────────────────────
 
